@@ -156,7 +156,7 @@ void CMultiAmpDlg::OnBnClickedButton1(){
 
 	if(hLib != NULL){
 		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, int a, int b) = NULL;
-		(FARPROC&)pFunction = GetProcAddress(hLib, "tstdll");
+		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1");   // tstdll
 		if(pFunction != NULL){
 			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, 3, 5);
 			_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);

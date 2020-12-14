@@ -19,4 +19,8 @@ extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, in
 	int ret = tstdllMain(hInstance, nCmdShow, a, b);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
+extern "C" _declspec(dllexport) int openWindow1(HINSTANCE hInstance, int nCmdShow, int a, int b){
+	openwnd(hInstance, nCmdShow);
+	return a + b;
+} // //////////////////////////////////////////////////////////////////////////////////
 
