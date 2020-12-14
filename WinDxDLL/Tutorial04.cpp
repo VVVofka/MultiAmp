@@ -1,7 +1,7 @@
 // File: Tutorial04.cpp
 // This application displays a 3D cube using Direct3D 11
 // Copyright (c) Microsoft Corporation. All rights reserved.
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 #include "pch.h"
 #ifdef MODE4
 #include <windows.h>
@@ -12,9 +12,9 @@
 #include "resource.h"
 #include "Main.h"
 
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Structures
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 struct SimpleVertex{
 	XMFLOAT3 Pos;
 	XMFLOAT4 Color;
@@ -24,9 +24,9 @@ struct ConstantBuffer{
 	XMMATRIX mView;
 	XMMATRIX mProjection;
 };
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Global Variables
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HINSTANCE               g_hInst = NULL;
 HWND                    g_hWnd = NULL;
 D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
@@ -44,19 +44,19 @@ ID3D11Buffer* g_pConstantBuffer = NULL;
 XMMATRIX                g_World;
 XMMATRIX                g_View;
 XMMATRIX                g_Projection;
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Forward declarations
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 HRESULT InitDevice();
 void CleanupDevice();
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 void Render();
 
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Entry point to the program. Initializes everything and goes into a message processing 
 // loop. Idle time is used to render the scene.
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
 int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
 	UNREFERENCED_PARAMETER(hPrevInstance);
@@ -80,9 +80,9 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 	}
 	CleanupDevice();
 	return (int)msg.wParam;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Register class and create window
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){
 	// Register class
 	WNDCLASSEX wcex{};
@@ -112,9 +112,9 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){
 		return E_FAIL;
 	ShowWindow(g_hWnd, nCmdShow);
 	return S_OK;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Helper for compiling shaders with D3DX11
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT CompileShaderFromFile(LPCSTR szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut){
 	HRESULT hr = S_OK;
 	DWORD dwShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
@@ -136,9 +136,9 @@ HRESULT CompileShaderFromFile(LPCSTR szFileName, LPCSTR szEntryPoint, LPCSTR szS
 	}
 	if(pErrorBlob) pErrorBlob->Release();
 	return S_OK;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Create Direct3D device and swap chain
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitDevice(){
 	HRESULT hr = S_OK;
 	RECT rc;
@@ -351,9 +351,9 @@ HRESULT InitDevice(){
 	g_Projection = XMMatrixPerspectiveFovLH(XM_PIDIV2, width / (FLOAT)height, 0.01f, 100.0f);
 
 	return S_OK;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Clean up the objects we've created
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 void CleanupDevice(){
 	if(g_pImmediateContext) g_pImmediateContext->ClearState();
 
@@ -367,9 +367,9 @@ void CleanupDevice(){
 	if(g_pSwapChain) g_pSwapChain->Release();
 	if(g_pImmediateContext) g_pImmediateContext->Release();
 	if(g_pd3dDevice) g_pd3dDevice->Release();
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Called every time the application receives a message
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	PAINTSTRUCT ps;
 	HDC hdc;
@@ -385,9 +385,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Render a frame
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 void Render(){
 	// Update our time
 	static float t = 0.0f;

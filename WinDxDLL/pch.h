@@ -4,9 +4,11 @@
 // However, files listed here are ALL re-compiled if any one of them is updated between builds.
 // Do not add files here that you will be updating frequently as this negates the performance advantage.
 
-#define MODE4
+
 #ifndef PCH_H
 #define PCH_H
+
+#define MODEA
 
 // add headers that you want to pre-compile here
 #include "framework.h"

@@ -16,6 +16,9 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{b6ff7f83-9201-4c5a-a314-1bbd5c1fbd4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InterOp">
+      <UniqueIdentifier>{7ab0c97a-c3f2-400b-8f80-e13532abf007}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -29,6 +32,45 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX2.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="DxInterOp.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="AMPEng2.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="Model2D.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="RunA.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="RunD.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="RunDlast.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="Masks.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="Options.h">
+      <Filter>InterOp</Filter>
+    </ClInclude>
+    <ClInclude Include="Options\OptionExternDecl.h">
+      <Filter>InterOp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +92,33 @@
     <ClCompile Include="Tutorial04.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DXInterOp.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="AMPEng2.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Model2D.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="RunA.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="RunD.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="RunDlast.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Masks.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Options.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Main.rc">
@@ -68,5 +137,10 @@
     <FxCompile Include="Tutorial04.fx">
       <Filter>Shaders</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXInterOpPsVs.hlsl">
+      <Filter>InterOp</Filter>
+    </None>
   </ItemGroup>
 </Project>

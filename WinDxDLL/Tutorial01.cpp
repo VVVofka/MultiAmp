@@ -1,7 +1,7 @@
 // File: Tutorial01.cpp
 // This application demonstrates creating a Direct3D 11 device
 // Copyright (c) Microsoft Corporation. All rights reserved.
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 #include "pch.h"
 #ifdef MODE1
 #include <windows.h>
@@ -9,9 +9,9 @@
 #include <d3dx11.h>
 #include "resource.h"
 #include "Main.h"
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Global Variables
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HINSTANCE               g_hInst = NULL;
 HWND                    g_hWnd = NULL;
 D3D_DRIVER_TYPE         g_driverType = D3D_DRIVER_TYPE_NULL;
@@ -20,18 +20,18 @@ ID3D11Device* g_pd3dDevice = NULL;
 ID3D11DeviceContext* g_pImmediateContext = NULL;
 IDXGISwapChain* g_pSwapChain = NULL;
 ID3D11RenderTargetView* g_pRenderTargetView = NULL;
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Forward declarations
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 HRESULT InitDevice();
 void CleanupDevice();
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 void Render();
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 // Entry point to the program. Initializes everything and goes into a message processing 
 // loop. Idle time is used to render the scene.
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
 int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
 	UNREFERENCED_PARAMETER(hPrevInstance);
@@ -57,9 +57,9 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 	}
 	CleanupDevice();
 	return (int)msg.wParam;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Register class and create window
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){
 	// Register class
 	WNDCLASSEX wcex{};
@@ -91,9 +91,9 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){
 		return E_FAIL;
 	ShowWindow(g_hWnd, nCmdShow);
 	return S_OK;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Called every time the application receives a message
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	PAINTSTRUCT ps;
 	HDC hdc;
@@ -109,9 +109,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Create Direct3D device and swap chain
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 HRESULT InitDevice(){
 	HRESULT hr = S_OK;
 
@@ -188,17 +188,17 @@ HRESULT InitDevice(){
 	vp.TopLeftY = 0;
 	g_pImmediateContext->RSSetViewports(1, &vp);
 	return S_OK;
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Render the frame
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 void Render(){
 	// Just clear the backbuffer
 	float ClearColor[4] = {0.0f, 0.125f, 0.3f, 1.0f}; //red,green,blue,alpha
 	g_pImmediateContext->ClearRenderTargetView(g_pRenderTargetView, ClearColor);
 	g_pSwapChain->Present(0, 0);
-}//--------------------------------------------------------------------------------------
+}// --------------------------------------------------------------------------------------
 // Clean up the objects we've created
-//--------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
 void CleanupDevice(){
 	if(g_pImmediateContext) g_pImmediateContext->ClearState();
 	if(g_pRenderTargetView) g_pRenderTargetView->Release();
