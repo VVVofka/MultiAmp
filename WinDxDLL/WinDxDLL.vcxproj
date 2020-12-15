@@ -107,7 +107,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Options.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +128,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Options.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,7 +145,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Options.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,7 +166,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Options.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;D3DX11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -19,12 +19,12 @@ bool Options::loadAuto(){
 	return ret;
 } // ///////////////////////////////////////////////////////////////////////////
 int Options::showDlg(){
-	//-int ret = openDlgOptions(iArr, dArr);
+	int ret = openDlgOptions(iArr, dArr);
 	//if(ret != 0){
 	//	save(autoDirsFName);
 	//	loadAll();
 	//}
-	//-return ret;
+	//- return ret;
 	return 0;
 } // ///////////////////////////////////////////////////////////////////////////
 bool Options::setDefault(){

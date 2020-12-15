@@ -131,16 +131,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Tutorial02.fx">
-      <Filter>Shaders</Filter>
-    </FxCompile>
-    <FxCompile Include="Tutorial04.fx">
-      <Filter>Shaders</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="DXInterOpPsVs.hlsl">
       <Filter>InterOp</Filter>
     </None>
+    <None Include="Tutorial02.fx" />
+    <None Include="Tutorial04.fx" />
   </ItemGroup>
 </Project>
