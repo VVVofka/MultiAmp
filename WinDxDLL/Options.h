@@ -6,6 +6,9 @@
 #include <cstdio> 
 
 #define autoDirsFName "autoArr.dat"
+struct WraperMask{
+	int v[16];
+};
 
 class Options{
 						// 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15

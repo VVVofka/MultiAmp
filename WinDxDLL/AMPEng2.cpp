@@ -38,14 +38,17 @@ void AMPEng2::initialize_data(){
 	m_data = std::unique_ptr<array<Vertex2D, 1>>(new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view));
 	last_dirs = std::unique_ptr<array<FLT2, 2>>(new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.last_dirs.begin(), m_accl_view));
 	amask = std::unique_ptr<array<int, 1>>(new array<int, 1>(16, model.options.aMask(), m_accl_view));
+	//for(int j=0; j<16; j++)
+	//	cmask.v[j] = model.options.aMask()[j];
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	INT2 shift(distLastAY(gen), distLastAX(gen));   // rand shift
 	//printf("\nshift = y:%d x:%d\n", shift.y, shift.x);	dumpA(nlastlay);
-	RunA::RunLast(shift, *var_areas[nlastlay], *var_areas[size_t(nlastlay) - 1], *amask);
-	for(size_t nlay = nlastlay - 1; nlay > 0; nlay--){
+	RunA::RunLast(shift, *var_areas[nlastlay], *var_areas[nlastlay - 1], *amask);
+	for(int nlay = (int)nlastlay - 1; nlay > 0; nlay--){
 		//dumpA(nlay);
 		RunA::Run(*var_areas[nlay], *var_areas[nlay - 1], *amask);
+		//RunA::RunConst(*var_areas[nlay], *var_areas[nlay - 1], cmask);
 	}
 	//dumpA(0);
 
@@ -58,13 +61,13 @@ void AMPEng2::run(){
 	RunDlast::Run(shift, *var_dirs[nlastlay - 1], *m_data, *var_areas[nlastlay], *last_dirs, model.sizeYX(), model.options.normDir());
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 
-void AMPEng2::dumpA(int nlay){
+void AMPEng2::dumpA(size_t nlay){
 	const char separ[] = " ";
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	setConsole();
 	array<int, 2> av(*var_areas[nlay].get());
 	std::cout << "A[" << nlay << "] y*x: " << av.extent[0] << "*" << av.extent[1] << std::endl;
-	if(nlay == int(var_areas.size() - 1)){
+	if(nlay == var_areas.size() - 1){
 		for(int y = 0; y < av.extent[0]; y++){
 			for(int x = 0; x < av.extent[1]; x++){
 				int q = av[y][x];
@@ -92,12 +95,12 @@ void AMPEng2::dumpA(int nlay){
 } // ////////////////////////////////////////////////////////////////
 void AMPEng2::dumpA(){
 	setConsole();
-	for(int nlay = 0; nlay < model.LaysCnt(); nlay++){
+	for(int nlay = 0; nlay < (int)model.LaysCnt(); nlay++){
 		dumpA(nlay);
 		std::cout << std::endl;
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////
-void AMPEng2::dumpD(int nlay){
+void AMPEng2::dumpD(size_t nlay){
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	setConsole();
 	array<DrQuadro, 2> av(*var_dirs[nlay].get());
@@ -114,7 +117,7 @@ void AMPEng2::dumpD(int nlay){
 	std::cout << std::endl;
 } // ////////////////////////////////////////////////////////////////
 void AMPEng2::dumpD(){
-	for(int nlay = 0; nlay < model.LaysCnt() - 1; nlay++)
+	for(int nlay = 0; nlay < (int)model.LaysCnt() - 1; nlay++)
 		dumpD(nlay);
 	dumpDLast();
 } // ////////////////////////////////////////////////////////////////////////////////////////

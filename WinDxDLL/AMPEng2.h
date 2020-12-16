@@ -5,11 +5,7 @@
 #include <amp_graphics.h>
 #include <vector>
 #include <random>
-
-//#pragma warning(push)
-//#pragma warning(disable:4005 26812) 
 #include <D3D11.h>
-//#pragma warning(pop)
 
 #include "Model2D.h"
 #include "Vertex.h"
@@ -33,6 +29,7 @@ class AMPEng2{
 	std::vector<std::unique_ptr<array<DrQuadro, 2>>> var_dirs;
 	std::unique_ptr<array<FLT2, 2>> last_dirs;
 	std::unique_ptr<array<int, 1>> amask;
+    //WraperMask cmask;
 	//std::unique_ptr<array<FLT2, 1>> dmask;
 	std::vector<std::unique_ptr<array<FLT2, 1>>> var_masks;
 
@@ -54,9 +51,9 @@ private:
 	size_t nlastlay = 0;  // N last lay
 
 public:
-	void dumpA(int nlay);
+	void dumpA(size_t nlay);
 	void dumpA();
-	void dumpD(int nlay);
+	void dumpD(size_t nlay);
 	void dumpD();
 	void dumpDLast();
 	void dumpPos();

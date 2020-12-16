@@ -19,7 +19,7 @@ void RunD::Run(const array<DrQuadro, 2>& srcd,
 		const int tr = dsta[y0][x1];
 		const int bl = dsta[y1][x0];
 		const int br = dsta[y1][x1];
-		int nmask = 16 * ((tl & 1) + ((tr & 1) << 1) + ((bl & 1) << 2) + ((br & 1) << 3));
+		int nmask = 16 * ((tl & 1) + ((tr & 1) * 2) + ((bl & 1) * 4) + ((br & 1) * 8));
 
 		const FLT2* srcitems = srcd[src.y][src.x].items;
 		FLT2* dstitems = dstd[y0][x0].items;

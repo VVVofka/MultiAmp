@@ -8,7 +8,6 @@ void Model2D::Create(){
 	double kRnd = options.dArr[InpOptions::kFillRnd];
 	DBL2 kSigma(options.dArr[InpOptions::kSigmaY], options.dArr[InpOptions::kSigmaX]);
 
-	;
 	const int RESERV_LAYS_CNT = 16;
 	v_poss.clear(); v_poss.reserve(RESERV_LAYS_CNT);
 	v_areas.clear(); v_areas.reserve(RESERV_LAYS_CNT);
@@ -68,10 +67,10 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 	std::normal_distribution<> distrx(sz.x * 0.5, sz.x * 0.3 * kSigma.x);
 
 	while(v_poss[nlay].size() < szpos){
-		int curpos;
+		int curpos=0;
 		do{
 			//curpos = dist(gen);
-			int y, x;
+			int y=0, x=0;
 			do{
 				y = (int)distry(gen);
 			} while(y < 0 || y >= sz.y);

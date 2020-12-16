@@ -5,11 +5,8 @@
 #include <cmath>
 #include <vector>
 
-//#pragma warning(push)
-//#pragma warning(disable:4005 26812) 
 #include <D3D11.h>
 #include <DirectXMath.h>
-//#pragma warning(pop)
 
 #include "Utils.h"
 #include "Vertex.h"
@@ -27,7 +24,7 @@ public:
 	std::vector<INT2> vsz;
 
 	std::vector<int> lastArea() const { return v_areas[v_areas.size() - 1]; }
-	std::vector<Vertex2D> lastPoss() const { return v_poss[v_poss.size() - 1]; }
+	std::vector<Vertex2D> lastPoss() const{ return v_poss[v_poss.size() - 1]; } // last lay
 
 	int sizeY(int nlay) const { return vsz[nlay].y; }
 	int sizeY() const { return vsz[vsz.size() - 1].y; }
@@ -35,7 +32,7 @@ public:
 	int sizeX() const { return vsz[vsz.size() - 1].x; }
 	const INT2& sizeYX(int nlay) const {return vsz[nlay];}
 	const INT2& sizeYX() const {return vsz[vsz.size() - 1];}
-	int LaysCnt() const { return (int)v_areas.size(); }
+	size_t LaysCnt() const { return v_areas.size(); }
 
 	void Create();
 	void dumpA(int nlay) const;

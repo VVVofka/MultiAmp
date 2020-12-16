@@ -5,8 +5,6 @@
 
 #ifdef MODEA
 
-//#include <windows.h>
-//#include <winnt.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,26 +14,24 @@
 
 #include "Vertex.h"
 
-//#pragma warning(push)
-//#pragma warning(disable:4005 26812) 
 #include <d3dcompiler.h>
 #include <D3D11.h>
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
 #endif    
-
-#ifndef SAFE_DELETE_ARRAY
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
-#endif    
-
+//
+//#ifndef SAFE_DELETE_ARRAY
+//#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=NULL; } }
+//#endif    
+//
 #ifndef SAFE_RELEASE
 #define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=NULL; } }
 #endif
-
-#ifndef SAFE_RELEASE_DELETE
-#define SAFE_RELEASE_DELETE(p)	{ if(p) { (p)->Release(); delete (p); (p)=NULL; } }
-#endif
+//
+//#ifndef SAFE_RELEASE_DELETE
+//#define SAFE_RELEASE_DELETE(p)	{ if(p) { (p)->Release(); delete (p); (p)=NULL; } }
+//#endif
 #ifndef RETURN_IF_FAIL
 #define RETURN_IF_FAIL(x)    { HRESULT thr = (x); if (FAILED(thr)) { return E_FAIL; } }
 #endif
@@ -155,12 +151,10 @@ protected:
 	HRESULT CreateVertexShader(const char* snaderName){
 		HRESULT hr = S_OK;
 		ID3DBlob* pVSBlob = NULL;
-		//!!! LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";
-		LPCSTR pProfile = "vs_5_0";
+		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";		//LPCSTR pProfile = "vs_5_0";
 		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 		if(FAILED(hr)){
 			hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
-			//MessageBox(NULL, L"The vertex shader in DXInterOpPsVs.hlsl cannot be compiled", L"Error", MB_OK);
 			if(FAILED(hr)){
 				wchar_t* q = NULL;
 				errno_t err = _get_wpgmptr(&q);
@@ -182,7 +176,7 @@ protected:
 		D3D11_INPUT_ELEMENT_DESC layout[] =
 		{
 			{ "POSITION", 0, DXGI_FORMAT_R32G32_FLOAT,       0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0},
-			{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			//{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
 		};
 		UINT numElements = ARRAYSIZE(layout);
 
@@ -302,6 +296,5 @@ protected:
 	} // /////////////////////////////////////////////////////////////////////////////////////////////
 
 }; // ******************************************************************************************
-//#pragma warning(pop)
 #endif  // MODEA
 

@@ -20,12 +20,11 @@ bool Options::loadAuto(){
 } // ///////////////////////////////////////////////////////////////////////////
 int Options::showDlg(){
 	int ret = openDlgOptions(iArr, dArr);
-	//if(ret != 0){
-	//	save(autoDirsFName);
-	//	loadAll();
-	//}
-	//- return ret;
-	return 0;
+	if(ret != 0){
+		save(autoDirsFName);
+		loadAll();
+	}
+	return ret;
 } // ///////////////////////////////////////////////////////////////////////////
 bool Options::setDefault(){
 	blocks2D2.setDefault();

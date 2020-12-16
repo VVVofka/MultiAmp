@@ -75,7 +75,7 @@ int work(){
 				time_t ctime;
 				time(&ctime);
 				const int interval = 5;
-				if(ctime - ltime == interval){
+				if(ctime - ltime >= interval){
 					ltime = ctime;
 					char buf[32];
 					sprintf_s(buf, 32, "fps: %d", cnt / interval);

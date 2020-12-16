@@ -11,8 +11,8 @@ class MDX2 : public MDX {
 public:
     HRESULT InitDevice(HWND ghWnd,
                        std::vector<Vertex2D> vertices,
-                       D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST
-    ) {// Create Direct3D device and shaders. Call from wWinMain()
+                       D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST)
+    {// Create Direct3D device and shaders. Call from wWinMain()
         HRESULT hr = MDX::InitDevice(ghWnd, Primitive);
         g_numVertices = (unsigned int)vertices.size();
         RETURN_IF_FAIL(MDX::CreateSwapChain());
@@ -49,8 +49,8 @@ private:
  public:
     void Render() {               //  Call from main loop wWinMain()
         g_pAMPComputeEngine->run();    
-        //MDX::Render(sizeof(Vertex2D));
-        MDX::Render(28); //!!!
+        MDX::Render(sizeof(Vertex2D));
+        //MDX::Render(28); //!!!
     } // ///////////////////////////////////////////////////////////////////////////////////////////////////
     void CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
         MDX::CleanupDevice();
