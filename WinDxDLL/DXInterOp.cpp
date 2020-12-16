@@ -74,11 +74,12 @@ int work(){
 				cnt++;
 				time_t ctime;
 				time(&ctime);
-				if(ctime - ltime == 1){
+				const int interval = 5;
+				if(ctime - ltime == interval){
 					ltime = ctime;
-					char buf[64];
-					sprintf_s(buf, 64, "fps: %d", cnt);
-					bool bret = SetWindowTextA(g_hWnd, buf);
+					char buf[32];
+					sprintf_s(buf, 32, "fps: %d", cnt / interval);
+					SetWindowTextA(g_hWnd, buf);
 					cnt = 0;
 				}
 			}
