@@ -49,7 +49,8 @@ private:
  public:
     void Render() {               //  Call from main loop wWinMain()
         g_pAMPComputeEngine->run();    
-        MDX::Render(sizeof(Vertex2D));
+        //MDX::Render(sizeof(Vertex2D));
+        MDX::Render(28); //!!!
     } // ///////////////////////////////////////////////////////////////////////////////////////////////////
     void CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
         MDX::CleanupDevice();

@@ -40,16 +40,15 @@ void AMPEng2::initialize_data(){
 	amask = std::unique_ptr<array<int, 1>>(new array<int, 1>(16, model.options.aMask(), m_accl_view));
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
-	INT2 shift(distLastAY(gen), distLastAX(gen));
+	INT2 shift(distLastAY(gen), distLastAX(gen));   // rand shift
 	//printf("\nshift = y:%d x:%d\n", shift.y, shift.x);	dumpA(nlastlay);
 	RunA::RunLast(shift, *var_areas[nlastlay], *var_areas[size_t(nlastlay) - 1], *amask);
-	//RunA::RunUnTorLast(shift, *var_areas[nlastlay], *var_areas[nlastlay - 1], *amask);
-
 	for(size_t nlay = nlastlay - 1; nlay > 0; nlay--){
 		//dumpA(nlay);
 		RunA::Run(*var_areas[nlay], *var_areas[nlay - 1], *amask);
 	}
 	//dumpA(0);
+
 	// Back to down
 	for(size_t nlay = 1; nlay < nlastlay; nlay++){
 		RunD::Run(*var_dirs[nlay - 1], *var_dirs[nlay], *var_areas[nlay], *var_masks[nlay - 1]);

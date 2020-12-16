@@ -16,8 +16,8 @@
 
 #include "Vertex.h"
 
-#pragma warning(push)
-#pragma warning(disable:4005 26812) 
+//#pragma warning(push)
+//#pragma warning(disable:4005 26812) 
 #include <d3dcompiler.h>
 #include <D3D11.h>
 
@@ -155,7 +155,8 @@ protected:
 	HRESULT CreateVertexShader(const char* snaderName){
 		HRESULT hr = S_OK;
 		ID3DBlob* pVSBlob = NULL;
-		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";
+		//!!! LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";
+		LPCSTR pProfile = "vs_5_0";
 		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 		if(FAILED(hr)){
 			hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
@@ -180,8 +181,8 @@ protected:
 		// Define the input layout
 		D3D11_INPUT_ELEMENT_DESC layout[] =
 		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{ "POSITION", 0, DXGI_FORMAT_R32G32_FLOAT,       0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{ "COLOR",    0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
 		};
 		UINT numElements = ARRAYSIZE(layout);
 
@@ -301,6 +302,6 @@ protected:
 	} // /////////////////////////////////////////////////////////////////////////////////////////////
 
 }; // ******************************************************************************************
-#pragma warning(pop)
+//#pragma warning(pop)
 #endif  // MODEA
 

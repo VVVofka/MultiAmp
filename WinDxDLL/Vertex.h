@@ -1,10 +1,10 @@
 #pragma once
 #ifdef MODEA
 
-#pragma warning(push)
-#pragma warning(disable:4005 26812) 
+//#pragma warning(push)
+//#pragma warning(disable:4005 26812) 
 #include <DirectXMath.h>
-#pragma warning(pop)
+//#pragma warning(pop)
 
 struct Vertex2D{
     Vertex2D(){ Pos.x = Pos.y = 0; }

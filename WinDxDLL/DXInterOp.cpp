@@ -17,8 +17,8 @@ static bool pauseRender = false;
 // loop. Idle time is used to render the scene.
 #pragma warning(suppress : 28251)
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-	int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-		UNREFERENCED_PARAMETER(hPrevInstance);
+int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
+	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
 		return 0;
@@ -61,13 +61,27 @@ int work(){
 
 // Main message loop
 	MSG msg = {0};
+	time_t ltime;
+	time(&ltime);
+	int cnt = 0;
 	while(WM_QUIT != msg.message){
 		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		} else{
-			if(!pauseRender)
+			if(!pauseRender){
 				mdx.Render();
+				cnt++;
+				time_t ctime;
+				time(&ctime);
+				if(ctime - ltime == 1){
+					ltime = ctime;
+					char buf[64];
+					sprintf_s(buf, 64, "fps: %d", cnt);
+					bool bret = SetWindowTextA(g_hWnd, buf);
+					cnt = 0;
+				}
+			}
 		}
 	}
 	mdx.CleanupDevice();

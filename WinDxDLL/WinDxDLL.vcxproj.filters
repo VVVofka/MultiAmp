@@ -134,7 +134,11 @@
     <None Include="DXInterOpPsVs.hlsl">
       <Filter>InterOp</Filter>
     </None>
-    <None Include="Tutorial02.fx" />
-    <None Include="Tutorial04.fx" />
+    <None Include="Tutorial02.fx">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Tutorial04.fx">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
