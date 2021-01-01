@@ -109,6 +109,7 @@ protected:
 		sd.BufferDesc.Width = width;
 		sd.BufferDesc.Height = height;
 		sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		//sd.BufferDesc.Format = DXGI_FORMAT_R8G8_UNORM;
 		sd.BufferDesc.RefreshRate.Numerator = 60;
 		sd.BufferDesc.RefreshRate.Denominator = 1;
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
@@ -141,7 +142,8 @@ protected:
 		vp.Width = (FLOAT)width;
 		vp.Height = (FLOAT)height;
 		vp.MinDepth = 0.0f;
-		vp.MaxDepth = 1.0f;
+		vp.MaxDepth = 0.0f;
+		//vp.MaxDepth = 1.0f;
 		vp.TopLeftX = 0;
 		vp.TopLeftY = 0;
 		g_pImmediateContext->RSSetViewports(1, &vp);
@@ -154,7 +156,7 @@ protected:
 		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";		//LPCSTR pProfile = "vs_5_0";
 		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 		if(FAILED(hr)){
-			hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
+			hr = CompileShaderFromFile(L"..\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 			if(FAILED(hr)){
 				wchar_t* q = NULL;
 				errno_t err = _get_wpgmptr(&q);
