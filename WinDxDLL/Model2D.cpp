@@ -1,6 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
-
 #include "Model2D.h"
 void Model2D::Create(){
 	INT2 minsz = INT2(options.iArr[InpOptions::LaysSzUpY], options.iArr[InpOptions::LaysSzUpX]);
@@ -119,4 +117,3 @@ void Model2D::dumpD(int nlay) const{
 		printf("\n");
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA

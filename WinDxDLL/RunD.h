@@ -1,5 +1,4 @@
 #pragma once
-#ifdef MODEA
 #include <amp.h>
 #include <amp_math.h>
 #include <amp_graphics.h>
@@ -17,4 +16,3 @@ public:
                     const array<FLT2, 1>& masksD
                     );
 }; // **************************************************************************************************************
-#endif  // MODEA

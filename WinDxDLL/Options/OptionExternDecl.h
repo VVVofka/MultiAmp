@@ -1,9 +1,9 @@
 #pragma once
-#ifdef MODEA
 
 int openDlgOptions(int* iArr, double* dArr); // decl Options.lib
 namespace InpOptions{
 static const int LaysCntReserv = 20; 
+
 // offset in iArr;
 static const int Dirs = 0;                    // 0
 static const int NormDir = Dirs + 16 * 4 * 4; // 256
@@ -28,4 +28,3 @@ static const int kLays = kBorder + 1;         // 5
              //  next = kLays + LaysCntReserv, add before kLays !!!
 //return
 }; // *************************************************************
-#endif  // MODEA

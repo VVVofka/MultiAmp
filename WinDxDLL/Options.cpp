@@ -1,6 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
-
 #include "Options.h"
 
 Options::Options(){
@@ -124,5 +122,4 @@ bool Options::load(const char* fname){
 void Options::loadAll(){
 	blocks2D2.fromDirs(dirs());// TODO: add other parametrs
 } // ///////////////////////////////////////////////////////////////////////////
-#endif  // MODEA
 

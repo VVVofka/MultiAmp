@@ -1,6 +1,4 @@
 #pragma once
-#ifdef MODEA
-
 #include "MDX.h"
 #include "AMPEng2.h"
 #include "Vertex.h"
@@ -54,4 +52,3 @@ SimpleVertex vertices[] =
 	{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f) }
 };
 */
-#endif  // MODEA

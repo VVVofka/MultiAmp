@@ -1,5 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
 #include "Utils.h"
 
 void setConsole(){
@@ -15,5 +14,4 @@ void setConsole(){
 	}
 #pragma warning(pop)
 } // ///////////////////////////////////////////////////////////////////////////
-#endif  // MODEA
 

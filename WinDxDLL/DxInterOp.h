@@ -3,7 +3,6 @@
 // --------------------------------------------------------------------------------------
 #pragma once
 #include "pch.h"
-#ifdef MODEA
 
 #include <Windows.h>
 #include <iostream>
@@ -28,6 +27,4 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 
 MDX2 mdx;
 Model2D model = Model2D();
-
-#endif  // MODEA
 

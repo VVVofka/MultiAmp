@@ -6,7 +6,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
 #include "pch.h"
-#ifdef MODEA
 
 //#include <windows.h>
 #include "DXInterOp.h"
@@ -128,4 +127,3 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	}
 	return 0;
 } // ////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA

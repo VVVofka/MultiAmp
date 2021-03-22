@@ -1,6 +1,4 @@
 #pragma once
-#ifdef MODEA
-
 #include <amp.h>
 #include <amp_graphics.h>
 #include <vector>
@@ -58,5 +56,4 @@ public:
 	void dumpDLast();
 	void dumpPos();
 }; // *******************************************************************************************************
-#endif  // MODEA
 

@@ -1,5 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
 #include "RunA.h"
 void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> ar_areas){
 	size_t nlastlay = ar_areas.size() - 1;
@@ -37,16 +36,3 @@ void RunA::Run(const array<int, 2>& src, array<int, 2>& dsta, const array<int, 1
 		dsta[dst.y][dst.x] = mask[adr];
 	});
 } // /////////////////////////////////////////////////////////////////////////////////////////////////////
-//void RunA::RunConst(const array<int, 2>& src, array<int, 2>& dsta, const WraperMask& mask){
-//	parallel_for_each(dsta.extent, [&dsta, &src, mask](index<2> idx) restrict(amp){
-//		const INT2 dst(idx);
-//		const int y0 = dst.y * 2;
-//		const int y1 = (y0 + 1) % src.extent[0];
-//		const int x0 = dst.x * 2;
-//		const int x1 = (x0 + 1) % src.extent[1];
-//
-//		const int adr = (((((src[y1][x1] << 1) | src[y1][x0]) << 1) | src[y0][x1]) << 1) | src[y0][x0];
-//		dsta[dst.y][dst.x] = mask.v[adr];
-//	});
-//} // /////////////////////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA

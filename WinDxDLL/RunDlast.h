@@ -1,5 +1,4 @@
 #pragma once
-#ifdef MODEA
 #include <amp.h>
 #include <amp_math.h>
 #include <amp_graphics.h>
@@ -19,6 +18,4 @@ public:
 				    array<FLT2, 2>& dstd,
 				    const INT2 sz,
 					bool normdir);
-
 }; // ***************************************************************************************************
-#endif  // MODEA

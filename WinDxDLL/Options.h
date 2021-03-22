@@ -1,6 +1,4 @@
 #pragma once
-#ifdef MODEA
-
 #include "Options\\OptionExternDecl.h"
 #include "Masks.h"
 #include <cstdio> 
@@ -49,5 +47,4 @@ public:
 private:
 	void loadAll();
 }; // ***************************************************************************************
-#endif  // MODEA
 

@@ -1,5 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
 #include "RunDlast.h"
 //#define AMPDBG_DLAST
 void RunDlast::Run(const INT2 shift,
@@ -115,4 +114,3 @@ void RunDlast::Run(const INT2 shift,
 #ifdef AMPDBG_DLAST
 #undef AMPDBG_DLAST
 #endif
-#endif  // MODEA

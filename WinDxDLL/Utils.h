@@ -1,5 +1,4 @@
 #pragma once
-#ifdef MODEA
 #include <Windows.h>
 #include <cstdio>
 #include <iostream>
@@ -11,7 +10,6 @@ using namespace Concurrency::fast_math;
 #define NORMAL_TO_AREA(POS, WIDTH) (float(2 * (POS) + 1) / (WIDTH) - 1.f)
 
 void setConsole();
-//class Utils{}; // *******************************************************************************************
 
 struct FLT2{
 	float y;
@@ -47,7 +45,6 @@ struct INT2{
 	INT2() restrict(amp, cpu) : y(0), x(0){}
 	INT2(int Y, int X) restrict(amp, cpu) : y(Y), x(X){}
 	INT2(concurrency::index<2> idx) restrict(amp, cpu) : y(idx[0]), x(idx[1]){}
-	//bool not0(){ return x != 0 || y != 0; }
 	void operator *=(int mult){ y *= mult; x *= mult; }
 
 	const INT2& operator * (int mult) const restrict(amp, cpu){ return INT2(y * mult, x * mult); }
@@ -58,10 +55,8 @@ struct DrQuadro{
 	FLT2 items[4];
 	bool not0(){ return items[0].not0() || items[1].not0() || items[2].not0() || items[3].not0(); }
 	void dump(){
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 4; i++)
 			printf("\ti:%d y:%+.1f x:%+.1f", i, items[i].y, items[i].x);
-		}
 	} // ///////////////////////////////////////////////////////////////////////////////////////
 }; // ********************************************************************************************
-#endif  // MODEA
 

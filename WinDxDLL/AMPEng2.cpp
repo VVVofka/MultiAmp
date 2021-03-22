@@ -1,5 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
 #include "AMPEng2.h"
 void AMPEng2::initialize_data(){
 	int seed = model.options.seedRnd();
@@ -148,4 +147,3 @@ void AMPEng2::dumpPos(){
 		printf("%d:\t%+.3f %+.3f\n", n, p.y, p.x);
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA

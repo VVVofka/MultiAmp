@@ -1,5 +1,4 @@
 #pragma once
-#ifdef MODEA
 
 //#pragma warning(push)
 //#pragma warning(disable:4005 26812) 
@@ -14,4 +13,3 @@ struct Vertex2D{
 struct Vertex3D{
     DirectX::XMFLOAT3 Pos;
 }; // ********************************************************************************************
-#endif  // MODEA

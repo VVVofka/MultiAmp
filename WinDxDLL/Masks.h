@@ -1,6 +1,4 @@
 #pragma once
-#ifdef MODEA
-
 #include <cassert>
 #include <string>
 #include "Utils.h"
@@ -88,4 +86,3 @@ struct Blocks2D2{
 	void dumpy(std::string delim = ",");
 private:
 }; // ***************************************************************************
-#endif  // MODEA

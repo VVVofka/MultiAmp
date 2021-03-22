@@ -1,6 +1,4 @@
 #pragma once
-#ifdef MODEA
-
 #include <random>
 #include <cmath>
 #include <vector>
@@ -44,5 +42,4 @@ private:
 	void fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma);
 	void filltest(int nlay);
 }; // *****************************************************************************
-#endif  // MODEA
 

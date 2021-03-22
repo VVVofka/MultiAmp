@@ -1,5 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
 #include "RunD.h"
 
 void RunD::Run(const array<DrQuadro, 2>& srcd,
@@ -50,4 +49,3 @@ void RunD::Run(const array<DrQuadro, 2>& srcd,
 		(++dstitems)->set(srcitems->y + masksD[nmask].y, srcitems->x + masksD[nmask].x);
 	});
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA

@@ -1,6 +1,4 @@
 #include "pch.h"
-#ifdef MODEA
-
 #include "Masks.h"
 
 FLT2* Blocks2D2::setDefault(){  // x, y !!!
@@ -404,4 +402,3 @@ int CellItem::b2i(int en, int dir){
 	if(dir == 0) return -1;
 	return 1;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
-#endif  // MODEA
