@@ -17,29 +17,32 @@ void AMPEng2::initialize_data(){
 		const INT2 size = model.sizeYX(nlay);
 
 		ar_areas.push_back(std::unique_ptr<array<int, 2>>());
-		ar_areas[nlay] = std::unique_ptr<array<int, 2>>
-			(new array<int, 2>(size.y, size.x, model.v_areas[nlay].begin(), m_accl_view));
+		auto pareas = new array<int, 2>(size.y, size.x, model.v_areas[nlay].begin(), m_accl_view);
+		ar_areas[nlay] = std::unique_ptr<array<int, 2>>(pareas);
 
 		if(nlay < layscnt - 1){
-			ar_dirs.push_back(std::unique_ptr<array<DrQuadro, 2>>());
-			ar_dirs[nlay] = std::unique_ptr<array<DrQuadro, 2>>
-				(new array<DrQuadro, 2>(size.y, size.x, model.v_dirs[nlay].begin(), m_accl_view));
+			auto tmp = new array<DrQuadro, 2>(size.y, size.x, model.v_dirs[nlay].begin(), m_accl_view);
+			ar_dirs.push_back(std::unique_ptr<array<DrQuadro, 2>>(tmp));
 		}
 		if(nlay < layscnt - 2){
-			ar_masks.push_back(std::unique_ptr<array<FLT2, 1>>());
 			FLT2 tmp[Options::szDirs];
 			float k = (float)model.options.kLays(nlay);
 			for(int j = 0; j < _countof(tmp); j++){
 				tmp[j].y = model.options.blocks2D2.vin[j].y * k;
 				tmp[j].x = model.options.blocks2D2.vin[j].x * k;
 			}
-			ar_masks[nlay] = std::unique_ptr<array<FLT2, 1>>
-				(new array<FLT2, 1>(Options::szDirs, tmp, m_accl_view));
+			auto v = new array<FLT2, 1>(Options::szDirs, tmp, m_accl_view);
+			ar_masks.push_back(std::unique_ptr<array<FLT2, 1>>(v));
 		}
 	}
-	ar_screen = std::unique_ptr<array<Vertex2D, 1>>(new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view));
-	ar_last_dirs = std::unique_ptr<array<FLT2, 2>>(new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view));
-	amask = std::unique_ptr<array<int, 1>>(new array<int, 1>(16, model.options.aMask(), m_accl_view));
+	auto pscreen = new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view);
+	ar_screen = std::unique_ptr<array<Vertex2D, 1>>(pscreen);
+
+	auto plast_dirs = new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view);
+	ar_last_dirs = std::unique_ptr<array<FLT2, 2>>(plast_dirs);
+
+	auto pamsk = new array<int, 1>(16, model.options.aMask(), m_accl_view);
+	amask = std::unique_ptr<array<int, 1>>(pamsk);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	INT2 shift(distLastAY(gen), distLastAX(gen));   // rand shift
