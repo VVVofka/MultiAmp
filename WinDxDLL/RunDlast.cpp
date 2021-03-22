@@ -4,7 +4,7 @@
 //#define AMPDBG_DLAST
 void RunDlast::Run(const INT2 shift,
 				   const array<DrQuadro, 2>& srcd,
-				   array<Vertex2D, 1>& dstpos,
+				   array<Vertex2D, 1>& screen,
 				   array<int, 2>& dsta,
 				   array<FLT2, 2>& dstd,
 				   const INT2 sz,
@@ -23,15 +23,7 @@ void RunDlast::Run(const INT2 shift,
 		dstd[y1][x1] = *(++q);
 	}); // parallel_for_each(srcd.extent,
 
-	// // prefer to center -
-	//parallel_for_each(dstd.extent, [&dstd](index<2> idx) restrict(amp){
-	//	int y = idx[0];
-	//	int x = idx[1];
-	//	dstd[y][x].y += 1.f + y / (-0.5f * dstd.extent[0]);
-	//	dstd[y][x].x += 1.f + x / (-0.5f * dstd.extent[1]);
-	//}); // parallel_for_each(srcd.extent,
-
-	// // del small dir (ex. 7,3 -> 7,0)
+	// // del small dir (ex. 7, 3 -> 7, 0)
 	//normdir = !true;
 	if(normdir){
 		parallel_for_each(dstd.extent, [&dstd](index<2> idx) restrict(amp){
@@ -42,7 +34,7 @@ void RunDlast::Run(const INT2 shift,
 			else if(absdir.y >= 2 * absdir.x)
 				dstd[dst.y][dst.x].x = 0;
 		}); // parallel_for_each(srcd.extent,
-	}
+	} // if(normdir)
 #ifdef AMPDBG_DLAST
 	struct myStruct{
 		int x = -9, y = -9;
@@ -63,7 +55,7 @@ void RunDlast::Run(const INT2 shift,
 	static int nshiftOrders = 0;
 	int shiftOrder = vShiftOrders[nshiftOrders];
 	if(++nshiftOrders >= 8) nshiftOrders = 0;
-	parallel_for_each(srcd.extent, [=, &dsta, &dstd, &dstpos](index<2> idx) restrict(amp){
+	parallel_for_each(srcd.extent, [=, &dsta, &dstd, &screen](index<2> idx) restrict(amp){
 		const int mask[7] = {0,0,1, 9, -1,0,0};
 		const int y0 = idx[0] * 2 + shift.y;
 		const int x0 = idx[1] * 2 + shift.x;
@@ -106,8 +98,8 @@ void RunDlast::Run(const INT2 shift,
 			//dstd[newy][newx].y = dstd[newy][newx].x = 0; // Block next moves by ncell
 			//dstd[y][x].y = dstd[y][x].x = 0; // lines 18-28
 
-			dstpos[aold].Pos.y = NORMAL_TO_AREA(newy, sz.y);
-			dstpos[aold].Pos.x = NORMAL_TO_AREA(newx, sz.x);
+			screen[aold].Pos.y = NORMAL_TO_AREA(newy, sz.y);
+			screen[aold].Pos.x = NORMAL_TO_AREA(newx, sz.x);
 		} // for(ncell
 	}); // parallel_for_each(srcd.extent,
 #ifdef AMPDBG_DLAST

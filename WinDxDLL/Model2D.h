@@ -20,7 +20,7 @@ public:
 	std::vector<std::vector<Vertex2D>> v_poss;
 	std::vector<std::vector<int>> v_areas;
 	std::vector<std::vector<DrQuadro>> v_dirs;
-	std::vector<FLT2> last_dirs;
+	std::vector<FLT2> ar_last_dirs;
 	std::vector<INT2> vsz;
 
 	std::vector<int> lastArea() const { return v_areas[v_areas.size() - 1]; }

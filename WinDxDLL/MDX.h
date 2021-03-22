@@ -1,8 +1,4 @@
 #pragma once
-#define MYAREA
-//#define MY2D
-//#define MY3D
-
 #ifdef MODEA
 
 #include <iostream>

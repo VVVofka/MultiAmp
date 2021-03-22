@@ -22,32 +22,6 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
 		return 0;
-#ifdef MY2D
-	vertices[0].Pos = DirectX::XMFLOAT2(-0.25f, 0.0f);
-	vertices[1].Pos = DirectX::XMFLOAT2(0.0f, -0.5f);
-	vertices[2].Pos = DirectX::XMFLOAT2(-0.5f, -0.5f);
-	if(FAILED(mdx.InitDevice(g_hWnd, vertices))){
-		mdx.CleanupDevice();
-		return E_FAIL;
-	}
-#elif MY3D // MY2D
-	vertices[0].Pos = DirectX::XMFLOAT3(-0.25f, 0.0f, 0.0f);
-	vertices[1].Pos = DirectX::XMFLOAT3(0.0f, -0.5f, -0.3f);
-	vertices[2].Pos = DirectX::XMFLOAT3(-0.5f, -0.5f, 0.3f);
-	if(FAILED(mdx.InitDevice(g_hWnd, vertices))){
-		mdx.CleanupDevice();
-		return E_FAIL;
-	}
-#else 
-	//INT2 szlay0 = INT2(1, 1);
-	////model.Create(szlay0, 1024 * 1, 0.06); //8 - ???
-	//DBL2 Sigma(0.15, 0.15);
-	//model.Create(szlay0, 1024 * 2, 0.015, Sigma); //8 - ???
-	//if(FAILED(mdx.InitDevice(g_hWnd, model.lastPoss()))){
-	//	mdx.CleanupDevice();
-	//	return E_FAIL;
-	//}
-#endif // MY2D
 	int work();
 	return work();
 } // ////////////////////////////////////////////////////////////////////////////

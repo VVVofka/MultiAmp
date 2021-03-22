@@ -32,7 +32,7 @@ void Model2D::Create(){
 	vsz.push_back(sz);
 	const size_t szarea = size_t(sz.x) * size_t(sz.y);
 	v_areas.push_back(std::vector<int>(szarea, -1)); // -1 - empty value
-	last_dirs.resize(szarea, FLT2(0, 0));
+	ar_last_dirs.resize(szarea, FLT2(0, 0));
 
 	// fill v_poss (for screen only) & v_areas for the last lay
 	v_poss.push_back(std::vector<Vertex2D>());

@@ -1,13 +1,12 @@
 #include "pch.h"
 #ifdef MODEA
 #include "RunA.h"
-void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> var_areas){
-	size_t nlastlay = var_areas.size() - 1;
+void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> ar_areas){
+	size_t nlastlay = ar_areas.size() - 1;
 	for(size_t nlay = nlastlay - 1; nlay > 0; nlay--){
-		auto &q = var_areas[nlay];
+		auto &q = ar_areas[nlay];
 		int szy = q->extent[0];
 		int szx = q->extent[1];
-
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void RunA::RunLast(INT2 shift, const array<int, 2>& srca, array<int, 2>& dsta, const array<int, 1>& mask){

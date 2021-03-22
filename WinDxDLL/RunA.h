@@ -10,7 +10,7 @@ using namespace concurrency::fast_math;
 using namespace concurrency::direct3d;
 class RunA{
 	public:
-		static void Create(std::vector<std::unique_ptr<array<int, 2>>> var_areas);
+		static void Create(std::vector<std::unique_ptr<array<int, 2>>> ar_areas);
 		static void Run(const array<int, 2>& src, array<int, 2>& dst, const array<int, 1>& mask);
 		//static void RunConst(const array<int, 2>& src, array<int, 2>& dst, const WraperMask& mask);
 		static void RunLast(INT2 shift, const array<int, 2>& src, array<int, 2>& dst, const array<int, 1>& mask);
