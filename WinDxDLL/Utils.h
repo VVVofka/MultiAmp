@@ -1,7 +1,11 @@
 #pragma once
+
+// for dumps console
+#pragma comment ( lib, "User32.lib" )
 #include <Windows.h>
 #include <cstdio>
 #include <iostream>
+
 #include <amp.h>
 #include <amp_math.h>
 using namespace Concurrency;

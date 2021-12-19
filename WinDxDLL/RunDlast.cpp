@@ -3,7 +3,7 @@
 //#define AMPDBG_DLAST
 void RunDlast::Run(const INT2 shift,
 				   const array<DrQuadro, 2>& srcd,
-				   array<Vertex2D, 1>& screen,
+				   array<Vertex2D, 1>& --++	,
 				   array<int, 2>& dsta,
 				   array<FLT2, 2>& dstd,
 				   const INT2 sz,
