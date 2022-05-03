@@ -40,9 +40,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX){
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
-
 // CMultiAmpDlg dialog
-
 
 
 CMultiAmpDlg::CMultiAmpDlg(CWnd* pParent /*=nullptr*/)
@@ -163,7 +161,6 @@ void CMultiAmpDlg::OnBnClickedButton1(){
 			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, 3, 5);
 			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 			//_RPT1(_CRT_WARN, "%d\n", ret);
-			//MessageBox(TEXT("tstdll from WinDxDLL.dll not loaded!"));
 		} else{
 			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
 		}
