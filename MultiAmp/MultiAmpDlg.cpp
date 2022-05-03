@@ -1,7 +1,4 @@
-
 // MultiAmpDlg.cpp : implementation file
-//
-
 #include "pch.h"
 #include "framework.h"
 #include "MultiAmp.h"
@@ -136,37 +133,51 @@ void CMultiAmpDlg::OnPaint(){
 //  the minimized window.
 HCURSOR CMultiAmpDlg::OnQueryDragIcon(){
 	return static_cast<HCURSOR>(m_hIcon);
-}
+} // /////////////////////////////////////////////////////////////////////////////////////
 
 void CMultiAmpDlg::OnBnClickedButton1(){
 	HMODULE hLib;
+/*
 #ifdef DEBUG
 #ifdef _WIN64
-	hLib = LoadLibrary(TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Debug\\WinDxDLL.dll"));
+	auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Debug\\WinDxDLL.dll");
 #else // _WIN64
-	hLib = LoadLibrary(TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Debug\\WinDxDLL.dll"));
+	auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Debug\\WinDxDLL.dll");
 #endif // _WIN64
 #else // DEBUG
 #ifdef _WIN64
-	hLib = LoadLibrary(TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Release\\WinDxDLL.dll"));
+	auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Release\\WinDxDLL.dll");
+	// c:\Prog\CPP\MultiAmp\x64\Release\WinDxDLL.dll 
 #else // _WIN64
-	hLib = LoadLibrary(TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Release\\WinDxDLL.dll"));
+	auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Release\\WinDxDLL.dll");
 #endif // _WIN64 
 #endif // DEBUG
-
+	*/
+	auto dllname = dllName();
+	auto spath = TEXT(dllname.c_str());
+	hLib = LoadLibrary(spath);
 	if(hLib != NULL){
 		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, int a, int b) = NULL;
 		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1");   // tstdll
 		if(pFunction != NULL){
 			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, 3, 5);
-			_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
-			_RPT1(_CRT_WARN, "%d\n", ret);
+			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+			//_RPT1(_CRT_WARN, "%d\n", ret);
 			//MessageBox(TEXT("tstdll from WinDxDLL.dll not loaded!"));
 		} else{
-			MessageBox(TEXT("tstdll from WinDxDLL.dll not loaded!"), 0, MB_ICONERROR);
+			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
 		}
 	} else{
-		MessageBox(TEXT("WinDxDLL.dll not loaded!"), 0, MB_ICONERROR);
+		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+std::string CMultiAmpDlg::dllName(){
+	std::string fHelpPathName(AfxGetApp()->m_pszHelpFilePath);
+	auto lenPath = fHelpPathName.length();
 
+	std::string fName("WinDxDLL.dll");	// Lenght WinDxDLL.dll == MultiAmp.HLP
+	auto lenName = fName.length();
+
+	auto start = lenPath - lenName;
+	return fHelpPathName.replace(start, lenName, fName);
+} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
