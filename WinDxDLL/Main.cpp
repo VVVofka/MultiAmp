@@ -4,6 +4,7 @@
 int tstdllMain(HINSTANCE hInstance, int nCmdShow, int a, int b){
 	return a + b;
 } // /////////////////////////////////////////////////////////////////////
-void openwnd(HINSTANCE hInstance, int nCmdShow){
-	mn(hInstance, NULL, NULL, nCmdShow);
+int openwnd(HINSTANCE hInstance, int nCmdShow){
+	int ret = mn(hInstance, NULL, NULL, nCmdShow);
+	return ret;
 } // /////////////////////////////////////////////////////////////////////

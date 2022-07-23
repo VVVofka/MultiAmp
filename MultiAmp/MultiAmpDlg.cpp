@@ -155,10 +155,10 @@ void CMultiAmpDlg::OnBnClickedButton1(){
 	auto spath = TEXT(dllname.c_str());
 	hLib = LoadLibrary(spath);
 	if(hLib != NULL){
-		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, int a, int b) = NULL;
+		int (*pFunction)(HINSTANCE hInstance, int nCmdShow) = NULL;
 		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1");   // tstdll
 		if(pFunction != NULL){
-			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, 3, 5);
+			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT);
 			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 			//_RPT1(_CRT_WARN, "%d\n", ret);
 		} else{
