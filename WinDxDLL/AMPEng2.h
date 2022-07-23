@@ -24,6 +24,7 @@ class AMPEng2{
 	size_t nlastlay = 0;     // N last lay
 
 	std::unique_ptr<array<Vertex2D, 1>>	ar_screen; // for screen
+	//array<Vertex2D, 1>*	ar_screen; // for screen
 	std::vector<std::unique_ptr<array<int, 2>>> ar_areas;
 	std::vector<std::unique_ptr<array<DrQuadro, 2>>> ar_dirs;
 	std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
