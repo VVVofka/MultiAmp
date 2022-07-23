@@ -43,7 +43,7 @@ int work(){
 			DispatchMessage(&msg);
 		} else{
 			if(!pauseRender){
-				mdx.Render();
+				mdx.Render();	// MAIN 
 				cnt++;
 				time_t ctime;
 				time(&ctime);

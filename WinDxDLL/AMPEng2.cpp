@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "AMPEng2.h"
-void AMPEng2::initialize_data(){
+AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)){
 	int seed = model.options.seedRnd();
 	if(seed >= 0)
 		gen.seed(seed);
@@ -36,7 +36,6 @@ void AMPEng2::initialize_data(){
 	}
 	auto pscreen = new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view);
 	ar_screen = std::unique_ptr<array<Vertex2D, 1>>(pscreen);
-	//ar_screen = new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view);
 
 	auto plast_dirs = new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view);
 	ar_last_dirs = std::unique_ptr<array<FLT2, 2>>(plast_dirs);

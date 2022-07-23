@@ -18,21 +18,20 @@ public:
 		RETURN_IF_FAIL(MDX::CreatePixelShader());
 		return hr;
 	} // //////////////////////////////////////////////////////////////////////////////////
-private:
-	HRESULT CreateComputeShader(){
-		g_pAMPComputeEngine = new AMPEng2(g_pd3dDevice);
-		RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
-		return MDX::CreateComputeShader();
-	} // /////////////////////////////////////////////////////////////////////////////////////////////
-public:
 	void Render(){               //  Call from main loop wWinMain()
-		g_pAMPComputeEngine->run();
+		g_pAMPComputeEngine->run();		// MAIN
 		MDX::Render(sizeof(Vertex2D));
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////
 	void CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 		MDX::CleanupDevice();
 		SAFE_DELETE(g_pAMPComputeEngine);
 	} // //////////////////////////////////////////////////////////////////////////////////////////
+private:
+	HRESULT CreateComputeShader(){
+		g_pAMPComputeEngine = new AMPEng2(g_pd3dDevice);
+		RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
+		return MDX::CreateComputeShader();
+	} // /////////////////////////////////////////////////////////////////////////////////////////////
 }; // ***********************************************************************
 /*
 D3D11_INPUT_ELEMENT_DESC layout[] =

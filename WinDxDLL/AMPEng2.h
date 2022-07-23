@@ -31,13 +31,8 @@ class AMPEng2{
 	std::unique_ptr<array<int, 1>> amask;
 	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 
-	void initialize_data();
-
 public:
-	AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)){
-		initialize_data();
-	} // ///////////////////////////////////////////////////////////////////////////////////////////////
-
+	AMPEng2(ID3D11Device* d3ddevice);
 	void run();    // main function in render
 
 	HRESULT get_data_d3dbuffer(void** d3dbuffer) const{
