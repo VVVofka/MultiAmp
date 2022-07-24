@@ -13,7 +13,6 @@
 
 class Model2D{
 public:
-	Model2D(){}
 	Options options;
 	std::vector<std::vector<Vertex2D>> v_poss;
 	std::vector<std::vector<int>> v_areas;

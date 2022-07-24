@@ -32,7 +32,7 @@ int work(){
 		return E_FAIL;
 	}
 
-// Main message loop
+	// Main message loop
 	MSG msg = {0};
 	time_t ltime;
 	time(&ltime);
@@ -93,38 +93,38 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and cr
 } // //////////////////////////////////////////////////////////////////////////////////////////////
 // Called every time the application receives a message
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
-	PAINTSTRUCT ps;	HDC hdc;
 	switch(message){
-		case WM_PAINT:
-			hdc = BeginPaint(hWnd, &ps);
-			EndPaint(hWnd, &ps);
+	case WM_PAINT:
+		PAINTSTRUCT ps;
+		BeginPaint(hWnd, &ps);
+		EndPaint(hWnd, &ps);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	case WM_KEYDOWN:
+		switch(wParam){
+		case VK_ESCAPE:
+			SendMessage(hWnd, WM_CLOSE, 0, 0);
 			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			break;
-		case WM_KEYDOWN:
-			switch(wParam){
-				case VK_ESCAPE:
-					SendMessage(hWnd, WM_CLOSE, 0, 0);
-					break;
-				case 79:{ // key 'o'  // I=73
-					pauseRender = true;
-					if(model.options.showDlg()){
-						model.Create();
-						mdx.CleanupDevice();
-						mdx.InitDevice(g_hWnd, model.lastPoss());
-					}
-					pauseRender = false;
-					break; }
-				case VK_PAUSE:
-					break;
-				default:
-					setConsole();			
-					printf("%d\n", (int)wParam);
-					break;
+		case 79:{ // key 'o'  // I=73
+			pauseRender = true;
+			if(model.options.showDlg()){
+				model.Create();
+				mdx.CleanupDevice();
+				mdx.InitDevice(g_hWnd, model.lastPoss());
 			}
+			pauseRender = false;
+			break; }
+		case VK_PAUSE:
+			break;
 		default:
-			return DefWindowProc(hWnd, message, wParam, lParam);
+			setConsole();
+			printf("%d\n", (int)wParam);
+			break;
+		}
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
 } // ////////////////////////////////////////////////////////////////////////////////////
