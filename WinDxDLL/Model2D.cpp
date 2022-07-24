@@ -7,7 +7,7 @@ void Model2D::Create(){
 	DBL2 kSigma(options.dArr[InpOptions::kSigmaY], options.dArr[InpOptions::kSigmaX]);
 
 	const int RESERV_LAYS_CNT = 16;
-	v_poss.clear(); v_poss.reserve(RESERV_LAYS_CNT);
+	//v_poss.clear(); v_poss.reserve(RESERV_LAYS_CNT);
 	v_areas.clear(); v_areas.reserve(RESERV_LAYS_CNT);
 	v_dirs.clear(); v_dirs.reserve(RESERV_LAYS_CNT);
 	vsz.clear(); vsz.reserve(RESERV_LAYS_CNT);
@@ -19,7 +19,7 @@ void Model2D::Create(){
 
 		v_areas.push_back(std::vector<int>(szarea, -1)); // -1 - empty value
 		v_dirs.push_back(std::vector<DrQuadro>(szarea));
-		v_poss.push_back(std::vector<Vertex2D>());
+		//v_poss.push_back(std::vector<Vertex2D>());
 		vsz.push_back(sz);
 
 		sz *= 2; szmaxxy *= 2;
@@ -33,7 +33,7 @@ void Model2D::Create(){
 	ar_last_dirs.resize(szarea, FLT2(0, 0));
 
 	// fill v_poss (for screen only) & v_areas for the last lay
-	v_poss.push_back(std::vector<Vertex2D>());
+	//v_poss.push_back(std::vector<Vertex2D>());
 	fillrnd((int)nlay, (int)szarea, kRnd, kSigma);
 	//filltest(nlay);
 	options.iArr[InpOptions::LaysCnt] = int(nlay);
@@ -58,13 +58,13 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 	}
 	std::uniform_int_distribution<int> dist(0, int(szarea) - 1);
 	size_t szpos = size_t(szarea * kFill + 0.5);
-	v_poss[nlay].reserve(szpos);
+	v_scr.reserve(szpos);
 
 	const INT2 sz(vsz[nlay]);
 	std::normal_distribution<> distry(sz.y * 0.5, sz.y * 0.3 * kSigma.y);
 	std::normal_distribution<> distrx(sz.x * 0.5, sz.x * 0.3 * kSigma.x);
 
-	while(v_poss[nlay].size() < szpos){
+	while(v_scr.size() < szpos){
 		int curpos=0;
 		do{
 			//curpos = dist(gen);
@@ -79,22 +79,12 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 			curpos = y * sz.x + x;
 			assert(curpos < (int)v_areas[nlay].size());
 		} while(v_areas[nlay][curpos] >= 0);
-		v_areas[nlay][curpos] = (unsigned int)v_poss[nlay].size(); // 0 ... szpos-1
+		v_areas[nlay][curpos] = (unsigned int)v_scr.size(); // 0 ... szpos-1
 
 		const Vertex2D vert2 = norm(curpos, sz);
-		v_poss[nlay].push_back(vert2);
+		v_scr.push_back(vert2);
 	} // 	while(v_poss[nlay].size() < szpos)
 }// /////////////////////////////////////////////////////////////////////////////////
-void Model2D::filltest(int nlay){
-	int vcurpos[] =
-		//{1, 4, 9, 11, 14, 19, 20, 21, 24, 25, 29, 34, 44};
-	{0, 8, 16, 4 * 17, 4 * 17 + 8, 4 * 17 + 16, 8 * 17, 8 * 17 + 8, 8 * 17 + 16};
-	for(auto curpos : vcurpos){
-		v_areas[nlay][curpos] = (unsigned int)v_poss[nlay].size();
-		const Vertex2D vert2 = norm(curpos, vsz[nlay]);
-		v_poss[nlay].push_back(vert2);
-	}
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
 void Model2D::dumpA(int nlay) const{
 	setConsole();
 	std::cout << " y*x: " << sizeY(nlay) << "*" << sizeX(nlay) << std::endl;

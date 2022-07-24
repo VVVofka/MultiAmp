@@ -27,7 +27,7 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 int work(){
 	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
 	model.Create();
-	if(FAILED(mdx.InitDevice(g_hWnd, model.lastPoss()))){
+	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
@@ -112,7 +112,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			if(model.options.showDlg()){
 				model.Create();
 				mdx.CleanupDevice();
-				mdx.InitDevice(g_hWnd, model.lastPoss());
+				mdx.InitDevice(g_hWnd, model.v_scr);
 			}
 			pauseRender = false;
 			break; }

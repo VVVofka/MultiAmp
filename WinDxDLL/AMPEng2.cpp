@@ -34,7 +34,7 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 			ar_masks.push_back(std::unique_ptr<array<FLT2, 1>>(v));
 		}
 	}
-	auto pscreen = new array<Vertex2D, 1>(int(model.lastPoss().size()), model.lastPoss().begin(), m_accl_view);
+	auto pscreen = new array<Vertex2D, 1>(int(model.v_scr.size()), model.v_scr.begin(), m_accl_view);
 	ar_screen = std::unique_ptr<array<Vertex2D, 1>>(pscreen);
 
 	auto plast_dirs = new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view);
