@@ -22,7 +22,7 @@ void RunDlast::Run(const INT2 shift,
 		dstd[y1][x1] = *(++q);
 	}); // parallel_for_each(srcd.extent,
 
-	// // del small dir (ex. 7, 3 -> 7, 0)
+	// // del small dir (ex. (7, 3) -> (7, 0))
 	//normdir = !true;
 	if(normdir){
 		parallel_for_each(dstd.extent, [&dstd](index<2> idx) restrict(amp){
