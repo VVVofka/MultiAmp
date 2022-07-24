@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "RunA.h"
-void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> ar_areas){
-	size_t nlastlay = ar_areas.size() - 1;
+void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> vgpu_a){
+	size_t nlastlay = vgpu_a.size() - 1;
 	for(size_t nlay = nlastlay - 1; nlay > 0; nlay--){
-		auto &q = ar_areas[nlay];
+		auto &q = vgpu_a[nlay];
 		int szy = q->extent[0];
 		int szx = q->extent[1];
 	}
