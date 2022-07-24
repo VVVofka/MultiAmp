@@ -14,7 +14,6 @@
 class Model2D{
 public:
 	Options options;
-	//std::vector<std::vector<Vertex2D>> v_poss;
 	std::vector<Vertex2D> v_scr;
 	std::vector<std::vector<int>> v_areas;
 	std::vector<std::vector<DrQuadro>> v_dirs;
@@ -22,7 +21,6 @@ public:
 	std::vector<INT2> vsz;
 
 	std::vector<int> lastArea() const { return v_areas[v_areas.size() - 1]; }
-	//std::vector<Vertex2D> lastPoss() const{ return v_poss[v_poss.size() - 1]; } // last lay
 
 	int sizeY(int nlay) const { return vsz[nlay].y; }
 	int sizeY() const { return vsz[vsz.size() - 1].y; }

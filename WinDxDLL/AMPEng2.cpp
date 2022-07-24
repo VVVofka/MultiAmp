@@ -6,8 +6,8 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 		gen.seed(seed);
 	else
 		gen.seed(rd());
-	distLastAY = std::uniform_int_distribution<int>(0, model.sizeY() - 1);
-	distLastAX = std::uniform_int_distribution<int>(0, model.sizeX() - 1);
+	distrLastAY = std::uniform_int_distribution<int>(0, model.sizeY() - 1);
+	distrLastAX = std::uniform_int_distribution<int>(0, model.sizeX() - 1);
 	nlastlay = size_t(model.LaysCnt() - 1); // N last lay
 
 	int layscnt = (int)model.v_areas.size();
@@ -44,7 +44,7 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 	amask = std::unique_ptr<array<int, 1>>(pamsk);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
-	INT2 shift(distLastAY(gen), distLastAX(gen));   // rand shift
+	INT2 shift(distrLastAY(gen), distrLastAX(gen));   // rand shift
 	//printf("\nshift = y:%d x:%d\n", shift.y, shift.x);	dumpA(nlastlay);
 	RunA::RunLast(shift, *ar_areas[nlastlay], *ar_areas[nlastlay - 1], *amask);
 	for(int nlay = (int)nlastlay - 1; nlay > 0; nlay--){

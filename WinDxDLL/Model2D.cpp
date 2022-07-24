@@ -7,7 +7,6 @@ void Model2D::Create(){
 	DBL2 kSigma(options.dArr[InpOptions::kSigmaY], options.dArr[InpOptions::kSigmaX]);
 
 	const int RESERV_LAYS_CNT = 16;
-	//v_poss.clear(); v_poss.reserve(RESERV_LAYS_CNT);
 	v_areas.clear(); v_areas.reserve(RESERV_LAYS_CNT);
 	v_dirs.clear(); v_dirs.reserve(RESERV_LAYS_CNT);
 	vsz.clear(); vsz.reserve(RESERV_LAYS_CNT);
@@ -19,7 +18,6 @@ void Model2D::Create(){
 
 		v_areas.push_back(std::vector<int>(szarea, -1)); // -1 - empty value
 		v_dirs.push_back(std::vector<DrQuadro>(szarea));
-		//v_poss.push_back(std::vector<Vertex2D>());
 		vsz.push_back(sz);
 
 		sz *= 2; szmaxxy *= 2;
@@ -33,9 +31,7 @@ void Model2D::Create(){
 	ar_last_dirs.resize(szarea, FLT2(0, 0));
 
 	// fill v_poss (for screen only) & v_areas for the last lay
-	//v_poss.push_back(std::vector<Vertex2D>());
 	fillrnd((int)nlay, (int)szarea, kRnd, kSigma);
-	//filltest(nlay);
 	options.iArr[InpOptions::LaysCnt] = int(nlay);
 	options.saveAuto();
 } // //////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +79,7 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 
 		const Vertex2D vert2 = norm(curpos, sz);
 		v_scr.push_back(vert2);
-	} // 	while(v_poss[nlay].size() < szpos)
+	} // 	while(v_scr.size() < szpos)
 }// /////////////////////////////////////////////////////////////////////////////////
 void Model2D::dumpA(int nlay) const{
 	setConsole();
