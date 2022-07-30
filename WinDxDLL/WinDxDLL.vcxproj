@@ -178,6 +178,7 @@
     <ClInclude Include="LayBase.h" />
     <ClInclude Include="LayMid.h" />
     <ClInclude Include="Lays.h" />
+    <ClInclude Include="LaysCPUCfg.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Masks.h" />
     <ClInclude Include="MDX.h" />

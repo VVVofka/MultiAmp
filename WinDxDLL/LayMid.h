@@ -14,7 +14,6 @@ public:
 
 	std::string sDumpA(const int digits)const;
 	std::string sDumpF(const int digits)const;
-	std::string sDumpV(const int digits)const;
 
 	std::string sInfo()const;
 };

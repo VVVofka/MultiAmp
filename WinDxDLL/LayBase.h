@@ -18,6 +18,8 @@ public:
 	void gpu2cpu();
 	void cpu2gpu();
 
+	bool isLoad()const;
+
 protected:
 	std::string sDumpA(const int digits)const;
 	std::string sDumpF(const int digits)const;

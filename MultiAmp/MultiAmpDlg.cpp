@@ -57,6 +57,9 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CMultiAmpDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
+	ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
+	ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -178,3 +181,52 @@ std::string CMultiAmpDlg::dllName(){
 	auto start = lenPath - lenName;
 	return fHelpPathName.replace(start, lenName, fName);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+void CMultiAmpDlg::OnBnClickedBtJson(){
+	const char* json = "{\"project\":\"rapidjson\",\"stars\":10}";
+	Document d;
+	d.Parse(json);
+
+	// 2. Modify it by DOM.
+	Value& s = d["stars"];
+	s.SetInt(s.GetInt() + 1);
+
+	// 3. Stringify the DOM
+	StringBuffer buffer;
+	Writer<StringBuffer> writer(buffer);
+	d.Accept(writer);
+
+	// Output {"project":"rapidjson","stars":11}
+	_RPT0(0, buffer.GetString());
+	//std::cout << buffer.GetString() << std::endl;
+
+} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void CMultiAmpDlg::OnBnClickedBtMaskA(){
+	CDialog dlg(IDD_DLG_MASK_A);	// IDD_DLG_MASK_A
+	auto nRet = dlg.DoModal();
+	switch(nRet){
+	case -1:
+		AfxMessageBox(_T("Dialog box could not be created!"));
+		break;
+	case IDABORT:
+		// Do something
+		break;
+	case IDOK:
+		// Do something
+		break;
+	case IDCANCEL:
+		// Do something
+		break;
+	default:
+		// Do something
+		break;
+	};
+}
+
+
+void CMultiAmpDlg::OnBnClickedOk(){
+	// TODO: добавьте свой код обработчика уведомлений
+	CDialogEx::OnOK();
+}
+

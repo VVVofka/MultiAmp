@@ -1,10 +1,12 @@
-
 // MultiAmpDlg.h : header file
-//
 
 #pragma once
 #include <string>
 
+#include "../Common/include/rapidjson/document.h"
+#include "../Common/include/rapidjson/writer.h"
+#include "../Common/include/rapidjson/stringbuffer.h"
+using namespace rapidjson;
 
 // CMultiAmpDlg dialog
 class CMultiAmpDlg : public CDialogEx
@@ -36,4 +38,8 @@ public:
 	afx_msg void OnBnClickedButton1();
 private:
 	std::string dllName();
+public:
+	afx_msg void OnBnClickedBtJson();
+	afx_msg void OnBnClickedBtMaskA();
+	afx_msg void OnBnClickedOk();
 };

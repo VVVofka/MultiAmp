@@ -14,6 +14,13 @@ void LayBase::cpu2gpu(){
 	va.cpu2gpu();
 	vf.cpu2gpu();
 } // ///////////////////////////////////////////////////////////////////////////////
+bool LayBase::isLoad() const{
+	if(sz.x <= 0) return false;
+	if(sz.y <= 0) return false;
+	if(va.vcpu.size() == 0) return false;
+	if(vf.vcpu.size() == 0) return false;
+	return true;
+} // ///////////////////////////////////////////////////////////////////////////////
 std::string LayBase::sDumpA(const int digits)const{
 	char buf[4096];
 	std::string ret, sformat("%" + std::to_string(digits) + "d ");

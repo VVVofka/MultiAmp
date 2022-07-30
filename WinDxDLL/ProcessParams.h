@@ -14,6 +14,5 @@ public:
 	void setLevelTurbul(const float val_in);
 	void setKLaminar(const float val_in);
 	void setKTurbul(const float val_in);
-
 };
 

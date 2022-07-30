@@ -2,7 +2,7 @@
 #include <amp.h>
 #include <amp_short_vectors.h>
 #include <vector>
-#include "Utils.h"
+#include "LaysCPUCfg.h"
 
 using namespace Concurrency::graphics;
 template<class T>

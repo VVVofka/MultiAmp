@@ -196,6 +196,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="MaskA.h" />
     <ClInclude Include="MultiAmp.h" />
     <ClInclude Include="MultiAmpDlg.h" />
     <ClInclude Include="pch.h" />
@@ -203,6 +204,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MaskA.cpp" />
     <ClCompile Include="MultiAmp.cpp" />
     <ClCompile Include="MultiAmpDlg.cpp" />
     <ClCompile Include="pch.cpp">
@@ -219,6 +221,9 @@
     <None Include="res\MultiAmp.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bitmap0.bmp" />
+    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmap2.bmp" />
     <Image Include="res\MultiAmp.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
