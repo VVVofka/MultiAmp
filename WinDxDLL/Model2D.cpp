@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "Model2D.h"
 void Model2D::Create(){
+	int seed = options.seedRnd();
+	seed = 123; // TODO: seed rnd?
+	if(seed >= 0)
+		rnd_gen.seed(seed);
+	else{
+		std::random_device rd;
+		rnd_gen.seed(rd());
+	}
 	INT2 minsz = INT2(options.iArr[InpOptions::LaysSzUpY], options.iArr[InpOptions::LaysSzUpX]);
 	int maxszXY = options.iArr[InpOptions::LaysSzDn];
 	double kRnd = options.dArr[InpOptions::kFillRnd];
@@ -43,15 +51,15 @@ Vertex2D Model2D::norm(int curpos, INT2 sizes) const{
 	return Vertex2D(y, x);
 } // /////////////////////////////////////////////////////////////////////////////////
 void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
-	std::mt19937 gen;  // to seed mersenne twister. rand: gen(rd())
+	////std::mt19937 gen;  // to seed mersenne twister. rand: gen(rd())
 
-	int seed = options.seedRnd();
-	if(seed >= 0)
-		gen.seed(seed);
-	else{
-		std::random_device rd;   // non-deterministic generator
-		gen.seed(rd());
-	}
+	//int seed = options.seedRnd();
+	//if(seed >= 0)
+	//	gen.seed(seed);
+	//else{
+	//	std::random_device rd;   // non-deterministic generator
+	//	gen.seed(rd());
+	//}
 	std::uniform_int_distribution<int> dist(0, int(szarea) - 1);
 	size_t szpos = size_t(szarea * kFill + 0.5);
 	v_scr.reserve(szpos);
@@ -66,10 +74,10 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 			//curpos = dist(gen);
 			int y=0, x=0;
 			do{
-				y = (int)distry(gen);
+				y = (int)distry(rnd_gen);
 			} while(y < 0 || y >= sz.y);
 			do{
-				x = (int)distrx(gen);
+				x = (int)distrx(rnd_gen);
 			} while(x < 0 || x >= sz.x);
 
 			curpos = y * sz.x + x;

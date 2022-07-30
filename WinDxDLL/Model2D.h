@@ -35,6 +35,8 @@ public:
 	void dumpD(int nlay) const;
 	FLT2* getFLT2(){return options.getFLT2();}
 
+	std::mt19937 rnd_gen;        // to seed mersenne twister. rand: gen(rd())
+
 private:
 	Vertex2D norm(int curpos, INT2 sizes) const;
 	void fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma);

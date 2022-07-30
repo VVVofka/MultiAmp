@@ -40,9 +40,8 @@ public:
 
 private:
 	//std::random_device rd;   // non-deterministic generator
-	std::mt19937 gen;        // to seed mersenne twister. rand: gen(rd())
+	//std::mt19937 gen;        // to seed mersenne twister. rand: gen(rd())
 	std::uniform_int_distribution<int> distrLastAY, distrLastAX;
-	void tst();
 
 public:
 	void dumpA(size_t nlay);
