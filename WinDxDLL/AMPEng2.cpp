@@ -1,11 +1,29 @@
 #include "pch.h"
 #include "AMPEng2.h"
+void AMPEng2::tst(){
+	//std::mt19937 rand(::time(0));  // Лучше использовать high_resolution_clock
+	std::mt19937 rand(123);  // Лучше использовать high_resolution_clock
+	for(int i = 0; i < 10; i++){
+		auto r = rand();
+		std::cout << r << '\0';
+		_RPT1(0, "%u\n", r);
+	}
+	std::mt19937 rand1(123);
+	_RPT1(0, "%u\n", rand1());
+	_RPT1(0, "%u\n", rand1());
+		// 2991312382 3062119789
+}
 AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)){
+	//tst();
 	int seed = model.options.seedRnd();
+//#ifdef _DEBUG
+	seed = 123456;
+//#endif // _DEBUG
+
 	if(seed >= 0)
 		gen.seed(seed);
 	else
-		gen.seed(rd());
+		gen.seed(::time(0));
 	distrLastAY = std::uniform_int_distribution<int>(0, model.sizeY() - 1);
 	distrLastAX = std::uniform_int_distribution<int>(0, model.sizeX() - 1);
 	nlastlay = size_t(model.LaysCnt() - 1); // N last lay
