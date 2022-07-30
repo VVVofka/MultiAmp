@@ -19,6 +19,9 @@
     <Filter Include="InterOp">
       <UniqueIdentifier>{7ab0c97a-c3f2-400b-8f80-e13532abf007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lays">
+      <UniqueIdentifier>{c123f49e-3c10-4475-8710-531586352dd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -72,6 +75,27 @@
     <ClInclude Include="Options\OptionExternDecl.h">
       <Filter>InterOp</Filter>
     </ClInclude>
+    <ClInclude Include="Lay0.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="LayBase.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="LayMid.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="VGpuCpu.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Lays.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessParam.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessParams.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -118,6 +142,24 @@
     </ClCompile>
     <ClCompile Include="Options.cpp">
       <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Lay0.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="LayBase.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="LayMid.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Lays.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParam.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParams.cpp">
+      <Filter>Lays</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
