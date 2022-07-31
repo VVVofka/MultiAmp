@@ -1,6 +1,8 @@
 #pragma once
 
 int openDlgOptions(int* iArr, double* dArr); // decl Options.lib
+int openDlgOptionsMaskA(char* s);
+
 namespace InpOptions{
 static const int LaysCntReserv = 20; 
 

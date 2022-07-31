@@ -1,7 +1,3 @@
-
-// MultiAmp.cpp : Defines the class behaviors for the application.
-//
-
 #include "pch.h"
 #include "framework.h"
 #include "MultiAmp.h"
@@ -11,38 +7,28 @@
 #define new DEBUG_NEW
 #endif
 
-
-// CMultiAmpApp
-
 BEGIN_MESSAGE_MAP(CMultiAmpApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
-
-// CMultiAmpApp construction
-
-CMultiAmpApp::CMultiAmpApp()
-{
+CMultiAmpApp::CMultiAmpApp(){
 	// TODO: add construction code here,
 	// Place all significant initialization in InitInstance
 }
 
 
 // The one and only CMultiAmpApp object
-
 CMultiAmpApp theApp;
 
 
 // CMultiAmpApp initialization
-
-BOOL CMultiAmpApp::InitInstance()
-{
+BOOL CMultiAmpApp::InitInstance(){
 	CWinApp::InitInstance();
 
 
 	// Create the shell manager, in case the dialog contains
 	// any shell tree view or shell list view controls.
-	CShellManager *pShellManager = new CShellManager;
+	CShellManager* pShellManager = new CShellManager;
 
 	// Activate "Windows Native" visual manager for enabling themes in MFC controls
 	CMFCVisualManager::SetDefaultManager(RUNTIME_CLASS(CMFCVisualManagerWindows));
@@ -56,28 +42,22 @@ BOOL CMultiAmpApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	CMultiAmpDlg dlg;
+	options::CMultiAmpDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
-	if (nResponse == IDOK)
-	{
+	if(nResponse == IDOK){
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with OK
-	}
-	else if (nResponse == IDCANCEL)
-	{
+	} else if(nResponse == IDCANCEL){
 		// TODO: Place code here to handle when the dialog is
 		//  dismissed with Cancel
-	}
-	else if (nResponse == -1)
-	{
+	} else if(nResponse == -1){
 		TRACE(traceAppMsg, 0, "Warning: dialog creation failed, so application is terminating unexpectedly.\n");
 		TRACE(traceAppMsg, 0, "Warning: if you are using MFC controls on the dialog, you cannot #define _AFX_NO_MFC_CONTROLS_IN_DIALOGS.\n");
 	}
 
 	// Delete the shell manager created above.
-	if (pShellManager != nullptr)
-	{
+	if(pShellManager != nullptr){
 		delete pShellManager;
 	}
 
