@@ -209,7 +209,7 @@ namespace options{
 		maska::DlgMaskASimple dlg(this);	// IDD_DLG_MASK_A
 		//auto nRet = dlg.DoModal();
 		std::string sjson = "{ \"MaskA\":[0, 1] } ";
-		auto nRet = dlg.myDoModal(sjson);
+		INT_PTR nRet = dlg.myDoModal(sjson);
 		switch(nRet){
 		case -1:
 			AfxMessageBox(_T("Dialog box could not be created!"));

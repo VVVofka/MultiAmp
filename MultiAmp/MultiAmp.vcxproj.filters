@@ -48,8 +48,11 @@
     <ClInclude Include="DlgMaskAFull.h">
       <Filter>options\maska</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsMaskA.h">
+    <ClInclude Include="OptionsMaskASelector.h">
       <Filter>options\maska</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskA.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +71,11 @@
     <ClCompile Include="DlgMaskAFull.cpp">
       <Filter>options\maska</Filter>
     </ClCompile>
-    <ClCompile Include="OptionsMaskA.cpp">
+    <ClCompile Include="OptionsMaskASelector.cpp">
       <Filter>options\maska</Filter>
+    </ClCompile>
+    <ClCompile Include="MaskA.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
