@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-namespace maska{
+//namespace maska{
 	class MaskA4{
 	public:
 		static const size_t size = 16;
@@ -19,4 +19,4 @@ namespace maska{
 	private:
 		int v[size] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
 	};
-}
+//}
