@@ -51,8 +51,8 @@
     <ClInclude Include="OptionsMaskASelector.h">
       <Filter>options\maska</Filter>
     </ClInclude>
-    <ClInclude Include="MaskA.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MaskA4.h">
+      <Filter>options\maska</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +74,8 @@
     <ClCompile Include="OptionsMaskASelector.cpp">
       <Filter>options\maska</Filter>
     </ClCompile>
-    <ClCompile Include="MaskA.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MaskA4.cpp">
+      <Filter>options\maska</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

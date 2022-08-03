@@ -198,7 +198,7 @@
     <ClInclude Include="DlgMaskAFull.h" />
     <ClInclude Include="DlgMaskASimple.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="MaskA.h" />
+    <ClInclude Include="MaskA4.h" />
     <ClInclude Include="MultiAmp.h" />
     <ClInclude Include="MultiAmpDlg.h" />
     <ClInclude Include="OptionsMaskASelector.h" />
@@ -209,7 +209,7 @@
   <ItemGroup>
     <ClCompile Include="DlgMaskAFull.cpp" />
     <ClCompile Include="DlgMaskASimple.cpp" />
-    <ClCompile Include="MaskA.cpp" />
+    <ClCompile Include="MaskA4.cpp" />
     <ClCompile Include="MultiAmp.cpp" />
     <ClCompile Include="MultiAmpDlg.cpp" />
     <ClCompile Include="OptionsMaskASelector.cpp" />
