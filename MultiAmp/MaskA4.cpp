@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "MaskA4.h"
-//namespace maska{
+namespace maska{
 
 	bool MaskA4::check(){
 		for(int j = 0; j < size; j++){
@@ -35,4 +35,4 @@
 			ret[j] = v[j] == 0 ? '0' : '1';
 		return std::string(ret, size);
 	} // ///////////////////////////////////////////////////////////////////////////////
-//}
+}
