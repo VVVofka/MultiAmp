@@ -12,17 +12,13 @@
 IMPLEMENT_DYNAMIC(DlgMaskAFull, CDialogEx)
 
 DlgMaskAFull::DlgMaskAFull(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_OPTIONS_MASK_A_FULL, pParent)
-{
+	: CDialogEx(IDD_OPTIONS_MASK_A_FULL, pParent){
 
 }
 
-DlgMaskAFull::~DlgMaskAFull()
-{
-}
+DlgMaskAFull::~DlgMaskAFull(){}
 
-void DlgMaskAFull::DoDataExchange(CDataExchange* pDX)
-{
+void DlgMaskAFull::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
 }
 

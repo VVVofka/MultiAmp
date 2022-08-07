@@ -2,25 +2,17 @@
 #include "pch.h"
 #include "Main.h"
 
-BOOL APIENTRY DllMain(HMODULE hModule,
-					   DWORD  ul_reason_for_call,
-					   LPVOID lpReserved
-){
-	switch(ul_reason_for_call){
-		case DLL_PROCESS_ATTACH:
-		case DLL_THREAD_ATTACH:
-		case DLL_THREAD_DETACH:
-		case DLL_PROCESS_DETACH:
-			break;
+BOOL APIENTRY DllMain(HMODULE hinstDLL, DWORD  fdwReason, LPVOID lpvReserved){
+	switch(fdwReason){
+	case DLL_PROCESS_ATTACH:	// DLL load due to process initialization or LoadLibrary
+	case DLL_THREAD_ATTACH:     // The attached process creates a new thread
+	case DLL_THREAD_DETACH:     // The thread of the attached process terminates
+	case DLL_PROCESS_DETACH:    // DLL unload due to process termination or FreeLibrary
+    default:
+        break;
 	}
 	return TRUE;
+    UNREFERENCED_PARAMETER(hinstDLL);
+    UNREFERENCED_PARAMETER(lpvReserved);
 } // /////////////////////////////////////////////////////////////////////
-extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, int a, int b){
-	int ret = tstdllMain(hInstance, nCmdShow, a, b);
-	return ret;
-} // //////////////////////////////////////////////////////////////////////////////////
-extern "C" _declspec(dllexport) int openWindow1(HINSTANCE hInstance, int nCmdShow){
-	int ret = openwnd(hInstance, nCmdShow);
-	return ret;
-} // //////////////////////////////////////////////////////////////////////////////////
 

@@ -141,22 +141,6 @@ namespace options{
 
 	void CMultiAmpDlg::OnBnClickedButton1(){
 		HMODULE hLib;
-		/*
-		#ifdef DEBUG
-		#ifdef _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Debug\\WinDxDLL.dll");
-		#else // _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Debug\\WinDxDLL.dll");
-		#endif // _WIN64
-		#else // DEBUG
-		#ifdef _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Release\\WinDxDLL.dll");
-			// c:\Prog\CPP\MultiAmp\x64\Release\WinDxDLL.dll
-		#else // _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Release\\WinDxDLL.dll");
-		#endif // _WIN64
-		#endif // DEBUG
-			*/
 		auto dllname = dllName();
 		auto spath = TEXT(dllname.c_str());
 		hLib = LoadLibrary(spath);
