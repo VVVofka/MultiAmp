@@ -63,6 +63,7 @@ namespace options{
 		ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
 		ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
 		ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
+//		ON_WM_TIMER()
 	END_MESSAGE_MAP()
 
 
@@ -141,30 +142,15 @@ namespace options{
 
 	void CMultiAmpDlg::OnBnClickedButton1(){
 		HMODULE hLib;
-		/*
-		#ifdef DEBUG
-		#ifdef _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Debug\\WinDxDLL.dll");
-		#else // _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Debug\\WinDxDLL.dll");
-		#endif // _WIN64
-		#else // DEBUG
-		#ifdef _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\x64\\Release\\WinDxDLL.dll");
-			// c:\Prog\CPP\MultiAmp\x64\Release\WinDxDLL.dll
-		#else // _WIN64
-			auto spath = TEXT("c:\\Prog\\CPP\\MultiAmp\\Win32\\Release\\WinDxDLL.dll");
-		#endif // _WIN64
-		#endif // DEBUG
-			*/
 		auto dllname = dllName();
 		auto spath = TEXT(dllname.c_str());
 		hLib = LoadLibrary(spath);
 		if(hLib != NULL){
-			int (*pFunction)(HINSTANCE hInstance, int nCmdShow) = NULL;
-			(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1");   // tstdll
+			int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json) = NULL;
+			(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
 			if(pFunction != NULL){
-				int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT);
+				json[0] = (char)0;
+				int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json);
 				//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 				//_RPT1(_CRT_WARN, "%d\n", ret);
 			} else{
@@ -241,3 +227,38 @@ namespace options{
 		// TODO: добавьте свой код обработчика уведомлений
 	}
 }
+
+//BOOL options::CMultiAmpDlg::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo){
+//	// TODO: Add your specialized code here and/or call the base class
+//	if(json[0] == (char)255){
+//		_RPT1(0, "%s\n", json + 1);
+//	}
+//	return CDialogEx::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+//}
+
+
+//BOOL options::CMultiAmpDlg::OnCommand(WPARAM wParam, LPARAM lParam){
+//	// TODO: Add your specialized code here and/or call the base class
+//	if(json[0] == (char)255){
+//		_RPT1(0, "%s\n", json + 1);
+//	}
+//
+//	return CDialogEx::OnCommand(wParam, lParam);
+//}
+
+
+//BOOL options::CMultiAmpDlg::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult){
+//	// TODO: Add your specialized code here and/or call the base class
+//	if(json[0] == (char)255){
+//		_RPT1(0, "%s\n", json + 1);
+//	}
+//
+//	return CDialogEx::OnWndMsg(message, wParam, lParam, pResult);
+//}
+
+
+//void options::CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
+//	// TODO: Add your message handler code here and/or call default
+//
+//	CDialogEx::OnTimer(nIDEvent);
+//}

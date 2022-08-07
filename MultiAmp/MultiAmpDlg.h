@@ -24,7 +24,8 @@ namespace options{
 
 	protected:
 		virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-
+		char json[255];
+		UINT_PTR timer;
 
 	// Implementation
 	protected:
@@ -44,5 +45,9 @@ namespace options{
 		afx_msg void OnBnClickedBtJson();
 		afx_msg void OnBnClickedBtMaskA();
 		afx_msg void OnBnClickedOk();
+//		virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
+//		virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
+//		virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
+//		afx_msg void OnTimer(UINT_PTR nIDEvent);
 	};
 }
