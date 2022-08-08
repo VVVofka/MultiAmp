@@ -11,35 +11,6 @@
 #endif
 
 namespace options{
-	class CAboutDlg : public CDialogEx{
-	public:
-		CAboutDlg();
-
-		// Dialog Data
-#ifdef AFX_DESIGN_TIME
-		enum{ IDD = IDD_ABOUTBOX };
-#endif
-
-	protected:
-		virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-
-	// Implementation
-	protected:
-		DECLARE_MESSAGE_MAP()
-	public:
-		afx_msg void OnBnClickedButton1();
-	};
-
-	CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX){}
-
-	void CAboutDlg::DoDataExchange(CDataExchange* pDX){
-		CDialogEx::DoDataExchange(pDX);
-	} // /////////////////////////////////////////////////////////
-
-	BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
-		ON_BN_CLICKED(IDC_BUTTON1, &CAboutDlg::OnBnClickedButton1)
-	END_MESSAGE_MAP()
-
 	// CMultiAmpDlg dialog
 	CMultiAmpDlg::CMultiAmpDlg(CWnd* pParent /*=nullptr*/)
 		: CDialogEx(IDD_MULTIAMP_DIALOG, pParent){
@@ -89,12 +60,7 @@ namespace options{
 		return TRUE;  // return TRUE  unless you set the focus to a control
 	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnSysCommand(UINT nID, LPARAM lParam){
-		if((nID & 0xFFF0) == IDM_ABOUTBOX){
-			CAboutDlg dlgAbout;
-			dlgAbout.DoModal();
-		} else{
-			CDialogEx::OnSysCommand(nID, lParam);
-		}
+		CDialogEx::OnSysCommand(nID, lParam);
 	} // /////////////////////////////////////////////////////////
 	// If you add a minimize button to your dialog, you will need the code below
 	//  to draw the icon.  For MFC applications using the document/view model,
@@ -118,7 +84,7 @@ namespace options{
 		} else{
 			CDialogEx::OnPaint();
 		}
-	}
+	}  // /////////////////////////////////////////////////////////
 	// The system calls this function to obtain the cursor to display while the user drags
 	//  the minimized window.
 	HCURSOR CMultiAmpDlg::OnQueryDragIcon(){
@@ -199,9 +165,6 @@ namespace options{
 		// TODO: добавьте свой код обработчика уведомлений
 		CDialogEx::OnOK();
 	}  // /////////////////////////////////////////////////////////
-	void CAboutDlg::OnBnClickedButton1(){
-		// TODO: добавьте свой код обработчика уведомлений
-	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 		if(json[0] == (char)255){
 			_RPT1(0, "%s\n", json + 1);

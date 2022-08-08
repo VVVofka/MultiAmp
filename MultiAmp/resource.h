@@ -3,7 +3,6 @@
 // Used by MultiAmp.rc
 //
 #define IDM_ABOUTBOX                    0x0010
-#define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
 #define IDD_MULTIAMP_DIALOG             102
 #define IDD_OPTIONS_MASK_A              103
@@ -20,7 +19,6 @@
 #define IDC_CHECK4                      1006
 #define IDC_CHECK5                      1007
 #define IDC_CHECK6                      1008
-#define IDC_DATETIMEPICKER1             1011
 
 // Next default values for new objects
 // 

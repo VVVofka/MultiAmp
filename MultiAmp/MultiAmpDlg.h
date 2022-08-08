@@ -25,8 +25,8 @@ namespace options{
 
 	protected:
 		virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-		char json[255];
-		UINT_PTR timer;
+		char json[255] = {0};
+		UINT_PTR timer = NULL;
 
 	// Implementation
 	protected:
@@ -36,7 +36,7 @@ namespace options{
 		virtual BOOL OnInitDialog();
 		afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 		afx_msg void OnPaint();
-		afx_msg void OnTimer(UINT);
+		afx_msg void OnTimer(UINT_PTR  nIDEvent);
 		afx_msg HCURSOR OnQueryDragIcon();
 		DECLARE_MESSAGE_MAP()
 	public:
