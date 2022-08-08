@@ -16,15 +16,15 @@ static bool pauseRender = false;
 // loop. Idle time is used to render the scene.
 #pragma warning(suppress : 28251)
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, char* json){
+int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, char* json_in, char* json_out){
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
 		return 0;
-	int work(char* json);
-	return work(json);
+	int work(char* json_in, char* json_out);
+	return work(json_in, json_out);
 } // ////////////////////////////////////////////////////////////////////////////
-int work(char* json){
+int work(char* json_in, char* json_out){
 	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
 	model.Create();
 	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
@@ -53,8 +53,8 @@ int work(char* json){
 					char buf[32];
 					sprintf_s(buf, 32, "fps: %d", cnt / interval);
 					SetWindowTextA(g_hWnd, buf);
-					json[0] = (char)255;
-					strcpy(json + 1, buf);
+					json_out[0] = (char)255;
+					strcpy(json_out + 1, buf);
 					cnt = 0;
 				}
 			}

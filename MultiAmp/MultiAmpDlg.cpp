@@ -96,11 +96,11 @@ namespace options{
 		auto spath = TEXT(dllname.c_str());
 		hLib = LoadLibrary(spath);
 		if(hLib != NULL){
-			int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json) = NULL;
+			int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json_out, char* json_in) = NULL;
 			(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
 			if(pFunction != NULL){
-				json[0] = (char)0;
-				int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json);
+				json_in[0] = (char)0;
+				int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json_out, json_in);
 				//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 				//_RPT1(_CRT_WARN, "%d\n", ret);
 			} else{
@@ -113,7 +113,6 @@ namespace options{
 	std::string CMultiAmpDlg::dllName(){
 		std::string fHelpPathName(AfxGetApp()->m_pszHelpFilePath);
 		auto lenPath = fHelpPathName.length();
-
 		std::string fName("WinDxDLL.dll");	// Lenght WinDxDLL.dll == MultiAmp.HLP
 		auto lenName = fName.length();
 
@@ -166,10 +165,10 @@ namespace options{
 		CDialogEx::OnOK();
 	}  // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
-		if(json[0] == (char)255){
-			_RPT1(0, "%s\n", json + 1);
-			SetWindowTextA(json + 1);
-			json[0] = (char)0;
+		if(json_in[0] == (char)255){
+			_RPT1(0, "%s\n", json_in + 1);
+			SetWindowTextA(json_in + 1);
+			json_in[0] = (char)0;
 		}
 		CDialogEx::OnTimer(nIDEvent);
 	} // /////////////////////////////////////////////////////////

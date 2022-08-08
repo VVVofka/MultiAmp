@@ -25,7 +25,8 @@ namespace options{
 
 	protected:
 		virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-		char json[255] = {0};
+		char json_in[255] = {0};
+		char json_out[255] = {0};
 		UINT_PTR timer = NULL;
 
 	// Implementation
