@@ -138,25 +138,20 @@ namespace options{
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
-		maska::DlgMaskASimple dlg(this);	// IDD_DLG_MASK_A
-		//auto nRet = dlg.DoModal();
+		maska::DlgMaskASimple dlg(this);	
 		std::string sjson = "{ \"MaskA\":[0, 1] } ";
 		auto nRet = dlg.myDoModal(sjson);
 		switch(nRet){
 		case -1:
-			AfxMessageBox(_T("Dialog box could not be created!"));
+			AfxMessageBox(_T("Dialog box couldn't be created!"));
 			break;
 		case IDABORT:
-			// Do something
 			break;
 		case IDOK:
-			// Do something
 			break;
 		case IDCANCEL:
-			// Do something
 			break;
 		default:
-			// Do something
 			break;
 		};
 	} // /////////////////////////////////////////////////////////
