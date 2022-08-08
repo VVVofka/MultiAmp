@@ -11,9 +11,6 @@
 #endif
 
 namespace options{
-
-	// CAboutDlg dialog used for App About
-
 	class CAboutDlg : public CDialogEx{
 	public:
 		CAboutDlg();
@@ -63,7 +60,7 @@ namespace options{
 		ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
 		ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
 		ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
-//		ON_WM_TIMER()
+		ON_WM_TIMER()
 	END_MESSAGE_MAP()
 
 
@@ -96,7 +93,7 @@ namespace options{
 		SetIcon(m_hIcon, FALSE);		// Set small icon
 
 		// TODO: Add extra initialization here
-
+		SetTimer(ID_TIMER_1, 1000, NULL);
 		return TRUE;  // return TRUE  unless you set the focus to a control
 	}
 
@@ -228,37 +225,11 @@ namespace options{
 	}
 }
 
-//BOOL options::CMultiAmpDlg::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo){
-//	// TODO: Add your specialized code here and/or call the base class
-//	if(json[0] == (char)255){
-//		_RPT1(0, "%s\n", json + 1);
-//	}
-//	return CDialogEx::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
-//}
-
-
-//BOOL options::CMultiAmpDlg::OnCommand(WPARAM wParam, LPARAM lParam){
-//	// TODO: Add your specialized code here and/or call the base class
-//	if(json[0] == (char)255){
-//		_RPT1(0, "%s\n", json + 1);
-//	}
-//
-//	return CDialogEx::OnCommand(wParam, lParam);
-//}
-
-
-//BOOL options::CMultiAmpDlg::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult){
-//	// TODO: Add your specialized code here and/or call the base class
-//	if(json[0] == (char)255){
-//		_RPT1(0, "%s\n", json + 1);
-//	}
-//
-//	return CDialogEx::OnWndMsg(message, wParam, lParam, pResult);
-//}
-
-
-//void options::CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
-//	// TODO: Add your message handler code here and/or call default
-//
-//	CDialogEx::OnTimer(nIDEvent);
-//}
+void options::CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
+	if(json[0] == (char)255){
+		_RPT1(0, "%s\n", json + 1);
+		SetWindowTextA(json + 1);
+		json[0] = (char)0;
+	}
+	CDialogEx::OnTimer(nIDEvent);
+}

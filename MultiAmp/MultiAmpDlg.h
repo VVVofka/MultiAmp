@@ -13,6 +13,7 @@ namespace options{
 
 	// CMultiAmpDlg dialog
 	class CMultiAmpDlg : public CDialogEx{
+		const int ID_TIMER_1 = 197;
 		// Construction
 	public:
 		CMultiAmpDlg(CWnd* pParent = nullptr);	// standard constructor
@@ -35,6 +36,7 @@ namespace options{
 		virtual BOOL OnInitDialog();
 		afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 		afx_msg void OnPaint();
+		afx_msg void OnTimer(UINT);
 		afx_msg HCURSOR OnQueryDragIcon();
 		DECLARE_MESSAGE_MAP()
 	public:
@@ -45,9 +47,5 @@ namespace options{
 		afx_msg void OnBnClickedBtJson();
 		afx_msg void OnBnClickedBtMaskA();
 		afx_msg void OnBnClickedOk();
-//		virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
-//		virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
-//		virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
-//		afx_msg void OnTimer(UINT_PTR nIDEvent);
 	};
 }
