@@ -34,24 +34,20 @@ namespace options{
 
 	void CAboutDlg::DoDataExchange(CDataExchange* pDX){
 		CDialogEx::DoDataExchange(pDX);
-	}
+	} // /////////////////////////////////////////////////////////
 
 	BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 		ON_BN_CLICKED(IDC_BUTTON1, &CAboutDlg::OnBnClickedButton1)
 	END_MESSAGE_MAP()
 
 	// CMultiAmpDlg dialog
-
-
 	CMultiAmpDlg::CMultiAmpDlg(CWnd* pParent /*=nullptr*/)
 		: CDialogEx(IDD_MULTIAMP_DIALOG, pParent){
 		m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	}
-
+	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::DoDataExchange(CDataExchange* pDX){
 		CDialogEx::DoDataExchange(pDX);
-	}
-
+	} // /////////////////////////////////////////////////////////
 	BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 		ON_WM_SYSCOMMAND()
 		ON_WM_PAINT()
@@ -63,9 +59,7 @@ namespace options{
 		ON_WM_TIMER()
 	END_MESSAGE_MAP()
 
-
 	// CMultiAmpDlg message handlers
-
 	BOOL CMultiAmpDlg::OnInitDialog(){
 		CDialogEx::OnInitDialog();
 
@@ -86,17 +80,14 @@ namespace options{
 				pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 			}
 		}
-
 		// Set the icon for this dialog.  The framework does this automatically
 		//  when the application's main window is not a dialog
 		SetIcon(m_hIcon, TRUE);			// Set big icon
 		SetIcon(m_hIcon, FALSE);		// Set small icon
-
 		// TODO: Add extra initialization here
 		SetTimer(ID_TIMER_1, 1000, NULL);
 		return TRUE;  // return TRUE  unless you set the focus to a control
-	}
-
+	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnSysCommand(UINT nID, LPARAM lParam){
 		if((nID & 0xFFF0) == IDM_ABOUTBOX){
 			CAboutDlg dlgAbout;
@@ -104,12 +95,10 @@ namespace options{
 		} else{
 			CDialogEx::OnSysCommand(nID, lParam);
 		}
-	}
-
+	} // /////////////////////////////////////////////////////////
 	// If you add a minimize button to your dialog, you will need the code below
 	//  to draw the icon.  For MFC applications using the document/view model,
 	//  this is automatically done for you by the framework.
-
 	void CMultiAmpDlg::OnPaint(){
 		if(IsIconic()){
 			CPaintDC dc(this); // device context for painting
@@ -130,13 +119,11 @@ namespace options{
 			CDialogEx::OnPaint();
 		}
 	}
-
 	// The system calls this function to obtain the cursor to display while the user drags
 	//  the minimized window.
 	HCURSOR CMultiAmpDlg::OnQueryDragIcon(){
 		return static_cast<HCURSOR>(m_hIcon);
 	} // /////////////////////////////////////////////////////////////////////////////////////
-
 	void CMultiAmpDlg::OnBnClickedButton1(){
 		HMODULE hLib;
 		auto dllname = dllName();
@@ -184,10 +171,7 @@ namespace options{
 		// Output {"project":"rapidjson","stars":11}
 		_RPT0(0, buffer.GetString());
 		//std::cout << buffer.GetString() << std::endl;
-
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
 		maska::DlgMaskASimple dlg(this);	// IDD_DLG_MASK_A
 		//auto nRet = dlg.DoModal();
@@ -210,26 +194,21 @@ namespace options{
 			// Do something
 			break;
 		};
-	}
-
-
+	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedOk(){
 		// TODO: добавьте свой код обработчика уведомлений
 		CDialogEx::OnOK();
-	}
-
-
-
+	}  // /////////////////////////////////////////////////////////
 	void CAboutDlg::OnBnClickedButton1(){
 		// TODO: добавьте свой код обработчика уведомлений
-	}
+	} // /////////////////////////////////////////////////////////
+	void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
+		if(json[0] == (char)255){
+			_RPT1(0, "%s\n", json + 1);
+			SetWindowTextA(json + 1);
+			json[0] = (char)0;
+		}
+		CDialogEx::OnTimer(nIDEvent);
+	} // /////////////////////////////////////////////////////////
 }
 
-void options::CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
-	if(json[0] == (char)255){
-		_RPT1(0, "%s\n", json + 1);
-		SetWindowTextA(json + 1);
-		json[0] = (char)0;
-	}
-	CDialogEx::OnTimer(nIDEvent);
-}
