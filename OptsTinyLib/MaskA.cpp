@@ -1,13 +1,25 @@
 #include "MaskA.h"
 using namespace tinyxml2;
 
-void MaskA::create(XMLElement* parent_element){
+void MaskA::create(XMLNode* parent_node){
 	v.clear();
 	v.reserve(16);
 	for(int j = 0; j < 16; j++)
 		v.push_back(defval[j]);
-	element = parent_element->InsertNewChildElement(XMLName);
-	element->SetText(v.c_str());
+
+	XMLDocument* doc = parent_node->GetDocument();
+	XMLElement* ele_out = doc->NewElement(XMLName);
+	ele_out->SetAttribute("val", v.c_str());
+	XMLNode* node = parent_node->InsertEndChild(ele_out);
+
+	//char z[2];
+	//z[1] = 0;
+	//for(int j = 0; j < 16; j++){
+	//	z[0] = v[j];
+	//	XMLElement* element = doc->NewElement(z);
+	//	element->SetAttribute("index", j);
+	//	node->InsertEndChild(element);
+	//}
 } // //////////////////////////////////////////////////////////////
 void MaskA::load(XMLDocument& doc){
 	// TODO: ---
