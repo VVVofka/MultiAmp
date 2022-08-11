@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Session">
+      <UniqueIdentifier>{89f3aba8-f6a7-4dd3-bf73-c7132a92fa45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\Data">
+      <UniqueIdentifier>{772046e2-06fd-433b-87a9-5768b46bad82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\Options">
+      <UniqueIdentifier>{a92d3dfe-af14-4e3e-9a67-ad070be00b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\Options\Lays">
+      <UniqueIdentifier>{eb9de409-839e-4c3e-9585-12b286f7250a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\Options\Masks">
+      <UniqueIdentifier>{0fac00b7-ed63-494f-a072-dffba7bbbd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\Options\Misc">
+      <UniqueIdentifier>{7ca7d814-07ee-4645-af4d-6fbbeb77bad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{d8a20fe2-7c71-4e2e-8649-2d3e85b46162}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MaskA.h">
+      <Filter>Session\Options\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskF.h">
+      <Filter>Session\Options\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="Options.h">
+      <Filter>Session\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="Masks.h">
+      <Filter>Session\Options\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="Lays.h">
+      <Filter>Session\Options\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Session\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Misc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lays.cpp">
+      <Filter>Session\Options\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="MaskA.cpp">
+      <Filter>Session\Options\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="MaskF.cpp">
+      <Filter>Session\Options\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Session\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Masks.cpp">
+      <Filter>Session\Options\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Session</Filter>
+    </ClCompile>
+    <ClCompile Include="Options.cpp">
+      <Filter>Session\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="OptsTinyLib.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Misc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
