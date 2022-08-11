@@ -7,5 +7,6 @@ void Session::load(const char* fname){
 		err = doc.LoadFile("session.xml");
 	else
 		err = doc.LoadFile(fname);
+	doc.SaveFile("session.xml");
 
 } // //////////////////////////////////////////////////////
