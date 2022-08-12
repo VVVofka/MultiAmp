@@ -7,8 +7,8 @@ class Masks{
 public:
 	MaskA maskA;
 	//MaskF maskF;
-	void create(XMLNode* parent_node);
-	void load(XMLDocument& doc);
+	bool create(XMLNode* parent_node);
+	bool load(XMLNode* parent_node);
 
 private:
 	const char XMLName[6] = "Masks";
