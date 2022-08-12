@@ -4,8 +4,7 @@
 #include "MultiAmp.h"
 #include "MultiAmpDlg.h"
 #include "afxdialogex.h"
-#include "DlgMaskASimple.h"
-#include "..\DlgMaskA\Dlg.h"
+#include "..\DlgMaskA\DlgMaskA.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -100,7 +99,6 @@ namespace options{
 			int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json_out, char* json_in) = NULL;
 			(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
 			if(pFunction != NULL){
-				json_in[0] = (char)0;
 				int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json_out, json_in);
 				//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 				//_RPT1(_CRT_WARN, "%d\n", ret);
@@ -139,10 +137,12 @@ namespace options{
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
-		Dlg dlg;
-		strcpy_s(dlg.sxml, _countof(dlg.sxml), "0101010101010101");
-		INT_PTR ret = dlg.DoModal();
-		_RPT1(0, "%s\n", dlg.sxml);
+		//std::string sxml;
+		fnDlgMaskA();
+		//Dlg dlg;
+		//strcpy_s(dlg.sxml, _countof(dlg.sxml), "0101010101010101");
+		//INT_PTR ret = dlg.DoModal();
+		//_RPT1(0, "%s\n", dlg.sxml);
 
 		//maska::DlgMaskASimple dlg(this);	
 		//std::string sjson = "{ \"MaskA\":[0, 1] } ";

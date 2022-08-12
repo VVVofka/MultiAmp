@@ -203,22 +203,16 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DlgMaskAFull.h" />
-    <ClInclude Include="DlgMaskASimple.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MultiAmp.h" />
     <ClInclude Include="MultiAmpDlg.h" />
-    <ClInclude Include="OptionsMaskA.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DlgMaskAFull.cpp" />
-    <ClCompile Include="DlgMaskASimple.cpp" />
     <ClCompile Include="MultiAmp.cpp" />
     <ClCompile Include="MultiAmpDlg.cpp" />
-    <ClCompile Include="OptionsMaskA.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

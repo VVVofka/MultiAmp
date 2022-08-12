@@ -2,6 +2,8 @@
 #include "pch.h"
 #include "framework.h"
 #include "DlgMaskA.h"
+#include "resource.h"
+#include "Dlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -28,8 +30,11 @@ int main(){
 		wprintf(L"Fatal Error: GetModuleHandle failed\n");
 		nRetCode = 1;
 	}
-
 	return nRetCode;
 }
+
 // TODO: This is an example of a library function
-void fnDlgMaskA(){}
+void fnDlgMaskA(){
+	Dlg dlg;
+	dlg.DoModal();
+} // ////////////////////////////////////////////////////////////////

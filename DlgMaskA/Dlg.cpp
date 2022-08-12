@@ -47,7 +47,6 @@ void Dlg::get(char* s){
 } // /////////////////////////////////////////////////////////////////
 void Dlg::set(const char* s){
 	for(int j = 0; j < 16; j++){
-		int val;
 		int state = ((CButton*)GetDlgItem(vc[j]))->GetCheck();
 		if(s[j] == '0')
 			((CButton*)GetDlgItem(vc[j]))->SetCheck(BST_UNCHECKED);
