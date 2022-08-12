@@ -7,8 +7,8 @@ class Options{
 public:
 	Lays lays;
 	Masks masks;
-	void create(XMLDocument* doc);
-	void load(XMLDocument* doc);
+	bool create(XMLDocument* doc);
+	bool load(XMLDocument* doc);
 
 private:
 	const char XMLName[8] = "Options";
