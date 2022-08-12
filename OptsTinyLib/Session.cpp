@@ -32,8 +32,14 @@ void Session::tstcrt(){
 	_RPT1(0, "errSave3 = %d\n", (int)errSave);
 } // //////////////////////////////////////////////////////////
 void Session::create(const char* fname){
-	opts.create(&doc);
+	options.create(&doc);
 	//doc.NewComment("mycomment");
 	XMLError errSave = doc.SaveFile(("new_" + std::string(fname)).c_str());
 	_RPT1(0, "errSave_create = %d\n", (int)errSave);
+} // //////////////////////////////////////////////////////////////
+const char* Session::get_maskA() const{
+	return options.get_maskA();
+} // //////////////////////////////////////////////////////////////
+XMLNode* Session::set_maskA(const char* s){
+	return options.set_maskA(s);
 } // //////////////////////////////////////////////////////////////

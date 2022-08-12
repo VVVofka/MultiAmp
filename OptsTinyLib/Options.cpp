@@ -1,21 +1,32 @@
 #include "Options.h"
 using namespace tinyxml2;
 
-bool Options::create(XMLDocument* doc){
+XMLNode* Options::create(XMLDocument* doc){
 	XMLElement* ele_out = doc->NewElement(XMLName);
-	XMLNode* node = doc->InsertEndChild(ele_out);
-	bool bmasks = masks.create(node);
-	return bmasks;
+	node = doc->InsertEndChild(ele_out);
+	XMLNode* masks_node = masks.create(node);
+	if(masks_node == NULL)
+		node = NULL;
+	return node;
 } // ///////////////////////////////////////////////////////////
-bool Options::load(XMLDocument* doc){
+XMLNode* Options::load(XMLDocument* doc){
 	bool bmasks = false;
-	for(XMLNode* node = doc->FirstChild(); node; node = node->NextSibling()){
-		XMLElement* ele = node->ToElement();
+	node = NULL;
+	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			bmasks = masks.load(node);
+			XMLNode* masks_node = masks.load(curnode);
+			if(masks_node != NULL)
+				node = curnode;
 			break;
 		}
 	}
-	return bmasks;
+	return node;
 } // ///////////////////////////////////////////////////////////
+const char* Options::get_maskA() const{
+	return masks.get_maskA();
+} // ////////////////////////////////////////////////////////////////
+XMLNode* Options::set_maskA(const char* s){
+	return masks.set_maskA(s);
+} // ////////////////////////////////////////////////////////////////////

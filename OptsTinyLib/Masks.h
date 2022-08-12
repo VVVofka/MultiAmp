@@ -7,8 +7,12 @@ class Masks{
 public:
 	MaskA maskA;
 	//MaskF maskF;
-	bool create(XMLNode* parent_node);
-	bool load(XMLNode* parent_node);
+	XMLNode* create(XMLNode* parent_node);
+	XMLNode* load(XMLNode* parent_node);
+	XMLNode* node = NULL;
+
+	const char* get_maskA() const;
+	XMLNode* set_maskA(const char* s);
 
 private:
 	const char XMLName[6] = "Masks";

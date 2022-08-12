@@ -7,8 +7,13 @@ class Options{
 public:
 	Lays lays;
 	Masks masks;
-	bool create(XMLDocument* doc);
-	bool load(XMLDocument* doc);
+	XMLNode* create(XMLDocument* doc);
+	XMLNode* load(XMLDocument* doc);
+	XMLNode* node;
+
+	const char* get_maskA() const;
+	XMLNode* set_maskA(const char* s);
+
 
 private:
 	const char XMLName[8] = "Options";

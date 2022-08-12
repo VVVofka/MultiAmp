@@ -2,22 +2,33 @@
 #include "Masks.h"
 #include <string>
 
-bool Masks::create(XMLNode* parent_node){
+XMLNode* Masks::create(XMLNode* parent_node){
 	XMLDocument* doc = parent_node->GetDocument();
 	XMLElement* ele_out = doc->NewElement(XMLName);
-	XMLNode* node = parent_node->InsertEndChild(ele_out);
-	bool bmaskA = maskA.create(node);
-	return bmaskA;
+	node = parent_node->InsertEndChild(ele_out);
+	XMLNode* maskA_node = maskA.create(node);
+	if(maskA_node == NULL)
+		node = NULL;
+	return node;
 } // ///////////////////////////////////////////////////////
-bool Masks::load(XMLNode* parent_node){
-	bool bmaskA = false;
-	for(XMLNode* node = parent_node->FirstChild(); node; node = node->NextSibling()){
-		XMLElement* ele = node->ToElement();
+XMLNode* Masks::load(XMLNode* parent_node){
+	node = NULL;
+	for(XMLNode* curnode = parent_node->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			bmaskA = maskA.load(node);
+			XMLNode* maskA_node = maskA.load(curnode);
+			// TODO: maskf
+			if(maskA_node != NULL)
+				node = curnode;
 			break;
 		}
 	}
-	return bmaskA;
+	return node;
 } // ///////////////////////////////////////////////////////
+const char* Masks::get_maskA() const{
+	return maskA.get_s();
+} // //////////////////////////////////////////////////////////
+XMLNode* Masks::set_maskA(const char* s){
+	return maskA.set(node, s);
+} // ///////////////////////////////////////////////////////////
