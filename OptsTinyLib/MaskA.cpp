@@ -10,7 +10,7 @@ XMLNode* MaskA::load(XMLNode* parent_node){
 		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			const char* val = ele->Attribute("val", defval);
+			const char* val = ele->Attribute("val");	//	, defval
 			parent_node->DeleteChild(curnode);
 			node = set(parent_node, val);
 			break;
@@ -65,7 +65,7 @@ XMLNode* MaskA::set(XMLNode* parent_node, const char* s){
 	char z[2];	z[1] = 0;
 	char sbin[5]; sbin[4] = 0;
 	for(int j = 0; j < 16; j++){
-		XMLElement* element = doc->NewElement(std::to_string(j).c_str());
+		XMLElement* element = doc->NewElement(("id" + std::to_string(j)).c_str());
 
 		unsigned cnt = 0;
 		for(int n = 0; n < 4; n++){

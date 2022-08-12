@@ -10,7 +10,6 @@ XMLNode* Options::create(XMLDocument* doc){
 	return node;
 } // ///////////////////////////////////////////////////////////
 XMLNode* Options::load(XMLDocument* doc){
-	bool bmasks = false;
 	node = NULL;
 	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
 		XMLElement* ele = curnode->ToElement();

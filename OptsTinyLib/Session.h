@@ -8,7 +8,10 @@ class Session{
 public:
 	Data data;
 	Options options;
-	void load(const char* fname = "");
+
+	void create(const char* f_name = "");
+	void load(const char* f_name = "");
+	void save(const char* f_name = "");
 	std::string fname;
 	void tstcrt();
 
@@ -17,6 +20,5 @@ public:
 
 protected:
 	XMLDocument doc;
-	void create(const char* fname);
 };
 
