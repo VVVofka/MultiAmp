@@ -34,7 +34,16 @@ private:
 		IDC_CHECK04, IDC_CHECK05, IDC_CHECK06, IDC_CHECK07,
 		IDC_CHECK08, IDC_CHECK09, IDC_CHECK10, IDC_CHECK11,
 		IDC_CHECK12, IDC_CHECK13, IDC_CHECK14, IDC_CHECK15};
+	std::array<int, 16 - 4> vsymmetry = {
+		IDC_CHECK01, IDC_CHECK02, IDC_CHECK03,
+		IDC_CHECK05, IDC_CHECK06, IDC_CHECK07,
+		IDC_CHECK09, IDC_CHECK10, IDC_CHECK11,
+		IDC_CHECK13, IDC_CHECK14, IDC_CHECK15};
+	void set(const char* s);
+	void get(char* s);
 public:
-	INT_PTR doModal(std::string json);
+	char sxml[16 + 1];
+	INT_PTR doModal(std::string& sxml);
+	afx_msg void OnBnClickedSymmetry();
 };
  

@@ -18,6 +18,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTstMaskA", "UTstMaskA\UTstMaskA.vcxproj", "{2BEF965A-1883-44DF-BC7B-7A242C3092C0}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DlgMaskA", "DlgMaskA\DlgMaskA.vcxproj", "{0849C300-9E44-42F7-BBFE-9BC70CE01420}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B94E92DB-3CEB-484F-8C8C-BC2922BA1CF8} = {B94E92DB-3CEB-484F-8C8C-BC2922BA1CF8}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OptsTinyLib", "OptsTinyLib\OptsTinyLib.vcxproj", "{B94E92DB-3CEB-484F-8C8C-BC2922BA1CF8}"
 	ProjectSection(ProjectDependencies) = postProject

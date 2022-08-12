@@ -5,6 +5,7 @@
 #include "MultiAmpDlg.h"
 #include "afxdialogex.h"
 #include "DlgMaskASimple.h"
+#include "..\DlgMaskA\Dlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -138,22 +139,27 @@ namespace options{
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
-		maska::DlgMaskASimple dlg(this);	
-		std::string sjson = "{ \"MaskA\":[0, 1] } ";
-		auto nRet = dlg.myDoModal(sjson);
-		switch(nRet){
-		case -1:
-			AfxMessageBox(_T("Dialog box couldn't be created!"));
-			break;
-		case IDABORT:
-			break;
-		case IDOK:
-			break;
-		case IDCANCEL:
-			break;
-		default:
-			break;
-		};
+		Dlg dlg;
+		strcpy_s(dlg.sxml, _countof(dlg.sxml), "0101010101010101");
+		INT_PTR ret = dlg.DoModal();
+		_RPT1(0, "%s\n", dlg.sxml);
+
+		//maska::DlgMaskASimple dlg(this);	
+		//std::string sjson = "{ \"MaskA\":[0, 1] } ";
+		//auto nRet = dlg.myDoModal(sjson);
+		//switch(nRet){
+		//case -1:
+		//	AfxMessageBox(_T("Dialog box couldn't be created!"));
+		//	break;
+		//case IDABORT:
+		//	break;
+		//case IDOK:
+		//	break;
+		//case IDCANCEL:
+		//	break;
+		//default:
+		//	break;
+		//};
 	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedOk(){
 		// TODO: добавьте свой код обработчика уведомлений

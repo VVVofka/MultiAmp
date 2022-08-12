@@ -7,6 +7,8 @@
 #define IDB_BITMAP1                     105
 #define IDB_BITMAP2                     106
 #define IDAPPLY                         1001
+#define IDC_Symmetry                    1002
+#define IDC_SYMETRY                     1002
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -94,7 +96,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        107
 #define _APS_NEXT_COMMAND_VALUE         40001
-#define _APS_NEXT_CONTROL_VALUE         1002
+#define _APS_NEXT_CONTROL_VALUE         1003
 #define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif
