@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DlgMaskA">
+      <UniqueIdentifier>{1114c100-1f6f-4cce-9cd7-ceef797aead2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultiAmp.h">
@@ -33,6 +36,9 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DlgMaskA.h">
+      <Filter>DlgMaskA</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -43,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMaskA.cpp">
+      <Filter>DlgMaskA</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +75,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\bitmap0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp0.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\bmp1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -1,7 +1,6 @@
-// MultiAmpDlg.h : header file
-
 #pragma once
 #include <string>
+#include "DlgMaskA.h"
 
 // https://rapidjson.org/
 #include "../Common/include/rapidjson/document.h"
@@ -10,8 +9,6 @@
 using namespace rapidjson;
 
 namespace options{
-
-	// CMultiAmpDlg dialog
 	class CMultiAmpDlg : public CDialogEx{
 		const int ID_TIMER_1 = 197;
 		// Construction

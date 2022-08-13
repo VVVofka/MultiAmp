@@ -4,7 +4,6 @@
 #include "MultiAmp.h"
 #include "MultiAmpDlg.h"
 #include "afxdialogex.h"
-#include "..\DlgMaskA\DlgMaskA.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -137,8 +136,12 @@ namespace options{
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
+		DlgMaskA dlgmaska;
+		dlgmaska.DoModal();
+		
 		//std::string sxml;
-		fnDlgMaskA();
+		//fnDlgMaskA();
+		
 		//Dlg dlg;
 		//strcpy_s(dlg.sxml, _countof(dlg.sxml), "0101010101010101");
 		//INT_PTR ret = dlg.DoModal();
