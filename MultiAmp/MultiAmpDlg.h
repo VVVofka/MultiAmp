@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include "DlgMaskA.h"
+#include "..\OptsTinyLib\InPort.h"
+//#include "..\OptsTinyLib\tinyxml2.h"
 
 // https://rapidjson.org/
 #include "../Common/include/rapidjson/document.h"
@@ -37,11 +39,10 @@ namespace options{
 		afx_msg void OnTimer(UINT_PTR  nIDEvent);
 		afx_msg HCURSOR OnQueryDragIcon();
 		DECLARE_MESSAGE_MAP()
-	public:
-		afx_msg void OnBnClickedButton1();
 	private:
 		std::string dllName();
 	public:
+		afx_msg void OnBnClickedButton1();
 		afx_msg void OnBnClickedBtJson();
 		afx_msg void OnBnClickedBtMaskA();
 		afx_msg void OnBnClickedOk();

@@ -4,6 +4,7 @@
 #include "MultiAmp.h"
 #include "MultiAmpDlg.h"
 #include "afxdialogex.h"
+#include "resource.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -136,38 +137,12 @@ namespace options{
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskA(){
+		auto maskA = getMaskA("tstDlg.xml");
 		DlgMaskA dlgmaska;
-		dlgmaska.DoModal();
-		
-		//std::string sxml;
-		//fnDlgMaskA();
-		
-		//Dlg dlg;
-		//strcpy_s(dlg.sxml, _countof(dlg.sxml), "0101010101010101");
-		//INT_PTR ret = dlg.DoModal();
-		//_RPT1(0, "%s\n", dlg.sxml);
-
-		//maska::DlgMaskASimple dlg(this);	
-		//std::string sjson = "{ \"MaskA\":[0, 1] } ";
-		//auto nRet = dlg.myDoModal(sjson);
-		//switch(nRet){
-		//case -1:
-		//	AfxMessageBox(_T("Dialog box couldn't be created!"));
-		//	break;
-		//case IDABORT:
-		//	break;
-		//case IDOK:
-		//	break;
-		//case IDCANCEL:
-		//	break;
-		//default:
-		//	break;
-		//};
+		auto newmask = dlgmaska.doModal(maskA);
+		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
+		setMaskA("tstDlg.xml", newmask.c_str());
 	} // /////////////////////////////////////////////////////////
-	void CMultiAmpDlg::OnBnClickedOk(){
-		// TODO: добавьте свой код обработчика уведомлений
-		CDialogEx::OnOK();
-	}  // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 		if(json_in[0] == (char)255){
 			_RPT1(0, "%s\n", json_in + 1);
@@ -176,5 +151,9 @@ namespace options{
 		}
 		CDialogEx::OnTimer(nIDEvent);
 	} // /////////////////////////////////////////////////////////
+	void CMultiAmpDlg::OnBnClickedOk(){
+		// TODO: добавьте свой код обработчика уведомлений
+		CDialogEx::OnOK();
+	}  // /////////////////////////////////////////////////////////
 }
 

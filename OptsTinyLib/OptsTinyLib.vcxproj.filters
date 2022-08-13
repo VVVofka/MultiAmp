@@ -54,6 +54,7 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Misc</Filter>
     </ClInclude>
+    <ClInclude Include="InPort.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -86,5 +87,6 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="InPort.cpp" />
   </ItemGroup>
 </Project>

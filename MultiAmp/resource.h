@@ -25,6 +25,7 @@
 #define IDC_CHECK4                      1006
 #define IDC_CHECK5                      1007
 #define IDC_CHECK6                      1008
+#define IDC_MAINDLG_INFO                1012
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -112,7 +113,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        142
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1012
+#define _APS_NEXT_CONTROL_VALUE         1013
 #define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

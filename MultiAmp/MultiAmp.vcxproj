@@ -102,8 +102,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>OptsTinyLib.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
@@ -129,8 +128,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>OptsTinyLib.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
@@ -160,8 +158,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>OptsTinyLib.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>
@@ -191,8 +188,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
+      <AdditionalDependencies>OptsTinyLib.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
     <Midl>

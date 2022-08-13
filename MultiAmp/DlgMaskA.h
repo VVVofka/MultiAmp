@@ -13,16 +13,13 @@ public:
 
 	// Dialog Data
 #ifdef AFX_DESIGN_TIME
-	enum{ IDD = IDD_Dlg };
+	enum{ IDD = IDD_MASK_A };
 #endif
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
-public:
-	afx_msg void OnBnClickedApply();
-
 private:
 	std::array<int, 16> vb = {
 		IDB_000, IDB_010, IDB_020, IDB_030,
@@ -34,16 +31,26 @@ private:
 		IDC_CHECK04, IDC_CHECK05, IDC_CHECK06, IDC_CHECK07,
 		IDC_CHECK08, IDC_CHECK09, IDC_CHECK10, IDC_CHECK11,
 		IDC_CHECK12, IDC_CHECK13, IDC_CHECK14, IDC_CHECK15};
-	std::array<int, 16 - 4> vsymmetry = {
-		IDC_CHECK01, IDC_CHECK02, IDC_CHECK03,
-		IDC_CHECK05, IDC_CHECK06, IDC_CHECK07,
-		IDC_CHECK09, IDC_CHECK10, IDC_CHECK11,
-		IDC_CHECK13, IDC_CHECK14, IDC_CHECK15};
+	std::array<int, 16 - 4 - 2> vsymmetry = {
+		IDC_CHECK06, //IDC_CHECK00, IDC_CHECK15,
+		IDC_CHECK02, IDC_CHECK04, IDC_CHECK08,
+		IDC_CHECK05, IDC_CHECK10, IDC_CHECK12,
+		IDC_CHECK11, IDC_CHECK13, IDC_CHECK14};
 	void set(const char* s);
-	void get(char* s);
+	std::string getString();
+	void SymmetryChange(int src, int dst1, int dst2, int dst3);
+	void SymmetryChange(int src, int dst1);
 public:
-	char sxml[16 + 1] = "";
-	INT_PTR doModal(std::string& sxml);
-	afx_msg void OnBnClickedSymmetry();
+	std::string sxmlInp;
+	std::string sxmlOut;
+	std::string doModal(const std::string& s_xml);
+	afx_msg void OnBnClickedCancel();
+	afx_msg void OnBnClickedCheck09();
+	afx_msg void OnBnClickedCheck01();
+	afx_msg void OnBnClickedCheck03();
+	afx_msg void OnBnClickedCheck07();
+	virtual BOOL OnInitDialog();
+	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedSymetry();
 };
  
