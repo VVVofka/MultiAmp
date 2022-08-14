@@ -8,8 +8,7 @@
 IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 
 DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_DLG_MASK_F, pParent){
-}
+	: CDialogEx(IDD_DLG_MASK_F, pParent){}
 
 DlgMaskF::~DlgMaskF(){}
 
@@ -21,6 +20,8 @@ void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 
 BEGIN_MESSAGE_MAP(DlgMaskF, CDialogEx)
 	ON_WM_WINDOWPOSCHANGED()
+	ON_BN_CLICKED(IDC_BUTTON2, &DlgMaskF::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, &DlgMaskF::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 // DlgMaskF message handlers
@@ -71,3 +72,10 @@ void DlgMaskF::ResizeControl(){
 		Invalidate();   	// перерисовка всего диалога
 	}
 }
+
+void DlgMaskF::OnBnClickedButton2(){
+	m_CELL_000.setDirect(0, 0);
+} // ////////////////////////////////////////////////////////////////////////
+void DlgMaskF::OnBnClickedButton3(){
+	m_CELL_000.setDirect(0, -1);
+} // ////////////////////////////////////////////////////////////////////////
