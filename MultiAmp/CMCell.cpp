@@ -115,13 +115,13 @@ void CMCell::drawUp(CPaintDC* pdc){
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawUpRight(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
-	double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
+	double R = ((double)rctArrow.Width() + rctArrow.Height()) * 0.25;
+	double dR = 0.85 * R;
 	double dg = 0.5 * R * (1 - kTipLenght);
-	double dR = 1.2 * R * q;
 	DBL2 drain(C.x - dR, C.y + dR);
 	DBL2 nip(C.x + dR, C.y - dR);
 	DBL2 Gnip(C.x + dg, C.y - dg);
-	double dwidth = rctArrow.Height() * kTipWidth * q;
+	double dwidth = R * kTipWidth / q;
 	pdc->MoveTo(drain.point());
 	pdc->LineTo(nip.point());
 	pdc->LineTo((int)(Gnip.x - dwidth), (int)(Gnip.y - dwidth));
@@ -140,13 +140,14 @@ void CMCell::drawRight(CPaintDC* pdc){	//+
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawDnRight(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
-	double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
+	double R = ((double)rctArrow.Width() + rctArrow.Height()) * 0.25;
+	//double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
+	double dR = 0.85 * R;
 	double dg = 0.5 * R * (1 - kTipLenght);
-	double dR = 1.2 * R * q;
 	DBL2 drain(C.x - dR, C.y - dR);
 	DBL2 nip(C.x + dR, C.y + dR);
 	DBL2 Gnip(C.x + dg, C.y + dg);
-	double dwidth = rctArrow.Height() * kTipWidth * q;
+	double dwidth = R * kTipWidth / q;
 	pdc->MoveTo(drain.point());
 	pdc->LineTo(nip.point());
 	pdc->LineTo((int)(Gnip.x + dwidth), (int)(Gnip.y - dwidth));
@@ -165,13 +166,13 @@ void CMCell::drawDn(CPaintDC* pdc){
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawDnLeft(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
-	double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
+	double R = ((double)rctArrow.Width() + rctArrow.Height()) * 0.25;
+	double dR = 0.85 * R;
 	double dg = 0.5 * R * (1 - kTipLenght);
-	double dR = 1.2 * R * q;
 	DBL2 drain(C.x + dR, C.y - dR);
 	DBL2 nip(C.x - dR, C.y + dR);
 	DBL2 Gnip(C.x - dg, C.y + dg);
-	double dwidth = rctArrow.Height() * kTipWidth * q;
+	double dwidth = R * kTipWidth / q;
 	pdc->MoveTo(drain.point());
 	pdc->LineTo(nip.point());
 	pdc->LineTo((int)(Gnip.x + dwidth), (int)(Gnip.y + dwidth));
@@ -190,13 +191,13 @@ void CMCell::drawLeft(CPaintDC* pdc){	//+
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawUpLeft(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
-	double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
+	double R = ((double)rctArrow.Width() + rctArrow.Height()) * 0.25;
+	double dR = 0.85 * R;
 	double dg = 0.5 * R * (1 - kTipLenght);
-	double dR = 1.2 * R * q;
 	DBL2 drain(C.x + dR, C.y + dR);
 	DBL2 nip(C.x - dR, C.y - dR);
 	DBL2 Gnip(C.x - dg, C.y - dg);
-	double dwidth = rctArrow.Height() * kTipWidth * q;
+	double dwidth = R * kTipWidth / q;
 	pdc->MoveTo(drain.point());
 	pdc->LineTo(nip.point());
 	pdc->LineTo((int)(Gnip.x + dwidth), (int)(Gnip.y - dwidth));
