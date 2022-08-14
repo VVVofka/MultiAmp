@@ -74,8 +74,8 @@ void DlgMaskF::ResizeControl(){
 }
 
 void DlgMaskF::OnBnClickedButton2(){
-	m_CELL_000.setDirect(0, 0);
+	m_CELL_000.nextIdx();
 } // ////////////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedButton3(){
-	m_CELL_000.setDirect(0, -1);
+	m_CELL_000.nextIdx(-1);
 } // ////////////////////////////////////////////////////////////////////////
