@@ -16,6 +16,7 @@ private:
 	void drawO(CPaintDC* pdc);
 	void drawUp(CPaintDC* pdc);
 	COLORREF clrSolid();
+	CRect rctArrow;
 
 };
 

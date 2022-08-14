@@ -56,7 +56,15 @@ void CMCell::OnPaint(){
 	room.top = rctLine.top + d;
 	room.bottom = rctLine.bottom - border / 2 - 1;	// - border / 2 - 1
 
-	CPen penArrow(PS_SOLID, 1, GREY(100));	// colorShad
+	double karrow = 0.9 * 0.5;
+	rctArrow = CRect(
+		room.CenterPoint().x - (int)(room.Width() * karrow + 0.5),
+		room.CenterPoint().y - (int)(room.Height() * karrow + 0.5),
+		room.CenterPoint().x + (int)(room.Width() * karrow + 0.5),
+		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
+		);
+
+	CPen penArrow(PS_SOLID, 3, GREY(100));	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(x == 0 && y == 0)
 		drawO(&dc);
@@ -86,16 +94,17 @@ void CMCell::drawO(CPaintDC* pdc){
 	CBrush* olpBrush = pdc->SelectObject(&brush);		// сохранение старого пера
 	double kw = room.Width() * 0.3;
 	double kh = room.Height() * 0.3;
-	CRect eli(room.left + kw, room.top + kh, room.right - kw, room.bottom - kh);
+	CRect eli((room.left + kw), (int)(room.top + kh), (int)(room.right - kw), (int)(room.bottom - kh));
 	auto err = pdc->Ellipse(eli);
 	pdc->SelectObject(brush);	// возврат старого пера
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawUp(CPaintDC* pdc){
-	CBrush m_Brush(clrSolid());
-	CBrush* olpBrush = pdc->SelectObject(&m_Brush);		// сохранение старого пера
-	double kw = room.Width() * 0.4;
-	double kh = room.Height() * 0.4;
-	CRect eli(room.left + kw, room.top + kh, room.right - kw, room.bottom - kh);
-	auto err = pdc->Ellipse(eli);
-	pdc->SelectObject(m_Brush);	// возврат старого пера
+	pdc->MoveTo(rctArrow.CenterPoint().x, rctArrow.bottom);	//	 - border / 2
+	CPoint nip(rctArrow.CenterPoint().x, rctArrow.top);
+	pdc->LineTo(nip);
+	int dx = (int)(rctArrow.Height() * 0.05 + 0.5);
+	int dy = (int)(rctArrow.Width() * 0.35 + 0.5);
+	pdc->LineTo(nip.x - dx, nip.y + dy);
+	pdc->MoveTo(nip);	
+	pdc->LineTo(nip.x + dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
