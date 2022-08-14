@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CMCell.h"
 
 // DlgMaskF dialog
 
@@ -20,4 +20,10 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
+public:
+	CMCell m_CELL_000;
+	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
+
+private:
+	void ResizeControl();
 };
