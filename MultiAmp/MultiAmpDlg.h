@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "DlgMaskA.h"
+#include "DlgMaskF.h"
 #include "..\OptsTinyLib\InPort.h"
 //#include "..\OptsTinyLib\tinyxml2.h"
 
@@ -46,5 +47,6 @@ namespace options{
 		afx_msg void OnBnClickedBtJson();
 		afx_msg void OnBnClickedBtMaskA();
 		afx_msg void OnBnClickedOk();
+		afx_msg void OnBnClickedBtMaskF();
 	};
 }

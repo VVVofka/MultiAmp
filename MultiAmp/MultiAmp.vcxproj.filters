@@ -13,7 +13,13 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DlgMaskA">
+    <Filter Include="DlgMasks">
+      <UniqueIdentifier>{440f11e7-4abb-4686-8656-e06645e72864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DlgMasks\F">
+      <UniqueIdentifier>{0b7c2cd7-fc35-4a32-9c61-6fa6c9d6c37f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DlgMasks\A">
       <UniqueIdentifier>{1114c100-1f6f-4cce-9cd7-ceef797aead2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -37,7 +43,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgMaskA.h">
-      <Filter>DlgMaskA</Filter>
+      <Filter>DlgMasks\A</Filter>
+    </ClInclude>
+    <ClInclude Include="DlgMaskF.h">
+      <Filter>DlgMasks\F</Filter>
+    </ClInclude>
+    <ClInclude Include="CMCell.h">
+      <Filter>DlgMasks\F</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -51,7 +63,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DlgMaskA.cpp">
-      <Filter>DlgMaskA</Filter>
+      <Filter>DlgMasks\A</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMaskF.cpp">
+      <Filter>DlgMasks\F</Filter>
+    </ClCompile>
+    <ClCompile Include="CMCell.cpp">
+      <Filter>DlgMasks\F</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

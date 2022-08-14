@@ -69,4 +69,3 @@ BOOL CMultiAmpApp::InitInstance(){
 	//  application, rather than start the application's message pump.
 	return FALSE;
 }
-

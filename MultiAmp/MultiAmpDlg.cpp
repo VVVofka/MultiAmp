@@ -28,6 +28,7 @@ namespace options{
 		ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
 		ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
 		ON_WM_TIMER()
+		ON_BN_CLICKED(IDC_BT_MASK_F, &CMultiAmpDlg::OnBnClickedBtMaskF)
 	END_MESSAGE_MAP()
 
 	// CMultiAmpDlg message handlers
@@ -155,5 +156,12 @@ namespace options{
 		// TODO: добавьте свой код обработчика уведомлений
 		CDialogEx::OnOK();
 	}  // /////////////////////////////////////////////////////////
+	void CMultiAmpDlg::OnBnClickedBtMaskF(){
+		DlgMaskF maskf;
+		maskf.DoModal();
+		// TODO: Add your control notification handler code here
+	}
 }
+
+
 
