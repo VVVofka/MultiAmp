@@ -203,6 +203,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CMCell4.h" />
     <ClInclude Include="CMCell.h" />
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
@@ -214,6 +215,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CMCell4.cpp" />
     <ClCompile Include="CMCell.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />

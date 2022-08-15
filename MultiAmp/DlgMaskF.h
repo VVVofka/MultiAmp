@@ -1,19 +1,19 @@
 #pragma once
 #include "CMCell.h"
+#include "CMCell4.h"
 
 // DlgMaskF dialog
 
-class DlgMaskF : public CDialogEx
-{
+class DlgMaskF : public CDialogEx{
 	DECLARE_DYNAMIC(DlgMaskF)
 
 public:
 	DlgMaskF(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~DlgMaskF();
 
-// Dialog Data
+	// Dialog Data
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_DLG_MASK_F };
+	enum{ IDD = IDD_DLG_MASK_F };
 #endif
 
 protected:
@@ -21,6 +21,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
+	CMCell4 c4;
 	CMCell m_CELL_000;
 	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 

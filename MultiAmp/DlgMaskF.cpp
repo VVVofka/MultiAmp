@@ -2,7 +2,7 @@
 #include "MultiAmp.h"
 #include "DlgMaskF.h"
 #include "afxdialogex.h"
-
+#include "CMCell4.h"
 // DlgMaskF dialog
 
 IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
@@ -15,6 +15,7 @@ DlgMaskF::~DlgMaskF(){}
 void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_STCELL000, m_CELL_000);
+	DDX_Control(pDX, IDC_ST_CELL4, c4);
 }
 
 

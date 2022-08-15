@@ -51,6 +51,9 @@
     <ClInclude Include="CMCell.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
+    <ClInclude Include="CMCell4.h">
+      <Filter>DlgMasks\F</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -69,6 +72,9 @@
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
     <ClCompile Include="CMCell.cpp">
+      <Filter>DlgMasks\F</Filter>
+    </ClCompile>
+    <ClCompile Include="CMCell4.cpp">
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
   </ItemGroup>
