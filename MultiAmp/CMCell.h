@@ -1,17 +1,17 @@
 #pragma once
 #include <array>
+#include <string>
 class CMCell :public CStatic{
-	//	CMCell(CWnd* pParent = nullptr);	// standard constructor
-	CRect room;
-
 	DECLARE_DYNAMIC(CMCell)
+
+protected:
+	DECLARE_MESSAGE_MAP()
+
 public:
 	bool isExist = true;
 	int idx = 0;
-	//void setDirect(int X, int Y);
+	void setDirect(const char* s);
 	int nextIdx(int direct = 1);
-
-	DECLARE_MESSAGE_MAP()
 	afx_msg void OnPaint();
 	struct DBL2{
 		double x=0, y=0;
@@ -21,6 +21,7 @@ public:
 	};
 
 private:
+	CRect room;
 	COLORREF clrSolid();
 	CRect rctArrow;
 	const double kTipLenght = 0.35;	// 0.35
@@ -43,6 +44,12 @@ private:
 		DBL2(0, 1), DBL2(-q, q),
 		DBL2(-1, 0), DBL2(-q,-q)
 	};
-	//double normDirect(double X);
+	//const std::array<std::string, 9> sidx = {"00", 
+	//	"0-", "+-",
+	//	"+0", "++",
+	//	"0+", "-+",
+	//	"-0", "--"
+	//};
+	void setDirect(int X, int Y);
 };
 

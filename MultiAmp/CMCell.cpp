@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CMCell.h"
 #define GREY(A) (RGB((A), (A), (A)))
+
 BEGIN_MESSAGE_MAP(CMCell, CStatic)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
@@ -89,11 +90,6 @@ void CMCell::OnPaint(){
 // +->
 // |
 // V
-//void CMCell::setDirect(int X, int Y){
-//	x = normDirect(X);
-//	y = normDirect(Y);
-//	InvalidateRect(room, TRUE);
-//} // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawO(CPaintDC* pdc){	//+
 	CBrush brush(clrSolid());
 	CBrush* olpBrush = pdc->SelectObject(&brush);		// сохранение старого пера
@@ -141,7 +137,6 @@ void CMCell::drawRight(CPaintDC* pdc){	//+
 void CMCell::drawDnRight(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
 	double R = ((double)rctArrow.Width() + rctArrow.Height()) * 0.25;
-	//double R = ((C.x - (double)rctArrow.left) + (C.y - (double)rctArrow.top)) * 0.5;
 	double dR = 0.85 * R;
 	double dg = 0.5 * R * (1 - kTipLenght);
 	DBL2 drain(C.x - dR, C.y - dR);
@@ -204,13 +199,9 @@ void CMCell::drawUpLeft(CPaintDC* pdc){
 	pdc->MoveTo(nip.point());
 	pdc->LineTo((int)(Gnip.x - dwidth), (int)(Gnip.y + dwidth));
 } // ///////////////////////////////////////////////////////////////////////////////////
-//double CMCell::normDirect(double val){
-//	if(val < -0.8535533905932738)		return -1;
-//	if(val < -0.3535533905932738)		return -q;
-//	if(val > +0.8535533905932738)		return +1;
-//	if(val > +0.3535533905932738)		return +q;
-//	return 0.0;
-//} // ///////////////////////////////////////////////////////////////////////////////////
+void CMCell::setDirect(const char* s){
+
+}// ///////////////////////////////////////////////////////////////////////////////////
 int CMCell::nextIdx(int direct){
 	idx = (idx + direct + varrays.size()) % varrays.size();
 	InvalidateRect(room, TRUE);
