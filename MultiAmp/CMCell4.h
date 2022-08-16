@@ -8,7 +8,7 @@ class CMCell4 : public CStatic{
 public:
 	CMCell4();
 	virtual ~CMCell4();
-	std::array<CMCell, 4> v;
+	std::array<CMCell, 16> v;
 	void setDirect(size_t idx, const char* s0, const char* s1, const char* s2, const char* s3);
 
 protected:
@@ -20,6 +20,7 @@ public:
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 private:
 	void rotate(int direct, CPoint point);
+	std::array<CRect,4> DevideRect4(const CRect& rect_base, int border = 0);
 };
 
 

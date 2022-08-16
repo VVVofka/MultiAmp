@@ -58,4 +58,14 @@ void CMCell4::setDirect(size_t idx, const char* s0, const char* s1, const char* 
 		v[j].isExist = ((idx & j) != 0);
 
 } // //////////////////////////////////////////////////////////////////////////////////
+std::array<CRect, 4> CMCell4::DevideRect4(const CRect& rect_base, int border){
+	CRect noBorder = CRect(rect_base.left + border, rect_base.top + border, rect_base.right - border, rect_base.bottom - border);
+	CPoint c = rect_base.CenterPoint();
+	std::array<CRect, 4> ret;
+	ret[0] = CRect(noBorder.TopLeft(), c);
+	ret[1] = CRect(c.x, noBorder.top, noBorder.right, c.y);
+	ret[2] = CRect(noBorder.left, c.y, c.x, noBorder.right);
+	ret[3] = CRect(c, noBorder.BottomRight());
+	return ret;
+} // //////////////////////////////////////////////////////////////////////////////////
 
