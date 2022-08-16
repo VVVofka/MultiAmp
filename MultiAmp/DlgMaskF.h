@@ -21,13 +21,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CMCell4 c4;
-	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 
-private:
-	void ResizeControl();
 public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
-	virtual void PreInitDialog();
 	virtual BOOL OnInitDialog();
 };

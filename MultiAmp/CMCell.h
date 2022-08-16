@@ -9,12 +9,11 @@ protected:
 
 public:
 	bool isExist = true;
-	int idx = 0;
+	size_t idRotate = 0;
 
 	int border = 0; // толщина линии границы
 	int bound = 0;	// толщина области за border (граница)
 
-	void setDirect(const char* s);
 	int rotate(int direct = 1);
 	afx_msg void OnPaint();
 	struct DBL2{
@@ -42,18 +41,19 @@ private:
 	void drawUpLeft(CPaintDC* pdc);
 
 	const double q = 0.7071067811865475;
-	std::array<DBL2, 9> varrays = {DBL2(0,0),
-		DBL2(0,-1), DBL2(q,-q),
-		DBL2(1, 0), DBL2(q, q),
-		DBL2(0, 1), DBL2(-q, q),
-		DBL2(-1, 0), DBL2(-q,-q)
-	};
+	const size_t cntRotates = 9;
+	//const std::string varrays = "4530400840080718";
+	//std::array<DBL2, 9> varrays = {DBL2(0,0),
+	//	DBL2(0,-1), DBL2(q,-q),
+	//	DBL2(1, 0), DBL2(q, q),
+	//	DBL2(0, 1), DBL2(-q, q),
+	//	DBL2(-1, 0), DBL2(-q,-q)
+	//};
 	//const std::array<std::string, 9> sidx = {"00", 
 	//	"0-", "+-",
 	//	"+0", "++",
 	//	"0+", "-+",
 	//	"-0", "--"
 	//};
-	void setDirect(int X, int Y);
 };
 

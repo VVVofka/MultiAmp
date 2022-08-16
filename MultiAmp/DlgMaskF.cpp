@@ -24,76 +24,17 @@ BEGIN_MESSAGE_MAP(DlgMaskF, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON3, &DlgMaskF::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
-// DlgMaskF message handlers
-
-void DlgMaskF::OnWindowPosChanged(WINDOWPOS* lpwndpos){
-	CDialogEx::OnWindowPosChanged(lpwndpos);
-	// TODO: Add your message handler code here
-	//c4.create();
-	ResizeControl();
-} // //////////////////////////////////////////////////////////////////////////////
-void DlgMaskF::ResizeControl(){
-	return;
-	// подгонка контрола к размеру диалога
-	CRect mainRect; // прямоугольник диалога
-	GetClientRect(&mainRect); // относительные координаты на диалоге
-
-	int n = 23; // отступ от краёв
-	CRect contRect; // прямоугольник элемента
-	contRect.left = mainRect.left + n;
-	contRect.top = mainRect.top + n;
-	contRect.right = mainRect.right - n;
-	contRect.bottom = mainRect.bottom - n;
-
-	// если края "захлестнулись" — корректируем
-	if(contRect.left > contRect.right)contRect.left = contRect.right;
-	if(contRect.top > contRect.bottom)contRect.top = contRect.bottom;
-
-	// боремся за производительность: перед переразмещением контрола убедимся,
-	// что положение на самом деле поменяется. В данном случае это малополезно,
-	// поскольку элемент один, да и размер его меняется в соответствии с диалогом.
-	// Но для тренировки всё-таки это сделаем:)
-	CRect currRect; // текущий прямоугольник контрола в абсолютных координатах
-	CRect newRect; // устанавливаемый прямоугольник в абсолютных координатах
-	{
-		// получаем абсолютные координаты контрола
-		c4.GetWindowRect(&currRect);
-
-		// проецируем contRect на абсолютные координаты
-		// класс CRect — эквивалентен массиву CPoint[2]
-		newRect = contRect;
-		::MapWindowPoints(m_hWnd, 0, (CPoint*)&newRect, 2);
-	}
-
-	if(currRect != newRect){
-		// задаём новый размер и положение
-		c4.MoveWindow(&contRect, 0);
-		_RPT4(0, "%d x %d    %d x %d\n", contRect.left, contRect.top, contRect.right, contRect.bottom);
-		c4.Invalidate();
-		Invalidate();   	// перерисовка всего диалога
-	}
-} // ////////////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedButton2(){
 	//m_CELL_000.rotate();
 } // ////////////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedButton3(){
 	//m_CELL_000.rotate(-1);
 } // ////////////////////////////////////////////////////////////////////////
-
-
-void DlgMaskF::PreInitDialog(){
-	// TODO: Add your specialized code here and/or call the base class
-
-	CDialogEx::PreInitDialog();
-}
-
-
 BOOL DlgMaskF::OnInitDialog(){
 	CDialogEx::OnInitDialog();
-
 	// TODO:  Add extra initialization here
 	c4.create();
-
+	c4.setIdMaskF(6);
+	c4.setRotates("4530400840080718");
 	return TRUE;  // return TRUE unless you set the focus to a control
-				  // EXCEPTION: OCX Property Pages should return FALSE
-}
+} // //////////////////////////////////////////////////////////////////////////////////////

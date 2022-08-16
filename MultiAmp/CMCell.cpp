@@ -65,15 +65,15 @@ void CMCell::OnPaint(){
 
 	CPen penArrow(PS_SOLID, 2, GREY(70));	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
-	if(idx == 0)		drawO(&dc);
-	else if(idx == 1)	drawUp(&dc);
-	else if(idx == 2)	drawUpRight(&dc);
-	else if(idx == 3)	drawRight(&dc);
-	else if(idx == 4)	drawDnRight(&dc);
-	else if(idx == 5)	drawDn(&dc);
-	else if(idx == 6)	drawDnLeft(&dc);
-	else if(idx == 7)	drawLeft(&dc);
-	else if(idx == 8)	drawUpLeft(&dc);
+	if(idRotate == 0)		drawO(&dc);
+	else if(idRotate == 1)	drawUp(&dc);
+	else if(idRotate == 2)	drawUpRight(&dc);
+	else if(idRotate == 3)	drawRight(&dc);
+	else if(idRotate == 4)	drawDnRight(&dc);
+	else if(idRotate == 5)	drawDn(&dc);
+	else if(idRotate == 6)	drawDnLeft(&dc);
+	else if(idRotate == 7)	drawLeft(&dc);
+	else if(idRotate == 8)	drawUpLeft(&dc);
 	dc.SelectObject(oldPenArrow);	// возврат старого пера
 
 	//CPen mShadPen(PS_SOLID, 1, RGB(0, 0, 0));	// colorShad
@@ -103,7 +103,7 @@ void CMCell::drawUp(CPaintDC* pdc){
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipWidth + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipLenght + 0.5);
-	pdc->LineTo(nip.x - dx, nip.y + dy);
+	pdc->LineTo(nip.x - dx - 1, nip.y + dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x + dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -128,9 +128,9 @@ void CMCell::drawRight(CPaintDC* pdc){	//+
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipLenght + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipWidth + 0.5);
-	pdc->LineTo(nip.x - dx, nip.y + dy);
+	pdc->LineTo(nip.x - dx, nip.y - dy - 1);
 	pdc->MoveTo(nip);
-	pdc->LineTo(nip.x - dx, nip.y - dy);
+	pdc->LineTo(nip.x - dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawDnRight(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
@@ -153,7 +153,7 @@ void CMCell::drawDn(CPaintDC* pdc){
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipWidth + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipLenght + 0.5);
-	pdc->LineTo(nip.x - dx, nip.y - dy);
+	pdc->LineTo(nip.x - dx - 1, nip.y - dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x + dx, nip.y - dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -178,9 +178,9 @@ void CMCell::drawLeft(CPaintDC* pdc){	//+
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipLenght + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipWidth + 0.5);
-	pdc->LineTo(nip.x + dx, nip.y + dy);
+	pdc->LineTo(nip.x + dx, nip.y - dy - 1);
 	pdc->MoveTo(nip);
-	pdc->LineTo(nip.x + dx, nip.y - dy);
+	pdc->LineTo(nip.x + dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawUpLeft(CPaintDC* pdc){
 	DBL2 C(rctArrow.CenterPoint());
@@ -197,11 +197,8 @@ void CMCell::drawUpLeft(CPaintDC* pdc){
 	pdc->MoveTo(nip.point());
 	pdc->LineTo((int)(Gnip.x - dwidth), (int)(Gnip.y + dwidth));
 } // ///////////////////////////////////////////////////////////////////////////////////
-void CMCell::setDirect(const char* s){
-
-}// ///////////////////////////////////////////////////////////////////////////////////
 int CMCell::rotate(int direct){
-	idx = (idx + direct + varrays.size()) % varrays.size();
+	idRotate = (idRotate + direct + cntRotates) % cntRotates;
 	InvalidateRect(room, TRUE);
-	return idx;
+	return idRotate;
 } // ///////////////////////////////////////////////////////////////////////////////////

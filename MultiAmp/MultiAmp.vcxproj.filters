@@ -54,9 +54,6 @@
     <ClInclude Include="CMCell4.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
-    <ClInclude Include="CMCell16.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -79,9 +76,6 @@
     </ClCompile>
     <ClCompile Include="CMCell4.cpp">
       <Filter>DlgMasks\F</Filter>
-    </ClCompile>
-    <ClCompile Include="CMCell16.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
