@@ -23,17 +23,14 @@ void CMCell4::OnPaint(){
 void CMCell4::PreSubclassWindow(){
 	CRect rctClient;
 	GetClientRect(&rctClient);
-	auto w = rctClient.Width() / 2;
-	auto h = rctClient.Height() / 2;
-	CRect vrct[4] = {
-		CRect(0, 0, w,   h),
-		CRect(w, 0, w * 2, h),
-		CRect(0, h, w,   h * 2),
-		CRect(w, h, w * 2, h * 2)
-	};
-	for(int j = 0; j < (int)v.size(); j++)
-		v[j].Create("", WS_CHILD | WS_VISIBLE, vrct[j], this);
-
+	auto vrct4 = DevideRect4(rctClient, 2);
+	for(size_t c4 = 0; c4 < 4; c4++){
+		auto vrct1 = DevideRect4(vrct4[c4], 2);
+		for(size_t c1 = 0; c1 < 4; c1++){
+			size_t idx = c4 * 4 + c1;
+			v[idx].Create("", WS_CHILD | WS_VISIBLE, vrct1[c1], this);
+		}
+	}
 	CStatic::PreSubclassWindow();
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell4::OnLButtonUp(UINT nFlags, CPoint point){
