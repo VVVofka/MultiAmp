@@ -10,17 +10,21 @@ public:
 	virtual ~CMCell4();
 	std::array<CMCell, 16> v;
 	void setDirect(size_t idx, const char* s0, const char* s1, const char* s2, const char* s3);
+	void create();
+
+	int borderOut = 1;
+	int borderInt = 2;
 
 protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnPaint();
-	virtual void PreSubclassWindow();
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 private:
 	void rotate(int direct, CPoint point);
 	std::array<CRect,4> DevideRect4(const CRect& rect_base, int border = 0);
+	size_t getIdx4byPoint(const CRect& rct, const CPoint& point);
 };
 
 

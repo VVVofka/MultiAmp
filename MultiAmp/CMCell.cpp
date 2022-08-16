@@ -32,8 +32,6 @@ void CMCell::OnPaint(){
 	COLORREF colorShad = ::GetSysColor(COLOR_BTNSHADOW);
 	COLORREF colorDeepShad = ::GetSysColor(COLOR_3DDKSHADOW);
 
-	int border = 1; // толщина линии
-	int bound = 1;
 	int brdline = bound + border / 2;
 	CRect rctLine(wndClient.left + brdline, wndClient.top + brdline, wndClient.right - brdline, wndClient.bottom - brdline);
 
@@ -65,7 +63,7 @@ void CMCell::OnPaint(){
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
 
-	CPen penArrow(PS_SOLID, 3, GREY(100));	// colorShad
+	CPen penArrow(PS_SOLID, 2, GREY(70));	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(idx == 0)		drawO(&dc);
 	else if(idx == 1)	drawUp(&dc);
@@ -93,11 +91,11 @@ void CMCell::OnPaint(){
 void CMCell::drawO(CPaintDC* pdc){	//+
 	CBrush brush(clrSolid());
 	CBrush* olpBrush = pdc->SelectObject(&brush);		// сохранение старого пера
-	double kw = room.Width() * kTipLenght;
-	double kh = room.Height() * 0.3;
-	CRect eli((int)(room.left + kw), (int)(room.top + kh), (int)(room.right - kw), (int)(room.bottom - kh));
+	CPoint c = room.CenterPoint();
+	LONG k = (LONG)(((double)room.Width() + (double)room.Height()) * 0.5 * 0.3 + 0.5);
+	CRect eli(c.x - k, c.y - k, c.x + k, c.y + k);
 	auto err = pdc->Ellipse(eli);
-	pdc->SelectObject(brush);	// возврат старого пера
+	pdc->SelectObject(olpBrush);	// возврат старого пера
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::drawUp(CPaintDC* pdc){	
 	pdc->MoveTo(rctArrow.CenterPoint().x, rctArrow.bottom);	//	 - border / 2

@@ -14,7 +14,6 @@ DlgMaskF::~DlgMaskF(){}
 
 void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_STCELL000, m_CELL_000);
 	DDX_Control(pDX, IDC_ST_CELL4, c4);
 }
 
@@ -30,6 +29,7 @@ END_MESSAGE_MAP()
 void DlgMaskF::OnWindowPosChanged(WINDOWPOS* lpwndpos){
 	CDialogEx::OnWindowPosChanged(lpwndpos);
 	// TODO: Add your message handler code here
+	//c4.create();
 	ResizeControl();
 } // //////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::ResizeControl(){
@@ -57,7 +57,7 @@ void DlgMaskF::ResizeControl(){
 	CRect newRect; // устанавливаемый прямоугольник в абсолютных координатах
 	{
 		// получаем абсолютные координаты контрола
-		m_CELL_000.GetWindowRect(&currRect);
+		c4.GetWindowRect(&currRect);
 
 		// проецируем contRect на абсолютные координаты
 		// класс CRect — эквивалентен массиву CPoint[2]
@@ -67,9 +67,9 @@ void DlgMaskF::ResizeControl(){
 
 	if(currRect != newRect){
 		// задаём новый размер и положение
-		m_CELL_000.MoveWindow(&contRect, 0);
+		c4.MoveWindow(&contRect, 0);
 		_RPT4(0, "%d x %d    %d x %d\n", contRect.left, contRect.top, contRect.right, contRect.bottom);
-		m_CELL_000.Invalidate();
+		c4.Invalidate();
 		Invalidate();   	// перерисовка всего диалога
 	}
 } // ////////////////////////////////////////////////////////////////////////
@@ -79,3 +79,21 @@ void DlgMaskF::OnBnClickedButton2(){
 void DlgMaskF::OnBnClickedButton3(){
 	//m_CELL_000.rotate(-1);
 } // ////////////////////////////////////////////////////////////////////////
+
+
+void DlgMaskF::PreInitDialog(){
+	// TODO: Add your specialized code here and/or call the base class
+
+	CDialogEx::PreInitDialog();
+}
+
+
+BOOL DlgMaskF::OnInitDialog(){
+	CDialogEx::OnInitDialog();
+
+	// TODO:  Add extra initialization here
+	c4.create();
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // EXCEPTION: OCX Property Pages should return FALSE
+}

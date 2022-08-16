@@ -1,5 +1,5 @@
 #pragma once
-#include "CMCell16.h"
+#include "CMCell4.h"
 
 // DlgMaskF dialog
 
@@ -21,7 +21,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CMCell4 c4;
-	CMCell16 m_CELL_000;
 	afx_msg void OnWindowPosChanged(WINDOWPOS* lpwndpos);
 
 private:
@@ -29,4 +28,6 @@ private:
 public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
+	virtual void PreInitDialog();
+	virtual BOOL OnInitDialog();
 };

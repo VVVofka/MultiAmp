@@ -10,6 +10,10 @@ protected:
 public:
 	bool isExist = true;
 	int idx = 0;
+
+	int border = 0; // толщина линии границы
+	int bound = 0;	// толщина области за border (граница)
+
 	void setDirect(const char* s);
 	int rotate(int direct = 1);
 	afx_msg void OnPaint();
@@ -24,8 +28,8 @@ private:
 	CRect room;
 	COLORREF clrSolid();
 	CRect rctArrow;
-	const double kTipLenght = 0.35;	// 0.35
-	const double kTipWidth = 0.05;	// 0.05
+	const double kTipLenght = 0.4;	// 0.4
+	const double kTipWidth = 0.12;	// 0.12
 
 	void drawO(CPaintDC* pdc);
 	void drawUp(CPaintDC* pdc);
