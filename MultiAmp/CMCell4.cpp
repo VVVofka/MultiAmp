@@ -51,7 +51,7 @@ void CMCell4::rotate(int direct, CPoint point){
 	size_t y = (2 * point.y) / rctClient.Height();
 	size_t idx = y * 2 + x;
 	if(idx < v.size())
-		v[idx].nextIdx(direct);
+		v[idx].rotate(direct);
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell4::setDirect(size_t idx, const char* s0, const char* s1, const char* s2, const char* s3){
 	for(size_t j = 0; j < v.size(); j++)

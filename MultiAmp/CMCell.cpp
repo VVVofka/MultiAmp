@@ -202,7 +202,7 @@ void CMCell::drawUpLeft(CPaintDC* pdc){
 void CMCell::setDirect(const char* s){
 
 }// ///////////////////////////////////////////////////////////////////////////////////
-int CMCell::nextIdx(int direct){
+int CMCell::rotate(int direct){
 	idx = (idx + direct + varrays.size()) % varrays.size();
 	InvalidateRect(room, TRUE);
 	return idx;

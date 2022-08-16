@@ -11,7 +11,7 @@ public:
 	bool isExist = true;
 	int idx = 0;
 	void setDirect(const char* s);
-	int nextIdx(int direct = 1);
+	int rotate(int direct = 1);
 	afx_msg void OnPaint();
 	struct DBL2{
 		double x=0, y=0;
