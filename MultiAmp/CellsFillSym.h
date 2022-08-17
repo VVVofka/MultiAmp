@@ -4,11 +4,12 @@
 class CellsFillSym{
 public:
 	std::array<Direct, 16> vout;
-	std::array<bool, 16> vIsEnabled;
+	std::array<bool, 16> vIsEnabled = {false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false};
 	char svout[10] = "012345678";
 
 	std::array<Direct, 16>& fill(size_t mask, const std::array<Direct, 16>& v_in);
 	std::array<Direct, 16>& fill(size_t mask, const char* s);
+
 private:
 	std::array<Direct, 16> vin;
 	std::array<Direct, 16>& fill(size_t mask);

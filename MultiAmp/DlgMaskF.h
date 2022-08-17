@@ -1,6 +1,7 @@
 #pragma once
 #include "CMCell4.h"
 #include <array>
+#include <string>
 #include <memory>
 // DlgMaskF dialog
 
@@ -28,6 +29,8 @@ public:
 
 	std::string sxmlInp;
 	std::string sxmlOut;
+
+	std::string doModal(const std::string& s_xml);
 
 private:
 	std::array<std::unique_ptr<CMCell4>, 3> vcells;

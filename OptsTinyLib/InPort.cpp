@@ -16,12 +16,12 @@ void setMaskA(const char* fname, const char* s){
 std::string getMaskF(const char* fname){
     Session ses;
     ses.load(fname);
-    auto ret = ses.get_maskA();
+    auto ret = ses.get_maskF();
     return std::string(ret);
 } // //////////////////////////////////////////////////////////////////////////
 void setMaskF(const char* fname, const char* s){
     Session ses;
     ses.load(fname);
-    auto ret = ses.set_maskA(s);
+    auto ret = ses.set_maskF(s);
     ses.save(fname);
 } // //////////////////////////////////////////////////////////////////////////

@@ -10,7 +10,7 @@ public:
 
 	unsigned get_uns() const;
 	const char* get_s() const;
-	
+	char v[16 + 1]= "0000000000000000";
 private:
 	const char defval[16 + 1] = "0001011101111111";
 	const char XMLName[6] = "MaskA";	// "MaskA"

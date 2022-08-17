@@ -30,6 +30,13 @@ BEGIN_MESSAGE_MAP(DlgMaskF, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON3, &DlgMaskF::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
+std::string DlgMaskF::doModal(const std::string& s_xml){
+	sxmlOut = sxmlInp = s_xml;
+	INT_PTR retDlg = CDialog::DoModal();
+	if(retDlg == IDOK)
+		return sxmlOut;
+	return sxmlInp;
+} // ////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedButton2(){
 	//m_CELL_000.rotate();
 } // ////////////////////////////////////////////////////////////////////////

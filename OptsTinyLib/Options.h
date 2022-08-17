@@ -19,7 +19,6 @@ public:
 
 private:
 	const char XMLName[8] = "Options";
-	//XMLElement* element = NULL;
 
 };
 

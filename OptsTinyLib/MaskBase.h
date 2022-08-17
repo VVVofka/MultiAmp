@@ -8,7 +8,6 @@ public:
 	bool isChange = true;
 	XMLNode* node = NULL;
 protected:
-	char v[16 + 1];
 private:
 };
 

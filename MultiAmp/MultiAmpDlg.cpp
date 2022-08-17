@@ -157,9 +157,11 @@ namespace options{
 		setMaskA("tstDlg.xml", newmask.c_str());
 	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskF(){
-		DlgMaskF maskf;
-		maskf.DoModal();
-		// TODO: Add your control notification handler code here
+		auto maskF = getMaskF("tstDlg.xml");
+		DlgMaskF dlgmaskf;
+		auto newmask = dlgmaskf.doModal(maskF);
+		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
+		setMaskF("tstDlg.xml", newmask.c_str());
 	}  // /////////////////////////////////////////////////////////
 }
 
