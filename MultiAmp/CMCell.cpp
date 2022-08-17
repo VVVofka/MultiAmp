@@ -63,7 +63,7 @@ void CMCell::OnPaint(){
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
 
-	CPen penArrow(PS_SOLID, 2, GREY(70));	// colorShad
+	CPen penArrow(PS_SOLID, arrowWidth, GREY(70));	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(idRotate == 0)		drawO(&dc);
 	else if(idRotate == 1)	drawUp(&dc);
@@ -103,7 +103,7 @@ void CMCell::drawUp(CPaintDC* pdc){
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipWidth + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipLenght + 0.5);
-	pdc->LineTo(nip.x - dx - 1, nip.y + dy);
+	pdc->LineTo(nip.x - dx, nip.y + dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x + dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ void CMCell::drawRight(CPaintDC* pdc){	//+
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipLenght + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipWidth + 0.5);
-	pdc->LineTo(nip.x - dx, nip.y - dy - 1);
+	pdc->LineTo(nip.x - dx, nip.y - dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x - dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +153,7 @@ void CMCell::drawDn(CPaintDC* pdc){
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipWidth + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipLenght + 0.5);
-	pdc->LineTo(nip.x - dx - 1, nip.y - dy);
+	pdc->LineTo(nip.x - dx, nip.y - dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x + dx, nip.y - dy);
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +178,7 @@ void CMCell::drawLeft(CPaintDC* pdc){	//+
 	pdc->LineTo(nip);
 	int dx = (int)(rctArrow.Height() * kTipLenght + 0.5);
 	int dy = (int)(rctArrow.Width() * kTipWidth + 0.5);
-	pdc->LineTo(nip.x + dx, nip.y - dy - 1);
+	pdc->LineTo(nip.x + dx, nip.y - dy);
 	pdc->MoveTo(nip);
 	pdc->LineTo(nip.x + dx, nip.y + dy);
 } // ///////////////////////////////////////////////////////////////////////////////////

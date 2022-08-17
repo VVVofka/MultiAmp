@@ -137,13 +137,6 @@ namespace options{
 		_RPT0(0, buffer.GetString());
 		//std::cout << buffer.GetString() << std::endl;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	void CMultiAmpDlg::OnBnClickedBtMaskA(){
-		auto maskA = getMaskA("tstDlg.xml");
-		DlgMaskA dlgmaska;
-		auto newmask = dlgmaska.doModal(maskA);
-		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
-		setMaskA("tstDlg.xml", newmask.c_str());
-	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 		if(json_in[0] == (char)255){
 			_RPT1(0, "%s\n", json_in + 1);
@@ -156,11 +149,18 @@ namespace options{
 		// TODO: добавьте свой код обработчика уведомлений
 		CDialogEx::OnOK();
 	}  // /////////////////////////////////////////////////////////
+	void CMultiAmpDlg::OnBnClickedBtMaskA(){
+		auto maskA = getMaskA("tstDlg.xml");
+		DlgMaskA dlgmaska;
+		auto newmask = dlgmaska.doModal(maskA);
+		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
+		setMaskA("tstDlg.xml", newmask.c_str());
+	} // /////////////////////////////////////////////////////////
 	void CMultiAmpDlg::OnBnClickedBtMaskF(){
 		DlgMaskF maskf;
 		maskf.DoModal();
 		// TODO: Add your control notification handler code here
-	}
+	}  // /////////////////////////////////////////////////////////
 }
 
 

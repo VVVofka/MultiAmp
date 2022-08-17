@@ -7,7 +7,8 @@ XMLNode* Masks::create(XMLNode* parent_node){
 	XMLElement* ele_out = doc->NewElement(XMLName);
 	node = parent_node->InsertEndChild(ele_out);
 	XMLNode* maskA_node = maskA.create(node);
-	if(maskA_node == NULL)
+	XMLNode* maskF_node = maskF.create(node);
+	if(maskA_node == NULL || maskF_node == NULL)
 		node = NULL;
 	return node;
 } // ///////////////////////////////////////////////////////
@@ -18,8 +19,8 @@ XMLNode* Masks::load(XMLNode* parent_node){
 		std::string name(ele->Name());
 		if(name == XMLName){
 			XMLNode* maskA_node = maskA.load(curnode);
-			// TODO: maskf
-			if(maskA_node != NULL)
+			XMLNode* maskF_node = maskF.load(curnode);
+			if(maskA_node != NULL || maskF_node == NULL)
 				node = curnode;
 			break;
 		}
@@ -31,4 +32,10 @@ const char* Masks::get_maskA() const{
 } // //////////////////////////////////////////////////////////
 XMLNode* Masks::set_maskA(const char* s){
 	return maskA.set(node, s);
+} // ///////////////////////////////////////////////////////////
+const char* Masks::get_maskF() const{
+	return maskF.get_s();
+} // //////////////////////////////////////////////////////////
+XMLNode* Masks::set_maskF(const char* s){
+	return maskF.set(node, s);
 } // ///////////////////////////////////////////////////////////

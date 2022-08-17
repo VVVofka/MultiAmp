@@ -161,6 +161,7 @@
     <ClInclude Include="InPort.h" />
     <ClInclude Include="Lays.h" />
     <ClInclude Include="MaskA.h" />
+    <ClInclude Include="MaskBase.h" />
     <ClInclude Include="MaskF.h" />
     <ClInclude Include="Masks.h" />
     <ClInclude Include="Options.h" />

@@ -55,6 +55,9 @@
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="InPort.h" />
+    <ClInclude Include="MaskBase.h">
+      <Filter>Session\Options\Masks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">

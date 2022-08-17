@@ -55,10 +55,10 @@
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
     <ClInclude Include="Directs.h">
-      <Filter>Header Files</Filter>
+      <Filter>DlgMasks\F</Filter>
     </ClInclude>
     <ClInclude Include="CellsFillSym.h">
-      <Filter>Header Files</Filter>
+      <Filter>DlgMasks\F</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +84,7 @@
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
     <ClCompile Include="CellsFillSym.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DlgMasks\F</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -96,7 +96,9 @@
     <None Include="res\MultiAmp.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Common\Directs.ods" />
+    <None Include="..\Common\Directs.ods">
+      <Filter>DlgMasks\F</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MultiAmp.ico">

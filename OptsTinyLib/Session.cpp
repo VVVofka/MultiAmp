@@ -50,3 +50,9 @@ const char* Session::get_maskA() const{
 XMLNode* Session::set_maskA(const char* s){
 	return options.set_maskA(s);
 } // //////////////////////////////////////////////////////////////
+const char* Session::get_maskF() const{
+	return options.get_maskF();
+} // //////////////////////////////////////////////////////////////
+XMLNode* Session::set_maskF(const char* s){
+	return options.set_maskF(s);
+} // //////////////////////////////////////////////////////////////

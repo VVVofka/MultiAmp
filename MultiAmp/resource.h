@@ -32,6 +32,11 @@
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
 #define IDC_ST_CELL4                    1018
+#define IDC_ST_CELL0000                 1018
+#define IDC_ST_CELL0001                 1019
+#define IDC_SYMETRY_F                   1020
+#define IDC_ST_CELL2                    1021
+#define IDC_ST_CELL0002                 1021
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -119,7 +124,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        143
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1019
+#define _APS_NEXT_CONTROL_VALUE         1021
 #define _APS_NEXT_SYMED_VALUE           108
 #endif
 #endif

@@ -6,13 +6,16 @@ using namespace tinyxml2;
 class Masks{
 public:
 	MaskA maskA;
-	//MaskF maskF;
+	MaskF maskF;
+
 	XMLNode* create(XMLNode* parent_node);
 	XMLNode* load(XMLNode* parent_node);
 	XMLNode* node = NULL;
 
 	const char* get_maskA() const;
 	XMLNode* set_maskA(const char* s);
+	const char* get_maskF() const;
+	XMLNode* set_maskF(const char* s);
 
 private:
 	const char XMLName[6] = "Masks";

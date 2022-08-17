@@ -38,7 +38,9 @@ std::array<CRect, 4> CMCell4::DevideRect4(const CRect& rect_base, int border){
 	ret[3] = CRect(c.x - 1, c.y - 1, noBorder.BottomRight().x, noBorder.BottomRight().y);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
-void CMCell4::create(){
+void CMCell4::create(size_t mask){
+	setIdMaskF(mask);
+	//fills.fill();
 	CRect rctClient;
 	GetClientRect(&rctClient);
 	//_RPT4(0, "rctClient: %d %d    %d %d\n", rctClient.left, rctClient.top, rctClient.right, rctClient.bottom);

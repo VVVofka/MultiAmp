@@ -17,6 +17,8 @@ public:
 
 	const char* get_maskA() const;
 	XMLNode* set_maskA(const char* s);
+	const char* get_maskF() const;
+	XMLNode* set_maskF(const char* s);
 
 protected:
 	XMLDocument doc;

@@ -56,7 +56,7 @@ void DlgMaskA::OnBnClickedOk(){
 void DlgMaskA::OnBnClickedSymetry(){
 	int stateSymmetry = ((CButton*)GetDlgItem(IDC_SYMETRY))->GetCheck();
 	BOOL stateNew = stateSymmetry == BST_CHECKED ? FALSE : TRUE;
-	for(int j = 0; j < vsymmetry.size(); j++)
+	for(size_t j = 0; j < vsymmetry.size(); j++)
 		((CButton*)GetDlgItem(vsymmetry[j]))->EnableWindow(stateNew);
 } // ////////////////////////////////////////////////////////////////
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "CMCell4.h"
-
+#include <array>
+#include <memory>
 // DlgMaskF dialog
 
 class DlgMaskF : public CDialogEx{
@@ -19,11 +20,15 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
-public:
-	CMCell4 c4;
 
 public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
 	virtual BOOL OnInitDialog();
+
+	std::string sxmlInp;
+	std::string sxmlOut;
+
+private:
+	std::array<std::unique_ptr<CMCell4>, 3> vcells;
 };
