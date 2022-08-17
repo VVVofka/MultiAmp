@@ -54,6 +54,12 @@
     <ClInclude Include="CMCell4.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
+    <ClInclude Include="Directs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CellsFillSym.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -77,6 +83,9 @@
     <ClCompile Include="CMCell4.cpp">
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
+    <ClCompile Include="CellsFillSym.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MultiAmp.rc">
@@ -87,6 +96,7 @@
     <None Include="res\MultiAmp.rc2">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\Common\Directs.ods" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MultiAmp.ico">

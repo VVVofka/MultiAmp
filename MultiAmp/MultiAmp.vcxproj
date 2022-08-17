@@ -203,8 +203,10 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CellsFillSym.h" />
     <ClInclude Include="CMCell4.h" />
     <ClInclude Include="CMCell.h" />
+    <ClInclude Include="Directs.h" />
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
     <ClInclude Include="framework.h" />
@@ -215,6 +217,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CellsFillSym.cpp" />
     <ClCompile Include="CMCell4.cpp" />
     <ClCompile Include="CMCell.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
@@ -232,6 +235,7 @@
     <ResourceCompile Include="MultiAmp.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Common\Directs.ods" />
     <None Include="res\MultiAmp.rc2" />
   </ItemGroup>
   <ItemGroup>
