@@ -46,9 +46,8 @@ BOOL DlgMaskF::OnInitDialog(){
 	
 	// Add extra initialization here
 	for(size_t j = 0; j < vcells.size(); j++){
-		vcells[j]->create(j);
 		std::string s = sxmlInp.substr(j * 16, 16);
-		vcells[j]->setRotates(s.c_str());
+		vcells[j]->create(j, s.c_str());
 	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // //////////////////////////////////////////////////////////////////////////////////////

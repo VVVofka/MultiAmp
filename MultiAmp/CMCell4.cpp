@@ -38,7 +38,7 @@ std::array<CRect, 4> CMCell4::DevideRect4(const CRect& rect_base, int border){
 	ret[3] = CRect(c.x - 1, c.y - 1, noBorder.BottomRight().x, noBorder.BottomRight().y);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
-void CMCell4::create(size_t mask){
+void CMCell4::create(size_t mask, const char* id_rotate){
 	setIdMaskF(mask);
 	//fills.fill();
 	CRect rctClient;
@@ -54,6 +54,7 @@ void CMCell4::create(size_t mask){
 			//_RPT5(0, "\t\tvrct4[%u]: %d x %d    %d x %d\n", c1, vrct1[c1].left, vrct1[c1].top, vrct1[c1].right, vrct1[c1].bottom);
 		}
 	}
+	setRotates(id_rotate);
 } // //////////////////////////////////////////////////////////////////////////////////////
 size_t CMCell4::getIdx4byPoint(const CRect& rct, const CPoint& point){
 	size_t x = (2 * (point.x - rct.left)) / rct.Width();
@@ -67,12 +68,12 @@ void CMCell4::setIdMaskF(size_t i){
 		v[j].isExist = (((i >> nq) & 1) == 1);
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
-void CMCell4::setRotates(const int* id_rotate){
-	for(size_t j = 0; j < v.size(); j++){
-		assert(id_rotate[j] < 9);
-		v[j].idRotate = id_rotate[j];
-	}
-} // //////////////////////////////////////////////////////////////////////////////////////
+//void CMCell4::setRotates(const int* id_rotate){
+//	for(size_t j = 0; j < v.size(); j++){
+//		assert(id_rotate[j] < 9);
+//		v[j].idRotate = id_rotate[j];
+//	}
+//} // //////////////////////////////////////////////////////////////////////////////////////
 void CMCell4::setRotates(const char* id_rotate){
 	for(size_t j = 0; j < v.size(); j++){
 		char buf[] = "\0";
