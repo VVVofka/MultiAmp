@@ -28,15 +28,9 @@
 #define IDC_CHECK6                      1008
 #define IDC_MAINDLG_INFO                1012
 #define IDC_BT_MASK_F                   1013
-#define IDC_STCELL000                   1015
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
-#define IDC_ST_CELL4                    1018
-#define IDC_ST_CELL0000                 1018
-#define IDC_ST_CELL0001                 1019
 #define IDC_SYMETRY_F                   1020
-#define IDC_ST_CELL2                    1021
-#define IDC_ST_CELL0002                 1021
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -117,6 +111,22 @@
 #define IDB_151                         1351
 #define IDB_152                         1352
 #define IDB_153                         1353
+#define IDC_ST_CELL0000                 2000
+#define IDC_ST_CELL0001                 2001
+#define IDC_ST_CELL0010                 2002
+#define IDC_ST_CELL0011                 2003
+#define IDC_ST_CELL0100                 2004
+#define IDC_ST_CELL0101                 2005
+#define IDC_ST_CELL0110                 2006
+#define IDC_ST_CELL0111                 2007
+#define IDC_ST_CELL1000                 2008
+#define IDC_ST_CELL1001                 2009
+#define IDC_ST_CELL1010                 2010
+#define IDC_ST_CELL1011                 2011
+#define IDC_ST_CELL1100                 2012
+#define IDC_ST_CELL1101                 2013
+#define IDC_ST_CELL1110                 2014
+#define IDC_ST_CELL1111                 2015
 
 // Next default values for new objects
 // 

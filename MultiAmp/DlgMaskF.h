@@ -33,5 +33,5 @@ public:
 	std::string doModal(const std::string& s_xml);
 
 private:
-	std::array<std::unique_ptr<CMCell4>, 3> vcells;
+	std::array<std::unique_ptr<CMCell4>, 16> vcells;
 };
