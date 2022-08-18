@@ -11,7 +11,6 @@ public:
 	bool isExist = true;
 	size_t idRotate = 0;
 
-
 	int border = 0; // толщина линии границы
 	int bound = 0;	// толщина области за border (граница)
 	int arrowWidth = 1;

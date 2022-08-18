@@ -23,8 +23,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	afx_msg void OnBnClickedButton2();
-	afx_msg void OnBnClickedButton3();
 	virtual BOOL OnInitDialog();
 
 	std::string sxmlInp;
@@ -34,4 +32,6 @@ public:
 
 private:
 	std::array<std::unique_ptr<CMCell4>, 16> vcells;
+public:
+	afx_msg void OnBnClickedOk();
 };

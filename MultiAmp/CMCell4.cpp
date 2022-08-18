@@ -11,11 +11,11 @@ IMPLEMENT_DYNAMIC(CMCell4, CStatic)
 
 void CMCell4::OnLButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnLButtonUp(nFlags, point);
-	rotate(1, point);
+	rotate(-1, point);
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell4::OnRButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnRButtonUp(nFlags, point);
-	rotate(-1, point);
+	rotate(1, point);
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell4::rotate(int direct, CPoint point){
 	CRect rctClient;

@@ -159,8 +159,22 @@ namespace options{
 	void CMultiAmpDlg::OnBnClickedBtMaskF(){
 		auto maskF = getMaskF("tstDlg.xml");
 		DlgMaskF dlgmaskf;
-		auto newmask = dlgmaskf.doModal(maskF);
-		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
+		std::string newmask = dlgmaskf.doModal(maskF);
+		std::string newmaskall;
+		for(size_t j = 0; j < 16; j++){
+			newmaskall += std::to_string(j) + ": ";
+			if(j <= 9)
+				newmaskall += "  ";	// шрифт не моноширный
+			for(size_t i = 0; i < 4; i++){
+				std::string subs = newmask.substr(j * 16 + i * 4, 4);
+				newmaskall += subs;
+				if(i < 3)
+					newmaskall += ' ';
+			}
+			if(j < 15)
+				newmaskall += '\n';
+		}
+		GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmaskall.c_str());
 		setMaskF("tstDlg.xml", newmask.c_str());
 	}  // /////////////////////////////////////////////////////////
 }

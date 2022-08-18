@@ -3,7 +3,6 @@
 #include "DlgMaskF.h"
 #include "afxdialogex.h"
 #include "CMCell4.h"
-// DlgMaskF dialog
 
 IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 
@@ -18,14 +17,11 @@ void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
 	for(int j = 0; j < 16; j++)
 		DDX_Control(pDX, IDC_ST_CELL0000 + j, *(vcells[j]));
-	//DDX_Control(pDX, IDC_ST_CELL0000, *(vcells[0]));
 } // ///////////////////////////////////////////////////////////////////////////////
-
 
 BEGIN_MESSAGE_MAP(DlgMaskF, CDialogEx)
 	ON_WM_WINDOWPOSCHANGED()
-	ON_BN_CLICKED(IDC_BUTTON2, &DlgMaskF::OnBnClickedButton2)
-	ON_BN_CLICKED(IDC_BUTTON3, &DlgMaskF::OnBnClickedButton3)
+	ON_BN_CLICKED(IDOK, &DlgMaskF::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 std::string DlgMaskF::doModal(const std::string& s_xml){
@@ -35,12 +31,6 @@ std::string DlgMaskF::doModal(const std::string& s_xml){
 		return sxmlOut;
 	return sxmlInp;
 } // ////////////////////////////////////////////////////////////////
-void DlgMaskF::OnBnClickedButton2(){
-	//m_CELL_000.rotate();
-} // ////////////////////////////////////////////////////////////////////////
-void DlgMaskF::OnBnClickedButton3(){
-	//m_CELL_000.rotate(-1);
-} // ////////////////////////////////////////////////////////////////////////
 BOOL DlgMaskF::OnInitDialog(){
 	CDialogEx::OnInitDialog();
 	
@@ -50,4 +40,18 @@ BOOL DlgMaskF::OnInitDialog(){
 		vcells[j]->create(j, s.c_str());
 	}
 	return TRUE;  // return TRUE unless you set the focus to a control
+} // //////////////////////////////////////////////////////////////////////////////////////
+void DlgMaskF::OnBnClickedOk(){
+	// Add your control notification handler code here
+	int poss = 0;
+	sxmlOut.resize(16 * 16, '\0');
+	for(size_t j = 0; j < vcells.size(); j++){
+		CMCell4& cell4 = *(vcells[j]);
+		for(size_t c = 0; c < vcells.size(); c++){
+			CMCell& cell = cell4.v[c];
+			size_t idRotate = cell.idRotate;
+			sxmlOut[poss++] = std::to_string(idRotate)[0];
+		}
+	}
+	CDialogEx::OnOK();
 } // //////////////////////////////////////////////////////////////////////////////////////
