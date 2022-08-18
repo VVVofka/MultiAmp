@@ -12,6 +12,7 @@ public:
 
 	const char* get_s() const;
 	std::string v;
+	static const size_t size = 16 * 16;
 
 private:
 	std::string defval;
