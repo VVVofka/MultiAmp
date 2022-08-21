@@ -63,7 +63,7 @@ void CMCell::OnPaint(){
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
 	COLORREF clrArrow = 0;
-	if(isSymetry && !isSymetryEnabled)
+	if(!isSymetryActive && isSymetryEnabled)
 		clrArrow =  GREY(99);
 	CPen penArrow(PS_SOLID, arrowWidth, clrArrow);	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера

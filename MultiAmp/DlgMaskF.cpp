@@ -9,6 +9,7 @@ IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParent){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
 		vcells[j] = std::make_unique<CMCell4>();
+
 } // ///////////////////////////////////////////////////////////////////////////////
 
 DlgMaskF::~DlgMaskF(){}
@@ -66,27 +67,14 @@ void DlgMaskF::OnBnClickedSymetryF(){
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::setEnabledAll(bool is_enable){
-	//for(size_t j = 0; j < vcells.size(); j++){	//	16
-	//	CMCell4& cell4 = *(vcells[j]);
-	//	for(size_t c = 0; c < cell4.v.size(); c++){	// 16
-	//		CMCell& cell = cell4.v[c];
-	//		cell.EnableWindow(is_enable);
-	//		cell.int
-	//	}
-	//}
-	//((CButton*)GetDlgItem(vsymmetry[j]))->EnableWindow(stateNew);
-	//((CButton*)GetDlgItem(vsymmetry[j]))->EnableWindow(stateNew);
-	//return;
 	int stateSymmetry = ((CButton*)GetDlgItem(IDC_SYMETRY_F))->GetCheck();
 	BOOL stateNew = stateSymmetry == BST_CHECKED ? FALSE : TRUE;
-	_RPT1(0, "%d\n", stateNew);
+//	_RPT1(0, "%d\n", stateNew);
 	for(size_t j = 0; j < vcells.size(); j++){	//	16
 		CMCell4& cell4 = *(vcells[j]);
 		for(size_t c = 0; c < cell4.v.size() / 2; c++){	// 16
 			CMCell& cell = cell4.v[c];
-			cell.EnableWindow(stateNew);
-			cell.invalidate();
-			//((CButton*)GetDlgItem(vsymmetry[j]))->EnableWindow(stateNew);
+//			cell.invalidate();
 		}
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////

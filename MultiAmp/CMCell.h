@@ -16,7 +16,7 @@ public:
 	int arrowWidth = 1;
 
 	bool isSymetryEnabled = false;
-	bool isSymetry = true;
+	bool isSymetryActive = true;
 
 	int rotate(int direct = 1);
 	//void invalidate();
