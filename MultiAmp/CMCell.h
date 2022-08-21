@@ -15,8 +15,13 @@ public:
 	int bound = 0;	// толщина области за border (граница)
 	int arrowWidth = 1;
 
+	bool isSymetryEnabled = false;
+	bool isSymetry = true;
+
 	int rotate(int direct = 1);
+	//void invalidate();
 	afx_msg void OnPaint();
+
 	struct DBL2{
 		double x=0, y=0;
 		DBL2(double X, double Y){ x = X; y = Y; }
@@ -43,18 +48,5 @@ private:
 
 	const double q = 0.7071067811865475;
 	const size_t cntRotates = 9;
-	//const std::string varrays = "4530400840080718";
-	//std::array<DBL2, 9> varrays = {DBL2(0,0),
-	//	DBL2(0,-1), DBL2(q,-q),
-	//	DBL2(1, 0), DBL2(q, q),
-	//	DBL2(0, 1), DBL2(-q, q),
-	//	DBL2(-1, 0), DBL2(-q,-q)
-	//};
-	//const std::array<std::string, 9> sidx = {"00", 
-	//	"0-", "+-",
-	//	"+0", "++",
-	//	"0+", "-+",
-	//	"-0", "--"
-	//};
 };
 

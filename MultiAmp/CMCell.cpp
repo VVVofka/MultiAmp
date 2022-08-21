@@ -62,8 +62,10 @@ void CMCell::OnPaint(){
 		room.CenterPoint().x + (int)(room.Width() * karrow + 0.5),
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
-
-	CPen penArrow(PS_SOLID, arrowWidth, GREY(70));	// colorShad
+	COLORREF clrArrow = 0;
+	if(isSymetry && !isSymetryEnabled)
+		clrArrow =  GREY(99);
+	CPen penArrow(PS_SOLID, arrowWidth, clrArrow);	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(idRotate == 0)		drawO(&dc);
 	else if(idRotate == 1)	drawUp(&dc);
@@ -202,3 +204,6 @@ int CMCell::rotate(int direct){
 	InvalidateRect(room, TRUE);
 	return idRotate;
 } // ///////////////////////////////////////////////////////////////////////////////////
+//void CMCell::invalidate(){
+//	InvalidateRect(room, TRUE);
+//} // ///////////////////////////////////////////////////////////////////////////////////

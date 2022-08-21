@@ -68,12 +68,6 @@ void CMCell4::setIdMaskF(size_t i){
 		v[j].isExist = (((i >> nq) & 1) == 1);
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
-//void CMCell4::setRotates(const int* id_rotate){
-//	for(size_t j = 0; j < v.size(); j++){
-//		assert(id_rotate[j] < 9);
-//		v[j].idRotate = id_rotate[j];
-//	}
-//} // //////////////////////////////////////////////////////////////////////////////////////
 void CMCell4::setRotates(const char* id_rotate){
 	for(size_t j = 0; j < v.size(); j++){
 		char buf[] = "\0";

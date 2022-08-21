@@ -17,8 +17,6 @@ public:
 	//cnt=16, 0-none; 1-up; 2-up,right .. 8-up,left
 	void create(size_t mask, const char* id_rotate);
 
-	//void setRotates(const int* id_rotate);
-
 	int borderOut = 0;
 	int borderInt = 1;
 

@@ -32,6 +32,9 @@ public:
 
 private:
 	std::array<std::unique_ptr<CMCell4>, 16> vcells;
+	void setEnabledAll(bool is_enable);
 public:
 	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedSymetryF();
+	CButton m_chSymmetry;
 };
