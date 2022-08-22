@@ -20,7 +20,7 @@ public:
 
 	int rotate(int direct = 1);
 	void changeSymmetry(bool isSymetryEnabled);
-	//void invalidate();
+
 	afx_msg void OnPaint();
 
 	struct DBL2{
