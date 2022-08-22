@@ -16,9 +16,10 @@ public:
 	int arrowWidth = 1;
 
 	bool isSymetryEnabled = false;
-	bool isSymetryActive = true;
+	//bool isSymetryActive = true;
 
 	int rotate(int direct = 1);
+	void changeSymmetry(bool isSymetryEnabled);
 	//void invalidate();
 	afx_msg void OnPaint();
 
