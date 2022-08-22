@@ -1,6 +1,4 @@
 #pragma once
-#include <array>
-#include <string>
 class CMCell :public CStatic{
 	DECLARE_DYNAMIC(CMCell)
 

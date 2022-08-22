@@ -1,5 +1,5 @@
 #pragma once
-#include "CMCell4.h"
+#include "CMCell16.h"
 #include <array>
 #include <string>
 #include <memory>
@@ -31,7 +31,7 @@ public:
 	std::string doModal(const std::string& s_xml);
 
 private:
-	std::array<std::unique_ptr<CMCell4>, 16> vcells;
+	std::array<std::unique_ptr<CMCell16>, 16> vcells;
 	void setEnabledAll(bool is_enable);
 public:
 	afx_msg void OnBnClickedOk();

@@ -1,23 +1,23 @@
 #include "pch.h"
 #include "MultiAmp.h"
-#include "CMCell4.h"
+#include "CMCell16.h"
 
-BEGIN_MESSAGE_MAP(CMCell4, CStatic)
+BEGIN_MESSAGE_MAP(CMCell16, CStatic)
 	ON_WM_LBUTTONUP()
 	ON_WM_RBUTTONUP()
 END_MESSAGE_MAP()
 
-IMPLEMENT_DYNAMIC(CMCell4, CStatic)
+IMPLEMENT_DYNAMIC(CMCell16, CStatic)
 
-void CMCell4::OnLButtonUp(UINT nFlags, CPoint point){
+void CMCell16::OnLButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnLButtonUp(nFlags, point);
 	rotate(-1, point);
 } // //////////////////////////////////////////////////////////////////////////////////
-void CMCell4::OnRButtonUp(UINT nFlags, CPoint point){
+void CMCell16::OnRButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnRButtonUp(nFlags, point);
 	rotate(1, point);
 } // //////////////////////////////////////////////////////////////////////////////////
-void CMCell4::rotate(int direct, CPoint point){
+void CMCell16::rotate(int direct, CPoint point){
 	CRect rctClient;
 	GetClientRect(&rctClient);
 	auto v1 = DevideRect4(rctClient);
@@ -28,7 +28,7 @@ void CMCell4::rotate(int direct, CPoint point){
 	if(idx < v.size())
 		v[idx].rotate(direct);
 } // //////////////////////////////////////////////////////////////////////////////////
-std::array<CRect, 4> CMCell4::DevideRect4(const CRect& rect_base, int border){
+std::array<CRect, 4> CMCell16::DevideRect4(const CRect& rect_base, int border){
 	CRect noBorder = CRect(rect_base.left + border, rect_base.top + border, rect_base.right - border, rect_base.bottom - border);
 	CPoint c = rect_base.CenterPoint();
 	std::array<CRect, 4> ret;
@@ -38,7 +38,7 @@ std::array<CRect, 4> CMCell4::DevideRect4(const CRect& rect_base, int border){
 	ret[3] = CRect(c.x - 1, c.y - 1, noBorder.BottomRight().x, noBorder.BottomRight().y);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
-void CMCell4::create(size_t mask, const char* id_rotate){
+void CMCell16::create(size_t mask, const char* id_rotate){
 	setIdMaskF(mask);
 	//fills.fill();
 	CRect rctClient;
@@ -56,19 +56,19 @@ void CMCell4::create(size_t mask, const char* id_rotate){
 	}
 	setRotates(id_rotate);
 } // //////////////////////////////////////////////////////////////////////////////////////
-size_t CMCell4::getIdx4byPoint(const CRect& rct, const CPoint& point){
+size_t CMCell16::getIdx4byPoint(const CRect& rct, const CPoint& point){
 	size_t x = (2 * (point.x - rct.left)) / rct.Width();
 	size_t y = (2 * (point.y - rct.top)) / rct.Height();
 	size_t idx = y * 2 + x;
 	return idx;
 } // //////////////////////////////////////////////////////////////////////////////////////
-void CMCell4::setIdMaskF(size_t i){
+void CMCell16::setIdMaskF(size_t i){
 	for(size_t j = 0; j < v.size(); j++){
 		size_t nq = j / 4;
 		v[j].isExist = (((i >> nq) & 1) == 1);
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
-void CMCell4::setRotates(const char* id_rotate){
+void CMCell16::setRotates(const char* id_rotate){
 	for(size_t j = 0; j < v.size(); j++){
 		char buf[] = "\0";
 		buf[0] = id_rotate[j];

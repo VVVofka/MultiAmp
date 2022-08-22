@@ -51,7 +51,7 @@
     <ClInclude Include="CMCell.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
-    <ClInclude Include="CMCell4.h">
+    <ClInclude Include="CMCell16.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
     <ClInclude Include="Directs.h">
@@ -80,7 +80,7 @@
     <ClCompile Include="CMCell.cpp">
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
-    <ClCompile Include="CMCell4.cpp">
+    <ClCompile Include="CMCell16.cpp">
       <Filter>DlgMasks\F</Filter>
     </ClCompile>
     <ClCompile Include="CellsFillSym.cpp">

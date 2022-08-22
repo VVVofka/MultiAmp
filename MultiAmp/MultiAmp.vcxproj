@@ -204,7 +204,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CellsFillSym.h" />
-    <ClInclude Include="CMCell4.h" />
+    <ClInclude Include="CMCell16.h" />
     <ClInclude Include="CMCell.h" />
     <ClInclude Include="Directs.h" />
     <ClInclude Include="DlgMaskA.h" />
@@ -218,7 +218,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CellsFillSym.cpp" />
-    <ClCompile Include="CMCell4.cpp" />
+    <ClCompile Include="CMCell16.cpp" />
     <ClCompile Include="CMCell.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />

@@ -2,13 +2,12 @@
 #include "MultiAmp.h"
 #include "DlgMaskF.h"
 #include "afxdialogex.h"
-#include "CMCell4.h"
 
 IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 
 DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParent){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
-		vcells[j] = std::make_unique<CMCell4>();
+		vcells[j] = std::make_unique<CMCell16>();
 
 } // ///////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +48,7 @@ void DlgMaskF::OnBnClickedOk(){
 	int poss = 0;
 	sxmlOut.resize(16 * 16, '\0');
 	for(size_t j = 0; j < vcells.size(); j++){	//	16
-		CMCell4& cell4 = *(vcells[j]);
+		CMCell16& cell4 = *(vcells[j]);
 		for(size_t c = 0; c < cell4.v.size(); c++){	// 16
 			CMCell& cell = cell4.v[c];
 			size_t idRotate = cell.idRotate;
@@ -71,7 +70,7 @@ void DlgMaskF::setEnabledAll(bool is_enable){
 	BOOL stateNew = stateSymmetry == BST_CHECKED ? FALSE : TRUE;
 //	_RPT1(0, "%d\n", stateNew);
 	for(size_t j = 0; j < vcells.size(); j++){	//	16
-		CMCell4& cell4 = *(vcells[j]);
+		CMCell16& cell4 = *(vcells[j]);
 		for(size_t c = 0; c < cell4.v.size() / 2; c++){	// 16
 			CMCell& cell = cell4.v[c];
 //			cell.invalidate();
