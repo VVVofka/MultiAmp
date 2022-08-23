@@ -62,7 +62,7 @@ void CMCell::OnPaint(){
 		room.CenterPoint().x + (int)(room.Width() * karrow + 0.5),
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
-	COLORREF clrArrow = (isEnabled) ?  GREY(99) : GREY(0);
+	COLORREF clrArrow = (isEnabled) ?  GREY(0) : GREY(175);
 	CPen penArrow(PS_SOLID, arrowWidth, clrArrow);	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(idRotate == 0)		drawO(&dc);
