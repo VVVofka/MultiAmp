@@ -60,20 +60,27 @@ void DlgMaskF::OnBnClickedOk(){
 void DlgMaskF::OnBnClickedSymetryF(){
 	auto state = m_chSymmetry.GetState() & 1;
 	if(state == BST_CHECKED){
-		setEnabledAll(false);
+		setSymmetry();
 	} else{
-		setEnabledAll(true);
+		setNonSymmetry();
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
-void DlgMaskF::setEnabledAll(bool is_enable){
-	int stateSymmetry = ((CButton*)GetDlgItem(IDC_SYMETRY_F))->GetCheck();
-	BOOL stateNew = stateSymmetry == BST_CHECKED ? FALSE : TRUE;
-//	_RPT1(0, "%d\n", stateNew);
-	for(size_t j = 0; j < vcells.size(); j++){	//	16
-		CMCell16& cell4 = *(vcells[j]);
-		for(size_t c = 0; c < cell4.v.size() / 2; c++){	// 16
-			CMCell& cell = cell4.v[c];
-//			cell.invalidate();
+void DlgMaskF::setSymmetry(){
+	for(size_t j = 0; j < vcells.size(); j++)	//	16
+		vcells[j].get()->setEnabled(false);
+
+
+	for(size_t j = 0; j < vsym.size(); j++){	//	16
+		std::vector<size_t>& curv = vsym[j];
+		size_t idx16 = curv[0];
+		CMCell16* cell16 = vcells[idx16].get();	//	std::unique_ptr<CMCell16>
+		for(size_t c = 1; c < curv.size(); c++){
+			size_t idx_cell = curv[c];
+			cell16->setEnabled(idx_cell, true);
 		}
 	}
+} // //////////////////////////////////////////////////////////////////////////////////////
+void DlgMaskF::setNonSymmetry(){
+	for(size_t j = 0; j < vcells.size(); j++)	//	16
+		vcells[j].get()->setEnabled(true);
 } // //////////////////////////////////////////////////////////////////////////////////////

@@ -13,11 +13,11 @@ public:
 	int bound = 0;	// толщина области за border (граница)
 	int arrowWidth = 1;
 
-	bool isSymetryEnabled = false;
+	bool isEnabled = false;
 	//bool isSymetryActive = true;
 
 	int rotate(int direct = 1);
-	void changeSymmetry(bool isSymetryEnabled);
+	void setEnabled(bool isSymetryEnabled);
 
 	afx_msg void OnPaint();
 

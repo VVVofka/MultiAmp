@@ -1,6 +1,7 @@
 #pragma once
 #include "CMCell16.h"
 #include <array>
+#include <vector>
 #include <string>
 #include <memory>
 // DlgMaskF dialog
@@ -32,7 +33,17 @@ public:
 
 private:
 	std::array<std::unique_ptr<CMCell16>, 16> vcells;
-	void setEnabledAll(bool is_enable);
+	void setSymmetry();
+	void setNonSymmetry();
+	std::vector<std::vector<size_t>> vsym{
+		{0, 0,1,3},
+		{1, 0,1,3,4,5,6,7,12,13,15},
+		{3, 0,1,2,3,8,9,10,11},
+		{6, 0,1,2,4,5,6},
+		{7, 0,1,2,3,4,5,6,7},
+		{15, 0,1,3}
+	};
+
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedSymetryF();
