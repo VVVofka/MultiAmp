@@ -8,7 +8,6 @@ IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParent){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
 		vcells[j] = std::make_unique<CMCell16>();
-
 } // ///////////////////////////////////////////////////////////////////////////////
 
 DlgMaskF::~DlgMaskF(){}
@@ -35,12 +34,13 @@ std::string DlgMaskF::doModal(const std::string& s_xml){
 } // ////////////////////////////////////////////////////////////////
 BOOL DlgMaskF::OnInitDialog(){
 	CDialogEx::OnInitDialog();
-	
 	// Add extra initialization here
 	for(size_t j = 0; j < vcells.size(); j++){
 		std::string s = sxmlInp.substr(j * 16, 16);
 		vcells[j]->create(j, s.c_str());
 	}
+	m_chSymmetry.SetCheck(1);
+	setSymmetry();
 	return TRUE;  // return TRUE unless you set the focus to a control
 }// //////////////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedOk(){
@@ -68,7 +68,6 @@ void DlgMaskF::OnBnClickedSymetryF(){
 void DlgMaskF::setSymmetry(){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
 		vcells[j].get()->setEnabled(false);
-
 
 	for(size_t j = 0; j < vsym.size(); j++){	//	16
 		std::vector<size_t>& curv = vsym[j];

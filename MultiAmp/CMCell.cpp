@@ -62,7 +62,7 @@ void CMCell::OnPaint(){
 		room.CenterPoint().x + (int)(room.Width() * karrow + 0.5),
 		room.CenterPoint().y + (int)(room.Height() * karrow + 0.5)
 	);
-	COLORREF clrArrow = (isEnabled) ?  GREY(0) : GREY(175);
+	COLORREF clrArrow = (isEnabled) ? GREY(0) : GREY(175);
 	CPen penArrow(PS_SOLID, arrowWidth, clrArrow);	// colorShad
 	CPen* oldPenArrow = dc.SelectObject(&penArrow);		// сохранение старого пера
 	if(idRotate == 0)		drawO(&dc);
@@ -97,7 +97,7 @@ void CMCell::drawO(CPaintDC* pdc){	//+
 	auto err = pdc->Ellipse(eli);
 	pdc->SelectObject(olpBrush);	// возврат старого пера
 } // ///////////////////////////////////////////////////////////////////////////////////
-void CMCell::drawUp(CPaintDC* pdc){	
+void CMCell::drawUp(CPaintDC* pdc){
 	pdc->MoveTo(rctArrow.CenterPoint().x, rctArrow.bottom);	//	 - border / 2
 	CPoint nip(rctArrow.CenterPoint().x, rctArrow.top);
 	pdc->LineTo(nip);
@@ -147,7 +147,7 @@ void CMCell::drawDnRight(CPaintDC* pdc){
 	pdc->MoveTo(nip.point());
 	pdc->LineTo((int)(Gnip.x - dwidth), (int)(Gnip.y + dwidth));
 } // ///////////////////////////////////////////////////////////////////////////////////
-void CMCell::drawDn(CPaintDC* pdc){	
+void CMCell::drawDn(CPaintDC* pdc){
 	pdc->MoveTo(rctArrow.CenterPoint().x, rctArrow.top);
 	CPoint nip(rctArrow.CenterPoint().x, rctArrow.bottom);
 	pdc->LineTo(nip);
@@ -198,8 +198,10 @@ void CMCell::drawUpLeft(CPaintDC* pdc){
 	pdc->LineTo((int)(Gnip.x - dwidth), (int)(Gnip.y + dwidth));
 } // ///////////////////////////////////////////////////////////////////////////////////
 int CMCell::rotate(int direct){
-	idRotate = (idRotate + direct + cntRotates) % cntRotates;
-	InvalidateRect(room, TRUE);
+	if(isEnabled){
+		idRotate = (idRotate + direct + cntRotates) % cntRotates;
+		InvalidateRect(room, TRUE);
+	}
 	return idRotate;
 } // ///////////////////////////////////////////////////////////////////////////////////
 void CMCell::setEnabled(bool is_Enabled){
