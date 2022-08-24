@@ -12,10 +12,12 @@ IMPLEMENT_DYNAMIC(CMCell16, CStatic)
 void CMCell16::OnLButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnLButtonUp(nFlags, point);
 	rotate(-1, point);
+	rotateSymmetry();
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell16::OnRButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnRButtonUp(nFlags, point);
 	rotate(1, point);
+	rotateSymmetry();
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell16::rotate(int direct, CPoint point){
 	CRect rctClient;
@@ -81,4 +83,13 @@ void CMCell16::setEnabled(size_t idx_cell, bool isEnabled){
 void CMCell16::setEnabled(bool isEnabled){
 	for(size_t j = 0; j < v.size(); j++)
 		v[j].setEnabled(isEnabled);
+} // //////////////////////////////////////////////////////////////////////////////////////
+void CMCell16::rotateSymmetry(){
+	size_t mask = (v[12].isExist ? 0b1000 : 0) + (v[8].isExist ? 0b0100 : 0) + (v[4].isExist ? 0b0010 : 0) + (v[0].isExist ? 0b0001 : 0);
+	std::array< size_t, 16> vr;
+	for(size_t j = 0; j < v.size(); j++)
+		vr[j] = v[j].idRotate;
+	fills.fill(mask, vr);
+	for(size_t j = 0; j < v.size(); j++)	//	16
+		v[j].setRotateNonEnabled(fills.vout[j].i);
 } // //////////////////////////////////////////////////////////////////////////////////////

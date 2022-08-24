@@ -200,7 +200,24 @@ void CMCell::drawUpLeft(CPaintDC* pdc){
 int CMCell::rotate(int direct){
 	if(isEnabled){
 		idRotate = (idRotate + direct + cntRotates) % cntRotates;
-		InvalidateRect(room, TRUE);
+		invalidateRect();
+	}
+	return idRotate;
+} // ///////////////////////////////////////////////////////////////////////////////////
+int CMCell::setRotateNonEnabled(const size_t idx_rotate){
+	if(!isEnabled){
+		idRotate = (idx_rotate + cntRotates) % cntRotates;
+		invalidateRect();
+	}
+	return idRotate;
+} // ///////////////////////////////////////////////////////////////////////////////////
+int CMCell::setRotate(const char ch){
+	if(isEnabled){
+		char buf[] = "\0";
+		buf[0] = ch;
+		int ret = atoi(buf);
+		idRotate = (ret + cntRotates) % cntRotates;
+		invalidateRect();
 	}
 	return idRotate;
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -210,3 +227,7 @@ void CMCell::setEnabled(bool is_Enabled){
 		InvalidateRect(room, TRUE);
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////
+void CMCell::invalidateRect(){
+	InvalidateRect(room, TRUE);
+} // //////////////////////////////////////////////////////////////////
+

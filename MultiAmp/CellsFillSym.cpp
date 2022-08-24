@@ -12,6 +12,11 @@ std::array<Direct, 16>& CellsFillSym::fill(size_t mask, const std::array<Direct,
 	vin = v_in;
 	return fill(mask);
 } // ///////////////////////////////////////////////////////////////////////////
+std::array<Direct, 16>& CellsFillSym::fill(size_t mask, const std::array<size_t, 16>& v_in){
+	for(size_t j = 0; j < v_in.size(); j++)
+		vin[j].i = v_in[j];
+	return fill(mask);
+} // ///////////////////////////////////////////////////////////////////////////
 std::array<Direct, 16>& CellsFillSym::fill(size_t mask){
 	switch(mask){
 	case 0b0000:
@@ -29,12 +34,11 @@ std::array<Direct, 16>& CellsFillSym::fill(size_t mask){
 		whoriz();
 		break;
 	case 0b1001:
+	//case 0b0110:
 		wdiag();
 		break;
-
 	default:
 		assert(false);
-		break;
 	}
 	char buf[2];
 	for(size_t j = 0; j < vin.size(); j++){
@@ -47,9 +51,9 @@ void CellsFillSym::w0(){
 	// quadro #0
 	Direct actdir(vin[0]);	// active position
 	vout[0] = actdir;			vIsEnabled[0] = true;
-	vout[5] = actdir.vert();	vIsEnabled[5] = false;
-	vout[15] = actdir.rise();	vIsEnabled[15] = false;
-	vout[10] = actdir.vert();	vIsEnabled[10] = false;
+	vout[5] = actdir.rotate90();	vIsEnabled[5] = false;
+	vout[15] = actdir.rotate180();	vIsEnabled[15] = false;
+	vout[10] = actdir.rotate270();	vIsEnabled[10] = false;
 
 	actdir = vin[1];		// active position
 	vout[1] = actdir;					vIsEnabled[1] = true;
@@ -63,9 +67,9 @@ void CellsFillSym::w0(){
 
 	actdir = vin[3];		// active position
 	vout[3] = actdir;			vIsEnabled[3] = true;
-	vout[6] = actdir.vert();	vIsEnabled[6] = false;
-	vout[12] = actdir.rise();	vIsEnabled[12] = false;
-	vout[9] = actdir.horiz();	vIsEnabled[9] = false;
+	vout[6] = actdir.rotate90();	vIsEnabled[6] = false;
+	vout[12] = actdir.rotate180();	vIsEnabled[12] = false;
+	vout[9] = actdir.rotate270();	vIsEnabled[9] = false;
 } // ///////////////////////////////////////////////////////////////////////////
 void CellsFillSym::wslope(){
 	// quadro #0
@@ -112,16 +116,18 @@ void CellsFillSym::whoriz(){
 } // ///////////////////////////////////////////////////////////////////////////
 void CellsFillSym::wdiag(){
 	// quadro #0
-	rise(0, 10);
-	slope(1, 2);
-	rise(3, 12);
+	rotate180(0, 15);
 	rotate180(1, 14);
+	rotate180(3, 12);
+	slope(1, 2);
+	rise(1, 13);
 
 	// quadro #1
-	rise(4, 7);
-	slope(5, 10);
-	slope(6, 9);
 	rotate180(4, 11);
+	rotate180(5, 10);
+	rotate180(6, 9);
+	rise(4, 7);
+	slope(4, 8);
 } // ///////////////////////////////////////////////////////////////////////////
 
 void CellsFillSym::activ(int act){
@@ -151,5 +157,11 @@ void CellsFillSym::horiz(int act, int pos){
 void CellsFillSym::rotate180(int act, int pos){
 	Direct actdir(vin[act]);		// active position
 	vout[act] = actdir;					vIsEnabled[act] = true;
-	vout[pos] = actdir.horiz().vert();	vIsEnabled[pos] = false;
+	vout[pos] = actdir.rotate180();	vIsEnabled[pos] = false;
+} // //////////////////////////////////////////////////////////////////////////////
+void CellsFillSym::rotate90(int act, int pos){
+	act = (act + 1 + 9) % 9;
+	Direct actdir(vin[act]);		// active position
+	vout[act] = actdir;					vIsEnabled[act] = true;
+	vout[pos] = actdir.rotate90();		vIsEnabled[pos] = false;
 } // //////////////////////////////////////////////////////////////////////////////

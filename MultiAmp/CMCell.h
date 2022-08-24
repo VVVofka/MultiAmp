@@ -11,12 +11,15 @@ public:
 
 	int border = 0; // толщина линии границы
 	int bound = 0;	// толщина области за border (граница)
-	int arrowWidth = 1;
+	int arrowWidth = 2;
 
 	bool isEnabled = false;
 
 	int rotate(int direct = 1);
+	int setRotate(const char ch);
+	int setRotateNonEnabled(const size_t idx_rotate);
 	void setEnabled(bool isSymetryEnabled);
+	void invalidateRect();
 
 	afx_msg void OnPaint();
 

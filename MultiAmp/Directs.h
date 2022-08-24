@@ -17,6 +17,9 @@ public:
 	Direct vert(){ return find(-vx[i], vy[i]); }
 	Direct slope(){ return find(vy[i], vx[i]); }
 	Direct rise(){ return find(-vy[i], -vx[i]); }
+	Direct rotate90(){ return find(-vy[i], vx[i]); }
+	Direct rotate180(){ return find(-vx[i], -vy[i]); }
+	Direct rotate270(){ return find(vy[i], -vx[i]); }
 private:
 	size_t find(int x, int y){
 		for(size_t j = 0; j < CNTROTATES; j++)

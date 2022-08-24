@@ -8,6 +8,7 @@ public:
 	char svout[10] = "012345678";
 
 	std::array<Direct, 16>& fill(size_t mask, const std::array<Direct, 16>& v_in);
+	std::array<Direct, 16>& fill(size_t mask, const std::array<size_t, 16>& v_in);
 	std::array<Direct, 16>& fill(size_t mask, const char* s);
 
 private:
@@ -25,5 +26,6 @@ private:
 	void vert(int act, int pos);
 	void horiz(int act, int pos);
 	void rotate180(int act, int pos);
+	void rotate90(int act, int pos);
 };
 

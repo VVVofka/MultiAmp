@@ -1,6 +1,5 @@
 #pragma once
 #include <array>
-//#include <vector>
 #include "CMCell.h"
 #include "CellsFillSym.h"
 
@@ -33,7 +32,7 @@ private:
 	void rotate(int direct, CPoint point); // for OnLButtonUp OnRButtonUp
 	std::array<CRect, 4> DevideRect4(const CRect& rect_base, int border = 0);
 	size_t getIdx4byPoint(const CRect& rct, const CPoint& point);
-
+	void rotateSymmetry();
 };
 
 
