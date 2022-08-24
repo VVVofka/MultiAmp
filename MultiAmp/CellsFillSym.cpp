@@ -24,7 +24,7 @@ std::array<Direct, 16>& CellsFillSym::fill(size_t mask){
 		w0();
 		break;
 	case 0b0001:
-	case 0b1110:
+	case 0b0111:
 		wslope();
 		break;
 	case 0b0011:
@@ -33,8 +33,7 @@ std::array<Direct, 16>& CellsFillSym::fill(size_t mask){
 	case 0b0101:
 		whoriz();
 		break;
-	case 0b1001:
-	//case 0b0110:
+	case 0b0110:
 		wdiag();
 		break;
 	default:
