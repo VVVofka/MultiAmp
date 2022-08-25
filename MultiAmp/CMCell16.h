@@ -1,5 +1,6 @@
 #pragma once
 #include <array>
+#include <vector>
 #include "CMCell.h"
 #include "CellsFillSym.h"
 
@@ -13,12 +14,14 @@ public:
 	virtual ~CMCell16(){};
 	std::array<CMCell, 16> v;
 	CellsFillSym fills;
+	std::vector<CMCell16*> vretsym;
+	bool isSymmetryMode = true;
 
 	//cnt=16, 0-none; 1-up; 2-up,right .. 8-up,left
 	void create(size_t mask, const char* id_rotate);
 	void setEnabled(size_t idx_cell, bool isEnabled);
 	void setEnabled(bool isEnabled);
-	void rotate(const CMCell16& other);
+	void rotate16(const CMCell16* src, CMCell16* dst);
 
 	int borderOut = 0;
 	int borderInt = 1;

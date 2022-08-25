@@ -12,12 +12,14 @@ IMPLEMENT_DYNAMIC(CMCell16, CStatic)
 void CMCell16::OnLButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnLButtonUp(nFlags, point);
 	rotate(-1, point);
-	rotateSymmetry();
+	if(isSymmetryMode)
+		rotateSymmetry();
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell16::OnRButtonUp(UINT nFlags, CPoint point){
 	CStatic::OnRButtonUp(nFlags, point);
 	rotate(1, point);
-	rotateSymmetry();
+	if(isSymmetryMode)
+		rotateSymmetry();
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell16::rotate(int direct, CPoint point){
 	CRect rctClient;
@@ -92,16 +94,28 @@ void CMCell16::rotateSymmetry(){
 	fills.fill(mask, vr);
 	for(size_t j = 0; j < v.size(); j++)	//	16
 		v[j].setRotateNonEnabled(fills.vout[j].i);
+
+	CMCell16* src = this;
+	for(size_t j = 0; j < vretsym.size(); j++){	//	4
+		CMCell16* dst = vretsym[j];
+		rotate16(src, dst);
+		src = dst;
+	}
 } // //////////////////////////////////////////////////////////////////////////////////////
-void CMCell16::rotate(const CMCell16& other16){
-	const size_t vrot[16] = {10,8,11,9,2,0,3,1,14,12,15,13,6,4,7,5};
-	const std::array<CMCell, 16>& v_in = other16.v;
-	for(size_t j = 0; j < 16; j++){
-		const CMCell& cell_in = v_in[vrot[j]];
-		CMCell& cell_out = v[j];
-		if(cell_in.idRotate > 6)
-			cell_out.idRotate = cell_in.idRotate - 6;
+void CMCell16::rotate16(const CMCell16* src, CMCell16* dst){
+	const size_t vrot[16] = {5,7,4,6,13,15,12,14,1,3,0,2,9,11,8,10};
+	const std::array<CMCell, 16>& v_src = src->v;
+	std::array<CMCell, 16>& v_dst = dst->v;
+	for(size_t idx_src = 0; idx_src < 16; idx_src++){
+		const CMCell& cell_src = v_src[idx_src];
+		size_t idx_dst = vrot[idx_src];
+		CMCell& cell_dst = v_dst[idx_dst];
+		if(cell_src.idRotate > 6)
+			cell_dst.idRotate = cell_src.idRotate - 6;
+		else if(cell_src.idRotate != 0)
+			cell_dst.idRotate = cell_src.idRotate + 2;
 		else
-			cell_out.idRotate = cell_in.idRotate + 2;
+			cell_dst.idRotate = 0;
+		cell_dst.invalidateRect();
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////

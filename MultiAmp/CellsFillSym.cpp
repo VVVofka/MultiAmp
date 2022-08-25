@@ -37,7 +37,8 @@ std::array<Direct, 16>& CellsFillSym::fill(size_t mask){
 		wdiag();
 		break;
 	default:
-		assert(false);
+		//assert(false);
+		break;
 	}
 	char buf[2];
 	for(size_t j = 0; j < vin.size(); j++){

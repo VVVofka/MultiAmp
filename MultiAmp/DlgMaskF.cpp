@@ -8,10 +8,18 @@ IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParent){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
 		vcells[j] = std::make_unique<CMCell16>();
+	for(size_t j = 0; j < vsymOther.size(); j++){	//	4
+		std::vector<size_t>& curv = vsymOther[j];
+		size_t srcid = curv[0];
+		for(size_t i = 1; i < curv.size(); i++){
+			size_t dstid = curv[i];
+			CMCell16* dstcur = vcells[dstid].get();
+			vcells[srcid]->vretsym.push_back(dstcur);
+		}
+	}
 } // ///////////////////////////////////////////////////////////////////////////////
-
-DlgMaskF::~DlgMaskF(){}
-
+DlgMaskF::~DlgMaskF(){
+} // ///////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
 	for(int j = 0; j < 16; j++)
@@ -66,9 +74,10 @@ void DlgMaskF::OnBnClickedSymetryF(){
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::setSymmetry(){
-	for(size_t j = 0; j < vcells.size(); j++)	//	16
+	for(size_t j = 0; j < vcells.size(); j++){	//	16
 		vcells[j].get()->setEnabled(false);
-
+		vcells[j].get()->isSymmetryMode = true;
+	}
 	for(size_t j = 0; j < vsym.size(); j++){	//	16
 		std::vector<size_t>& curv = vsym[j];
 		size_t idx16 = curv[0];
@@ -80,6 +89,8 @@ void DlgMaskF::setSymmetry(){
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::setNonSymmetry(){
-	for(size_t j = 0; j < vcells.size(); j++)	//	16
+	for(size_t j = 0; j < vcells.size(); j++){	//	16
 		vcells[j].get()->setEnabled(true);
+		vcells[j].get()->isSymmetryMode = false;
+	}
 } // //////////////////////////////////////////////////////////////////////////////////////
