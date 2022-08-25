@@ -18,7 +18,7 @@ public:
 	void create(size_t mask, const char* id_rotate);
 	void setEnabled(size_t idx_cell, bool isEnabled);
 	void setEnabled(bool isEnabled);
-
+	void rotate(const CMCell16& other);
 
 	int borderOut = 0;
 	int borderInt = 1;

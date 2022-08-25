@@ -93,3 +93,15 @@ void CMCell16::rotateSymmetry(){
 	for(size_t j = 0; j < v.size(); j++)	//	16
 		v[j].setRotateNonEnabled(fills.vout[j].i);
 } // //////////////////////////////////////////////////////////////////////////////////////
+void CMCell16::rotate(const CMCell16& other16){
+	const size_t vrot[16] = {10,8,11,9,2,0,3,1,14,12,15,13,6,4,7,5};
+	const std::array<CMCell, 16>& v_in = other16.v;
+	for(size_t j = 0; j < 16; j++){
+		const CMCell& cell_in = v_in[vrot[j]];
+		CMCell& cell_out = v[j];
+		if(cell_in.idRotate > 6)
+			cell_out.idRotate = cell_in.idRotate - 6;
+		else
+			cell_out.idRotate = cell_in.idRotate + 2;
+	}
+} // //////////////////////////////////////////////////////////////////////////////////////
