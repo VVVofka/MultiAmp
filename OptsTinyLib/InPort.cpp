@@ -11,7 +11,7 @@ void setMaskA(const char* fname, const char* s){
     ses.load(fname);
     auto ret = ses.set_maskA(s);
     ses.save(fname);
-} // //////////////////////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 std::string getMaskF(const char* fname){
     Session ses;
@@ -24,4 +24,17 @@ void setMaskF(const char* fname, const char* s){
     ses.load(fname);
     auto ret = ses.set_maskF(s);
     ses.save(fname);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+structLaysCfg getLaysCgf(const char* fname){
+    Session ses;
+    ses.load(fname);
+    auto ret = ses.get_LaysCfg();
+    return ret;
 } // //////////////////////////////////////////////////////////////////////////
+void setMaskF(const char* fname, const structLaysCfg& lays_cfg){
+    Session ses;
+    ses.load(fname);
+    auto ret = ses.set_LaysCfg(lays_cfg);
+    ses.save(fname);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

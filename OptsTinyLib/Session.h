@@ -2,6 +2,7 @@
 #include "Data.h"
 #include "Options.h"
 #include "tinyxml2.h"
+#include "structLaysCfg.h"
 using namespace tinyxml2;
 
 class Session{
@@ -17,8 +18,12 @@ public:
 
 	const char* get_maskA() const;
 	XMLNode* set_maskA(const char* s);
+
 	const char* get_maskF() const;
 	XMLNode* set_maskF(const char* s);
+
+	structLaysCfg get_LaysCfg() const;
+	XMLNode* set_LaysCfg(const structLaysCfg& lays_cfg);
 
 protected:
 	XMLDocument doc;

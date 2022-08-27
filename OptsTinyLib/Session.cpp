@@ -43,16 +43,22 @@ void Session::tstcrt(){
 
 	XMLError errSave = doc.SaveFile("crt.xml");
 	_RPT1(0, "errSave3 = %d\n", (int)errSave);
-} // //////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const char* Session::get_maskA() const{
 	return options.get_maskA();
 } // //////////////////////////////////////////////////////////////
 XMLNode* Session::set_maskA(const char* s){
 	return options.set_maskA(s);
-} // //////////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const char* Session::get_maskF() const{
 	return options.get_maskF();
 } // //////////////////////////////////////////////////////////////
 XMLNode* Session::set_maskF(const char* s){
 	return options.set_maskF(s);
-} // //////////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+structLaysCfg Session::get_LaysCfg() const{
+	return structLaysCfg();
+} // //////////////////////////////////////////////////////////////////////////////
+XMLNode* Session::set_LaysCfg(const structLaysCfg& lays_cfg){
+	return nullptr;
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

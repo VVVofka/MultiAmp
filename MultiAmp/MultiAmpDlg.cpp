@@ -170,6 +170,7 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	setMaskF("tstDlg.xml", newmask.c_str());
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
+	auto maskF = getMaskF("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;
 	dlgcfgLays.DoModal();
 }  // /////////////////////////////////////////////////////////

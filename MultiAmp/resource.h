@@ -22,7 +22,6 @@
 #define IDC_BT_MASK_A                   1004
 #define IDC_MAINDLG_INFO                1012
 #define IDC_BT_MASK_F                   1013
-#define IDC_BT_MASK_F2                  1014
 #define IDC_BT_LAYS                     1014
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
@@ -33,7 +32,8 @@
 #define IDC_CNT_LAYS_Y_MAX              1024
 #define IDC_SPIN_TOPX                   1025
 #define IDC_SPIN_TOPY                   1026
-#define IDC_SPIN_0X                     1027
+#define IDC_EDIT1                       1027
+#define IDC_ED_LAYS_CNT                 1027
 #define IDC_SPIN_0Y                     1028
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
@@ -138,7 +138,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        145
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1026
+#define _APS_NEXT_CONTROL_VALUE         1028
 #define _APS_NEXT_SYMED_VALUE           109
 #endif
 #endif

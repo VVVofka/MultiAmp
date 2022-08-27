@@ -167,6 +167,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Session.h" />
+    <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>

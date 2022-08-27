@@ -12,17 +12,13 @@
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)
 
 DlgCfgLays::DlgCfgLays(CWnd* pParent /*=nullptr*/)
-	: CDialog(IDD_CFG_LAYS, pParent)
-{
+	: CDialog(IDD_CFG_LAYS, pParent){
 
 }
 
-DlgCfgLays::~DlgCfgLays()
-{
-}
+DlgCfgLays::~DlgCfgLays(){}
 
-void DlgCfgLays::DoDataExchange(CDataExchange* pDX)
-{
+void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	CDialog::DoDataExchange(pDX);
 }
 

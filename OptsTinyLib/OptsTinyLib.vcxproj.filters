@@ -58,6 +58,7 @@
     <ClInclude Include="MaskBase.h">
       <Filter>Session\Options\Masks</Filter>
     </ClInclude>
+    <ClInclude Include="structLaysCfg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
