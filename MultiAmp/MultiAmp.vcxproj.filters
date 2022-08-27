@@ -13,21 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DlgMasks">
+    <Filter Include="Dlgs">
       <UniqueIdentifier>{440f11e7-4abb-4686-8656-e06645e72864}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DlgMasks\F">
+    <Filter Include="Dlgs\F">
       <UniqueIdentifier>{0b7c2cd7-fc35-4a32-9c61-6fa6c9d6c37f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DlgMasks\A">
+    <Filter Include="Dlgs\A">
       <UniqueIdentifier>{1114c100-1f6f-4cce-9cd7-ceef797aead2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlgs\Lays">
+      <UniqueIdentifier>{fb71ac31-a562-4eb5-9595-4573154313a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dlgs\Main">
+      <UniqueIdentifier>{8e88ac9c-fea8-46a2-b093-d78692e8d860}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultiAmp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiAmpDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="framework.h">
@@ -43,54 +46,57 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgMaskA.h">
-      <Filter>DlgMasks\A</Filter>
+      <Filter>Dlgs\A</Filter>
     </ClInclude>
     <ClInclude Include="DlgMaskF.h">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClInclude>
     <ClInclude Include="CMCell.h">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClInclude>
     <ClInclude Include="CMCell16.h">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClInclude>
     <ClInclude Include="Directs.h">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClInclude>
     <ClInclude Include="CellsFillSym.h">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClInclude>
     <ClInclude Include="DlgCfgLays.h">
-      <Filter>Header Files</Filter>
+      <Filter>Dlgs\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiAmpDlg.h">
+      <Filter>Dlgs\Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultiAmpDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DlgMaskA.cpp">
-      <Filter>DlgMasks\A</Filter>
+      <Filter>Dlgs\A</Filter>
     </ClCompile>
     <ClCompile Include="DlgMaskF.cpp">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClCompile>
     <ClCompile Include="CMCell.cpp">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClCompile>
     <ClCompile Include="CMCell16.cpp">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClCompile>
     <ClCompile Include="CellsFillSym.cpp">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </ClCompile>
     <ClCompile Include="DlgCfgLays.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dlgs\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiAmpDlg.cpp">
+      <Filter>Dlgs\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +109,7 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\Common\Directs.ods">
-      <Filter>DlgMasks\F</Filter>
+      <Filter>Dlgs\F</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
