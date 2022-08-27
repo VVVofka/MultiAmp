@@ -60,6 +60,9 @@
     <ClInclude Include="CellsFillSym.h">
       <Filter>DlgMasks\F</Filter>
     </ClInclude>
+    <ClInclude Include="DlgCfgLays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="CellsFillSym.cpp">
       <Filter>DlgMasks\F</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgCfgLays.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

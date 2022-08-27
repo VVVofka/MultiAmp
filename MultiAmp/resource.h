@@ -5,32 +5,34 @@
 #define IDM_ABOUTBOX                    0x0010
 #define IDS_ABOUTBOX                    101
 #define IDD_MULTIAMP_DIALOG             102
-#define IDD_OPTIONS_MASK_A              103
 #define IDD_Dlg                         104
 #define IDD_MASK_A                      104
 #define IDB_CELL_FULL                   106
 #define IDD_DLG_MASK_F                  107
+#define IDD_DlgCfgLays                  108
 #define IDR_MAINFRAME                   128
 #define IDB_BITMAP0                     132
 #define IDB_BITMAP1                     133
-#define IDD_OPTIONS_MASK_A_FULL         139
 #define IDB_CELL_EMPTY                  141
+#define IDD_CFG_LAYS                    143
 #define IDC_BUTTON1                     1000
 #define IDC_BT_JSON                     1001
 #define IDAPPLY                         1001
 #define IDC_SYMETRY                     1002
-#define IDC_CHECK1                      1003
-#define IDC_CHECK2                      1004
 #define IDC_BT_MASK_A                   1004
-#define IDC_CHECK3                      1005
-#define IDC_CHECK4                      1006
-#define IDC_CHECK5                      1007
-#define IDC_CHECK6                      1008
 #define IDC_MAINDLG_INFO                1012
 #define IDC_BT_MASK_F                   1013
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
 #define IDC_SYMETRY_F                   1020
+#define IDC_CNT_LAYS_X_MIN              1021
+#define IDC_CNT_LAYS_Y_MIN              1022
+#define IDC_CNT_LAYS_X_MAX              1023
+#define IDC_CNT_LAYS_Y_MAX              1024
+#define IDC_SPIN_TOPX                   1025
+#define IDC_SPIN_TOPY                   1026
+#define IDC_SPIN_0X                     1027
+#define IDC_SPIN_0Y                     1028
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -132,9 +134,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        143
+#define _APS_NEXT_RESOURCE_VALUE        145
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1021
-#define _APS_NEXT_SYMED_VALUE           108
+#define _APS_NEXT_CONTROL_VALUE         1026
+#define _APS_NEXT_SYMED_VALUE           109
 #endif
 #endif

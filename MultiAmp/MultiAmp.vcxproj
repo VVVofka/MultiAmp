@@ -207,6 +207,7 @@
     <ClInclude Include="CMCell16.h" />
     <ClInclude Include="CMCell.h" />
     <ClInclude Include="Directs.h" />
+    <ClInclude Include="DlgCfgLays.h" />
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
     <ClInclude Include="framework.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="CellsFillSym.cpp" />
     <ClCompile Include="CMCell16.cpp" />
     <ClCompile Include="CMCell.cpp" />
+    <ClCompile Include="DlgCfgLays.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />
     <ClCompile Include="MultiAmp.cpp" />
