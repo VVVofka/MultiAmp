@@ -29,6 +29,7 @@ namespace options{
 		ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
 		ON_WM_TIMER()
 		ON_BN_CLICKED(IDC_BT_MASK_F, &CMultiAmpDlg::OnBnClickedBtMaskF)
+		ON_BN_CLICKED(IDC_BT_LAYS, &CMultiAmpDlg::OnBnClickedBtLays)
 	END_MESSAGE_MAP()
 
 	// CMultiAmpDlg message handlers
@@ -173,3 +174,8 @@ namespace options{
 
 
 
+
+
+void options::CMultiAmpDlg::OnBnClickedBtLays(){
+	// TODO: Add your control notification handler code here
+}

@@ -22,6 +22,8 @@
 #define IDC_BT_MASK_A                   1004
 #define IDC_MAINDLG_INFO                1012
 #define IDC_BT_MASK_F                   1013
+#define IDC_BT_MASK_F2                  1014
+#define IDC_BT_LAYS                     1014
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
 #define IDC_SYMETRY_F                   1020

@@ -48,5 +48,6 @@ namespace options{
 		afx_msg void OnBnClickedBtMaskA();
 		afx_msg void OnBnClickedOk();
 		afx_msg void OnBnClickedBtMaskF();
+		afx_msg void OnBnClickedBtLays();
 	};
 }
