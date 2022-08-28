@@ -39,8 +39,8 @@ XMLNode* Options::set_maskF(const char* s){
 	return masks.set_maskF(s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 structLaysCfg Options::get_laysCfg() const{
-	return lays.;
+	return lays.cfg;
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_laysCfg(const structLaysCfg& lays_cfg){
-	return nullptr;
+	return lays.set(node, lays_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

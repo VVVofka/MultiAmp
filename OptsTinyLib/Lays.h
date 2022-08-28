@@ -6,7 +6,6 @@ using namespace tinyxml2;
 class Lays{
 public:
 	structLaysCfg cfg;
-	bool isChange = true;
 	XMLNode* node = NULL;
 
 	Lays();

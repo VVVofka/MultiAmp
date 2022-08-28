@@ -32,9 +32,9 @@
 #define IDC_CNT_LAYS_Y_MAX              1024
 #define IDC_SPIN_TOPX                   1025
 #define IDC_SPIN_TOPY                   1026
-#define IDC_EDIT1                       1027
 #define IDC_ED_LAYS_CNT                 1027
-#define IDC_SPIN_0Y                     1028
+#define IDC_SPIN_CNT                    1028
+#define IDC_SPIN_CNTLAYS                1028
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102

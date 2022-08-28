@@ -35,7 +35,6 @@ XMLNode* Lays::load(XMLNode* parent_node){
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
 XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
-	isChange = false;
 	cfg = new_cfg;
 	// If exist, delete node *****************
 	for(XMLNode* curnode = parent_node->FirstChild(); curnode; curnode = curnode->NextSibling()){

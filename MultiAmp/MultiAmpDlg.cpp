@@ -159,7 +159,8 @@ void CMultiAmpDlg::OnBnClickedBtMaskA(){
 void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	auto maskF = getMaskF("tstDlg.xml");
 	DlgMaskF dlgmaskf;
-	std::string newmask = dlgmaskf.doModal(maskF), newmaskall;
+	std::string newmask = dlgmaskf.doModal(maskF);
+	std::string newmaskall;
 	for(size_t j = 0; j < 16; j++){
 		newmaskall += (j ? "\n" : "") + std::to_string(j) + (j <= 9 ? ":  " : ":");
 		for(size_t i = 0; i < 4; i++)
@@ -170,7 +171,7 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	setMaskF("tstDlg.xml", newmask.c_str());
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
-	auto maskF = getMaskF("tstDlg.xml");
+	structLaysCfg layscfg = getLaysCgf("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;
 	dlgcfgLays.DoModal();
 }  // /////////////////////////////////////////////////////////
