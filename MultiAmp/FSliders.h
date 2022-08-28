@@ -1,20 +1,10 @@
 #pragma once
 #include <vector>
 #include <algorithm>
-	class SliderEdit{
-	public:
-		~SliderEdit(){
-			if(slider != NULL) delete slider;
-			if(edit != NULL) delete edit;
-		}
-		CSliderCtrl* slider;
-		CEdit* edit;
-	}; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 class FSliders{
 public:
 	~FSliders();
-	std::vector<SliderEdit> vsl;
+	std::vector<CSliderCtrl*> vsl;
 	std::vector<float>* vk;	// = { 0.1, 0.2, 0.45, 0.85, 1.25, 1.5 };
 
 	void activate(CWnd* grp, CSliderCtrl* example_slider, CEdit* example_edit, std::vector<float>* v_k);

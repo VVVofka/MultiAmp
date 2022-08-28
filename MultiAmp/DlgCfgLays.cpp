@@ -22,8 +22,10 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_SPIN_TOPX, m_spinTopX);
 	DDX_Control(pDX, IDC_SPIN_TOPY, m_spinTopY);
 	DDX_Control(pDX, IDC_SPIN_CNT, m_spinCnt);
-	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_00, sl00);
-	DDX_Control(pDX, IDC_LAYSCFG_EDIT_00, ed00);
+	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_TOP, slTop);
+	DDX_Control(pDX, IDC_LAYSCFG_EDIT_TOP, edTop);
+	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_BOTTOM, slBottom);
+	DDX_Control(pDX, IDC_LAYSCFG_EDIT_BOTTOM, edBottom);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -31,7 +33,6 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPX, &DlgCfgLays::OnDeltaposSpinTopx)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
-	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_LAYSCFG_SLIDER_00, &DlgCfgLays::OnTRBNThumbPosChangingLayscfgSlider00)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -71,7 +72,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.activate(frame, &sl00, &ed00, &cfgOut.vkf);
+	fsliders.activate(frame, &slTop, &edTop, &cfgOut.vkf);
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -97,12 +98,3 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	fsliders.saveVK(cfgOut.laysCnt);
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
-
-
-void DlgCfgLays::OnTRBNThumbPosChangingLayscfgSlider00(NMHDR* pNMHDR, LRESULT* pResult){
-	// This feature requires Windows Vista or greater.
-	// The symbol _WIN32_WINNT must be >= 0x0600.
-	NMTRBTHUMBPOSCHANGING* pNMTPC = reinterpret_cast<NMTRBTHUMBPOSCHANGING*>(pNMHDR);
-	// TODO: Add your control notification handler code here
-	*pResult = 0;
-}

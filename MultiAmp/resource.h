@@ -35,9 +35,12 @@
 #define IDC_ED_LAYS_CNT                 1027
 #define IDC_SPIN_CNT                    1028
 #define IDC_LAYSCFG_SLIDER_00           1029
+#define IDC_LAYSCFG_SLIDER_TOP          1029
 #define IDC_LAYSCFG_SLIDERS_GROUP       1030
-#define IDC_IDC_LAYSCFG_SLIDER_00       1031
 #define IDC_LAYSCFG_EDIT_00             1031
+#define IDC_LAYSCFG_EDIT_TOP            1032
+#define IDC_LAYSCFG_SLIDER_BOTTOM       1033
+#define IDC_LAYSCFG_EDIT_BOTTOM         1034
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102

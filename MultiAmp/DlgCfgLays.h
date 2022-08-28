@@ -20,8 +20,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	FSliders fsliders;
-	CSliderCtrl sl00;
-	CEdit ed00;
+	CSliderCtrl slTop, slBottom;
+	CEdit edTop, edBottom;
 	std::vector<double> vk;
 
 	DECLARE_MESSAGE_MAP()
@@ -39,5 +39,4 @@ public:
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnTRBNThumbPosChangingLayscfgSlider00(NMHDR* pNMHDR, LRESULT* pResult);
 };
