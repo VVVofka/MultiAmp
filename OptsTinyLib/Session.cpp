@@ -57,7 +57,7 @@ XMLNode* Session::set_maskF(const char* s){
 	return options.set_maskF(s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 structLaysCfg Session::get_LaysCfg() const{
-	return structLaysCfg();
+	return options.lays.cfg;
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_LaysCfg(const structLaysCfg& lays_cfg){
 	return nullptr;

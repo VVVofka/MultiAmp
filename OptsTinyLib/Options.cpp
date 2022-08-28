@@ -5,8 +5,9 @@ XMLNode* Options::create(XMLDocument* doc){
 	XMLElement* ele_out = doc->NewElement(XMLName);
 	node = doc->InsertEndChild(ele_out);
 	XMLNode* masks_node = masks.create(node);
-	if(masks_node == NULL)
-		node = NULL;
+	XMLNode* layscfg_node = lays.create(node);
+	if(masks_node == NULL || layscfg_node == NULL)
+		return NULL;
 	return node;
 } // ///////////////////////////////////////////////////////////
 XMLNode* Options::load(XMLDocument* doc){
@@ -16,9 +17,11 @@ XMLNode* Options::load(XMLDocument* doc){
 		std::string name(ele->Name());
 		if(name == XMLName){
 			XMLNode* masks_node = masks.load(curnode);
-			if(masks_node != NULL)
+			XMLNode* layscfg_node = lays.load(curnode);
+			if(masks_node != NULL && layscfg_node != NULL){
 				node = curnode;
-			break;
+				break;
+			}
 		}
 	}
 	return node;
@@ -28,10 +31,16 @@ const char* Options::get_maskA() const{
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_maskA(const char* s){
 	return masks.set_maskA(s);
-} // ////////////////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const char* Options::get_maskF() const{
 	return masks.get_maskF();
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_maskF(const char* s){
 	return masks.set_maskF(s);
-} // ////////////////////////////////////////////////////////////////////
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+structLaysCfg Options::get_laysCfg() const{
+	return lays.;
+} // ////////////////////////////////////////////////////////////////
+XMLNode* Options::set_laysCfg(const structLaysCfg& lays_cfg){
+	return nullptr;
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
