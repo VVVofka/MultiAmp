@@ -24,7 +24,7 @@ public:
 	double shifthtop = 0.1;
 	double shifthbottom = 0.1;
 	double kgaph = 0.1f;
-	double kgapw = 0.05;
+	double kgapw = 0.02;
 
 	double fmin = 0;
 	double fmax = 2;

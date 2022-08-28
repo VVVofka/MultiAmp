@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPX, &DlgCfgLays::OnDeltaposSpinTopx)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
+	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_LAYSCFG_SLIDER_00, &DlgCfgLays::OnTRBNThumbPosChangingLayscfgSlider00)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -96,3 +97,12 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	fsliders.saveVK(cfgOut.laysCnt);
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+void DlgCfgLays::OnTRBNThumbPosChangingLayscfgSlider00(NMHDR* pNMHDR, LRESULT* pResult){
+	// This feature requires Windows Vista or greater.
+	// The symbol _WIN32_WINNT must be >= 0x0600.
+	NMTRBTHUMBPOSCHANGING* pNMTPC = reinterpret_cast<NMTRBTHUMBPOSCHANGING*>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	*pResult = 0;
+}

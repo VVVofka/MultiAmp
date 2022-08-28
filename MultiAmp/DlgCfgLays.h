@@ -33,13 +33,11 @@ public:
 	CEdit m_cnt;
 	CEdit m_lay0X;
 	CEdit m_lay0Y;
-	//CSpinButtonCtrl m_spinTopX;	
-	//CSpinButtonCtrl m_spinTopY;	
-	//CSpinButtonCtrl m_spinCnt;	
 	CSpinButtonCtrl m_spinTopX;
 	CSpinButtonCtrl m_spinTopY;
 	CSpinButtonCtrl m_spinCnt;
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnTRBNThumbPosChangingLayscfgSlider00(NMHDR* pNMHDR, LRESULT* pResult);
 };
