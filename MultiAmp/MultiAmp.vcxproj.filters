@@ -69,6 +69,9 @@
     <ClInclude Include="MultiAmpDlg.h">
       <Filter>Dlgs\Main</Filter>
     </ClInclude>
+    <ClInclude Include="FSliders.h">
+      <Filter>Dlgs\Lays</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="MultiAmpDlg.cpp">
       <Filter>Dlgs\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="FSliders.cpp">
+      <Filter>Dlgs\Lays</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

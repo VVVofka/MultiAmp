@@ -34,7 +34,10 @@
 #define IDC_SPIN_TOPY                   1026
 #define IDC_ED_LAYS_CNT                 1027
 #define IDC_SPIN_CNT                    1028
-#define IDC_SLIDER1                     1029
+#define IDC_LAYSCFG_SLIDER_00           1029
+#define IDC_LAYSCFG_SLIDERS_GROUP       1030
+#define IDC_IDC_LAYSCFG_SLIDER_00       1031
+#define IDC_LAYSCFG_EDIT_00             1031
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -138,7 +141,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        145
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1030
+#define _APS_NEXT_CONTROL_VALUE         1032
 #define _APS_NEXT_SYMED_VALUE           109
 #endif
 #endif

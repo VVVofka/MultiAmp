@@ -211,6 +211,7 @@
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="FSliders.h" />
     <ClInclude Include="MultiAmp.h" />
     <ClInclude Include="MultiAmpDlg.h" />
     <ClInclude Include="pch.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="DlgCfgLays.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />
+    <ClCompile Include="FSliders.cpp" />
     <ClCompile Include="MultiAmp.cpp" />
     <ClCompile Include="MultiAmpDlg.cpp" />
     <ClCompile Include="pch.cpp">

@@ -22,6 +22,8 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_SPIN_TOPX, m_spinTopX);
 	DDX_Control(pDX, IDC_SPIN_TOPY, m_spinTopY);
 	DDX_Control(pDX, IDC_SPIN_CNT, m_spinCnt);
+	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_00, sl00);
+	DDX_Control(pDX, IDC_LAYSCFG_EDIT_00, ed00);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -67,6 +69,8 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
+	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
+	fsliders.activate(frame, &sl00, &cfgOut.vkf);
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -89,5 +93,7 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	if(cfgOut.laysCnt < 2)		cfgOut.laysCnt = 2;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	fsliders.saveVK(cfgOut.laysCnt);
+	fsliders.activate();
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
