@@ -18,20 +18,22 @@ XMLNode* Lays::load(XMLNode* parent_node){
 		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			structLaysCfg cfg;
 			cfg.topX = ele->IntAttribute("topX", 1);
 			cfg.topY = ele->IntAttribute("topY", 1);
 			cfg.laysCnt = ele->IntAttribute("cnt", 5);
 			cfg.vkf.resize(cfg.laysCnt);
 			for(size_t j = 0; j < cfg.vkf.size(); j++){
-				std::string atrname = "klayf" + std::to_string(j);
+				std::string atrname = "k" + std::to_string(j);
 				cfg.vkf[j] = ele->FloatAttribute(atrname.c_str(), 1.0f);
 			}
 			parent_node->DeleteChild(curnode);
 			node = set(parent_node, cfg);
-			break;
+			return node;
 		}
 	}
+	cfg.topX = cfg.topY = 1;
+	cfg.laysCnt = 5;
+	node = set(parent_node, cfg);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
 XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
@@ -53,7 +55,7 @@ XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
 	ele_out->SetAttribute("topY", new_cfg.topY);	// 1
 	ele_out->SetAttribute("cnt", new_cfg.laysCnt);	// 5
 	for(size_t j = 0; j < new_cfg.vkf.size(); j++){
-		std::string atrname = "klayf" + std::to_string(j);
+		std::string atrname = "k" + std::to_string(j);
 		ele_out->SetAttribute(atrname.c_str(), new_cfg.vkf[j]);	// 1.0f
 	}
 	node = parent_node->InsertEndChild(ele_out);

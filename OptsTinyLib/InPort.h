@@ -7,5 +7,5 @@ void setMaskA(const char* fname, const char* s);
 std::string getMaskF(const char* fname);
 void setMaskF(const char* fname, const char* s);
 
-structLaysCfg getLaysCgf(const char* fname);
-void setMaskF(const char* fname, const structLaysCfg& lays_cfg);
+structLaysCfg getLaysCfg(const char* fname);
+void setLaysCfg(const char* fname, const structLaysCfg& lays_cfg);

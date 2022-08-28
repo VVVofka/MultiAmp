@@ -26,13 +26,13 @@ void setMaskF(const char* fname, const char* s){
     ses.save(fname);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-structLaysCfg getLaysCgf(const char* fname){
+structLaysCfg getLaysCfg(const char* fname){
     Session ses;
     ses.load(fname);
     auto ret = ses.get_LaysCfg();
     return ret;
 } // //////////////////////////////////////////////////////////////////////////
-void setMaskF(const char* fname, const structLaysCfg& lays_cfg){
+void setLaysCfg(const char* fname, const structLaysCfg& lays_cfg){
     Session ses;
     ses.load(fname);
     auto ret = ses.set_LaysCfg(lays_cfg);

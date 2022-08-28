@@ -41,7 +41,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
 // DlgCfgLays message handlers
 
 void DlgCfgLays::OnBnClickedOk(){
-	// TODO: Add your control notification handler code here
+	//cfgOut.topX = std::to_integer()
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
@@ -54,7 +54,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_spinTopY.SetRange(1, 20);		// диапазон
 	m_spinTopY.SetPos(1);		    // позиция
 
-	m_spinCnt.SetBuddy(&m_cnt);	// подружить окно
+	m_spinCnt.SetBuddy(&m_cnt);		// подружить окно
 	m_spinCnt.SetRange(2, 20);		// диапазон
 	m_spinCnt.SetPos(5);		    // позиция
 
@@ -71,23 +71,23 @@ BOOL DlgCfgLays::OnInitDialog(){
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-	cfgInp.topX = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgInp.topX <= 0)		cfgInp.topX = 1;
-	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
+	cfgOut.topX = pNMUpDown->iPos + pNMUpDown->iDelta;
+	if(cfgOut.topX <= 0)		cfgOut.topX = 1;
+	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-	cfgInp.topY = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgInp.topY <= 0)		cfgInp.topY = 1;
-	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
+	cfgOut.topY = pNMUpDown->iPos + pNMUpDown->iDelta;
+	if(cfgOut.topY <= 0)		cfgOut.topY = 1;
+	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-	cfgInp.laysCnt = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgInp.laysCnt < 2)		cfgInp.laysCnt = 2;
-	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
-	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
+	cfgOut.laysCnt = pNMUpDown->iPos + pNMUpDown->iDelta;
+	if(cfgOut.laysCnt < 2)		cfgOut.laysCnt = 2;
+	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
+	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////

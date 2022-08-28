@@ -171,7 +171,8 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	setMaskF("tstDlg.xml", newmask.c_str());
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
-	structLaysCfg layscfg = getLaysCgf("tstDlg.xml");
+	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;
-	dlgcfgLays.DoModal();
+	structLaysCfg ret = dlgcfgLays.doModal(layscfg);
+	setLaysCfg("tstDlg.xml", ret);
 }  // /////////////////////////////////////////////////////////
