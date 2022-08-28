@@ -70,7 +70,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.activate(frame, &sl00, &cfgOut.vkf);
+	fsliders.activate(frame, &sl00, &ed00, &cfgOut.vkf);
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -94,6 +94,5 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	fsliders.saveVK(cfgOut.laysCnt);
-	fsliders.activate();
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////

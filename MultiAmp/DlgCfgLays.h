@@ -21,6 +21,7 @@ protected:
 
 	FSliders fsliders;
 	CSliderCtrl sl00;
+	CEdit ed00;
 	std::vector<double> vk;
 
 	DECLARE_MESSAGE_MAP()
@@ -41,5 +42,4 @@ public:
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
-	CEdit ed00;
 };

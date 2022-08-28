@@ -7,16 +7,16 @@ FSliders::~FSliders() {
 	for (size_t j = 0; j < vsl.size(); j++)
 		delete vsl[j];
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::activate(CWnd* grp, CSliderCtrl* Example, std::vector<float>* v_k) {
+void FSliders::activate(CWnd* grp, CSliderCtrl* example_slider, CEdit* example_edit, std::vector<float>* v_k) {
 	vk = v_k;
 	frame = grp;
-	example = Example;
+	exampleSlider = example_slider;
 	activate();
 } // /////////////////////////////////////////////////////////////////////////////////////////
 void FSliders::activate() {
-	if (example == NULL)
+	if (exampleSlider == NULL)
 		return;
-	example->ShowWindow(SW_SHOW);
+	exampleSlider->ShowWindow(SW_SHOW);
 	CRect rctGrp;
 	frame->GetClientRect(rctGrp);
 
@@ -34,11 +34,11 @@ void FSliders::activate() {
 	for (int j = 0; j < sz; j++) {
 		CRect rct((int)left, (int)(0.5 + top + j * heighT), (int)(0.5 + right), (int)(0.5 + top + (j + 1.0) * heighT));
 		vsl[j] = new CSliderCtrl();
-		vsl[j]->Create(example->GetStyle(), rct, frame, 188999 + 1 + j);
+		vsl[j]->Create(exampleSlider->GetStyle(), rct, frame, 188999 + 1 + j);
 		vsl[j]->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
 		vsl[j]->SetPos((int)(vk->at(j) * kslayer));
 	}
-	example->ShowWindow(SW_HIDE);
+	exampleSlider->ShowWindow(SW_HIDE);
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize) {
 	if (vk == NULL)
@@ -53,6 +53,7 @@ void FSliders::saveVK(size_t newsize) {
 			double k = ((double)pos - min) / ((double)max - min);
 			vk->at(j) = (float)(fmin + fmax * k);
 		}
+	activate();
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::rescale(size_t newsize) {
 	size_t oldsize = vk->size();
