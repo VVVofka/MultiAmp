@@ -72,7 +72,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.activate(frame, &slTop, &edTop, &cfgOut.vkf);
+	fsliders.activate(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){

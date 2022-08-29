@@ -7,7 +7,8 @@ public:
 	std::vector<CSliderCtrl*> vsl;
 	std::vector<float>* vk;	// = { 0.1, 0.2, 0.45, 0.85, 1.25, 1.5 };
 
-	void activate(CWnd* grp, CSliderCtrl* example_slider, CEdit* example_edit, std::vector<float>* v_k);
+	void activate(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
+		CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<float>* v_k);
 	void saveVK(size_t newsize);
 
 	double kslayer = 100;
@@ -22,8 +23,13 @@ public:
 private:
 	void activate();
 	void rescale(size_t newsize);
-	CSliderCtrl* exampleSlider = NULL;
-	CEdit* exampleEdit = NULL;
+	CSliderCtrl* exampleSliderTop = NULL;
+	CSliderCtrl* exampleSliderBottom = NULL;
+	CEdit* exampleEditTop = NULL;
+	CEdit* exampleEditBottom = NULL;
 	CWnd* frame = NULL;
+
+	double getF(CEdit* edit);
+	void setMinMax();
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
