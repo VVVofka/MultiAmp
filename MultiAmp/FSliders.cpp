@@ -45,15 +45,17 @@ void FSliders::activate(){
 	sliderTop->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
 	sliderTop->SetPos((int)(vk->at(0) * kslayer));
 	sliderBottom->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
-	sliderBottom->SetPos((int)(vk->at(vk->size()-1) * kslayer));
+	sliderBottom->SetPos((int)(vk->at(vk->size() - 1) * kslayer));
 
-	int h = (rctSliderBottom.top - rctSliderTop.top) / (vsl.size()+1);
+	double h = ((double)rctSliderBottom.top - rctSliderTop.top) / (vsl.size() + 1);
 	rctSlider.top = rctSliderTop.top - rctFrame.top;
 	rctSlider.bottom = rctSliderTop.bottom - rctFrame.top;
 	rctSlider.left = rctSliderTop.left - rctFrame.left;
 	rctSlider.right = rctSliderTop.right - rctFrame.left;
 	for(int j = 0; j < (int)vsl.size(); j++){
-		rctSlider.top += h; 		rctSlider.bottom += h;
+		int d = (int)(h * (j + 1) + 0.5);
+		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
+		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
 		vsl[j] = new CSliderCtrl();
 		vsl[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
 		vsl[j]->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
