@@ -23,10 +23,10 @@ public:
 private:
 	void activate();
 	void rescale(size_t newsize);
-	CSliderCtrl* exampleSliderTop = NULL;
-	CSliderCtrl* exampleSliderBottom = NULL;
-	CEdit* exampleEditTop = NULL;
-	CEdit* exampleEditBottom = NULL;
+	CSliderCtrl* sliderTop = NULL;
+	CSliderCtrl* sliderBottom = NULL;
+	CEdit* editTop = NULL;
+	CEdit* editBottom = NULL;
 	CWnd* frame = NULL;
 
 	double getF(CEdit* edit);

@@ -37,4 +37,5 @@
             <i15 bin="1111" cell0="0008" cell1="8000" cell2="0800" cell3="8085"/>
         </MaskF>
     </Masks>
+    <LaysCfg topX="1" topY="1" cnt="5" k0="1" k1="1" k2="1" k3="1" k4="1"/>
 </Options>

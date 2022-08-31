@@ -10,19 +10,19 @@ FSliders::~FSliders(){
 		if(vsl[j] != NULL)
 			delete vsl[j];
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::activate(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top, 
+void FSliders::activate(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
 	CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<float>* v_k){
 	vk = v_k;
 	frame = grp;
-	exampleSliderTop = slider_top;
-	exampleEditTop = edit_top;
-	exampleSliderBottom = slider_bottom;
-	exampleEditBottom = edit_bottom;
+	sliderTop = slider_top;
+	editTop = edit_top;
+	sliderBottom = slider_bottom;
+	editBottom = edit_bottom;
 	activate();
 } // /////////////////////////////////////////////////////////////////////////////////////////
 void FSliders::activate(){
-	exampleSliderTop->SetBuddy(exampleEditTop);
-	exampleSliderBottom->SetBuddy(exampleEditBottom);
+	sliderTop->SetBuddy(editTop);
+	sliderBottom->SetBuddy(editBottom);
 	CRect rctGrp;
 	frame->GetClientRect(rctGrp);
 
@@ -37,21 +37,28 @@ void FSliders::activate(){
 	int left = (int)(kgapw * rctGrp.Width());
 	int right = (int)((1 - kgapw) * rctGrp.Width());
 
-	CRect rctEdit, rctSlider;
-	exampleEditTop->GetClientRect(rctEdit);
-	exampleSliderTop->GetClientRect(rctSlider);
+	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
+	sliderTop->GetWindowRect(rctSliderTop);
+	sliderBottom->GetWindowRect(rctSliderBottom);
+	frame->GetWindowRect(rctFrame);
 	setMinMax();
-	exampleSliderTop->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
-	exampleSliderTop->SetPos((int)(vk->at(0) * kslayer));
-	for(int j = 0; j < vsl.size(); j++){
-		rctSlider = CRect(rctEdit.Width(), (int)(1.5 + top + j * heighT), rctGrp.Width() - left, (int)(0.5 + top + (j + 2.0) * heighT));
+	sliderTop->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
+	sliderTop->SetPos((int)(vk->at(0) * kslayer));
+	sliderBottom->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
+	sliderBottom->SetPos((int)(vk->at(vk->size()-1) * kslayer));
+
+	int h = (rctSliderBottom.top - rctSliderTop.top) / (vsl.size()+1);
+	rctSlider.top = rctSliderTop.top - rctFrame.top;
+	rctSlider.bottom = rctSliderTop.bottom - rctFrame.top;
+	rctSlider.left = rctSliderTop.left - rctFrame.left;
+	rctSlider.right = rctSliderTop.right - rctFrame.left;
+	for(int j = 0; j < (int)vsl.size(); j++){
+		rctSlider.top += h; 		rctSlider.bottom += h;
 		vsl[j] = new CSliderCtrl();
-		vsl[j]->Create(exampleSliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
+		vsl[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
 		vsl[j]->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
 		vsl[j]->SetPos((int)(vk->at(j + 1) * kslayer));
 	}
-	exampleSliderTop->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
-	exampleSliderTop->SetPos((int)(vk->at(vk->size() - 1) * kslayer));
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
 	if(vk == NULL)
@@ -59,9 +66,9 @@ void FSliders::saveVK(size_t newsize){
 	if(newsize != vk->size())
 		rescale(newsize);
 	else{
-		int pos = exampleSliderTop->GetPos();
-		int min = exampleSliderTop->GetRangeMin();
-		int max = exampleSliderTop->GetRangeMax();
+		int pos = sliderTop->GetPos();
+		int min = sliderTop->GetRangeMin();
+		int max = sliderTop->GetRangeMax();
 		double k = ((double)pos - min) / ((double)max - min);
 		vk->at(0) = (float)(fmin + fmax * k);
 		for(size_t j = 0; j < vsl.size(); j++){
@@ -71,11 +78,11 @@ void FSliders::saveVK(size_t newsize){
 			double k = ((double)pos - min) / ((double)max - min);
 			vk->at(j + 1) = (float)(fmin + fmax * k);
 		}
-		pos = exampleSliderTop->GetPos();
-		min = exampleSliderTop->GetRangeMin();
-		max = exampleSliderTop->GetRangeMax();
+		pos = sliderTop->GetPos();
+		min = sliderTop->GetRangeMin();
+		max = sliderTop->GetRangeMax();
 		k = ((double)pos - min) / ((double)max - min);
-		vk->at(vk->size()-1) = (float)(fmin + fmax * k);
+		vk->at(vk->size() - 1) = (float)(fmin + fmax * k);
 	}
 	activate();
 } // /////////////////////////////////////////////////////////////////////////
@@ -117,8 +124,8 @@ double FSliders::getF(CEdit* edit){
 	return dbl;
 } // ///////////////////////////////////////////////////////////////////////////
 void FSliders::setMinMax(){
-	double val_top = getF(exampleEditTop);
-	double val_bot = getF(exampleEditBottom);
+	double val_top = getF(editTop);
+	double val_bot = getF(editBottom);
 	fmin = __min(val_top, val_bot);
 	fmax = __max(val_top, val_bot);
 } // ///////////////////////////////////////////////////////////////////////////
