@@ -56,7 +56,7 @@ XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
 	ele_out->SetAttribute("cnt", new_cfg.laysCnt);	// 5
 	for(size_t j = 0; j < new_cfg.vkf.size(); j++){
 		std::string atrname = "k" + std::to_string(j);
-		ele_out->SetAttribute(atrname.c_str(), new_cfg.vkf[j]);	// 1.0f
+		ele_out->SetAttribute(atrname.c_str(), (float)((int)(100 * new_cfg.vkf[j] + 0.5) / 100) );	// 1.0f
 	}
 	node = parent_node->InsertEndChild(ele_out);
 	return node;

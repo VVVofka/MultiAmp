@@ -33,6 +33,9 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPX, &DlgCfgLays::OnDeltaposSpinTopx)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
+//	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnTRBNThumbPosChangingLayscfgSliderTop)
+//	ON_NOTIFY(NM_CUSTOMDRAW, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnNMCustomdrawLayscfgSliderTop)
+//	ON_NOTIFY(NM_THEMECHANGED, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnNMThemeChangedLayscfgSliderTop)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -46,6 +49,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
 
 void DlgCfgLays::OnBnClickedOk(){
 	//cfgOut.topX = std::to_integer()
+	fsliders.saveVK(cfgOut.laysCnt);
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
@@ -96,5 +100,30 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	fsliders.saveVK(cfgOut.laysCnt);
+	Invalidate();
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+
+
+//void DlgCfgLays::OnTRBNThumbPosChangingLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
+//	// This feature requires Windows Vista or greater.
+//	// The symbol _WIN32_WINNT must be >= 0x0600.
+//	NMTRBTHUMBPOSCHANGING* pNMTPC = reinterpret_cast<NMTRBTHUMBPOSCHANGING*>(pNMHDR);
+//	// TODO: Add your control notification handler code here
+//	*pResult = 0;
+//}
+
+
+//void DlgCfgLays::OnNMCustomdrawLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
+//	LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
+//	// TODO: Add your control notification handler code here
+//	*pResult = 0;
+//}
+
+
+//void DlgCfgLays::OnNMThemeChangedLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
+//	// This feature requires Windows XP or greater.
+//	// The symbol _WIN32_WINNT must be >= 0x0501.
+//	// TODO: Add your control notification handler code here
+//	*pResult = 0;
+//}

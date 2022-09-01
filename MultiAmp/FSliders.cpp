@@ -6,9 +6,7 @@
 #include <locale.h>
 
 FSliders::~FSliders(){
-	for(size_t j = 0; j < vsl.size(); j++)
-		if(vsl[j] != NULL)
-			delete vsl[j];
+	vslClear();
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::activate(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
 	CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<float>* v_k){
@@ -27,15 +25,9 @@ void FSliders::activate(){
 	frame->GetClientRect(rctGrp);
 
 	int sz = int(vk->size());
+	vslClear();
 	vsl.clear();
 	vsl.resize(sz - 2);
-	double heigh = (rctGrp.Height() * (1 - shifthtop - shifthbottom)) / (sz + (sz + 1.0) * kgaph);
-	double heighT = heigh * (1 + kgaph);
-	double top = shifthtop * rctGrp.Height() + heigh * kgaph;
-
-	double width = (1 - 2 * kgapw) * rctGrp.Width();
-	int left = (int)(kgapw * rctGrp.Width());
-	int right = (int)((1 - kgapw) * rctGrp.Width());
 
 	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
 	sliderTop->GetWindowRect(rctSliderTop);
@@ -56,6 +48,8 @@ void FSliders::activate(){
 		int d = (int)(h * (j + 1) + 0.5);
 		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
 		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
+		if(vsl[j] != NULL)
+			delete vsl[j];
 		vsl[j] = new CSliderCtrl();
 		vsl[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
 		vsl[j]->SetRange((int)(fmin * kslayer), (int)(fmax * kslayer), TRUE);
@@ -93,8 +87,11 @@ void FSliders::rescale(size_t newsize){
 	std::vector<std::pair<double, double>> vold(oldsize);
 	std::vector<std::pair<double, double>> vnew(newsize);
 
-	for(size_t j = 0; j < oldsize; j++)
-		vold[j] = std::pair<double, double>(j / (oldsize - 1.0), vsl[j]->GetPos() / (double)kslayer);
+	vold[0] = std::pair<double, double>(0, sliderTop->GetPos() / (double)kslayer);
+	for(size_t j = 1; j < oldsize-1; j++)
+		vold[j] = std::pair<double, double>(j / (oldsize - 1.0), vsl[j-1]->GetPos() / (double)kslayer);
+	vold[oldsize - 1] = std::pair<double, double>(oldsize / (oldsize - 1.0), sliderBottom->GetPos() / (double)kslayer);
+
 	for(size_t j = 1; j < newsize - 1; j++)
 		vnew[j] = std::pair<double, double>(j / (newsize - 1.0), 0);
 
@@ -130,4 +127,20 @@ void FSliders::setMinMax(){
 	double val_bot = getF(editBottom);
 	fmin = __min(val_top, val_bot);
 	fmax = __max(val_top, val_bot);
+	if(fmax - fmin < 1){
+		double favg = (fmin + fmax) / 2;
+		fmin = favg - 1.0;
+		fmax = favg + 1.0;
+	}
+} // ///////////////////////////////////////////////////////////////////////////
+void FSliders::vslClear(){
+	for(size_t j = 0; j < vsl.size(); j++)
+		if(vsl[j] != NULL)
+			delete vsl[j];
+} // ///////////////////////////////////////////////////////////////////////////
+float FSliders::round2(float var){
+	char str[40];
+	sprintf_s(str, "%.2f", var);
+	sscanf_s(str, "%f", &var);
+	return var;
 } // ///////////////////////////////////////////////////////////////////////////

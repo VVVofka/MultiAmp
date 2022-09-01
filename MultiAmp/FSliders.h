@@ -31,5 +31,8 @@ private:
 
 	double getF(CEdit* edit);
 	void setMinMax();
+	void vslClear();
+	float round2(double val){ return round2((float)val); };
+	float round2(float val);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
