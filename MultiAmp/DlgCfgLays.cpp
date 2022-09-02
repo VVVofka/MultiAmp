@@ -8,8 +8,6 @@
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)
 
 DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){
-	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.create(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
 } // //////////////////////////////////////////////////////////////////////////////
 
 DlgCfgLays::~DlgCfgLays(){}
@@ -54,6 +52,10 @@ void DlgCfgLays::OnBnClickedOk(){
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
+
+	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
+	fsliders.create(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
+
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
 	m_spinTopX.SetRange(1, 20);		// диапазон
 	m_spinTopX.SetPos(1);		    // позиция
@@ -75,27 +77,30 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
-	fsliders.activate();
+	fsliders.makeSliders();
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.topX = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.topX <= 0)		cfgOut.topX = 1;
+	if(cfgOut.topX <= 0)		
+		cfgOut.topX = 1;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.topY = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.topY <= 0)		cfgOut.topY = 1;
+	if(cfgOut.topY <= 0)		
+		cfgOut.topY = 1;
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.laysCnt = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.laysCnt < 2)		cfgOut.laysCnt = 2;
+	if(cfgOut.laysCnt < 2)		
+		cfgOut.laysCnt = 2;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	fsliders.saveVK(cfgOut.laysCnt);
