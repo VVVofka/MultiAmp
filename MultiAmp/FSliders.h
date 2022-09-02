@@ -4,12 +4,14 @@
 class FSliders{
 public:
 	~FSliders();
-	std::vector<CSliderCtrl*> vsl;
-	std::vector<float>* vk;	// = { 0.1, 0.2, 0.45, 0.85, 1.25, 1.5 };
 
-	void activate(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
+	void create(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
 		CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<float>* v_k);
+	void activate();
 	void saveVK(size_t newsize);
+
+	std::vector<CSliderCtrl*> vsliders;
+	std::vector<float>* vkoefs;	// = { 0.1, 0.2, 0.45, 0.85, 1.25, 1.5 };
 
 	double kslayer = 100;
 	double shifthtop = 0.1;
@@ -21,7 +23,6 @@ public:
 	double fmax = 2;
 
 private:
-	void activate();
 	void rescale(size_t newsize);
 	CSliderCtrl* sliderTop = NULL;
 	CSliderCtrl* sliderBottom = NULL;
@@ -31,7 +32,7 @@ private:
 
 	double getF(CEdit* edit);
 	void setMinMax();
-	void vslClear();
+	void vslClear(int new_size);
 	float round2(double val){ return round2((float)val); };
 	float round2(float val);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

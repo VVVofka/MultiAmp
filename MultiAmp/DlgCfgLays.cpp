@@ -7,8 +7,10 @@
 // DlgCfgLays dialog
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)
 
-DlgCfgLays::DlgCfgLays(CWnd* pParent /*=nullptr*/)
-	: CDialog(IDD_CFG_LAYS, pParent){} // //////////////////////////////////////////////////////////////////////////////
+DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){
+	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
+	fsliders.create(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
+} // //////////////////////////////////////////////////////////////////////////////
 
 DlgCfgLays::~DlgCfgLays(){}
 
@@ -33,9 +35,7 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPX, &DlgCfgLays::OnDeltaposSpinTopx)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
-//	ON_NOTIFY(TRBN_THUMBPOSCHANGING, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnTRBNThumbPosChangingLayscfgSliderTop)
-//	ON_NOTIFY(NM_CUSTOMDRAW, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnNMCustomdrawLayscfgSliderTop)
-//	ON_NOTIFY(NM_THEMECHANGED, IDC_LAYSCFG_SLIDER_TOP, &DlgCfgLays::OnNMThemeChangedLayscfgSliderTop)
+ON_WM_HSCROLL()
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -75,8 +75,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
-	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.activate(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
+	fsliders.activate();
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -103,27 +102,13 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	Invalidate();
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
+	if(pScrollBar->m_hWnd == slTop.m_hWnd){
+		auto pos = slTop.GetPos();
+		this->Invalidate(FALSE);
+	}else if(pScrollBar->m_hWnd == slBottom.m_hWnd){
 
-
-//void DlgCfgLays::OnTRBNThumbPosChangingLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
-//	// This feature requires Windows Vista or greater.
-//	// The symbol _WIN32_WINNT must be >= 0x0600.
-//	NMTRBTHUMBPOSCHANGING* pNMTPC = reinterpret_cast<NMTRBTHUMBPOSCHANGING*>(pNMHDR);
-//	// TODO: Add your control notification handler code here
-//	*pResult = 0;
-//}
-
-
-//void DlgCfgLays::OnNMCustomdrawLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
-//	LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
-//	// TODO: Add your control notification handler code here
-//	*pResult = 0;
-//}
-
-
-//void DlgCfgLays::OnNMThemeChangedLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult){
-//	// This feature requires Windows XP or greater.
-//	// The symbol _WIN32_WINNT must be >= 0x0501.
-//	// TODO: Add your control notification handler code here
-//	*pResult = 0;
-//}
+		this->Invalidate(FALSE);
+	}
+	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+} // ///////////////////////////////////////////////////////////////////////////////////////////

@@ -39,7 +39,5 @@ public:
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
-//	afx_msg void OnTRBNThumbPosChangingLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult);
-//	afx_msg void OnNMCustomdrawLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult);
-//	afx_msg void OnNMThemeChangedLayscfgSliderTop(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 };
