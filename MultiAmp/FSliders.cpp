@@ -27,14 +27,14 @@ void FSliders::makeSliders(){
 	sliderBottom->GetWindowRect(rctSliderBottom);
 	frame->GetWindowRect(rctFrame);
 
-	double h = ((double)rctSliderBottom.top - rctSliderTop.top) / (vsliders.size() + 1);
+	double h = ((double)rctSliderBottom.top - rctSliderTop.top) / (vsliders.size() - 1);
 	rctSlider.top = rctSliderTop.top - rctFrame.top;
 	rctSlider.bottom = rctSliderTop.bottom - rctFrame.top;
 	rctSlider.left = rctSliderTop.left - rctFrame.left;
 	rctSlider.right = rctSliderTop.right - rctFrame.left;
 
 	for(int j = 1; j < (int)(vsliders.size() - 1); j++){
-		int d = (int)(h * (j + 1) + 0.5);
+		int d = (int)(h * j + 0.5);
 		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
 		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
 		vsliders[j] = new CSliderCtrl();
@@ -43,6 +43,8 @@ void FSliders::makeSliders(){
 	for(size_t j = 0; j < vsliders.size(); j++){
 		vsliders[j]->SetRange(fmin, fmax, TRUE);
 		vsliders[j]->SetPos(vkoefs->at(j));
+		vsliders[j]->SetTicFreq(100);
+		//vsliders[j]->SetFont()
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
@@ -64,7 +66,7 @@ void FSliders::rescale(size_t newsize){
 
 	for(size_t j = 0; j < oldsize; j++){
 		vold[j].x = j / (oldsize - 1.0);
-		vold[j].y = vsliders[j - 1]->GetPos();
+		vold[j].y = vsliders[j]->GetPos();
 	}
 	for(size_t j = 0; j < newsize; j++)
 		vnew[j].x = j / (newsize - 1.0);

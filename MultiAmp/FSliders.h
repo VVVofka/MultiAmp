@@ -11,9 +11,9 @@ public:
 	void saveVK(size_t newsize);
 
 	std::vector<CSliderCtrl*> vsliders;
+	std::vector<CEdit*> vedits;
 	std::vector<int>* vkoefs = NULL;	// = { 0.1, 0.2, 0.45, 0.85, 1.25, 1.5 };
 
-	//double kslayer = 100;
 	double shifthtop = 0.1;
 	double shifthbottom = 0.1;
 	double kgaph = 0.1f;
