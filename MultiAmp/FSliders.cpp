@@ -31,13 +31,8 @@ void FSliders::makeSliders(){
 	rctSlider.left = rctSliderTop.left - rctFrame.left;
 	rctSlider.right = rctSliderTop.right - rctFrame.left;
 
-	CRect rctEdit, rctEditTop;
-	editTop->GetWindowRect(rctEditTop);
-	rctEdit.top = rctEditTop.top - rctFrame.top;
-	rctEdit.bottom = rctEditTop.bottom - rctFrame.top;
-	rctEdit.left = rctEditTop.left - rctFrame.left;
-	rctEdit.right = rctEditTop.right - rctFrame.left;
-
+	CRect rctEdit;
+	editTop->GetWindowRect(rctEdit);
 	for(size_t j = 1; j < vedits.size(); j++){
 		vedits[j] = new CEdit();
 		vedits[j]->Create(editTop->GetStyle(), rctEdit, frame, 188999 + 2 + j + 100);
