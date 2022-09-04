@@ -1,6 +1,7 @@
 #pragma once
 #include "..\OptsTinyLib\structLaysCfg.h"
-#include "FSliders.h"
+//#include "FSliders.h"
+#include <array>
 
 class DlgCfgLays : public CDialog{
 	DECLARE_DYNAMIC(DlgCfgLays)
@@ -20,6 +21,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	//FSliders fsliders;
+	std::array<CSliderCtrl*, 20> vslider;
+	std::array<CEdit*, 20> vedit;
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -37,4 +40,5 @@ public:
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	CStatic m_pointsAll;
 };

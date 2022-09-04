@@ -21,6 +21,7 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_SPIN_TOPX, m_spinTopX);
 	DDX_Control(pDX, IDC_SPIN_TOPY, m_spinTopY);
 	DDX_Control(pDX, IDC_SPIN_CNT, m_spinCnt);
+	DDX_Control(pDX, IDC_ST_LAYSCFG_POINTS_ALL, m_pointsAll);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -33,6 +34,10 @@ END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
 	cfgOut = cfgInp = cfg_lays;
+	//for(int j = 0; j < (int)vslider.size(); j++){
+	//	vslider[j]->SetPos(cfgInp.vkf[j]);
+	//	vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
+	//}
 	INT_PTR retDlg = CDialog::DoModal();
 	if(retDlg == IDOK)
 		return cfgOut;
@@ -73,6 +78,22 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	//fsliders.makeSliders();
+	const int fmin = -100, fmax = 200;
+	for(int j = 0; j < (int)vslider.size(); j++){
+		vslider[j] = (CSliderCtrl*)GetDlgItem(3000 + j);
+		vedit[j] = (CEdit*)GetDlgItem(3100 + j);
+		vslider[j]->SetBuddy(vedit[j]);
+		vslider[j]->SetRange(fmin, fmax, FALSE);
+		vslider[j]->SetTicFreq(100);
+
+		if(j < cfgInp.vkf.size()){
+			vslider[j]->ShowWindow(SW_SHOWNORMAL);
+			vslider[j]->SetPos(cfgInp.vkf[j]);
+			vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
+		} else{
+			vslider[j]->ShowWindow(SW_HIDE);
+		}
+	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -98,6 +119,7 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 		cfgOut.laysCnt = 2;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	m_pointsAll.SetWindowTextA(std::to_string(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
 	//fsliders.saveVK(cfgOut.laysCnt);
 	Invalidate();
 	*pResult = 0;

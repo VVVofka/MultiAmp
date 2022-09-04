@@ -38,6 +38,7 @@
 #define IDC_LAYSCFG_SLIDERS_GROUP       1030
 #define IDC_LAYSCFG_EDIT_00             1031
 #define IDC_LAYSCFG_EDIT_TOP            1032
+#define IDC_ST_LAYSCFG_POINTS_ALL       1032
 #define IDC_LAYSCFG_SLIDER_BOTTOM       1033
 #define IDC_LAYSCFG_EDIT_BOTTOM         1034
 #define IDC_CHECK00                     1100
@@ -183,7 +184,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        145
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1032
+#define _APS_NEXT_CONTROL_VALUE         1033
 #define _APS_NEXT_SYMED_VALUE           109
 #endif
 #endif
