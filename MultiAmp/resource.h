@@ -34,7 +34,6 @@
 #define IDC_SPIN_TOPY                   1026
 #define IDC_ED_LAYS_CNT                 1027
 #define IDC_SPIN_CNT                    1028
-#define IDC_LAYSCFG_SLIDER_00           1029
 #define IDC_LAYSCFG_SLIDER_TOP          1029
 #define IDC_LAYSCFG_SLIDERS_GROUP       1030
 #define IDC_LAYSCFG_EDIT_00             1031
@@ -137,6 +136,46 @@
 #define IDC_ST_CELL1101                 2013
 #define IDC_ST_CELL1110                 2014
 #define IDC_ST_CELL1111                 2015
+#define IDC_LAYSCFG_SLIDER_00           3000
+#define IDC_LAYSCFG_SLIDER_01           3001
+#define IDC_LAYSCFG_SLIDER_02           3002
+#define IDC_LAYSCFG_SLIDER_03           3003
+#define IDC_LAYSCFG_SLIDER_04           3004
+#define IDC_LAYSCFG_SLIDER_05           3005
+#define IDC_LAYSCFG_SLIDER_06           3006
+#define IDC_LAYSCFG_SLIDER_07           3007
+#define IDC_LAYSCFG_SLIDER_08           3008
+#define IDC_LAYSCFG_SLIDER_09           3009
+#define IDC_LAYSCFG_SLIDER_10           3010
+#define IDC_LAYSCFG_SLIDER_11           3011
+#define IDC_LAYSCFG_SLIDER_12           3012
+#define IDC_LAYSCFG_SLIDER_13           3013
+#define IDC_LAYSCFG_SLIDER_14           3014
+#define IDC_LAYSCFG_SLIDER_15           3015
+#define IDC_LAYSCFG_SLIDER_16           3016
+#define IDC_LAYSCFG_SLIDER_17           3017
+#define IDC_LAYSCFG_SLIDER_18           3018
+#define IDC_LAYSCFG_SLIDER_19           3019
+#define IDC_LAYSCFG_EDIT00              3100
+#define IDC_LAYSCFG_EDIT01              3101
+#define IDC_LAYSCFG_EDIT02              3102
+#define IDC_LAYSCFG_EDIT03              3103
+#define IDC_LAYSCFG_EDIT04              3104
+#define IDC_LAYSCFG_EDIT05              3105
+#define IDC_LAYSCFG_EDIT06              3106
+#define IDC_LAYSCFG_EDIT07              3107
+#define IDC_LAYSCFG_EDIT08              3108
+#define IDC_LAYSCFG_EDIT09              3109
+#define IDC_LAYSCFG_EDIT10              3110
+#define IDC_LAYSCFG_EDIT11              3111
+#define IDC_LAYSCFG_EDIT12              3112
+#define IDC_LAYSCFG_EDIT13              3113
+#define IDC_LAYSCFG_EDIT14              3114
+#define IDC_LAYSCFG_EDIT15              3115
+#define IDC_LAYSCFG_EDIT16              3116
+#define IDC_LAYSCFG_EDIT17              3117
+#define IDC_LAYSCFG_EDIT18              3118
+#define IDC_LAYSCFG_EDIT19              3119
 
 // Next default values for new objects
 // 

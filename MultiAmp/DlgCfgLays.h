@@ -19,9 +19,7 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	FSliders fsliders;
-	CSliderCtrl slTop, slBottom;
-	CEdit edTop;
+	//FSliders fsliders;
 
 	DECLARE_MESSAGE_MAP()
 public:
