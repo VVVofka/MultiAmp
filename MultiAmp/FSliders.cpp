@@ -54,7 +54,7 @@ void FSliders::makeSliders(){
 		vsliders[j]->SetTicFreq(100);
 		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
 	}
-	vedits[vedits.size() - 1]->SetWindowTextA(std::to_string(vkoefs->at(vsliders.size()-1)).c_str());
+	vedits[vedits.size() - 1]->SetWindowTextA(std::to_string(vkoefs->at(vsliders.size() - 1)).c_str());
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
 	if(vkoefs == NULL)
@@ -115,9 +115,23 @@ void FSliders::vslClear(int new_size){
 			vsliders[j] = NULL;
 		vsliders[new_size - 1] = sliderBottom;
 
-		vedits.resize(new_size + 1);
+		vedits.resize(new_size);
 		vedits[0] = editTop;
 		for(int j = 1; j < new_size; j++)
 			vedits[j] = NULL;
 	}
 } // ///////////////////////////////////////////////////////////////////////////
+bool FSliders::hscroll(HWND hwnd){
+	CSliderCtrl* pslider = NULL;
+	CEdit* pedit = NULL;
+	for(size_t j = 0; j < vsliders.size(); j++){
+		if(vsliders[j]->m_hWnd == hwnd){
+			pslider = vsliders[j];
+			pedit = vedits[j];
+			break;
+		}
+	}
+	if(pslider == NULL)
+		return false;
+	pedit->SetWindowTextA(std::to_string( pslider->GetPos()).c_str());
+} // /////////////////////////////////////////////////////////////////////////

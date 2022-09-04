@@ -7,8 +7,7 @@
 // DlgCfgLays dialog
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)
 
-DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){
-} // //////////////////////////////////////////////////////////////////////////////
+DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){} // //////////////////////////////////////////////////////////////////////////////
 
 DlgCfgLays::~DlgCfgLays(){}
 
@@ -32,7 +31,7 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPX, &DlgCfgLays::OnDeltaposSpinTopx)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
-ON_WM_HSCROLL()
+	ON_WM_HSCROLL()
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -82,7 +81,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.topX = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.topX <= 0)		
+	if(cfgOut.topX <= 0)
 		cfgOut.topX = 1;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	*pResult = 0;
@@ -90,7 +89,7 @@ void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
 void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.topY = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.topY <= 0)		
+	if(cfgOut.topY <= 0)
 		cfgOut.topY = 1;
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	*pResult = 0;
@@ -98,7 +97,7 @@ void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
 	cfgOut.laysCnt = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.laysCnt < 2)		
+	if(cfgOut.laysCnt < 2)
 		cfgOut.laysCnt = 2;
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
@@ -107,12 +106,7 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
-	if(pScrollBar->m_hWnd == slTop.m_hWnd){
-		auto pos = slTop.GetPos();
-		this->Invalidate(FALSE);
-	}else if(pScrollBar->m_hWnd == slBottom.m_hWnd){
-
-		this->Invalidate(FALSE);
-	}
+	if(fsliders.hscroll(pScrollBar->m_hWnd))
+		this->Invalidate(TRUE);
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 } // ///////////////////////////////////////////////////////////////////////////////////////////

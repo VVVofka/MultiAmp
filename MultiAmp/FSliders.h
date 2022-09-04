@@ -9,6 +9,7 @@ public:
 		CSliderCtrl* slider_bottom, std::vector<int>* v_k);
 	void makeSliders();
 	void saveVK(size_t newsize);
+	bool hscroll(HWND hwnd);
 
 	std::vector<CSliderCtrl*> vsliders;
 	std::vector<CEdit*> vedits;
