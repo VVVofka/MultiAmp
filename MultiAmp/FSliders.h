@@ -29,7 +29,6 @@ private:
 	CEdit* editTop = NULL;
 	CWnd* frame = NULL;
 
-	double getF(CEdit* edit);
 	void vslClear(int new_size);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

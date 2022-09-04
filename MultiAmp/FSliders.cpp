@@ -102,16 +102,6 @@ void FSliders::rescale(size_t newsize){
 	for(size_t j = 0; j < vkoefs->size(); j++)
 		vkoefs->at(j) = lround(vnew[j].y);
 } // ////////////////////////////////////////////////////////////////////////
-double FSliders::getF(CEdit* edit){
-	CString s;
-	edit->GetWindowTextA(s);
-	s.Replace(',', '.');
-	_locale_t us = _create_locale(LC_NUMERIC, "en-US");
-	double dbl = _atof_l((LPCSTR)s, us);
-	s.Format("%.2f", dbl);
-	edit->SetWindowTextA(s);
-	return dbl;
-} // ///////////////////////////////////////////////////////////////////////////
 void FSliders::vslClear(int new_size){
 	for(int j = 1; j < (int)vsliders.size() - 1; j++)
 		if(vsliders[j] != NULL)
