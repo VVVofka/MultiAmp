@@ -21,7 +21,7 @@ protected:
 
 	FSliders fsliders;
 	CSliderCtrl slTop, slBottom;
-	CEdit edTop, edBottom;
+	CEdit edTop;
 
 	DECLARE_MESSAGE_MAP()
 public:

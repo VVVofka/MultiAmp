@@ -8,16 +8,14 @@ FSliders::~FSliders(){
 	vslClear(0);
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::create(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
-	CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<int>* v_k){
+	CSliderCtrl* slider_bottom, std::vector<int>* v_k){
 	vkoefs = v_k;
 	frame = grp;
 	sliderTop = slider_top;
 	editTop = edit_top;
 	sliderBottom = slider_bottom;
-	editBottom = edit_bottom;
 
 	sliderTop->SetBuddy(editTop);
-	sliderBottom->SetBuddy(editBottom);
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::makeSliders(){
 	vslClear(vkoefs->size());
@@ -33,31 +31,35 @@ void FSliders::makeSliders(){
 	rctSlider.left = rctSliderTop.left - rctFrame.left;
 	rctSlider.right = rctSliderTop.right - rctFrame.left;
 
-	CRect rctEdit, rctEditTop;// , rctEditBottom;
+	CRect rctEdit, rctEditTop;
 	editTop->GetWindowRect(rctEditTop);
-	//editBottom->GetWindowRect(rctEditBottom);
 	rctEdit.top = rctEditTop.top - rctFrame.top;
 	rctEdit.bottom = rctEditTop.bottom - rctFrame.top;
 	rctEdit.left = rctEditTop.left - rctFrame.left;
 	rctEdit.right = rctEditTop.right - rctFrame.left;
 
+	for(size_t j = 1; j < vedits.size(); j++){
+		vedits[j] = new CEdit();
+		vedits[j]->Create(editTop->GetStyle(), rctEdit, frame, 188999 + 2 + j + 100);
+		vedits[j]->SetFont(editTop->GetFont());
+	}
 	for(int j = 1; j < (int)(vsliders.size() - 1); j++){
 		int d = (int)(h * j + 0.5);
 		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
 		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
 		vsliders[j] = new CSliderCtrl();
 		vsliders[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
-		vedits[j] = new CEdit();
-		vedits[j]->Create(editTop->GetStyle(), rctEdit, frame, 188999 + 2 + j + 100);
 		vsliders[j]->SetBuddy(vedits[j]);
-		vedits[j]->SetFont(editTop->GetFont());
 	}
+	sliderBottom->SetBuddy(vedits[vedits.size() - 1]);
+
 	for(size_t j = 0; j < vsliders.size(); j++){
 		vsliders[j]->SetRange(fmin, fmax, TRUE);
 		vsliders[j]->SetPos(vkoefs->at(j));
 		vsliders[j]->SetTicFreq(100);
 		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
 	}
+	vedits[vedits.size() - 1]->SetWindowTextA(std::to_string(vkoefs->at(vsliders.size()-1)).c_str());
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
 	if(vkoefs == NULL)
@@ -116,7 +118,7 @@ void FSliders::vslClear(int new_size){
 			delete vsliders[j];
 	vsliders.clear();
 
-	for(int j = 1; j < (int)vedits.size() - 1; j++)
+	for(int j = 1; j < (int)vedits.size(); j++)
 		if(vedits[j] != NULL)
 			delete vedits[j];
 	vedits.clear();
@@ -128,10 +130,9 @@ void FSliders::vslClear(int new_size){
 			vsliders[j] = NULL;
 		vsliders[new_size - 1] = sliderBottom;
 
-		vedits.resize(new_size);
+		vedits.resize(new_size + 1);
 		vedits[0] = editTop;
-		for(int j = 1; j < new_size - 1; j++)
+		for(int j = 1; j < new_size; j++)
 			vedits[j] = NULL;
-		vedits[new_size - 1] = editBottom;
 	}
 } // ///////////////////////////////////////////////////////////////////////////

@@ -25,7 +25,6 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_TOP, slTop);
 	DDX_Control(pDX, IDC_LAYSCFG_EDIT_TOP, edTop);
 	DDX_Control(pDX, IDC_LAYSCFG_SLIDER_BOTTOM, slBottom);
-	DDX_Control(pDX, IDC_LAYSCFG_EDIT_BOTTOM, edBottom);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -54,7 +53,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
 
 	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
-	fsliders.create(frame, &slTop, &edTop, &slBottom, &edBottom, &cfgOut.vkf);
+	fsliders.create(frame, &slTop, &edTop, &slBottom, &cfgOut.vkf);
 
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
 	m_spinTopX.SetRange(1, 20);		// диапазон

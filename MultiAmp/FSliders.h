@@ -6,7 +6,7 @@ public:
 	~FSliders();
 
 	void create(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
-		CSliderCtrl* slider_bottom, CEdit* edit_bottom, std::vector<int>* v_k);
+		CSliderCtrl* slider_bottom, std::vector<int>* v_k);
 	void makeSliders();
 	void saveVK(size_t newsize);
 
@@ -27,7 +27,6 @@ private:
 	CSliderCtrl* sliderTop = NULL;
 	CSliderCtrl* sliderBottom = NULL;
 	CEdit* editTop = NULL;
-	CEdit* editBottom = NULL;
 	CWnd* frame = NULL;
 
 	double getF(CEdit* edit);
