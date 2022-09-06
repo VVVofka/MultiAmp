@@ -32,6 +32,7 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
 	ON_WM_HSCROLL()
+	ON_STN_CLICKED(IDC_LAYSCFG_SLIDERS_GROUP, &DlgCfgLays::OnStnClickedLayscfgSlidersGroup)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -110,3 +111,6 @@ void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
 		this->Invalidate(TRUE);
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+void DlgCfgLays::OnStnClickedLayscfgSlidersGroup(){
+	// TODO: Add your control notification handler code here
+}

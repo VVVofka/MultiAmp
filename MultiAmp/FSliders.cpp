@@ -45,6 +45,7 @@ void FSliders::makeSliders(){
 		vsliders[j] = new CSliderCtrl();
 		vsliders[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
 		vsliders[j]->SetBuddy(vedits[j]);
+		vsliders[j]->NotifyWinEvent
 	}
 	sliderBottom->SetBuddy(vedits[vedits.size() - 1]);
 
