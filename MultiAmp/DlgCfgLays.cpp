@@ -86,7 +86,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 		vslider[j]->SetRange(fmin, fmax, FALSE);
 		vslider[j]->SetTicFreq(100);
 
-		if(j < cfgInp.vkf.size()){
+		if(j < (int)cfgInp.vkf.size()){
 			vslider[j]->ShowWindow(SW_SHOWNORMAL);
 			vslider[j]->SetPos(cfgInp.vkf[j]);
 			vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());

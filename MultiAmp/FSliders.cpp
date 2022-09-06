@@ -134,4 +134,5 @@ bool FSliders::hscroll(HWND hwnd){
 	if(pslider == NULL)
 		return false;
 	pedit->SetWindowTextA(std::to_string( pslider->GetPos()).c_str());
+	return true;
 } // /////////////////////////////////////////////////////////////////////////
