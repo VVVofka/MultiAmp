@@ -27,6 +27,43 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 		return;
 	sliderBottom = vsliders[szVisible - 1];
 } // /////////////////////////////////////////////////////////////////////////
+void FSliders::draw(){
+	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
+	frame->GetWindowRect(rctFrame);
+	sliderTop->GetWindowRect(rctSliderTop);
+	sliderBottom->GetWindowRect(rctSliderBottom);
+
+	double h = ((double)rctSliderBottom.top - rctSliderTop.top) / (vsliders.size() - 1);
+	rctSlider.top = rctSliderTop.top - rctFrame.top;
+	rctSlider.bottom = rctSliderTop.bottom - rctFrame.top;
+	rctSlider.left = rctSliderTop.left - rctFrame.left;
+	rctSlider.right = rctSliderTop.right - rctFrame.left;
+
+	CRect rctEdit;
+	editTop->GetWindowRect(rctEdit);
+	for(size_t j = 1; j < vedits.size(); j++){
+		vedits[j] = new CEdit();
+		vedits[j]->Create(editTop->GetStyle(), rctEdit, frame, 188999 + 2 + j + 100);
+		vedits[j]->SetFont(editTop->GetFont());
+	}
+	for(int j = 1; j < (int)(vsliders.size() - 1); j++){
+		int d = (int)(h * j + 0.5);
+		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
+		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
+		vsliders[j] = new CSliderCtrl();
+		vsliders[j]->Create(sliderTop->GetStyle(), rctSlider, frame, 188999 + 2 + j);
+		vsliders[j]->SetBuddy(vedits[j]);
+	}
+	sliderBottom->SetBuddy(vedits[vedits.size() - 1]);
+
+	for(size_t j = 0; j < vsliders.size(); j++){
+		vsliders[j]->SetRange(fmin, fmax, TRUE);
+		vsliders[j]->SetPos(vkoefs->at(j));
+		vsliders[j]->SetTicFreq(100);
+		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
+	}
+	vedits[vedits.size() - 1]->SetWindowTextA(std::to_string(vkoefs->at(vsliders.size() - 1)).c_str());
+} // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
 	if(vkoefs == NULL)
 		return;

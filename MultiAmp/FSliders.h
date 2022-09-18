@@ -13,7 +13,8 @@ class FSliders{
 
 public:
 	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size_visible, size_t size_capacity);
-	void setElements();
+	void draw();
+	void setElements();	// TODO: del
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
 
