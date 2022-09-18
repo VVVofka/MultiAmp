@@ -5,7 +5,6 @@ class FSliders{
 	CDialog* dlg = NULL;	// TODO: del?
 	CWnd* frame = NULL;
 	CSliderCtrl* sliderTop = NULL;
-	CSliderCtrl* sliderBottom = NULL;
 	CEdit* editTop = NULL;
 	size_t szVisible = 0;
 

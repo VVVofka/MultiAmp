@@ -25,7 +25,6 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	szVisible = size_visible;
 	if(szVisible == 0) 
 		return;
-	sliderBottom = vsliders[szVisible - 1];
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::draw(){
 	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
@@ -79,7 +78,7 @@ void FSliders::setElements(){
 	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
 	frame->GetWindowRect(rctFrame);
 	sliderTop->GetWindowRect(rctSliderTop);
-	sliderBottom->GetWindowRect(rctSliderBottom);
+	//& sliderBottom->GetWindowRect(rctSliderBottom);
 
 	double h = ((double)rctSliderBottom.top - rctSliderTop.top) / (vsliders.size() - 1);
 	rctSlider.top = rctSliderTop.top - rctFrame.top;
