@@ -5,14 +5,12 @@
 #include <locale.h>
 
 FSliders::~FSliders(){
-	vslClear(0);
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int>* v_k){
-	vkoefs = v_k;
-	CWnd* frame = (CWnd*)dlg->GetDlgItem(id_grp);
-	vsliders.resize(v_k->size());
-	vedits.resize(v_k->size());
-	for(size_t j = 0; j < vsliders.size(); j++){
+void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size){
+	frame = (CWnd*)dlg->GetDlgItem(id_grp);
+	vsliders.resize(size);
+	vedits.resize(size);
+	for(size_t j = 0; j < size; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
 	}
@@ -23,8 +21,6 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	sliderTop->SetBuddy(editTop);
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::makeSliders(){
-	vslClear(vkoefs->size());
-
 	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
 	frame->GetWindowRect(rctFrame);
 	sliderTop->GetWindowRect(rctSliderTop);
@@ -102,30 +98,6 @@ void FSliders::rescale(size_t newsize){
 	for(size_t j = 0; j < vkoefs->size(); j++)
 		vkoefs->at(j) = lround(vnew[j].y);
 } // ////////////////////////////////////////////////////////////////////////
-void FSliders::vslClear(int new_size){
-	for(int j = 1; j < (int)vsliders.size() - 1; j++)
-		if(vsliders[j] != NULL)
-			delete vsliders[j];
-	vsliders.clear();
-
-	for(int j = 1; j < (int)vedits.size(); j++)
-		if(vedits[j] != NULL)
-			delete vedits[j];
-	vedits.clear();
-
-	if(new_size > 1){
-		vsliders.resize(new_size);
-		vsliders[0] = sliderTop;
-		for(int j = 1; j < new_size - 1; j++)
-			vsliders[j] = NULL;
-		vsliders[new_size - 1] = sliderBottom;
-
-		vedits.resize(new_size);
-		vedits[0] = editTop;
-		for(int j = 1; j < new_size; j++)
-			vedits[j] = NULL;
-	}
-} // ///////////////////////////////////////////////////////////////////////////
 bool FSliders::hscroll(HWND hwnd){
 	CSliderCtrl* pslider = NULL;
 	CEdit* pedit = NULL;

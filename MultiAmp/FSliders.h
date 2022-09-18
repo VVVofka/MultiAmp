@@ -5,7 +5,7 @@ class FSliders{
 public:
 	~FSliders();
 
-	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int>* v_k);
+	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size);
 	void makeSliders();
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
@@ -30,6 +30,5 @@ private:
 	CSliderCtrl* sliderBottom = NULL;
 	CEdit* editTop = NULL;
 
-	void vslClear(int new_size);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
