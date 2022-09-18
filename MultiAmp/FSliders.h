@@ -5,8 +5,7 @@ class FSliders{
 public:
 	~FSliders();
 
-	void create(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
-		CSliderCtrl* slider_bottom, std::vector<int>* v_k);
+	void create(CWnd* grp, int id_slider_top, int id_edit_top, std::vector<int>* v_k);
 	void makeSliders();
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
