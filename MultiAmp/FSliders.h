@@ -2,11 +2,18 @@
 #include <vector>
 #include <algorithm>
 class FSliders{
-public:
-	~FSliders();
+	CDialog* dlg = NULL;	// TODO: del?
+	CWnd* frame = NULL;
+	CSliderCtrl* sliderTop = NULL;
+	CSliderCtrl* sliderBottom = NULL;
+	CEdit* editTop = NULL;
+	size_t szVisible = 0;
 
-	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size);
-	void makeSliders();
+	void rescale(size_t newsize);
+
+public:
+	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size_visible, size_t size_capacity);
+	void setElements();
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
 
@@ -21,14 +28,5 @@ public:
 
 	int fmin = -100;
 	int fmax = 200;
-
-private:
-	void rescale(size_t newsize);
-	CDialog* dlg = NULL;
-	CWnd* frame = NULL;
-	CSliderCtrl* sliderTop = NULL;
-	CSliderCtrl* sliderBottom = NULL;
-	CEdit* editTop = NULL;
-
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

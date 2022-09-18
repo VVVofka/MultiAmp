@@ -34,7 +34,7 @@ END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
 	cfgOut = cfgInp = cfg_lays;
-	//for(int j = 0; j < (int)vslider.size(); j++){
+	//for(int j = 0; j < (int)vslider.szVisible(); j++){
 	//	vslider[j]->SetPos(cfgInp.vkf[j]);
 	//	vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
 	//}
@@ -77,7 +77,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
-	//fsliders.makeSliders();
+	//fsliders.setElements();
 	const int fmin = -100, fmax = 200;
 	for(int j = 0; j < (int)vslider.size(); j++){
 		vslider[j] = (CSliderCtrl*)GetDlgItem(3000 + j);

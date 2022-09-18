@@ -4,23 +4,41 @@
 #include <string>
 #include <locale.h>
 
-FSliders::~FSliders(){
-} // /////////////////////////////////////////////////////////////////////////
-void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size){
+void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size_visible, size_t size_capacity){
+	this->dlg = dlg;
 	frame = (CWnd*)dlg->GetDlgItem(id_grp);
-	vsliders.resize(size);
-	vedits.resize(size);
-	for(size_t j = 0; j < size; j++){
+	vsliders.resize(size_capacity);
+	vedits.resize(size_capacity);
+	for(size_t j = 0; j < size_capacity; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
+		
+		vsliders[j]->SetBuddy(vedits[j]);
+
+		const int show_mode = j < size_visible ? SW_SHOWNORMAL : SW_HIDE;
+		vsliders[j]->ShowWindow(show_mode);
+		vedits[j]->ShowWindow(show_mode);
 	}
 	sliderTop = vsliders[0];
 	editTop = vedits[0];
-	sliderBottom = vsliders[vsliders.size() - 1];
 
-	sliderTop->SetBuddy(editTop);
+	szVisible = size_visible;
+	if(szVisible == 0) 
+		return;
+	sliderBottom = vsliders[szVisible - 1];
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::makeSliders(){
+void FSliders::saveVK(size_t newsize){
+	if(vkoefs == NULL)
+		return;
+	if(newsize != vkoefs->size())
+		rescale(newsize);
+	else{
+		for(size_t j = 0; j < vsliders.size(); j++)
+			vkoefs->at(j) = sliderTop->GetPos();
+	}
+	setElements();
+} // /////////////////////////////////////////////////////////////////////////
+void FSliders::setElements(){
 	CRect rctFrame, rctSlider, rctSliderTop, rctSliderBottom;
 	frame->GetWindowRect(rctFrame);
 	sliderTop->GetWindowRect(rctSliderTop);
@@ -57,19 +75,10 @@ void FSliders::makeSliders(){
 	}
 	vedits[vedits.size() - 1]->SetWindowTextA(std::to_string(vkoefs->at(vsliders.size() - 1)).c_str());
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::saveVK(size_t newsize){
-	if(vkoefs == NULL)
-		return;
-	if(newsize != vkoefs->size())
-		rescale(newsize);
-	else{
-		for(size_t j = 0; j < vsliders.size(); j++)
-			vkoefs->at(j) = sliderTop->GetPos();
-	}
-	makeSliders();
-} // /////////////////////////////////////////////////////////////////////////
 void FSliders::rescale(size_t newsize){
 	struct xy{ double x, y; };
+	sliderBottom = vsliders[newsize - 1];
+
 	size_t oldsize = vkoefs->size();
 	std::vector<xy> vold(oldsize);
 	std::vector<xy> vnew(newsize);
