@@ -7,13 +7,18 @@
 FSliders::~FSliders(){
 	vslClear(0);
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::create(CWnd* grp, CSliderCtrl* slider_top, CEdit* edit_top,
-	CSliderCtrl* slider_bottom, std::vector<int>* v_k){
+void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int>* v_k){
 	vkoefs = v_k;
-	frame = grp;
-	sliderTop = slider_top;
-	editTop = edit_top;
-	sliderBottom = slider_bottom;
+	CWnd* frame = (CWnd*)dlg->GetDlgItem(id_grp);
+	vsliders.resize(v_k->size());
+	vedits.resize(v_k->size());
+	for(size_t j = 0; j < vsliders.size(); j++){
+		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
+		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
+	}
+	sliderTop = vsliders[0];
+	editTop = vedits[0];
+	sliderBottom = vsliders[vsliders.size() - 1];
 
 	sliderTop->SetBuddy(editTop);
 } // /////////////////////////////////////////////////////////////////////////
@@ -133,6 +138,6 @@ bool FSliders::hscroll(HWND hwnd){
 	}
 	if(pslider == NULL)
 		return false;
-	pedit->SetWindowTextA(std::to_string( pslider->GetPos()).c_str());
+	pedit->SetWindowTextA(std::to_string(pslider->GetPos()).c_str());
 	return true;
 } // /////////////////////////////////////////////////////////////////////////
