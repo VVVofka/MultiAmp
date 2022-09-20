@@ -25,25 +25,22 @@ void FSliders::draw(){
 	CRect rctFrame, rctSlider, rctSlider0;
 	frame->GetWindowRect(rctFrame);
 	vsliders[0]->GetWindowRect(rctSlider0);
-	int width = rctSlider0.Width();
 	int height = rctSlider0.Height();
 
 	rctSlider.right = rctFrame.right - rctFrame.left;
-	rctSlider.left = rctFrame.right - width - rctFrame.left;
+	rctSlider.left = rctSlider.right - rctSlider0.Width();
 
 	double h = ((double)rctFrame.Height() - 1.5 * height) / (vkoefs->size() - 1);
 	for(size_t j = 0; j < vkoefs->size(); j++){
 		rctSlider.top = (LONG)(j * h);
 		rctSlider.bottom = rctSlider.top + height;
 		vsliders[j]->MoveWindow(rctSlider);
-		_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
-	}
-
-	for(size_t j = 0; j < vkoefs->size(); j++){
+		//_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
 		vsliders[j]->SetRange(fmin, fmax, FALSE);
 		vsliders[j]->SetPos(vkoefs->at(j));
 		vsliders[j]->SetTicFreq(100);
 		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
+		vsliders[j]->SetBuddy(vedits[j]);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
