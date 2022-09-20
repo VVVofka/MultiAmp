@@ -2,14 +2,9 @@
 #include "Lays.h"
 #include <string>
 
-Lays::Lays(){
-	cfg.vkf.resize(cfg.laysCnt, 1);
-} // ///////////////////////////////////////////////////////////////////////////////////
 XMLNode* Lays::create(XMLNode* parent_node){
 	structLaysCfg new_cfg;
-	new_cfg.topX = new_cfg.topY = 1;
-	new_cfg.laysCnt = 5;
-	new_cfg.vkf.resize(new_cfg.laysCnt, 1);
+	new_cfg.setDefault();
 	return set(parent_node, new_cfg);
 } // ///////////////////////////////////////////////////////////////////////////////////
 XMLNode* Lays::load(XMLNode* parent_node){
@@ -20,9 +15,9 @@ XMLNode* Lays::load(XMLNode* parent_node){
 		if(name == XMLName){
 			cfg.topX = ele->IntAttribute("topX", 1);
 			cfg.topY = ele->IntAttribute("topY", 1);
-			cfg.laysCnt = ele->IntAttribute("cnt", 5);
 			cfg.digits = ele->IntAttribute("digits", 2);
-			cfg.vkf.resize(cfg.laysCnt);
+			size_t size = ele->IntAttribute("cnt", 5);
+			cfg.vkf.resize(size);
 			for(size_t j = 0; j < cfg.vkf.size(); j++){
 				std::string atrname = "k" + std::to_string(j);
 				cfg.vkf[j] = ele->IntAttribute(atrname.c_str(), 1);
@@ -33,7 +28,7 @@ XMLNode* Lays::load(XMLNode* parent_node){
 		}
 	}
 	cfg.topX = cfg.topY = 1;
-	cfg.laysCnt = 5;
+	//cfg.laysCnt = 5;
 	node = set(parent_node, cfg);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
@@ -62,4 +57,8 @@ XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
 	}
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
+} // ///////////////////////////////////////////////////////////////////////////////////
+void Lays::setDefault(){
+	cfg.setDefault();
+	node = NULL;
 } // ///////////////////////////////////////////////////////////////////////////////////
