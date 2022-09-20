@@ -21,8 +21,6 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	FSliders fsliders;
-	//std::array<CSliderCtrl*, 20> vslider;
-	//std::array<CEdit*, 20> vedit;
 
 	DECLARE_MESSAGE_MAP()
 public:
@@ -43,4 +41,8 @@ public:
 	CStatic m_pointsAll;
 
 private:
+	void chngCnt(size_t cnt);
+public:
+	afx_msg void OnEnChangeEdLaysCnt();
+	CButton m_btOK;
 };

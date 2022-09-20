@@ -22,6 +22,7 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_SPIN_TOPY, m_spinTopY);
 	DDX_Control(pDX, IDC_SPIN_CNT, m_spinCnt);
 	DDX_Control(pDX, IDC_ST_LAYSCFG_POINTS_ALL, m_pointsAll);
+	DDX_Control(pDX, IDOK, m_btOK);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -30,6 +31,7 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_TOPY, &DlgCfgLays::OnDeltaposSpinTopy)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
 	ON_WM_HSCROLL()
+	ON_EN_CHANGE(IDC_ED_LAYS_CNT, &DlgCfgLays::OnEnChangeEdLaysCnt)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
@@ -114,17 +116,38 @@ void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
-	cfgOut.laysCnt = pNMUpDown->iPos + pNMUpDown->iDelta;
-	if(cfgOut.laysCnt < 2)
-		cfgOut.laysCnt = 2;
-	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
-	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
-	m_pointsAll.SetWindowTextA(std::to_string(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
-	fsliders.saveVK(cfgOut.laysCnt);
-	Invalidate();
+	chngCnt(pNMUpDown->iPos + pNMUpDown->iDelta);
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
 	fsliders.hscroll(pScrollBar->m_hWnd);
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
+} // ///////////////////////////////////////////////////////////////////////////////////////////
+void DlgCfgLays::chngCnt(size_t cnt){
+	static int prev = -1;
+	//auto prevcnt = cfgOut.laysCnt;
+	if(prev == (int)cnt)
+		return;
+	if(cnt < 2 || cnt > fsliders.vsliders.size()){
+		m_btOK.EnableWindow(FALSE);
+		return;
+	}
+	prev = (int)cnt;
+	cfgOut.laysCnt = cnt;
+
+	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
+	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	m_pointsAll.SetWindowTextA(std::to_string(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
+	fsliders.saveVK(cfgOut.laysCnt);
+	m_btOK.EnableWindow(TRUE);
+	Invalidate();
+} // ///////////////////////////////////////////////////////////////////////////////////////////
+void DlgCfgLays::OnEnChangeEdLaysCnt(){
+	char buf[3] = "";
+	m_cnt.GetWindowTextA(buf, 2);
+	int len = strlen(buf);
+	if(len > 0 && len <= 2){
+		int cnt = atoi(buf);
+		chngCnt((size_t)cnt);
+	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////
