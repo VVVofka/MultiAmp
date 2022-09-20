@@ -4,16 +4,12 @@
 class FSliders{
 	CDialog* dlg = NULL;	// TODO: del?
 	CWnd* frame = NULL;
-	CSliderCtrl* sliderTop = NULL;
-	CEdit* editTop = NULL;
-	size_t szVisible = 0;
 
 	void rescale(size_t newsize);
 
 public:
-	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, size_t size_visible, size_t size_capacity);
+	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int>* v_koefs, size_t size_capacity);
 	void draw();
-	void setElements();	// TODO: del
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
 

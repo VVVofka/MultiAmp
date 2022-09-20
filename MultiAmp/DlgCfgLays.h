@@ -1,6 +1,6 @@
 #pragma once
 #include "..\OptsTinyLib\structLaysCfg.h"
-//#include "FSliders.h"
+#include "FSliders.h"
 #include <array>
 
 class DlgCfgLays : public CDialog{
@@ -20,7 +20,7 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-	//FSliders fsliders;
+	FSliders fsliders;
 	std::array<CSliderCtrl*, 20> vslider;
 	std::array<CEdit*, 20> vedit;
 
