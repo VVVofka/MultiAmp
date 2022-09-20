@@ -34,12 +34,8 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_EN_CHANGE(IDC_ED_LAYS_CNT, &DlgCfgLays::OnEnChangeEdLaysCnt)
 END_MESSAGE_MAP()
 
-structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
+structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 	cfgOut = cfgInp = cfg_lays;
-	//for(int j = 0; j < (int)vslider.szVisible(); j++){
-	//	vslider[j]->SetPos(cfgInp.vkf[j]);
-	//	vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
-	//}
 	INT_PTR retDlg = CDialog::DoModal();
 	if(retDlg == IDOK)
 		return cfgOut;
@@ -48,14 +44,12 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg& cfg_lays){
 // DlgCfgLays message handlers
 
 void DlgCfgLays::OnBnClickedOk(){
-	//cfgOut.topX = std::to_integer()
 	fsliders.saveVK(cfgOut.laysCnt);
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
 
-	CWnd* frame = (CWnd*)this->GetDlgItem(IDC_LAYSCFG_SLIDERS_GROUP);
 	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, &cfgOut.vkf, 20);
 
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
@@ -70,9 +64,8 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_spinCnt.SetRange(2, 20);		// диапазон
 	m_spinCnt.SetPos(5);		    // позиция
 
-
 	if(cfgInp.laysCnt == 0)
-		cfgInp.laysCnt = 1;
+		cfgInp.laysCnt = 2;
 	m_topX.SetWindowTextA(std::to_string(cfgInp.topX).c_str());
 	m_topY.SetWindowTextA(std::to_string(cfgInp.topY).c_str());
 	m_cnt.SetWindowTextA(std::to_string(cfgInp.laysCnt).c_str());
@@ -80,22 +73,6 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	fsliders.draw();
-	//const int fmin = -100, fmax = 200;
-	//for(int j = 0; j < (int)vslider.size(); j++){
-	//	vslider[j] = (CSliderCtrl*)GetDlgItem(3000 + j);
-	//	vedit[j] = (CEdit*)GetDlgItem(3100 + j);
-	//	vslider[j]->SetBuddy(vedit[j]);
-	//	vslider[j]->SetRange(fmin, fmax, FALSE);
-	//	vslider[j]->SetTicFreq(100);
-
-	//	if(j < (int)cfgInp.vkf.size()){
-	//		vslider[j]->ShowWindow(SW_SHOWNORMAL);
-	//		vslider[j]->SetPos(cfgInp.vkf[j]);
-	//		vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
-	//	} else{
-	//		vslider[j]->ShowWindow(SW_HIDE);
-	//	}
-	//}
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -125,11 +102,11 @@ void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::chngCnt(size_t cnt){
 	static int prev = -1;
-	//auto prevcnt = cfgOut.laysCnt;
 	if(prev == (int)cnt)
 		return;
 	if(cnt < 2 || cnt > fsliders.vsliders.size()){
 		m_btOK.EnableWindow(FALSE);
+		prev = (int)cnt;
 		return;
 	}
 	prev = (int)cnt;

@@ -15,7 +15,7 @@ public:
 #endif
 
 	structLaysCfg cfgOut, cfgInp;
-	structLaysCfg doModal(structLaysCfg& cfg_lays);
+	structLaysCfg doModal(structLaysCfg cfg_lays);
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
