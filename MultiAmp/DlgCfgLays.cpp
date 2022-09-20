@@ -78,22 +78,22 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
 	fsliders.draw();
-	const int fmin = -100, fmax = 200;
-	for(int j = 0; j < (int)vslider.size(); j++){
-		vslider[j] = (CSliderCtrl*)GetDlgItem(3000 + j);
-		vedit[j] = (CEdit*)GetDlgItem(3100 + j);
-		vslider[j]->SetBuddy(vedit[j]);
-		vslider[j]->SetRange(fmin, fmax, FALSE);
-		vslider[j]->SetTicFreq(100);
+	//const int fmin = -100, fmax = 200;
+	//for(int j = 0; j < (int)vslider.size(); j++){
+	//	vslider[j] = (CSliderCtrl*)GetDlgItem(3000 + j);
+	//	vedit[j] = (CEdit*)GetDlgItem(3100 + j);
+	//	vslider[j]->SetBuddy(vedit[j]);
+	//	vslider[j]->SetRange(fmin, fmax, FALSE);
+	//	vslider[j]->SetTicFreq(100);
 
-		if(j < (int)cfgInp.vkf.size()){
-			vslider[j]->ShowWindow(SW_SHOWNORMAL);
-			vslider[j]->SetPos(cfgInp.vkf[j]);
-			vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
-		} else{
-			vslider[j]->ShowWindow(SW_HIDE);
-		}
-	}
+	//	if(j < (int)cfgInp.vkf.size()){
+	//		vslider[j]->ShowWindow(SW_SHOWNORMAL);
+	//		vslider[j]->SetPos(cfgInp.vkf[j]);
+	//		vedit[j]->SetWindowTextA(std::to_string(cfgInp.vkf[j]).c_str());
+	//	} else{
+	//		vslider[j]->ShowWindow(SW_HIDE);
+	//	}
+	//}
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){

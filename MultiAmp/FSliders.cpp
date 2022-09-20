@@ -13,12 +13,7 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	for(size_t j = 0; j < size_capacity; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
-
-		vsliders[j]->SetBuddy(vedits[j]);
-
-		const int show_mode = j < vkoefs->size() ? SW_SHOWNORMAL : SW_HIDE;
-		vsliders[j]->ShowWindow(show_mode);
-		vedits[j]->ShowWindow(show_mode);
+		//vsliders[j]->SetBuddy(vedits[j]);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::draw(){
@@ -40,7 +35,13 @@ void FSliders::draw(){
 		vsliders[j]->SetPos(vkoefs->at(j));
 		vsliders[j]->SetTicFreq(100);
 		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
+		vsliders[j]->ShowWindow(SW_SHOWNORMAL);
+		vedits[j]->ShowWindow(SW_SHOWNORMAL);
 		vsliders[j]->SetBuddy(vedits[j]);
+	}
+	for(size_t j = vkoefs->size(); j < vsliders.size(); j++){
+		vsliders[j]->ShowWindow(SW_HIDE);
+		vedits[j]->ShowWindow(SW_HIDE);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
@@ -52,9 +53,8 @@ void FSliders::saveVK(size_t newsize){
 		for(size_t j = 0; j < vkoefs->size(); j++)
 			vkoefs->at(j) = vsliders[j]->GetPos();
 	}
-	draw();	//setElements();
+	draw();	
 } // /////////////////////////////////////////////////////////////////////////
-
 void FSliders::rescale(size_t newsize){
 	struct xy{ double x, y; };
 
@@ -87,8 +87,6 @@ void FSliders::rescale(size_t newsize){
 		vkoefs->at(j) = lround(vnew[j].y);
 } // ////////////////////////////////////////////////////////////////////////
 bool FSliders::hscroll(HWND hwnd){
-	CSliderCtrl* pslider = NULL;
-	CEdit* pedit = NULL;
 	for(size_t j = 0; j < vkoefs->size(); j++){
 		if(vsliders[j]->m_hWnd == hwnd){
 			vedits[j]->SetWindowTextA(std::to_string(vsliders[j]->GetPos()).c_str());
