@@ -13,6 +13,12 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	for(size_t j = 0; j < size_capacity; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
+
+		vsliders[j]->SetBuddy(vedits[j]);
+
+		const int show_mode = j < vkoefs->size() ? SW_SHOWNORMAL : SW_HIDE;
+		vsliders[j]->ShowWindow(show_mode);
+		vedits[j]->ShowWindow(show_mode);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::draw(){
@@ -25,23 +31,16 @@ void FSliders::draw(){
 	rctSlider.left = rctSlider.right - rctSlider0.Width();
 
 	double h = ((double)rctFrame.Height() - 1.5 * height) / (vkoefs->size() - 1);
-	const int fmin = -100, fmax = 200;
 	for(size_t j = 0; j < vkoefs->size(); j++){
 		rctSlider.top = (LONG)(j * h);
 		rctSlider.bottom = rctSlider.top + height;
 		vsliders[j]->MoveWindow(rctSlider);
 		//_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
 		vsliders[j]->SetRange(fmin, fmax, FALSE);
-		vsliders[j]->SetTicFreq(100);
 		vsliders[j]->SetPos(vkoefs->at(j));
+		vsliders[j]->SetTicFreq(100);
 		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
 		vsliders[j]->SetBuddy(vedits[j]);
-		vsliders[j]->ShowWindow(SW_SHOWNORMAL);
-		vedits[j]->ShowWindow(SW_SHOWNORMAL);
-	}
-	for(size_t j = vkoefs->size(); j < vsliders.size(); j++){
-		vsliders[j]->ShowWindow(SW_HIDE);
-		vedits[j]->ShowWindow(SW_HIDE);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
@@ -53,12 +52,12 @@ void FSliders::saveVK(size_t newsize){
 		for(size_t j = 0; j < vkoefs->size(); j++)
 			vkoefs->at(j) = vsliders[j]->GetPos();
 	}
-	draw();
+	draw();	//setElements();
 } // /////////////////////////////////////////////////////////////////////////
+
 void FSliders::rescale(size_t newsize){
 	struct xy{ double x, y; };
 
-	if(newsize > vsliders.size()) return;
 	size_t oldsize = vkoefs->size();
 	std::vector<xy> vold(oldsize);
 	std::vector<xy> vnew(newsize);
