@@ -22,33 +22,28 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::draw(){
-	CRect rctFrame, rctSliderTop, rctEdit, rctSlider;
+	CRect rctFrame, rctSlider, rctSlider0;
 	frame->GetWindowRect(rctFrame);
-	vsliders[0]->GetWindowRect(rctSliderTop);
-	vedits[0]->GetWindowRect(rctEdit);
+	vsliders[0]->GetWindowRect(rctSlider0);
+	int width = rctSlider0.Width();
+	int height = rctSlider0.Height();
 
-	rctSlider.top = rctSliderTop.top - rctFrame.top;
-	rctSlider.bottom = rctSliderTop.bottom - rctFrame.top;
-	rctSlider.left = rctSliderTop.left - rctFrame.left;
-	rctSlider.right = rctSliderTop.right - rctFrame.left;
+	rctSlider.right = rctFrame.right - rctFrame.left;
+	rctSlider.left = rctFrame.right - width - rctFrame.left;
 
-	double h = ((double)rctFrame.bottom - rctSliderTop.top - rctSliderTop.Height()) / (vsliders.size() - 1);
-	for(int j = 0; j < (int)vsliders.size(); j++){
-		int d = (int)(h * j + 0.5);
-		rctSlider.top = rctSliderTop.top + d - rctFrame.top;
-		rctSlider.bottom = rctSliderTop.bottom + d - rctFrame.top;
+	double h = ((double)rctFrame.Height() - 1.5 * height) / (vkoefs->size() - 1);
+	for(size_t j = 0; j < vkoefs->size(); j++){
+		rctSlider.top = (LONG)(j * h);
+		rctSlider.bottom = rctSlider.top + height;
 		vsliders[j]->MoveWindow(rctSlider);
+		_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
 	}
 
-	for(size_t j = 0; j < vsliders.size(); j++){
-		if(j < vkoefs->size()){
-			vsliders[j]->SetRange(fmin, fmax, TRUE);
-			vsliders[j]->SetPos(vkoefs->at(j));
-			vsliders[j]->SetTicFreq(100);
-			vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
-		} else{
-
-		}
+	for(size_t j = 0; j < vkoefs->size(); j++){
+		vsliders[j]->SetRange(fmin, fmax, FALSE);
+		vsliders[j]->SetPos(vkoefs->at(j));
+		vsliders[j]->SetTicFreq(100);
+		vedits[j]->SetWindowTextA(std::to_string(vkoefs->at(j)).c_str());
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::saveVK(size_t newsize){
