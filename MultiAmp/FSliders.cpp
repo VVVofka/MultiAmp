@@ -89,15 +89,11 @@ void FSliders::rescale(size_t newsize){
 bool FSliders::hscroll(HWND hwnd){
 	CSliderCtrl* pslider = NULL;
 	CEdit* pedit = NULL;
-	for(size_t j = 0; j < vsliders.size(); j++){
+	for(size_t j = 0; j < vkoefs->size(); j++){
 		if(vsliders[j]->m_hWnd == hwnd){
-			pslider = vsliders[j];
-			pedit = vedits[j];
-			break;
+			vedits[j]->SetWindowTextA(std::to_string(vsliders[j]->GetPos()).c_str());
+			return true;
 		}
 	}
-	if(pslider == NULL)
-		return false;
-	pedit->SetWindowTextA(std::to_string(pslider->GetPos()).c_str());
-	return true;
+	return false;
 } // /////////////////////////////////////////////////////////////////////////

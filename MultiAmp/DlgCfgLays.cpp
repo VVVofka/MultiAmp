@@ -125,7 +125,6 @@ void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
-	//if(fsliders.hscroll(pScrollBar->m_hWnd))
-	//	this->Invalidate(TRUE);
+	fsliders.hscroll(pScrollBar->m_hWnd);
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
