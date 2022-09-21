@@ -38,7 +38,7 @@ public:
 
 private:
 	void chngCnt(size_t cnt);
-	int iEdit(int id);
+	bool iEdit(const int id, int& out, const int digits = 2);
 public:
 	CButton m_btOK;
 
