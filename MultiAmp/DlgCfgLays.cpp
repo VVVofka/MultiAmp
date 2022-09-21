@@ -44,7 +44,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 // DlgCfgLays message handlers
 
 void DlgCfgLays::OnBnClickedOk(){
-	fsliders.saveVK(cfgOut.laysCnt);
+	fsliders.saveVK(cfgOut.laysCnt());
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
@@ -64,11 +64,11 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_spinCnt.SetRange(2, 20);		// диапазон
 	m_spinCnt.SetPos(5);		    // позиция
 
-	if(cfgInp.laysCnt == 0)
-		cfgInp.laysCnt = 2;
+	if(cfgInp.laysCnt() == 0)
+		cfgInp.vkf.resize(2, 1);
 	m_topX.SetWindowTextA(std::to_string(cfgInp.topX).c_str());
 	m_topY.SetWindowTextA(std::to_string(cfgInp.topY).c_str());
-	m_cnt.SetWindowTextA(std::to_string(cfgInp.laysCnt).c_str());
+	m_cnt.SetWindowTextA(std::to_string(cfgInp.laysCnt()).c_str());
 	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
 
@@ -110,12 +110,12 @@ void DlgCfgLays::chngCnt(size_t cnt){
 		return;
 	}
 	prev = (int)cnt;
-	cfgOut.laysCnt = cnt;
+	cfgOut.vkf.resize(cnt, 1);
 
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 	m_pointsAll.SetWindowTextA(std::to_string(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
-	fsliders.saveVK(cfgOut.laysCnt);
+	fsliders.saveVK(cfgOut.laysCnt());
 	m_btOK.EnableWindow(TRUE);
 	Invalidate();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
