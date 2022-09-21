@@ -12,6 +12,7 @@ public:
 	void draw();
 	void saveVK(size_t newsize);
 	bool hscroll(HWND hwnd);
+	void chngEdit(size_t idx);
 
 	std::vector<CSliderCtrl*> vsliders;
 	std::vector<CEdit*> vedits;

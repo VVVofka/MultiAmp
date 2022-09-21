@@ -32,6 +32,26 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_CNT, &DlgCfgLays::OnDeltaposSpinCnt)
 	ON_WM_HSCROLL()
 	ON_EN_CHANGE(IDC_ED_LAYS_CNT, &DlgCfgLays::OnEnChangeEdLaysCnt)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT00, &DlgCfgLays::OnEnChangeLayscfgEdit00)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT01, &DlgCfgLays::OnEnChangeLayscfgEdit01)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT02, &DlgCfgLays::OnEnChangeLayscfgEdit02)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT03, &DlgCfgLays::OnEnChangeLayscfgEdit03)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT04, &DlgCfgLays::OnEnChangeLayscfgEdit04)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT05, &DlgCfgLays::OnEnChangeLayscfgEdit05)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT06, &DlgCfgLays::OnEnChangeLayscfgEdit06)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT07, &DlgCfgLays::OnEnChangeLayscfgEdit07)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT08, &DlgCfgLays::OnEnChangeLayscfgEdit08)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT09, &DlgCfgLays::OnEnChangeLayscfgEdit09)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT10, &DlgCfgLays::OnEnChangeLayscfgEdit10)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT11, &DlgCfgLays::OnEnChangeLayscfgEdit11)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT12, &DlgCfgLays::OnEnChangeLayscfgEdit12)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT13, &DlgCfgLays::OnEnChangeLayscfgEdit13)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT14, &DlgCfgLays::OnEnChangeLayscfgEdit14)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT15, &DlgCfgLays::OnEnChangeLayscfgEdit15)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT16, &DlgCfgLays::OnEnChangeLayscfgEdit16)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT17, &DlgCfgLays::OnEnChangeLayscfgEdit17)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT18, &DlgCfgLays::OnEnChangeLayscfgEdit18)
+	ON_EN_CHANGE(IDC_LAYSCFG_EDIT19, &DlgCfgLays::OnEnChangeLayscfgEdit19)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
@@ -45,6 +65,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 
 void DlgCfgLays::OnBnClickedOk(){
 	fsliders.saveVK(cfgOut.laysCnt());
+
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
@@ -128,3 +149,26 @@ void DlgCfgLays::OnEnChangeEdLaysCnt(){
 		chngCnt((size_t)cnt);
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+int DlgCfgLays::iEdit(int id){
+	return 0;
+} // ///////////////////////////////////////////////////////////////////////////////////////////
+void DlgCfgLays::OnEnChangeLayscfgEdit00(){ fsliders.chngEdit(0); }
+void DlgCfgLays::OnEnChangeLayscfgEdit01(){ fsliders.chngEdit(1); }
+void DlgCfgLays::OnEnChangeLayscfgEdit02(){ fsliders.chngEdit(2); }
+void DlgCfgLays::OnEnChangeLayscfgEdit03(){ fsliders.chngEdit(3); }
+void DlgCfgLays::OnEnChangeLayscfgEdit04(){ fsliders.chngEdit(4); }
+void DlgCfgLays::OnEnChangeLayscfgEdit05(){ fsliders.chngEdit(5); }
+void DlgCfgLays::OnEnChangeLayscfgEdit06(){ fsliders.chngEdit(6); }
+void DlgCfgLays::OnEnChangeLayscfgEdit07(){ fsliders.chngEdit(7); }
+void DlgCfgLays::OnEnChangeLayscfgEdit08(){ fsliders.chngEdit(8); }
+void DlgCfgLays::OnEnChangeLayscfgEdit09(){ fsliders.chngEdit(9); }
+void DlgCfgLays::OnEnChangeLayscfgEdit10(){ fsliders.chngEdit(10); }
+void DlgCfgLays::OnEnChangeLayscfgEdit11(){ fsliders.chngEdit(11); }
+void DlgCfgLays::OnEnChangeLayscfgEdit12(){ fsliders.chngEdit(12); }
+void DlgCfgLays::OnEnChangeLayscfgEdit13(){ fsliders.chngEdit(13); }
+void DlgCfgLays::OnEnChangeLayscfgEdit14(){ fsliders.chngEdit(14); }
+void DlgCfgLays::OnEnChangeLayscfgEdit15(){ fsliders.chngEdit(15); }
+void DlgCfgLays::OnEnChangeLayscfgEdit16(){ fsliders.chngEdit(16); }
+void DlgCfgLays::OnEnChangeLayscfgEdit17(){ fsliders.chngEdit(17); }
+void DlgCfgLays::OnEnChangeLayscfgEdit18(){ fsliders.chngEdit(18); }
+void DlgCfgLays::OnEnChangeLayscfgEdit19(){ fsliders.chngEdit(19); }

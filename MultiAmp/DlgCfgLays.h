@@ -34,15 +34,42 @@ public:
 	CSpinButtonCtrl m_spinTopX;
 	CSpinButtonCtrl m_spinTopY;
 	CSpinButtonCtrl m_spinCnt;
-	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
 	CStatic m_pointsAll;
 
 private:
 	void chngCnt(size_t cnt);
+	int iEdit(int id);
 public:
-	afx_msg void OnEnChangeEdLaysCnt();
 	CButton m_btOK;
+
+	int iTopX(){ return iEdit(IDC_CNT_LAYS_X_MIN); };
+	int iTopY(){ return iEdit(IDC_CNT_LAYS_Y_MIN); };
+	int iLaysCnt(){ return iEdit(IDC_ED_LAYS_CNT); };
+	int iKoefF(int idx){ return iEdit(IDC_LAYSCFG_EDIT00 + idx); };
+
+	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar);
+	afx_msg void OnEnChangeEdLaysCnt();
+	afx_msg void OnEnChangeLayscfgEdit00();
+	afx_msg void OnEnChangeLayscfgEdit01();
+	afx_msg void OnEnChangeLayscfgEdit02();
+	afx_msg void OnEnChangeLayscfgEdit03();
+	afx_msg void OnEnChangeLayscfgEdit04();
+	afx_msg void OnEnChangeLayscfgEdit05();
+	afx_msg void OnEnChangeLayscfgEdit06();
+	afx_msg void OnEnChangeLayscfgEdit07();
+	afx_msg void OnEnChangeLayscfgEdit08();
+	afx_msg void OnEnChangeLayscfgEdit09();
+	afx_msg void OnEnChangeLayscfgEdit10();
+	afx_msg void OnEnChangeLayscfgEdit11();
+	afx_msg void OnEnChangeLayscfgEdit12();
+	afx_msg void OnEnChangeLayscfgEdit13();
+	afx_msg void OnEnChangeLayscfgEdit14();
+	afx_msg void OnEnChangeLayscfgEdit15();
+	afx_msg void OnEnChangeLayscfgEdit16();
+	afx_msg void OnEnChangeLayscfgEdit17();
+	afx_msg void OnEnChangeLayscfgEdit18();
+	afx_msg void OnEnChangeLayscfgEdit19();
 };
