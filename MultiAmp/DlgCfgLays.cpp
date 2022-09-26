@@ -149,10 +149,15 @@ void DlgCfgLays::OnEnChangeEdLaysCnt(){
 		chngCnt((size_t)cnt);
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////
-bool DlgCfgLays::iEdit(const int id, int& out, const int digits){
-	BOOL* no_err;
-	out = GetDlgItemInt(id, no_err, FALSE);
-	return no_err != 0;
+//bool DlgCfgLays::iEdit(const int id, int& out, const int digits){
+//	BOOL* no_err;
+//	out = GetDlgItemInt(id, no_err, FALSE);
+//	return no_err != 0;
+//} // ///////////////////////////////////////////////////////////////////////////////////////////
+int DlgCfgLays::iEdit(const int id, const int def, const int digits){
+	BOOL bSuccess = FALSE;
+	int out = GetDlgItemInt(id, &bSuccess, FALSE);
+	return bSuccess? out : def;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnEnChangeLayscfgEdit00(){ fsliders.chngEdit(0); }
 void DlgCfgLays::OnEnChangeLayscfgEdit01(){ fsliders.chngEdit(1); }

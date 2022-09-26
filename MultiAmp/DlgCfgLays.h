@@ -38,14 +38,15 @@ public:
 
 private:
 	void chngCnt(size_t cnt);
-	bool iEdit(const int id, int& out, const int digits = 2);
+	//bool iEdit(const int id, int& out, const int digits = 2);
+	int iEdit(const int id, const int def, const int digits = 2);
 public:
 	CButton m_btOK;
 
-	int iTopX(){ return iEdit(IDC_CNT_LAYS_X_MIN); };
-	int iTopY(){ return iEdit(IDC_CNT_LAYS_Y_MIN); };
-	int iLaysCnt(){ return iEdit(IDC_ED_LAYS_CNT); };
-	int iKoefF(int idx){ return iEdit(IDC_LAYSCFG_EDIT00 + idx); };
+	int iTopX(){ return  iEdit(IDC_CNT_LAYS_X_MIN, 1, 2); };
+	int iTopY(){ return iEdit(IDC_CNT_LAYS_Y_MIN, 1, 2); };
+	int iLaysCnt(const int def = 5){ return iEdit(IDC_ED_LAYS_CNT, def, 2); };
+	int iKoefF(int idx){ return iEdit(IDC_LAYSCFG_EDIT00 + idx, 1, 3); };
 
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
