@@ -4,8 +4,10 @@
 class FSliders{
 	CDialog* dlg = NULL;	// TODO: del?
 	CWnd* frame = NULL;
+	int idxSlider0 = 0, idxEdit0 = 0;
 
 	void rescale(size_t newsize);
+	int iEdit(size_t idx, const int def, const int digits = 3);
 
 public:
 	void create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int>* v_koefs, size_t size_capacity);

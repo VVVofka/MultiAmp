@@ -10,10 +10,11 @@ void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_t
 	vsliders.resize(size_capacity);
 	vedits.resize(size_capacity);
 	vkoefs = v_koefs;
+	idxSlider0 = id_slider_top;
+	idxEdit0 = id_edit_top;
 	for(size_t j = 0; j < size_capacity; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
-		//vsliders[j]->SetBuddy(vedits[j]);
 	}
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::draw(){
@@ -27,7 +28,8 @@ void FSliders::draw(){
 
 	double h = ((double)rctFrame.Height() - 1.5 * height) / (vkoefs->size() - 1);
 	for(size_t j = 0; j < vkoefs->size(); j++){
-		rctSlider.top = (LONG)(j * h);
+		int shift = height / 2;
+		rctSlider.top = (LONG)(j * h) + shift;
 		rctSlider.bottom = rctSlider.top + height;
 		vsliders[j]->MoveWindow(rctSlider);
 		//_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
@@ -96,4 +98,17 @@ bool FSliders::hscroll(HWND hwnd){
 	return false;
 } // /////////////////////////////////////////////////////////////////////////
 void FSliders::chngEdit(size_t idx){
+	int oldSlider = vsliders[idx]->GetPos();
+	int newSlider = iEdit(idx, 100, 3);
+	if(oldSlider != newSlider)
+		vsliders[idx]->SetPos(newSlider);
 } // /////////////////////////////////////////////////////////////////////////
+int FSliders::iEdit(size_t idx, const int def, const int digits){
+	BOOL bSuccess = FALSE;
+	int out = dlg->GetDlgItemInt(idxEdit0 + idx, &bSuccess, TRUE);
+	if(bSuccess == FALSE)
+		return def;
+	if(out < vsliders[idx]->GetRangeMin() || out > vsliders[idx]->GetRangeMax())
+		out = 100;
+	return out;
+} // ///////////////////////////////////////////////////////////////////////////////////////////

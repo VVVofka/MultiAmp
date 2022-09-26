@@ -52,6 +52,26 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 	ON_EN_CHANGE(IDC_LAYSCFG_EDIT17, &DlgCfgLays::OnEnChangeLayscfgEdit17)
 	ON_EN_CHANGE(IDC_LAYSCFG_EDIT18, &DlgCfgLays::OnEnChangeLayscfgEdit18)
 	ON_EN_CHANGE(IDC_LAYSCFG_EDIT19, &DlgCfgLays::OnEnChangeLayscfgEdit19)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT00, &DlgCfgLays::OnEnKillfocusLayscfgEdit00)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT01, &DlgCfgLays::OnEnKillfocusLayscfgEdit01)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT02, &DlgCfgLays::OnEnKillfocusLayscfgEdit02)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT03, &DlgCfgLays::OnEnKillfocusLayscfgEdit03)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT04, &DlgCfgLays::OnEnKillfocusLayscfgEdit04)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT05, &DlgCfgLays::OnEnKillfocusLayscfgEdit05)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT06, &DlgCfgLays::OnEnKillfocusLayscfgEdit06)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT07, &DlgCfgLays::OnEnKillfocusLayscfgEdit07)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT08, &DlgCfgLays::OnEnKillfocusLayscfgEdit08)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT09, &DlgCfgLays::OnEnKillfocusLayscfgEdit09)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT10, &DlgCfgLays::OnEnKillfocusLayscfgEdit10)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT11, &DlgCfgLays::OnEnKillfocusLayscfgEdit11)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT12, &DlgCfgLays::OnEnKillfocusLayscfgEdit12)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT13, &DlgCfgLays::OnEnKillfocusLayscfgEdit13)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT14, &DlgCfgLays::OnEnKillfocusLayscfgEdit14)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT15, &DlgCfgLays::OnEnKillfocusLayscfgEdit15)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT16, &DlgCfgLays::OnEnKillfocusLayscfgEdit16)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT17, &DlgCfgLays::OnEnKillfocusLayscfgEdit17)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT18, &DlgCfgLays::OnEnKillfocusLayscfgEdit18)
+	ON_EN_KILLFOCUS(IDC_LAYSCFG_EDIT19, &DlgCfgLays::OnEnKillfocusLayscfgEdit19)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
@@ -149,15 +169,10 @@ void DlgCfgLays::OnEnChangeEdLaysCnt(){
 		chngCnt((size_t)cnt);
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////
-//bool DlgCfgLays::iEdit(const int id, int& out, const int digits){
-//	BOOL* no_err;
-//	out = GetDlgItemInt(id, no_err, FALSE);
-//	return no_err != 0;
-//} // ///////////////////////////////////////////////////////////////////////////////////////////
 int DlgCfgLays::iEdit(const int id, const int def, const int digits){
 	BOOL bSuccess = FALSE;
 	int out = GetDlgItemInt(id, &bSuccess, FALSE);
-	return bSuccess? out : def;
+	return bSuccess ? out : def;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnEnChangeLayscfgEdit00(){ fsliders.chngEdit(0); }
 void DlgCfgLays::OnEnChangeLayscfgEdit01(){ fsliders.chngEdit(1); }
@@ -179,3 +194,40 @@ void DlgCfgLays::OnEnChangeLayscfgEdit16(){ fsliders.chngEdit(16); }
 void DlgCfgLays::OnEnChangeLayscfgEdit17(){ fsliders.chngEdit(17); }
 void DlgCfgLays::OnEnChangeLayscfgEdit18(){ fsliders.chngEdit(18); }
 void DlgCfgLays::OnEnChangeLayscfgEdit19(){ fsliders.chngEdit(19); }
+
+void DlgCfgLays::OnEnKillfocusLayscfgEdit00(){ slid2ed(0); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit01(){ slid2ed(1); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit02(){ slid2ed(2); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit03(){ slid2ed(3); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit04(){ slid2ed(4); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit05(){ slid2ed(5); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit06(){ slid2ed(6); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit07(){ slid2ed(7); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit08(){ slid2ed(8); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit09(){ slid2ed(9); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit10(){ slid2ed(10); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit11(){ slid2ed(11); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit12(){ slid2ed(12); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit13(){ slid2ed(13); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit14(){ slid2ed(14); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit15(){ slid2ed(15); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit16(){ slid2ed(16); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit17(){ slid2ed(17); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit18(){ slid2ed(18); }
+void DlgCfgLays::OnEnKillfocusLayscfgEdit19(){ slid2ed(19); }
+
+void DlgCfgLays::slid2ed(size_t idx){
+	BOOL bSuccess = FALSE;
+	char buf1[5] = "", buf2[5] = "";
+	GetDlgItemText(IDC_LAYSCFG_EDIT00 + idx, buf1, 5);
+	int out = GetDlgItemInt(IDC_LAYSCFG_EDIT00 + idx, &bSuccess, TRUE);
+	if(!bSuccess)
+		out = 100;
+	else if(out < fsliders.vsliders[idx]->GetRangeMin())
+		out = fsliders.vsliders[idx]->GetRangeMin();
+	else if(out > fsliders.vsliders[idx]->GetRangeMax())
+		out = fsliders.vsliders[idx]->GetRangeMax();
+	_itoa_s(out, buf2, 10);
+	if(strcmp(buf1, buf2) != 0)
+		SetDlgItemText(IDC_LAYSCFG_EDIT00 + idx, buf2);
+} // /////////////////////////////////////////////////////////////////

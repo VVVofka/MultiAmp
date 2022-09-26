@@ -38,8 +38,8 @@ public:
 
 private:
 	void chngCnt(size_t cnt);
-	//bool iEdit(const int id, int& out, const int digits = 2);
 	int iEdit(const int id, const int def, const int digits = 2);
+	void slid2ed(size_t idx);
 public:
 	CButton m_btOK;
 
@@ -73,4 +73,24 @@ public:
 	afx_msg void OnEnChangeLayscfgEdit17();
 	afx_msg void OnEnChangeLayscfgEdit18();
 	afx_msg void OnEnChangeLayscfgEdit19();
+	afx_msg void OnEnKillfocusLayscfgEdit00();
+	afx_msg void OnEnKillfocusLayscfgEdit01();
+	afx_msg void OnEnKillfocusLayscfgEdit02();
+	afx_msg void OnEnKillfocusLayscfgEdit03();
+	afx_msg void OnEnKillfocusLayscfgEdit04();
+	afx_msg void OnEnKillfocusLayscfgEdit05();
+	afx_msg void OnEnKillfocusLayscfgEdit06();
+	afx_msg void OnEnKillfocusLayscfgEdit07();
+	afx_msg void OnEnKillfocusLayscfgEdit08();
+	afx_msg void OnEnKillfocusLayscfgEdit09();
+	afx_msg void OnEnKillfocusLayscfgEdit10();
+	afx_msg void OnEnKillfocusLayscfgEdit11();
+	afx_msg void OnEnKillfocusLayscfgEdit12();
+	afx_msg void OnEnKillfocusLayscfgEdit13();
+	afx_msg void OnEnKillfocusLayscfgEdit14();
+	afx_msg void OnEnKillfocusLayscfgEdit15();
+	afx_msg void OnEnKillfocusLayscfgEdit16();
+	afx_msg void OnEnKillfocusLayscfgEdit17();
+	afx_msg void OnEnKillfocusLayscfgEdit18();
+	afx_msg void OnEnKillfocusLayscfgEdit19();
 };
