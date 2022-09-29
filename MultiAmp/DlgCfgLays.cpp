@@ -7,10 +7,9 @@
 // DlgCfgLays dialog
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)
 
-DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){} // //////////////////////////////////////////////////////////////////////////////
-
+DlgCfgLays::DlgCfgLays(CWnd* pParent) : CDialog(IDD_CFG_LAYS, pParent){}
 DlgCfgLays::~DlgCfgLays(){}
-
+// //////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_CNT_LAYS_X_MIN, m_topX);
@@ -75,45 +74,38 @@ BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
 END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
-	cfgOut = cfgInp = cfg_lays;
+	cfgOut = cfg_lays;
+	auto cfgInp = cfgOut;
 	INT_PTR retDlg = CDialog::DoModal();
 	if(retDlg == IDOK)
 		return cfgOut;
 	return cfgInp;
 } // //////////////////////////////////////////////////////////////////////////////
 // DlgCfgLays message handlers
-
-void DlgCfgLays::OnBnClickedOk(){
-	fsliders.saveVK(cfgOut.laysCnt());
-
-	CDialog::OnOK();
-} // ///////////////////////////////////////////////////////////////////////////////////////////
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
 
 	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, &cfgOut.vkf, 20);
+	fsliders.draw();
 
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
 	m_spinTopX.SetRange(1, 20);		// диапазон
-	m_spinTopX.SetPos(1);		    // позиция
+	m_spinTopX.SetPos((int)cfgOut.topX);		    // позиция
 
 	m_spinTopY.SetBuddy(&m_topY);	// подружить окно
 	m_spinTopY.SetRange(1, 20);		// диапазон
-	m_spinTopY.SetPos(1);		    // позиция
+	m_spinTopY.SetPos((int)cfgOut.topY);		    // позиция
 
 	m_spinCnt.SetBuddy(&m_cnt);		// подружить окно
 	m_spinCnt.SetRange(2, 20);		// диапазон
-	m_spinCnt.SetPos(5);		    // позиция
+	m_spinCnt.SetPos((int)cfgOut.vkf.size());		    // позиция
 
-	if(cfgInp.laysCnt() == 0)
-		cfgInp.vkf.resize(2, 1);
-	m_topX.SetWindowTextA(std::to_string(cfgInp.topX).c_str());
-	m_topY.SetWindowTextA(std::to_string(cfgInp.topY).c_str());
-	m_cnt.SetWindowTextA(std::to_string(cfgInp.laysCnt()).c_str());
-	m_lay0X.SetWindowTextA(std::to_string(cfgInp.bottomX()).c_str());
-	m_lay0Y.SetWindowTextA(std::to_string(cfgInp.bottomY()).c_str());
+	m_topX.SetWindowTextA(std::to_string(m_spinTopX.GetPos()).c_str());
+	m_topY.SetWindowTextA(std::to_string(m_spinTopY.GetPos()).c_str());
+	m_cnt.SetWindowTextA(std::to_string(m_spinCnt.GetPos()).c_str());
+	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
+	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
 
-	fsliders.draw();
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -231,3 +223,7 @@ void DlgCfgLays::slid2ed(size_t idx){
 	if(strcmp(buf1, buf2) != 0)
 		SetDlgItemText(IDC_LAYSCFG_EDIT00 + idx, buf2);
 } // /////////////////////////////////////////////////////////////////
+void DlgCfgLays::OnBnClickedOk(){
+	fsliders.saveVK(cfgOut.laysCnt());
+	CDialog::OnOK();
+} // ///////////////////////////////////////////////////////////////////////////////////////////

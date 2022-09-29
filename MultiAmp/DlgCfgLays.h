@@ -14,7 +14,7 @@ public:
 	enum{ IDD = IDD_CFG_LAYS };
 #endif
 
-	structLaysCfg cfgOut, cfgInp;
+	structLaysCfg cfgOut;
 	structLaysCfg doModal(structLaysCfg cfg_lays);
 
 protected:
