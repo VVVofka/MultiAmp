@@ -15,6 +15,7 @@
 #define IDB_BITMAP1                     133
 #define IDB_CELL_EMPTY                  141
 #define IDD_CFG_LAYS                    143
+#define IDD_DATA                        145
 #define IDC_BUTTON1                     1000
 #define IDC_BT_JSON                     1001
 #define IDAPPLY                         1001
@@ -23,6 +24,7 @@
 #define IDC_MAINDLG_INFO                1012
 #define IDC_BT_MASK_F                   1013
 #define IDC_BT_LAYS                     1014
+#define IDC_BT_DATA                     1015
 #define IDC_BUTTON2                     1016
 #define IDC_BUTTON3                     1017
 #define IDC_SYMETRY_F                   1020
@@ -40,7 +42,16 @@
 #define IDC_LAYSCFG_EDIT_TOP            1032
 #define IDC_ST_LAYSCFG_POINTS_ALL       1032
 #define IDC_LAYSCFG_SLIDER_BOTTOM       1033
+#define IDC_FRM_DATA_SIZE               1033
 #define IDC_LAYSCFG_EDIT_BOTTOM         1034
+#define IDC_TXT_DATA_SIZE_X             1034
+#define IDC_CPT_DATA_X                  1035
+#define IDC_CPT_DATA_Y                  1036
+#define IDC_TXT_DATA_SIZE_Y             1037
+#define IDC_CPT_DATA_ALL                1038
+#define IDC_TXT_DATA_SIZE_ALL           1039
+#define IDC_FLG_DATA_COUNT              1042
+#define IDC_FLG_DATA_PROC               1043
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -182,9 +193,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        145
+#define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1033
-#define _APS_NEXT_SYMED_VALUE           109
+#define _APS_NEXT_CONTROL_VALUE         1044
+#define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif

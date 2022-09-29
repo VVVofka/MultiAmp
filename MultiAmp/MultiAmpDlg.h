@@ -48,4 +48,5 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedBtMaskF();
 	afx_msg void OnBnClickedBtLays();
+	afx_msg void OnBnClickedBtData();
 };

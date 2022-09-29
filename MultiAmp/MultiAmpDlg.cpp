@@ -6,6 +6,7 @@
 #include "afxdialogex.h"
 #include "resource.h"
 #include "DlgCfgLays.h"
+#include "DlgData.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -30,6 +31,7 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_BT_MASK_F, &CMultiAmpDlg::OnBnClickedBtMaskF)
 	ON_BN_CLICKED(IDC_BT_LAYS, &CMultiAmpDlg::OnBnClickedBtLays)
+	ON_BN_CLICKED(IDC_BT_DATA, &CMultiAmpDlg::OnBnClickedBtData)
 END_MESSAGE_MAP()
 
 // CMultiAmpDlg message handlers
@@ -176,3 +178,7 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 	structLaysCfg ret = dlgcfgLays.doModal(layscfg);
 	setLaysCfg("tstDlg.xml", ret);
 }  // /////////////////////////////////////////////////////////
+void CMultiAmpDlg::OnBnClickedBtData(){
+	DlgData dlgdata;
+	dlgdata.DoModal();
+} // /////////////////////////////////////////////////////////////////////////////////

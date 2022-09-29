@@ -188,6 +188,7 @@
     <ClInclude Include="MDX.h" />
     <ClInclude Include="MDX2.h" />
     <ClInclude Include="Model2D.h" />
+    <ClInclude Include="myRnd.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
     <ClInclude Include="pch.h" />
