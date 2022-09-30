@@ -29,6 +29,7 @@ void DlgData::OnBnClickedFlgDataProc(){
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
 	// TODO:  Add extra initialization here
+
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
