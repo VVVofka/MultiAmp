@@ -75,6 +75,9 @@
     <ClInclude Include="DlgData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DlgDataData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">

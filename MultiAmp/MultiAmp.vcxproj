@@ -211,6 +211,7 @@
     <ClInclude Include="Directs.h" />
     <ClInclude Include="DlgCfgLays.h" />
     <ClInclude Include="DlgData.h" />
+    <ClInclude Include="DlgDataData.h" />
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
     <ClInclude Include="framework.h" />
