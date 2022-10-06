@@ -18,7 +18,6 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	BOOL m_size_type;
 	INT_PTR doModal(DlgDataData* in_data);
 	afx_msg void OnBnClickedFlgDataCount();
 	afx_msg void OnBnClickedFlgDataProc();
@@ -28,9 +27,16 @@ public:
 	CStatic m_size_x;
 	CStatic m_size_y;
 	CStatic m_size;
+	CEdit m_count_proc;
+	CButton m_cnt_proc_type;
 
 private:
 	std::string razd(size_t u);
+	size_t getVal();
+	float getSigma();
+	std::string float_to_str(float val, int digits);
+	static void drawScr(std::vector<DlgDataDataItem>, size_t sz_x, size_t sz_y, UINT id_control);
 public:
-	CEdit m_count_proc;
+	CEdit m_sigma;
+	afx_msg void OnBnClickedBtDataGener();
 };

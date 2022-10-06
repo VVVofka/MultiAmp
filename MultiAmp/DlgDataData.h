@@ -4,15 +4,16 @@
 #include <random>
 #include <algorithm>
 using namespace Concurrency::graphics;
-class DlgDataData{
-public:
 	struct DlgDataDataItem{
 		size_t offset;
 		float_2 speed;
 	};
+class DlgDataData{
+public:
 
 	size_t szX;
 	size_t szY;
+	float sigma = 0;
 	std::vector<DlgDataDataItem> v;
 
 	bool create(size_t sz_x, size_t sz_y, float proc, float sigma);

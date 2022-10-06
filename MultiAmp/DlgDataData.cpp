@@ -1,7 +1,8 @@
 #include "pch.h"
 #include "DlgDataData.h"
 
-bool DlgDataData::create(size_t sz_x, size_t sz_y, float proc, float sigma){
+bool DlgDataData::create(size_t sz_x, size_t sz_y, float proc, float in_sigma){
+	sigma = in_sigma;
 	v.resize((size_t)((szX = sz_x) * (szY = sz_y) * proc + 0.5));
 	std::vector<int> ar(szX * szY, -1);
 
