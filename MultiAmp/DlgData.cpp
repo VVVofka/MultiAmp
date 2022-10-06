@@ -14,6 +14,7 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_TXT_DATA_SIZE_X, m_size_x);
 	DDX_Control(pDX, IDC_TXT_DATA_SIZE_Y, m_size_y);
 	DDX_Control(pDX, IDC_TXT_DATA_SIZE_ALL, m_size);
+	DDX_Control(pDX, IDC_TXT_DATA_COUNT_PROC, m_count_proc);
 } // ///////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgData, CDialog)
@@ -23,15 +24,20 @@ BEGIN_MESSAGE_MAP(DlgData, CDialog)
 END_MESSAGE_MAP()
 
 // DlgData message handlers
-void DlgData::OnBnClickedFlgDataCount(){} // ///////////////////////////////////////////////////////////////////////////
+void DlgData::OnBnClickedFlgDataCount(){
+	size_t cnt = (size_t)data->cnt();
+	m_count_proc.SetWindowTextA(razd(cnt).c_str());
+} // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedFlgDataProc(){
-	// TODO: Add your control notification handler code here
+	int cntproc = (100 * data->cnt()) / data->szAll();
+	m_count_proc.SetWindowTextA(std::to_string(cntproc).c_str());
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
 	m_size_x.SetWindowTextA(razd(data->szX).c_str());
 	m_size_y.SetWindowTextA(razd(data->szY).c_str());
 	m_size.SetWindowTextA(razd(data->szAll()).c_str());
+	OnBnClickedFlgDataCount();
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){

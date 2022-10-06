@@ -31,4 +31,6 @@ public:
 
 private:
 	std::string razd(size_t u);
+public:
+	CEdit m_count_proc;
 };

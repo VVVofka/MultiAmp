@@ -228,6 +228,7 @@
     <ClCompile Include="CMCell.cpp" />
     <ClCompile Include="DlgCfgLays.cpp" />
     <ClCompile Include="DlgData.cpp" />
+    <ClCompile Include="DlgDataData.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />
     <ClCompile Include="FSliders.cpp" />
