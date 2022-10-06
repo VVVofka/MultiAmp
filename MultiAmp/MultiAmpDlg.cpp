@@ -181,8 +181,6 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 void CMultiAmpDlg::OnBnClickedBtData(){
 	DlgData dlgdata;
 	DlgDataData data;
-	data.szX = 1024;
-	data.szY = 1024;
-	
+	data.create(1024, 1024, 0.1f);
 	dlgdata.doModal(&data);
 } // /////////////////////////////////////////////////////////////////////////////////

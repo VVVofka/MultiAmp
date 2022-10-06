@@ -20,13 +20,19 @@ public:
 
 		std::random_device rd;   // non-deterministic generator
 		std::mt19937 gen(rd());  // to seed mersenne twister.
-		std::uniform_int_distribution<> distOfs(0, v.size() - 1); // distribute results between  inclusive.
+		std::uniform_int_distribution<> distOfs(0, szAll() - 1); // distribute results between  inclusive.
 		std::uniform_real_distribution<> distSpeed(-1, 1);			// distribute results between  inclusive.
 
 		for(size_t j = 0; j < v.size(); j++){
 			while(true){
 				size_t ofs = distOfs(gen);
-				bool found = std::any_of(v.begin(), v.end(), [&](DlgDataDataItem& i) {return i.offset == ofs; });
+				bool found = false;	// std::any_of(v.begin(), v.end(), [&](DlgDataDataItem& i) {return i.offset == ofs; });
+				for(size_t i = 0; i < j; i++){
+					if(v[i].offset == ofs){
+						found = true;
+						break;
+					}
+				}
 				if(!found){
 					v[j].offset = ofs;
 					v[j].speed = float_2((float)distSpeed(gen), (float)distSpeed(gen));
