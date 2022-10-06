@@ -2,6 +2,7 @@
 #include "..\OptsTinyLib\structLaysCfg.h"
 #include "FSliders.h"
 #include <array>
+#include <string>
 
 class DlgCfgLays : public CDialog{
 	DECLARE_DYNAMIC(DlgCfgLays)
@@ -40,6 +41,7 @@ private:
 	void chngCnt(size_t cnt);
 	int iEdit(const int id, const int def, const int digits = 2);
 	void slid2ed(size_t idx);
+	std::string DlgCfgLays::razd(size_t u);
 public:
 	CButton m_btOK;
 

@@ -147,7 +147,7 @@ void DlgCfgLays::chngCnt(size_t cnt){
 
 	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
-	m_pointsAll.SetWindowTextA(std::to_string(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
+	m_pointsAll.SetWindowTextA(razd(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
 	fsliders.saveVK(cfgOut.laysCnt());
 	m_btOK.EnableWindow(TRUE);
 	Invalidate();
@@ -227,3 +227,16 @@ void DlgCfgLays::OnBnClickedOk(){
 	fsliders.saveVK(cfgOut.laysCnt());
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+std::string DlgCfgLays::razd(size_t u){
+	size_t j = 0;
+	std::string s = std::to_string(u % 10), ret;
+	while(u /= 10){
+		if((++j % 3) == 0)
+			s += ' ';
+		s += std::to_string(u % 10);
+	}
+	j = s.length();
+	while(j > 0)
+		ret += s[--j];
+	return ret;
+} // /////////////////////////////////////////////////////////////////////////////

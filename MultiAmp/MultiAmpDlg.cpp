@@ -180,5 +180,9 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
 	DlgData dlgdata;
-	dlgdata.DoModal();
+	DlgDataData data;
+	data.szX = 1024;
+	data.szY = 1024;
+	
+	dlgdata.doModal(&data);
 } // /////////////////////////////////////////////////////////////////////////////////

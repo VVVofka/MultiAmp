@@ -5,13 +5,15 @@
 
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
-DlgData::DlgData(CWnd* pParent /*=nullptr*/)	: CDialog(IDD_DATA, pParent), m_size_type(FALSE){
-} // ///////////////////////////////////////////////////////////////////////////
+DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent), m_size_type(FALSE){} // ///////////////////////////////////////////////////////////////////////////
 DlgData::~DlgData(){}
 
 void DlgData::DoDataExchange(CDataExchange* pDX){
 	CDialog::DoDataExchange(pDX);
 	DDX_Radio(pDX, IDC_FLG_DATA_COUNT, m_size_type);
+	DDX_Control(pDX, IDC_TXT_DATA_SIZE_X, m_size_x);
+	DDX_Control(pDX, IDC_TXT_DATA_SIZE_Y, m_size_y);
+	DDX_Control(pDX, IDC_TXT_DATA_SIZE_ALL, m_size);
 } // ///////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgData, CDialog)
@@ -21,15 +23,15 @@ BEGIN_MESSAGE_MAP(DlgData, CDialog)
 END_MESSAGE_MAP()
 
 // DlgData message handlers
-void DlgData::OnBnClickedFlgDataCount(){
-} // ///////////////////////////////////////////////////////////////////////////
+void DlgData::OnBnClickedFlgDataCount(){} // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedFlgDataProc(){
 	// TODO: Add your control notification handler code here
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
-	// TODO:  Add extra initialization here
-
+	m_size_x.SetWindowTextA(std::to_string(data->szX).c_str());
+	m_size_y.SetWindowTextA(std::to_string(data->szY).c_str());
+	m_size.SetWindowTextA(razd(data->szAll()).c_str());
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
@@ -37,3 +39,23 @@ void DlgData::OnBnClickedOk(){
 	_RPT1(0, "%d\n", m_size_type);
 	CDialog::OnOK();
 }  // ///////////////////////////////////////////////////////////////////////////
+INT_PTR DlgData::DoModal(){
+	return CDialog::DoModal();
+}  // ///////////////////////////////////////////////////////////////////////////
+INT_PTR DlgData::doModal(DlgDataData* in_data){
+	data = in_data;
+	return DoModal();
+}  // ///////////////////////////////////////////////////////////////////////////
+std::string DlgData::razd(size_t u){
+	size_t j = 0;
+	std::string s = std::to_string(u % 10), ret;
+	while(u /= 10){
+		if((++j % 3) == 0)
+			s += ' ';
+		s += std::to_string(u % 10);
+	}
+	j = s.length();
+	while(j > 0)
+		ret += s[--j];
+	return ret;
+} // /////////////////////////////////////////////////////////////////////////////
