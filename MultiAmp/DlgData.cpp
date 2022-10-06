@@ -29,8 +29,8 @@ void DlgData::OnBnClickedFlgDataProc(){
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
-	m_size_x.SetWindowTextA(std::to_string(data->szX).c_str());
-	m_size_y.SetWindowTextA(std::to_string(data->szY).c_str());
+	m_size_x.SetWindowTextA(razd(data->szX).c_str());
+	m_size_y.SetWindowTextA(razd(data->szY).c_str());
 	m_size.SetWindowTextA(razd(data->szAll()).c_str());
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
@@ -48,14 +48,14 @@ INT_PTR DlgData::doModal(DlgDataData* in_data){
 }  // ///////////////////////////////////////////////////////////////////////////
 std::string DlgData::razd(size_t u){
 	size_t j = 0;
-	std::string s = std::to_string(u % 10), ret;
+	std::string s = std::to_string(u % 10);
 	while(u /= 10){
 		if((++j % 3) == 0)
 			s += ' ';
 		s += std::to_string(u % 10);
 	}
-	j = s.length();
-	while(j > 0)
-		ret += s[--j];
-	return ret;
+	size_t len = s.length();
+	for(size_t j = 0; j < len / 2; j++)
+		std::swap(s[j], s[len - j - 1]);
+	return s;
 } // /////////////////////////////////////////////////////////////////////////////

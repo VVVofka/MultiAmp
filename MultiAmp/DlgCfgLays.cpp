@@ -103,8 +103,8 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_topX.SetWindowTextA(std::to_string(m_spinTopX.GetPos()).c_str());
 	m_topY.SetWindowTextA(std::to_string(m_spinTopY.GetPos()).c_str());
 	m_cnt.SetWindowTextA(std::to_string(m_spinCnt.GetPos()).c_str());
-	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
-	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
+	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +113,7 @@ void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
 	cfgOut.topX = pNMUpDown->iPos + pNMUpDown->iDelta;
 	if(cfgOut.topX <= 0)
 		cfgOut.topX = 1;
-	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
+	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
@@ -121,7 +121,7 @@ void DlgCfgLays::OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult){
 	cfgOut.topY = pNMUpDown->iPos + pNMUpDown->iDelta;
 	if(cfgOut.topY <= 0)
 		cfgOut.topY = 1;
-	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 	*pResult = 0;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinCnt(NMHDR* pNMHDR, LRESULT* pResult){
@@ -145,8 +145,8 @@ void DlgCfgLays::chngCnt(size_t cnt){
 	prev = (int)cnt;
 	cfgOut.vkf.resize(cnt, 1);
 
-	m_lay0X.SetWindowTextA(std::to_string(cfgOut.bottomX()).c_str());
-	m_lay0Y.SetWindowTextA(std::to_string(cfgOut.bottomY()).c_str());
+	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
+	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 	m_pointsAll.SetWindowTextA(razd(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
 	fsliders.saveVK(cfgOut.laysCnt());
 	m_btOK.EnableWindow(TRUE);
@@ -229,14 +229,14 @@ void DlgCfgLays::OnBnClickedOk(){
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string DlgCfgLays::razd(size_t u){
 	size_t j = 0;
-	std::string s = std::to_string(u % 10), ret;
+	std::string s = std::to_string(u % 10);
 	while(u /= 10){
 		if((++j % 3) == 0)
 			s += ' ';
 		s += std::to_string(u % 10);
 	}
-	j = s.length();
-	while(j > 0)
-		ret += s[--j];
-	return ret;
+	size_t len = s.length();
+	for(size_t j = 0; j < len / 2; j++)
+		std::swap(s[j], s[len - j - 1]);
+	return s;
 } // /////////////////////////////////////////////////////////////////////////////
