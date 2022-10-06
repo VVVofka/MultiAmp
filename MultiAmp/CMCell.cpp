@@ -26,7 +26,7 @@ void CMCell::OnPaint(){
 	int Wid = r_CL.Width();
 	CRect wndClient = CRect(0, 0, Wid - 1, Hig - 1);
 
-	// демонстрация системных цветов
+	// системных цветов
 	COLORREF colorGrey = ::GetSysColor(COLOR_BTNFACE);	// back
 	COLORREF colorLihg = ::GetSysColor(COLOR_BTNHIGHLIGHT);
 	COLORREF colorShad = ::GetSysColor(COLOR_BTNSHADOW);
@@ -75,15 +75,6 @@ void CMCell::OnPaint(){
 	else if(idRotate == 7)	drawLeft(&dc);
 	else if(idRotate == 8)	drawUpLeft(&dc);
 	dc.SelectObject(oldPenArrow);	// возврат старого пера
-
-	//CPen mShadPen(PS_SOLID, 1, RGB(0, 0, 0));	// colorShad
-	//CPen* olpPen1 = dc.SelectObject(&mShadPen);		// сохранение старого пера
-	//dc.MoveTo(room.left, room.top);
-	//dc.LineTo(room.right, room.top);
-	//dc.LineTo(room.right, room.bottom);
-	//dc.LineTo(room.left, room.bottom);
-	//dc.LineTo(room.left, room.top);
-	//dc.SelectObject(olpPen1);	// возврат старого пера
 } // /////////////////////////////////////////////////////////////////////////////////
 // +->
 // |

@@ -23,6 +23,7 @@ BEGIN_MESSAGE_MAP(DlgData, CDialog)
 	ON_BN_CLICKED(IDC_FLG_DATA_PROC, &DlgData::OnBnClickedFlgDataProc)
 	ON_BN_CLICKED(IDOK, &DlgData::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BT_DATA_GENER, &DlgData::OnBnClickedBtDataGener)
+	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 // DlgData message handlers
@@ -74,14 +75,14 @@ void DlgData::OnBnClickedBtDataGener(){
 	size_t val = getVal();
 	float proc = (float)(0.5 + (double)val / data->szAll());
 	data->create(data->szX, data->szY, proc, sigma);
-	drawScr(std::vector<DlgDataDataItem>);
+	//drawScr(std::vector<DlgDataDataItem>);
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getVal(){
 	UINT z = m_cnt_proc_type.GetState();
 	BOOL* lpTrans = FALSE;
 	UINT val = GetDlgItemInt(IDC_TXT_DATA_COUNT_PROC, lpTrans, FALSE);
 	if(z == 0)	// %
-		return val * 0.01 * data->szAll();
+		return size_t(val * 0.01 * data->szAll());
 	return val;
 } // /////////////////////////////////////////////////////////////////////////////
 float DlgData::getSigma(){
@@ -105,4 +106,46 @@ std::string DlgData::float_to_str(float val, int digits){
 } // //////////////////////////////////////////////////////////////////////////////
 void DlgData::drawScr(std::vector<DlgDataDataItem>, size_t sz_x, size_t sz_y, UINT id_control){
 
+} // //////////////////////////////////////////////////////////////////////////////
+void DlgData::OnPaint(){
+	CPaintDC dc(this); // device context for painting
+					   // TODO: Add your message handler code here
+					   // Do not call CDialog::OnPaint() for painting messages
+	// прямоугольник клиентской области
+	CRect r_CL;
+	GetClientRect(&r_CL);
+
+	// определение высоты и ширины клиентской области
+	int rclHeight = r_CL.Height();
+	int rclWidth = r_CL.Width();
+	CRect wndClient = CRect(0, 0, rclWidth - 1, rclHeight - 1);
+
+	COLORREF colorPixel = RGB(255, 255, 0);
+	COLORREF colorBack = RGB(0, 0, 31);
+
+	const LONG brdline = 1;
+	CRect rctLine(wndClient.left + brdline, wndClient.top + brdline, wndClient.right - brdline, wndClient.bottom - brdline);
+
+	// fill background
+	CRect rctSolid(rctLine.left + 1, rctLine.top + 1, rctLine.right, rctLine.bottom);
+	dc.FillSolidRect(rctSolid, colorBack);	//	colorShad
+
+	// Draw points
+	CPen m_ShadPen(PS_SOLID, brdline, colorPixel);	// colorShad
+	CPen* oldPen = dc.SelectObject(&m_ShadPen);		// сохранение старого пера
+	for(size_t j = 0; j < data->v.size(); j++){
+		DlgDataDataItem& item = data->v[j];
+		size_t posPixel = item.offset;
+		POINT pixel;
+		pixel.x = data->getPosX(posPixel);
+		pixel.y = data->getPosY(posPixel);
+
+		COLORREF clrOld = dc.GetPixel(pixel);
+		dc.MoveTo(rctLine.left, rctLine.top);	//	 - border / 2
+		dc.LineTo(rctLine.right, rctLine.top);
+		dc.LineTo(rctLine.right, rctLine.bottom);
+		dc.LineTo(rctLine.left, rctLine.bottom);
+		dc.LineTo(rctLine.left, rctLine.top);	//	 - border / 2
+	}
+	dc.SelectObject(oldPen);	// возврат старого пера
 } // //////////////////////////////////////////////////////////////////////////////

@@ -39,4 +39,5 @@ private:
 public:
 	CEdit m_sigma;
 	afx_msg void OnBnClickedBtDataGener();
+	afx_msg void OnPaint();
 };
