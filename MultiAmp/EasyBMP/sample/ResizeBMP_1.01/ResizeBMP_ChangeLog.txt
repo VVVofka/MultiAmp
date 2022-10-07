@@ -1,0 +1,32 @@
+ResizeBMP Change Log:
+
+Date: 2-14-2005
+Changes from 0.50 to 0.51:
+     Added BMP32 support
+     Everything's upconverted to 32-bit
+     Save as 24-bit unless original was 32-bit
+     (Paul Macklin)
+
+Date: 5-16-2005
+Changes from 0.51 to 0.59:
+     Rewrote to use new version of the library. (Paul Macklin)
+    
+     Removed change log from source file. (Paul Macklin)
+
+     Improved robustness for the rare case of resizing a 
+     1x1 file. (Paul Macklin)
+	 
+Date: 7-27-2005
+Changes from 0.59 to 0.63:
+     Simplified code in main loop. (Paul Macklin)
+	 
+     Fixed idiotic bug in GetPixel(BMP&,int,int,int,int) where 
+     the range was truncated if s (or t) was greater than 1. 
+     The range should have been truncated if s (or t) is 
+     greater than OldWidth-1 (or OldHeight-1). (Paul Macklin)
+	 
+Date: 2-8-2006
+Changes from 0.63 to 1.00:
+     Updated to work with EasyBMP Version 1.00. (Paul Macklin)
+
+     Updated to work with std namespace / STL. (Paul Macklin)

@@ -28,6 +28,9 @@
     <Filter Include="Dlgs\Main">
       <UniqueIdentifier>{8e88ac9c-fea8-46a2-b093-d78692e8d860}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EasyBMP">
+      <UniqueIdentifier>{b051a92c-2a22-49a2-a156-5631fca35a4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultiAmp.h">
@@ -78,6 +81,18 @@
     <ClInclude Include="DlgDataData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EasyBMP.h">
+      <Filter>EasyBMP</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_BMP.h">
+      <Filter>EasyBMP</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_DataStructures.h">
+      <Filter>EasyBMP</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyBMP_VariousBMPutilities.h">
+      <Filter>EasyBMP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -115,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="DlgDataData.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyBMP.cpp">
+      <Filter>EasyBMP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

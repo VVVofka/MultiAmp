@@ -29,15 +29,18 @@ public:
 	CStatic m_size;
 	CEdit m_count_proc;
 	CButton m_cnt_proc_type;
+	CEdit m_sigma;
+	CWnd m_screen;
+	
 
 private:
 	std::string razd(size_t u);
 	size_t getVal();
 	float getSigma();
 	std::string float_to_str(float val, int digits);
-	static void drawScr(std::vector<DlgDataDataItem>, size_t sz_x, size_t sz_y, UINT id_control);
+	void draw();
+	bool newdata = true;
 public:
-	CEdit m_sigma;
 	afx_msg void OnBnClickedBtDataGener();
 	afx_msg void OnPaint();
 };

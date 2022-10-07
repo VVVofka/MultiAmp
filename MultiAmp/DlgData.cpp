@@ -2,7 +2,7 @@
 #include "MultiAmp.h"
 #include "DlgData.h"
 #include "afxdialogex.h"
-
+#include "EasyBMP.h"
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
@@ -16,6 +16,8 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_TXT_DATA_COUNT_PROC, m_count_proc);
 	DDX_Control(pDX, IDC_FLG_DATA_COUNT, m_cnt_proc_type);
 	DDX_Control(pDX, IDC_TXT_DATA_SIGMA, m_sigma);
+	//  DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
+	DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 } // ///////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgData, CDialog)
@@ -75,6 +77,8 @@ void DlgData::OnBnClickedBtDataGener(){
 	size_t val = getVal();
 	float proc = (float)(0.5 + (double)val / data->szAll());
 	data->create(data->szX, data->szY, proc, sigma);
+	newdata = true;
+	Invalidate(TRUE);
 	//drawScr(std::vector<DlgDataDataItem>);
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getVal(){
@@ -104,48 +108,41 @@ std::string DlgData::float_to_str(float val, int digits){
 	}
 	return buf;
 } // //////////////////////////////////////////////////////////////////////////////
-void DlgData::drawScr(std::vector<DlgDataDataItem>, size_t sz_x, size_t sz_y, UINT id_control){
-
-} // //////////////////////////////////////////////////////////////////////////////
-void DlgData::OnPaint(){
-	CPaintDC dc(this); // device context for painting
-					   // TODO: Add your message handler code here
-					   // Do not call CDialog::OnPaint() for painting messages
+void DlgData::draw(){
+	if(!newdata)
+		return;
+	CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
+	CPaintDC dc(wnd);
 	// прямоугольник клиентской области
 	CRect r_CL;
-	GetClientRect(&r_CL);
+	m_screen.GetClientRect(&r_CL);
 
 	// определение высоты и ширины клиентской области
-	int rclHeight = r_CL.Height();
 	int rclWidth = r_CL.Width();
+	int rclHeight = r_CL.Height();
 	CRect wndClient = CRect(0, 0, rclWidth - 1, rclHeight - 1);
 
 	COLORREF colorPixel = RGB(255, 255, 0);
 	COLORREF colorBack = RGB(0, 0, 31);
-
-	const LONG brdline = 1;
-	CRect rctLine(wndClient.left + brdline, wndClient.top + brdline, wndClient.right - brdline, wndClient.bottom - brdline);
-
-	// fill background
-	CRect rctSolid(rctLine.left + 1, rctLine.top + 1, rctLine.right, rctLine.bottom);
-	dc.FillSolidRect(rctSolid, colorBack);	//	colorShad
-
-	// Draw points
-	CPen m_ShadPen(PS_SOLID, brdline, colorPixel);	// colorShad
-	CPen* oldPen = dc.SelectObject(&m_ShadPen);		// сохранение старого пера
+	std::vector<COLORREF> vdata(rclWidth * rclHeight, colorBack);
+	double maxSizePoint = (double)max(data->szX, data->szY);
+	double kx = rclWidth / maxSizePoint;
+	double ky = rclHeight / maxSizePoint;
 	for(size_t j = 0; j < data->v.size(); j++){
-		DlgDataDataItem& item = data->v[j];
-		size_t posPixel = item.offset;
-		POINT pixel;
-		pixel.x = data->getPosX(posPixel);
-		pixel.y = data->getPosY(posPixel);
-
-		COLORREF clrOld = dc.GetPixel(pixel);
-		dc.MoveTo(rctLine.left, rctLine.top);	//	 - border / 2
-		dc.LineTo(rctLine.right, rctLine.top);
-		dc.LineTo(rctLine.right, rctLine.bottom);
-		dc.LineTo(rctLine.left, rctLine.bottom);
-		dc.LineTo(rctLine.left, rctLine.top);	//	 - border / 2
+		size_t x = size_t(kx * data->getPosX(data->v[j].offset));
+		size_t y = size_t(ky * data->getPosY(data->v[j].offset));
+		vdata[x + y * rclWidth] = colorPixel;
 	}
-	dc.SelectObject(oldPen);	// возврат старого пера
+
+	BMP ImageOut;
+	ImageOut.SetSize(rclWidth, rclHeight);
+
+
+	for(size_t y = 0; y < rclHeight; y++)
+		for(size_t x = 0; x < rclWidth; x++)
+			dc.SetPixel(x, y, vdata[x + y * rclWidth]);
+	newdata = false;
+} // ///////////////////////////////////////////////////////////////////////////////////////
+void DlgData::OnPaint(){
+	draw();
 } // //////////////////////////////////////////////////////////////////////////////
