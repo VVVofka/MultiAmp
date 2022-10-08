@@ -2,7 +2,9 @@
 #include "MultiAmp.h"
 #include "DlgData.h"
 #include "afxdialogex.h"
-#include "EasyBMP.h"
+//#include "EasyBMP.h"
+#include "EasyBMP2Ctrl.h"
+
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
@@ -16,7 +18,6 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_TXT_DATA_COUNT_PROC, m_count_proc);
 	DDX_Control(pDX, IDC_FLG_DATA_COUNT, m_cnt_proc_type);
 	DDX_Control(pDX, IDC_TXT_DATA_SIGMA, m_sigma);
-	//  DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 	DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 } // ///////////////////////////////////////////////////////////////////////////
 
@@ -111,11 +112,12 @@ std::string DlgData::float_to_str(float val, int digits){
 void DlgData::draw(){
 	if(!newdata)
 		return;
-	CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
-	CPaintDC dc(wnd);
+	//CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
+	//CPaintDC dc(wnd);
+	CPaintDC dc(this);
 	// прямоугольник клиентской области
 	CRect r_CL;
-	m_screen.GetClientRect(&r_CL);
+	//m_screen.GetClientRect(&r_CL);
 
 	// определение высоты и ширины клиентской области
 	int rclWidth = r_CL.Width();
@@ -133,16 +135,25 @@ void DlgData::draw(){
 		size_t y = size_t(ky * data->getPosY(data->v[j].offset));
 		vdata[x + y * rclWidth] = colorPixel;
 	}
-
+	
 	BMP ImageOut;
 	ImageOut.SetSize(rclWidth, rclHeight);
 
 
-	for(size_t y = 0; y < rclHeight; y++)
-		for(size_t x = 0; x < rclWidth; x++)
+	for(size_t y = 0; y < (size_t)rclHeight; y++)
+		for(size_t x = 0; x < (size_t)rclWidth; x++)
 			dc.SetPixel(x, y, vdata[x + y * rclWidth]);
 	newdata = false;
 } // ///////////////////////////////////////////////////////////////////////////////////////
 void DlgData::OnPaint(){
-	draw();
+	CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
+	//std::vector<COLORREF> v(data->szAll());
+	COLORREF* v = new COLORREF[data->szAll()];
+	for(size_t j = 0; j < data->szAll(); j++){
+
+	}
+
+	EasyBMP2Ctrl::load(wnd, data->szX, data->szY, v);
+	//draw();
+	delete[] v;
 } // //////////////////////////////////////////////////////////////////////////////

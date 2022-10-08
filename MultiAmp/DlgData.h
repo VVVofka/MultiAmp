@@ -1,6 +1,6 @@
 #pragma once
 #include "DlgDataData.h"
-
+// 97*0 198*183
 class DlgData : public CDialog{
 	DECLARE_DYNAMIC(DlgData)
 	DlgDataData* data = NULL;
@@ -30,7 +30,7 @@ public:
 	CEdit m_count_proc;
 	CButton m_cnt_proc_type;
 	CEdit m_sigma;
-	CWnd m_screen;
+	CStatic m_screen;
 	
 
 private:

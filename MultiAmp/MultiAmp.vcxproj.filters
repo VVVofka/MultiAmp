@@ -93,6 +93,9 @@
     <ClInclude Include="EasyBMP_VariousBMPutilities.h">
       <Filter>EasyBMP</Filter>
     </ClInclude>
+    <ClInclude Include="EasyBMP2Ctrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="EasyBMP.cpp">
       <Filter>EasyBMP</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyBMP2Ctrl.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
