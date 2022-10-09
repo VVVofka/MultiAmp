@@ -149,7 +149,7 @@ void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 	CDialogEx::OnTimer(nIDEvent);
 } // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedOk(){
-	CDialogEx::OnOK();
+	CDialogEx::OnOK(); 
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskA(){
 	auto maskA = getMaskA("tstDlg.xml");
