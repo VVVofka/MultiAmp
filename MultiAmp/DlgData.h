@@ -32,13 +32,12 @@ public:
 	CEdit m_sigma;
 	CWnd m_screen;
 	
+	afx_msg void OnBnClickedBtDataGener();
+	afx_msg void OnPaint();
 private:
 	std::string razd(size_t u);
 	size_t getVal();
 	float getSigma();
 	std::string float_to_str(float val, int digits);
 	bool newdata = true;
-public:
-	afx_msg void OnBnClickedBtDataGener();
-	afx_msg void OnPaint();
 };
