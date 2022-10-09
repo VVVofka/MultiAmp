@@ -5,7 +5,7 @@
 #include <algorithm>
 using namespace Concurrency::graphics;
 	struct DlgDataDataItem{
-		size_t offset;
+		size_t offset = 0;
 		float_2 speed;
 	};
 class DlgDataData{

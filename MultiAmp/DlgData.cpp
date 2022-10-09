@@ -70,7 +70,7 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
-	float sigma = getSigma();
+	float sigma = getFloatFromCEdit(m_sigma);
 	size_t val = getVal();
 	float proc = (float)val / data->szAll();
 	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
@@ -79,22 +79,28 @@ void DlgData::OnBnClickedBtDataGener(){
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getVal(){
 	int z = m_cnt_proc_type.GetCheck();
-	BOOL* lpTrans = FALSE;
-	UINT val = GetDlgItemInt(IDC_TXT_DATA_COUNT_PROC, lpTrans, FALSE);
+	float value = getFloatFromCEdit(m_count_proc);
 	if(z == BST_CHECKED)
-		return val;	// count
-	return size_t(val * 0.01 * data->szAll());	// %
+		return size_t(value);	// count
+	return size_t(value * 0.01 * data->szAll() + 0.5);	// %
 } // /////////////////////////////////////////////////////////////////////////////
-float DlgData::getSigma(){
+float DlgData::getFloatFromCEdit(CEdit& edit){
 	CString sb;
-	m_sigma.GetWindowTextA(sb);
+	edit.GetWindowTextA(sb);
 	sb.Replace(" ", "");
 	sb.Replace(',', '.');
-	std::string s(sb);
-	char* stopstring;
-	float sigma = std::strtof(s.c_str(), &stopstring);
-	return sigma;
-} // /////////////////////////////////////////////////////////////////////////////
+	return std::strtof((LPCSTR)sb, NULL);
+} // //////////////////////////////////////////////////////////////////////////////
+//size_t DlgData::getUnsFromCEdit(CEdit& edit){
+//	float fl = getFloatFromCEdit(edit);
+//	return size_t(fl + 0.5f);
+//} // //////////////////////////////////////////////////////////////////////////////
+//float DlgData::getSigmaByCount(){
+//	return getFloatFromCEdit(m_sigma);
+//} // /////////////////////////////////////////////////////////////////////////////
+//float DlgData::getSigmaByProc(){
+//	return getFloatFromCEdit(m_sigma);
+//} // /////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val, int digits){
 	char buf[_CVTBUFSIZE];
 	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);
