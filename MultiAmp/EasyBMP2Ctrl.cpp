@@ -48,7 +48,7 @@ void EasyBMP2Ctrl::load(CWnd* wnd, COLORREF* data){
 	// клиентской области окна
 	clientDC.BitBlt(0, 0, bmp.bmWidth, bmp.bmHeight, &memDC,
 		0, 0, SRCCOPY);
-
+	 
 	CPoint
 	wnd->GetDC()->DrawState()
 	Gdiplus::Graphics graphics(hdc);
