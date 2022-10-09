@@ -10,7 +10,6 @@ using namespace Concurrency::graphics;
 	};
 class DlgDataData{
 public:
-
 	size_t szX;
 	size_t szY;
 	float sigma = 0;

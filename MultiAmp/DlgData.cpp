@@ -18,7 +18,6 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_TXT_DATA_SIGMA, m_sigma);
 	DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 } // ///////////////////////////////////////////////////////////////////////////
-
 BEGIN_MESSAGE_MAP(DlgData, CDialog)
 	ON_BN_CLICKED(IDC_FLG_DATA_COUNT, &DlgData::OnBnClickedFlgDataCount)
 	ON_BN_CLICKED(IDC_FLG_DATA_PROC, &DlgData::OnBnClickedFlgDataProc)

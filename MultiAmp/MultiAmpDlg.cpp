@@ -1,4 +1,3 @@
-// MultiAmpDlg.cpp : implementation file
 #include "pch.h"
 #include "framework.h"
 #include "MultiAmp.h"

@@ -32,7 +32,6 @@ public:
 	CEdit m_sigma;
 	CWnd m_screen;
 	
-
 private:
 	std::string razd(size_t u);
 	size_t getVal();
