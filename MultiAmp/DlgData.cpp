@@ -134,10 +134,6 @@ void DlgData::draw(){
 		vdata[x + y * rclWidth] = colorPixel;
 	}
 
-	BMP ImageOut;
-	ImageOut.SetSize(rclWidth, rclHeight);
-
-
 	for(size_t y = 0; y < rclHeight; y++)
 		for(size_t x = 0; x < rclWidth; x++)
 			dc.SetPixel(x, y, vdata[x + y * rclWidth]);
