@@ -16,7 +16,6 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_TXT_DATA_COUNT_PROC, m_count_proc);
 	DDX_Control(pDX, IDC_FLG_DATA_COUNT, m_cnt_proc_type);
 	DDX_Control(pDX, IDC_TXT_DATA_SIGMA, m_sigma);
-	//  DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 	DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
 } // ///////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +38,7 @@ void DlgData::OnBnClickedFlgDataProc(){
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
-	m_cnt_proc_type.SetState(1);
+	m_cnt_proc_type.SetCheck(BST_CHECKED);
 	m_size_x.SetWindowTextA(razd(data->szX).c_str());
 	m_size_y.SetWindowTextA(razd(data->szY).c_str());
 	m_size.SetWindowTextA(razd(data->szAll()).c_str());
@@ -49,7 +48,6 @@ BOOL DlgData::OnInitDialog(){
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
-
 	CDialog::OnOK();
 }  // ///////////////////////////////////////////////////////////////////////////
 INT_PTR DlgData::DoModal(){
@@ -75,19 +73,18 @@ std::string DlgData::razd(size_t u){
 void DlgData::OnBnClickedBtDataGener(){
 	float sigma = getSigma();
 	size_t val = getVal();
-	float proc = (float)(0.5 + (double)val / data->szAll());
-	data->create(data->szX, data->szY, proc, sigma);
+	float proc = (float)val / data->szAll();
+	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
 	newdata = true;
-	Invalidate(TRUE);
-	//drawScr(std::vector<DlgDataDataItem>);
+	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getVal(){
-	UINT z = m_cnt_proc_type.GetState();
+	int z = m_cnt_proc_type.GetCheck();
 	BOOL* lpTrans = FALSE;
 	UINT val = GetDlgItemInt(IDC_TXT_DATA_COUNT_PROC, lpTrans, FALSE);
-	if(z == 0)	// %
-		return size_t(val * 0.01 * data->szAll());
-	return val;
+	if(z == BST_CHECKED)
+		return val;	// count
+	return size_t(val * 0.01 * data->szAll());	// %
 } // /////////////////////////////////////////////////////////////////////////////
 float DlgData::getSigma(){
 	CString sb;
@@ -108,41 +105,27 @@ std::string DlgData::float_to_str(float val, int digits){
 	}
 	return buf;
 } // //////////////////////////////////////////////////////////////////////////////
-void DlgData::draw(){
-	if(!newdata)
+void DlgData::OnPaint(){
+	if(newdata == false)
 		return;
+	newdata = false;
 	CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
 	CPaintDC dc(wnd);
-	// прямоугольник клиентской области
-	CRect r_CL;
+
+	CRect r_CL;	// прямоугольник клиентской области
 	m_screen.GetClientRect(&r_CL);
 
-	// определение высоты и ширины клиентской области
-	int rclWidth = r_CL.Width();
-	int rclHeight = r_CL.Height();
-	CRect wndClient = CRect(0, 0, rclWidth - 1, rclHeight - 1);
+	const COLORREF colorPixel = RGB(255, 255, 0);
+	const COLORREF colorBack = RGB(0, 0, 48);
 
-	COLORREF colorPixel = RGB(255, 255, 0);
-	COLORREF colorBack = RGB(0, 0, 31);
-	std::vector<COLORREF> vdata(rclWidth * rclHeight, colorBack);
+	dc.FillSolidRect(r_CL, colorBack);		// fill background
+
 	double maxSizePoint = (double)max(data->szX, data->szY);
-	double kx = rclWidth / maxSizePoint;
-	double ky = rclHeight / maxSizePoint;
+	double kx = r_CL.Width() / maxSizePoint;
+	double ky = r_CL.Height() / maxSizePoint;
 	for(size_t j = 0; j < data->v.size(); j++){
-		size_t x = size_t(kx * data->getPosX(data->v[j].offset));
-		size_t y = size_t(ky * data->getPosY(data->v[j].offset));
-		vdata[x + y * rclWidth] = colorPixel;
+		int pixelx = int(kx * data->getPosXid(j));
+		int pixely = int(ky * data->getPosYid(j));
+		dc.SetPixel(pixelx, pixely, colorPixel);
 	}
-
-	BMP ImageOut;
-	ImageOut.SetSize(rclWidth, rclHeight);
-
-
-	for(size_t y = 0; y < rclHeight; y++)
-		for(size_t x = 0; x < rclWidth; x++)
-			dc.SetPixel(x, y, vdata[x + y * rclWidth]);
-	newdata = false;
-} // ///////////////////////////////////////////////////////////////////////////////////////
-void DlgData::OnPaint(){
-	draw();
 } // //////////////////////////////////////////////////////////////////////////////

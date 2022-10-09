@@ -38,7 +38,6 @@ private:
 	size_t getVal();
 	float getSigma();
 	std::string float_to_str(float val, int digits);
-	void draw();
 	bool newdata = true;
 public:
 	afx_msg void OnBnClickedBtDataGener();

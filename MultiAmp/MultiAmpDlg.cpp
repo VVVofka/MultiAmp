@@ -179,8 +179,9 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 	setLaysCfg("tstDlg.xml", ret);
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
+	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
 	DlgData dlgdata;
 	DlgDataData data;
-	data.create(1024, 1024, 0.01f, 0.4f);
+	data.create(layscfg.bottomX(), layscfg.bottomY(), 0.01f, 0.4f);
 	dlgdata.doModal(&data);
 } // /////////////////////////////////////////////////////////////////////////////////
