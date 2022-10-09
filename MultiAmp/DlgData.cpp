@@ -135,7 +135,7 @@ void DlgData::draw(){
 		size_t y = size_t(ky * data->getPosY(data->v[j].offset));
 		vdata[x + y * rclWidth] = colorPixel;
 	}
-	
+
 	BMP ImageOut;
 	ImageOut.SetSize(rclWidth, rclHeight);
 
@@ -147,13 +147,28 @@ void DlgData::draw(){
 } // ///////////////////////////////////////////////////////////////////////////////////////
 void DlgData::OnPaint(){
 	CWnd* wnd = CWnd::FromHandle(m_screen.m_hWnd);
-	//std::vector<COLORREF> v(data->szAll());
-	COLORREF* v = new COLORREF[data->szAll()];
-	for(size_t j = 0; j < data->szAll(); j++){
-
+	if(((CStatic*)wnd)->GetBitmap() != NULL)
+		return;
+	CRect r_CL;	// прямоугольник клиентской области
+	wnd->GetClientRect(&r_CL);		//	m_screen.GetClientRect(&r_CL);
+	int bmpWidth = r_CL.Width();
+	int bmpHeight = r_CL.Height();
+	int bmpSize = bmpWidth * bmpHeight;
+	COLORREF* v = new COLORREF[bmpSize];
+	for(int j = 0; j < bmpSize; j++)
+		v[j] = RGB(0, 0, 64);	// BACKGROUND
+	
+	size_t cntPoints = data->v.size();
+	for(size_t j = 0; j < cntPoints; j++){
+		size_t datax = data->getPosXid(j);
+		size_t datay = data->getPosYid(j);
+		size_t bmpx = size_t(bmpWidth * (double(datax) / data->szX));
+		size_t bmpy = size_t(bmpHeight * (double(datay) / data->szY));
+		size_t bmpidx = bmpx + bmpy * bmpWidth;
+		v[bmpidx] = RGB(255, 255, 0);
 	}
 
-	EasyBMP2Ctrl::load(wnd, data->szX, data->szY, v);
+	EasyBMP2Ctrl::load(wnd, v);
 	//draw();
 	delete[] v;
 } // //////////////////////////////////////////////////////////////////////////////

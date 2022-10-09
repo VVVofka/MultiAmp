@@ -22,6 +22,8 @@ public:
 	size_t szAll(){ return szX * szY; }
 	size_t getPosX(size_t offset){ return offset % szX; }
 	size_t getPosY(size_t offset){ return offset / szY; }
+	size_t getPosXid(size_t idx){ return v[idx].offset % szX; }
+	size_t getPosYid(size_t idx){ return v[idx].offset / szY; }
 
 	DlgDataDataItem* getItem(size_t idx){ return &v[idx]; }
 	size_t getOffset(size_t idx){ return getItem(idx)->offset; }
