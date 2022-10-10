@@ -3,7 +3,8 @@
 #include <string>
 XMLNode* DataCfg::create(XMLNode* parent_node){
 	structDataCfg new_cfg;
-	new_cfg.vkf.resize(structDataCfg::DEF_SIZE, 1);
+	new_cfg.v.resize(1);
+	new_cfg.v[0] = 0;
 	return set(parent_node, new_cfg);
 } // ///////////////////////////////////////////////////////////////////////////////////
 XMLNode* DataCfg::load(XMLNode* parent_node){
@@ -45,22 +46,8 @@ XMLNode* DataCfg::set(XMLNode* parent_node, const structDataCfg& new_cfg){
 	//****************
 	XMLDocument* doc = parent_node->GetDocument();
 	XMLElement* ele_out = doc->NewElement(XMLName);
-
-	ele_out->SetAttribute("topX", new_cfg.topX);		// 1
-	ele_out->SetAttribute("topY", new_cfg.topY);		// 1
-	ele_out->SetAttribute("cnt", new_cfg.vkf.size());		// 5
-	ele_out->SetAttribute("digits", new_cfg.digits);	// 2
-	for(size_t j = 0; j < new_cfg.vkf.size(); j++){
-		std::string atrname = "k" + std::to_string(j);
-		ele_out->SetAttribute(atrname.c_str(), new_cfg.vkf[j]);	// 1
-	}
+	ele_out->SetAttribute("size", new_cfg.v.size());		
+	ele_out->SetText(new_cfg.get_s().c_str());
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
-void DataCfg::setDefault(){
-	cfg.topX = cfg.topY = 1;
-	cfg.digits = 2;
-	cfg.vkf.resize(structLaysCfg::DEF_SIZE, 1);
-	node = NULL;
-} // ///////////////////////////////////////////////////////////////////////////////////
-

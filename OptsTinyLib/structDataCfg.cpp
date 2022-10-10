@@ -11,7 +11,7 @@ size_t structDataCfg::fill_v(const std::string& s){
 		v[j] = size_t(atol(words[j].c_str()));
 	return newsize;
 } // //////////////////////////////////////////////////////////////////////////////////////
-std::string structDataCfg::get_s(){
+std::string structDataCfg::get_s() const{
 	std::string sret;
 	size_t size = v.size();
 	if(size){

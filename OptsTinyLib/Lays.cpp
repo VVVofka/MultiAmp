@@ -58,7 +58,7 @@ XMLNode* Lays::set(XMLNode* parent_node, const structLaysCfg& new_cfg){
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
-void Lays::setDefault(){
+void Lays::setDefault(){	// TODO: del
 	cfg.topX = cfg.topY = 1;
 	cfg.digits = 2;
 	cfg.vkf.resize(structLaysCfg::DEF_SIZE, 1);

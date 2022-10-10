@@ -12,8 +12,6 @@ public:
 	XMLNode* load(XMLNode* parent_node);
 	XMLNode* set(XMLNode* parent_node, const structDataCfg& cfg);
 
-	void setDefault();
-
 private:
 	const char XMLName[8] = "DataCfg";	// "LaysCfg"
 
