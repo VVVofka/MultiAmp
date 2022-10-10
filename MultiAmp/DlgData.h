@@ -43,4 +43,5 @@ private:
 	//size_t getUnsFromCEdit(CEdit& edit);
 	std::string float_to_str(float val, int digits);
 	bool newdata = true;
+	BYTE incColor(BYTE clr);
 };

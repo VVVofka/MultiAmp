@@ -121,40 +121,46 @@ void DlgData::OnPaint(){
 	CRect r_CL;	// прямоугольник клиентской области
 	m_screen.GetClientRect(&r_CL);
 
-	const COLORREF colorPixel = RGB(255, 255, 0);
+	const COLORREF colorPixel = RGB(70, 64, 0);
 	const COLORREF colorBack = RGB(0, 0, 48);
 
 	dc.FillSolidRect(r_CL, colorBack);		// fill background
 
 	double maxSizePoint = (double)max(data->szX, data->szY);
 	int pixelwidth = r_CL.Width();
+	int pixelheigh = r_CL.Height();
 	double kx = pixelwidth / maxSizePoint;
-	double ky = r_CL.Height() / maxSizePoint;
+	double ky = pixelheigh / maxSizePoint;
 
 	typedef std::map<size_t, COLORREF> MyMap;
 	MyMap mymap;
-	MyMap::iterator it;
+	std::vector<size_t> vsort;
+	vsort.reserve(pixelwidth * pixelheigh);
+
 	for(size_t j = 0; j < data->v.size(); j++){
 		size_t pixelx = size_t(kx * data->getPosXid(j));
 		size_t pixely = size_t(ky * data->getPosYid(j));
 		size_t key = pixelx + pixely * pixelwidth;
-		it = mymap.find(key);
+		MyMap::iterator it = mymap.find(key);
 		if(it == mymap.end()){
 			mymap.insert(MyMap::value_type(key, colorPixel));
+			vsort.push_back(key);
 		} else{
-			//
+			BYTE r = incColor(GetRValue(it->second));
+			BYTE g = incColor(GetGValue(it->second));
+			it->second = RGB(r, g, 0);
 		}
 	}
-	for each(auto i in mymap){
-		int pixelx = i.first % pixelwidth;
-		int pixely = i.first / pixelwidth;
-		dc.SetPixel(pixelx, pixely, i.second);
+	for(const size_t i : vsort){
+		int pixelx = i % pixelwidth;
+		int pixely = i / pixelwidth;
+		dc.SetPixel(pixelx, pixely, mymap.find(i)->second);
 	}
-	return;
-	for(size_t j = 0; j < data->v.size(); j++){
-		int pixelx = int(kx * data->getPosXid(j));
-		int pixely = int(ky * data->getPosYid(j));
-		dc.SetPixel(pixelx, pixely, colorPixel);
-	}
-
+} // //////////////////////////////////////////////////////////////////////////////
+BYTE DlgData::incColor(BYTE clr){
+	const unsigned step = 64;
+	unsigned c = clr + step;
+	if(c > 255)
+		return BYTE(clr + (255 - clr) * 0.5);
+	return BYTE(c);
 } // //////////////////////////////////////////////////////////////////////////////
