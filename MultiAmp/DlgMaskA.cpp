@@ -21,6 +21,7 @@ BEGIN_MESSAGE_MAP(DlgMaskA, CDialog)
 	ON_BN_CLICKED(IDC_CHECK07, &DlgMaskA::OnBnClickedCheck07)
 	ON_BN_CLICKED(IDOK, &DlgMaskA::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_SYMETRY, &DlgMaskA::OnBnClickedSymetry)
+//	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
 BOOL DlgMaskA::OnInitDialog(){

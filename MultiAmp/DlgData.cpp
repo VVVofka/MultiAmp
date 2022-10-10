@@ -29,19 +29,16 @@ END_MESSAGE_MAP()
 
 // DlgData message handlers
 void DlgData::OnBnClickedFlgDataCount(){
-	size_t cnt = data->cnt();
-	std::string scnt = razd(cnt);
+	std::string scnt = razd(curPointsCount);
 	m_count_proc.SetWindowTextA(scnt.c_str());
-	m_count_proc.Invalidate();
+	m_count_proc.UpdateWindow();
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedFlgDataProc(){
-	size_t cnt = data->cnt();
 	size_t szall = data->szAll();
-	float proc = (100.0f * cnt) / szall;
+	float proc = (100.0f * curPointsCount) / szall;
 	std::string sproc = float_to_str(proc, 3);
-	SetDlgItemText(IDC_TXT_DATA_SIGMA,sproc.c_str());
-	//m_count_proc.SetWindowTextA(sproc.c_str());
-	//m_count_proc.Invalidate();
+	m_count_proc.SetWindowTextA(sproc.c_str());
+	m_count_proc.UpdateWindow();
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
@@ -49,9 +46,14 @@ BOOL DlgData::OnInitDialog(){
 	m_size_x.SetWindowTextA(razd(data->szX).c_str());
 	m_size_y.SetWindowTextA(razd(data->szY).c_str());
 	m_size.SetWindowTextA(razd(data->szAll()).c_str());
+
 	std::string ssigma = float_to_str(data->sigma, 3);
 	m_sigma.SetWindowTextA(ssigma.c_str());
-	OnBnClickedFlgDataCount();
+
+	curPointsCount = data->cnt();
+	std::string scnt = razd(curPointsCount);
+	m_count_proc.SetWindowTextA(scnt.c_str());
+
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
@@ -79,8 +81,8 @@ std::string DlgData::razd(size_t u){
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
 	float sigma = getFloatFromCEdit(m_sigma);
-	size_t val = getVal();
-	float proc = (float)val / data->szAll();
+	curPointsCount = getVal();
+	float proc = (float)curPointsCount / data->szAll();
 	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
 	newdata = true;
 	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();

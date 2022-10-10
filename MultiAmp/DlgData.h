@@ -37,11 +37,10 @@ public:
 private:
 	std::string razd(size_t u);
 	size_t getVal();
-	//float getSigmaByCount();
-	//float getSigmaByProc();
 	float getFloatFromCEdit(CEdit& edit);
-	//size_t getUnsFromCEdit(CEdit& edit);
-	std::string float_to_str(float val, int digits);
-	bool newdata = true;
 	BYTE incColor(BYTE clr);
+	std::string float_to_str(float val, int digits);
+
+	bool newdata = true;
+	size_t curPointsCount = 0;
 };
