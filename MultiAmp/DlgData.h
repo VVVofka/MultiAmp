@@ -36,7 +36,7 @@ public:
 	afx_msg void OnPaint();
 private:
 	std::string razd(size_t u);
-	size_t getVal();
+	size_t getNewPointsCount();
 	float getFloatFromCEdit(CEdit& edit);
 	BYTE incColor(BYTE clr);
 	std::string float_to_str(float val, int digits);

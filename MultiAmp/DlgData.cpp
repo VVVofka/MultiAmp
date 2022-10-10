@@ -81,13 +81,13 @@ std::string DlgData::razd(size_t u){
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
 	float sigma = getFloatFromCEdit(m_sigma);
-	curPointsCount = getVal();
+	curPointsCount = getNewPointsCount();
 	float proc = (float)curPointsCount / data->szAll();
 	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
 	newdata = true;
 	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 } // /////////////////////////////////////////////////////////////////////////////
-size_t DlgData::getVal(){
+size_t DlgData::getNewPointsCount(){
 	int z = m_cnt_proc_type.GetCheck();
 	float value = getFloatFromCEdit(m_count_proc);
 	if(z == BST_CHECKED)
@@ -101,16 +101,6 @@ float DlgData::getFloatFromCEdit(CEdit& edit){
 	sb.Replace(',', '.');
 	return std::strtof((LPCSTR)sb, NULL);
 } // //////////////////////////////////////////////////////////////////////////////
-//size_t DlgData::getUnsFromCEdit(CEdit& edit){
-//	float fl = getFloatFromCEdit(edit);
-//	return size_t(fl + 0.5f);
-//} // //////////////////////////////////////////////////////////////////////////////
-//float DlgData::getSigmaByCount(){
-//	return getFloatFromCEdit(m_sigma);
-//} // /////////////////////////////////////////////////////////////////////////////
-//float DlgData::getSigmaByProc(){
-//	return getFloatFromCEdit(m_sigma);
-//} // /////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val, int digits){
 	char buf[_CVTBUFSIZE];
 	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);
