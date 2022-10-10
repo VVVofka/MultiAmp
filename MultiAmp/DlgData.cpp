@@ -29,12 +29,19 @@ END_MESSAGE_MAP()
 
 // DlgData message handlers
 void DlgData::OnBnClickedFlgDataCount(){
-	size_t cnt = (size_t)data->cnt();
-	m_count_proc.SetWindowTextA(razd(cnt).c_str());
+	size_t cnt = data->cnt();
+	std::string scnt = razd(cnt);
+	m_count_proc.SetWindowTextA(scnt.c_str());
+	m_count_proc.Invalidate();
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedFlgDataProc(){
-	int cntproc = (100 * data->cnt()) / data->szAll();
-	m_count_proc.SetWindowTextA(std::to_string(cntproc).c_str());
+	size_t cnt = data->cnt();
+	size_t szall = data->szAll();
+	float proc = (100.0f * cnt) / szall;
+	std::string sproc = float_to_str(proc, 3);
+	SetDlgItemText(IDC_TXT_DATA_SIGMA,sproc.c_str());
+	//m_count_proc.SetWindowTextA(sproc.c_str());
+	//m_count_proc.Invalidate();
 } // ///////////////////////////////////////////////////////////////////////////
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
