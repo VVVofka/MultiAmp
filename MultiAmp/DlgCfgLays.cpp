@@ -84,7 +84,6 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 // DlgCfgLays message handlers
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
-	tst();
 
 	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, &cfgOut.vkf, 20);
 	fsliders.draw();
@@ -243,10 +242,3 @@ std::string DlgCfgLays::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 // TODO: delete!!!
-#include <regex>
-void DlgCfgLays::tst(){
-	std::string s{"String to   split here, and here, and here,..."};
-	std::regex regex{R"([\s,]+)"}; // split on space and comma
-	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
-	std::vector<std::string> words{it, {}};
-} // /////////////////////////////////////////////////////////////////////////////

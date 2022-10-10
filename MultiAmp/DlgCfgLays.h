@@ -1,5 +1,6 @@
 #pragma once
 #include "..\OptsTinyLib\structLaysCfg.h"
+#include "..\OptsTinyLib\structDataCfg.h"
 #include "FSliders.h"
 #include <array>
 #include <string>
@@ -96,5 +97,4 @@ public:
 	afx_msg void OnEnKillfocusLayscfgEdit18();
 	afx_msg void OnEnKillfocusLayscfgEdit19();
 
-	void tst();
 };

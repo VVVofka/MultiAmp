@@ -38,3 +38,16 @@ void setLaysCfg(const char* fname, const structLaysCfg& lays_cfg){
     auto ret = ses.set_LaysCfg(lays_cfg);
     ses.save(fname);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+structDataCfg getDataCfg(const char* fname){
+    Session ses;
+    ses.load(fname);
+    auto ret = ses.get_DataCfg();
+    return ret;
+} // //////////////////////////////////////////////////////////////////////////
+void setDataCfg(const char* fname, const structDataCfg& data_cfg){
+    Session ses;
+    ses.load(fname);
+    auto ret = ses.set_DataCfg(data_cfg);
+    ses.save(fname);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -170,6 +170,7 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Session.h" />
+    <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
@@ -189,6 +190,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Session.cpp" />
+    <ClCompile Include="structDataCfg.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

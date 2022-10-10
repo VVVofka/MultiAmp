@@ -62,3 +62,9 @@ structLaysCfg Session::get_LaysCfg() const{
 XMLNode* Session::set_LaysCfg(const structLaysCfg& lays_cfg){
 	return options.set_laysCfg(lays_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+structDataCfg Session::get_DataCfg() const{
+	return options.get_dataCfg();
+} // //////////////////////////////////////////////////////////////////////////////
+XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
+	return options.set_dataCfg(data_cfg);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

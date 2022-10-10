@@ -59,6 +59,7 @@
       <Filter>Session\Options\Masks</Filter>
     </ClInclude>
     <ClInclude Include="structLaysCfg.h" />
+    <ClInclude Include="structDataCfg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -92,5 +93,6 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
+    <ClCompile Include="structDataCfg.cpp" />
   </ItemGroup>
 </Project>
