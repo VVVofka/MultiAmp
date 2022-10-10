@@ -3,6 +3,7 @@
 #include "DlgData.h"
 #include "afxdialogex.h"
 #include "EasyBMP.h"
+#include <map>
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
