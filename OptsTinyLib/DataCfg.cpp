@@ -13,22 +13,18 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			cfg.topX = ele->IntAttribute("topX", 1);
-			cfg.topY = ele->IntAttribute("topY", 1);
-			cfg.digits = ele->IntAttribute("digits", 2);
-			size_t size = ele->IntAttribute("cnt", 5);
-			cfg.vkf.resize(size);
-			for(size_t j = 0; j < cfg.vkf.size(); j++){
-				std::string atrname = "k" + std::to_string(j);
-				cfg.vkf[j] = ele->IntAttribute(atrname.c_str(), 1);
+			size_t size = ele->IntAttribute("size", 1);
+			std::string sin = ele->GetText();
+			cfg.fill_v(sin);
+			if(cfg.v.size() != size){
+				printf("bad attribute size dataCfg");
+				_RPT2(0, "bad attribute size dataCfg cfg.v.size=%u attribute=%u\n", cfg.v.size(), size);
 			}
 			parent_node->DeleteChild(curnode);
 			node = set(parent_node, cfg);
 			return node;
 		}
 	}
-	cfg.topX = cfg.topY = 1;
-	//cfg.laysCnt = 5;
 	node = set(parent_node, cfg);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////

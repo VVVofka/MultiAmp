@@ -49,8 +49,8 @@ XMLNode* Options::set_laysCfg(const structLaysCfg& lays_cfg){
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 structDataCfg Options::get_dataCfg() const{
-	return lays.cfg;
+	return datacfg.cfg;
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_dataCfg(const structDataCfg& data_cfg){
-	return lays.set(node, data_cfg);
+	return datacfg.set(node, data_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

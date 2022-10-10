@@ -1,6 +1,7 @@
 #pragma once
 #include "Lays.h"
 #include "Masks.h"
+#include "DataCfg.h"
 #include "structLaysCfg.h"
 #include "structDataCfg.h"
 
@@ -10,6 +11,8 @@ class Options{
 public:
 	Lays lays;
 	Masks masks;
+	DataCfg datacfg;
+
 	XMLNode* create(XMLDocument* doc);
 	XMLNode* load(XMLDocument* doc);
 	XMLNode* node;
