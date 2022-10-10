@@ -26,21 +26,31 @@ XMLNode* Options::load(XMLDocument* doc){
 	}
 	return node;
 } // ///////////////////////////////////////////////////////////
+
 const char* Options::get_maskA() const{
 	return masks.get_maskA();
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_maskA(const char* s){
 	return masks.set_maskA(s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 const char* Options::get_maskF() const{
 	return masks.get_maskF();
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_maskF(const char* s){
 	return masks.set_maskF(s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 structLaysCfg Options::get_laysCfg() const{
 	return lays.cfg;
 } // ////////////////////////////////////////////////////////////////
 XMLNode* Options::set_laysCfg(const structLaysCfg& lays_cfg){
 	return lays.set(node, lays_cfg);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+structDataCfg Options::get_dataCfg() const{
+	return lays.cfg;
+} // ////////////////////////////////////////////////////////////////
+XMLNode* Options::set_dataCfg(const structDataCfg& data_cfg){
+	return lays.set(node, data_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -60,6 +60,7 @@
     </ClInclude>
     <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="structDataCfg.h" />
+    <ClInclude Include="DataCfg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -94,5 +95,6 @@
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
     <ClCompile Include="structDataCfg.cpp" />
+    <ClCompile Include="DataCfg.cpp" />
   </ItemGroup>
 </Project>

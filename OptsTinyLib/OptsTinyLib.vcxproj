@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
+    <ClInclude Include="DataCfg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InPort.h" />
     <ClInclude Include="Lays.h" />
@@ -176,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DataCfg.cpp" />
     <ClCompile Include="InPort.cpp" />
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="MaskA.cpp" />
