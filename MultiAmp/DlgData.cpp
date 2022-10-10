@@ -127,11 +127,34 @@ void DlgData::OnPaint(){
 	dc.FillSolidRect(r_CL, colorBack);		// fill background
 
 	double maxSizePoint = (double)max(data->szX, data->szY);
-	double kx = r_CL.Width() / maxSizePoint;
+	int pixelwidth = r_CL.Width();
+	double kx = pixelwidth / maxSizePoint;
 	double ky = r_CL.Height() / maxSizePoint;
+
+	typedef std::map<size_t, COLORREF> MyMap;
+	MyMap mymap;
+	MyMap::iterator it;
+	for(size_t j = 0; j < data->v.size(); j++){
+		size_t pixelx = size_t(kx * data->getPosXid(j));
+		size_t pixely = size_t(ky * data->getPosYid(j));
+		size_t key = pixelx + pixely * pixelwidth;
+		it = mymap.find(key);
+		if(it == mymap.end()){
+			mymap.insert(MyMap::value_type(key, colorPixel));
+		} else{
+			//
+		}
+	}
+	for each(auto i in mymap){
+		int pixelx = i.first % pixelwidth;
+		int pixely = i.first / pixelwidth;
+		dc.SetPixel(pixelx, pixely, i.second);
+	}
+	return;
 	for(size_t j = 0; j < data->v.size(); j++){
 		int pixelx = int(kx * data->getPosXid(j));
 		int pixely = int(ky * data->getPosYid(j));
 		dc.SetPixel(pixelx, pixely, colorPixel);
 	}
+
 } // //////////////////////////////////////////////////////////////////////////////
