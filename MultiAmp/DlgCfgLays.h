@@ -95,4 +95,6 @@ public:
 	afx_msg void OnEnKillfocusLayscfgEdit17();
 	afx_msg void OnEnKillfocusLayscfgEdit18();
 	afx_msg void OnEnKillfocusLayscfgEdit19();
+
+	void tst();
 };

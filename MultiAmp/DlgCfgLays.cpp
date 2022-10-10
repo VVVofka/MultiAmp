@@ -84,6 +84,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 // DlgCfgLays message handlers
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
+	tst();
 
 	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, &cfgOut.vkf, 20);
 	fsliders.draw();
@@ -208,6 +209,7 @@ void DlgCfgLays::OnEnKillfocusLayscfgEdit17(){ slid2ed(17); }
 void DlgCfgLays::OnEnKillfocusLayscfgEdit18(){ slid2ed(18); }
 void DlgCfgLays::OnEnKillfocusLayscfgEdit19(){ slid2ed(19); }
 
+
 void DlgCfgLays::slid2ed(size_t idx){
 	BOOL bSuccess = FALSE;
 	char buf1[5] = "", buf2[5] = "";
@@ -239,4 +241,12 @@ std::string DlgCfgLays::razd(size_t u){
 	for(size_t j = 0; j < len / 2; j++)
 		std::swap(s[j], s[len - j - 1]);
 	return s;
+} // /////////////////////////////////////////////////////////////////////////////
+// TODO: delete!!!
+#include <regex>
+void DlgCfgLays::tst(){
+	std::string s{"String to   split here, and here, and here,..."};
+	std::regex regex{R"([\s,]+)"}; // split on space and comma
+	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
+	std::vector<std::string> words{it, {}};
 } // /////////////////////////////////////////////////////////////////////////////
