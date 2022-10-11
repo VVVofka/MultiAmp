@@ -4,8 +4,8 @@
 #include "DlgData.h"
 #include "afxdialogex.h"
 #include "EasyBMP.h"
-#include "myRnd.h"
-#include "Util.h"
+//#include "myRnd.h"
+#include "Utils.h"
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
@@ -84,10 +84,13 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
-	float sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
+	*data->sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
 	curPointsCount = getNewPointsCount();
-	float proc = (float)curPointsCount / data->szAll();
-	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
+	bool suc = false;
+	if(*data->sigma < 0.1f)
+		suc = data->generRndFlat(curPointsCount);
+//	float proc = (float)curPointsCount / data->szAll();
+//	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
 	newdata = true;
 	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 } // /////////////////////////////////////////////////////////////////////////////
@@ -147,7 +150,7 @@ void DlgData::OnPaint(){
 	std::vector<size_t> vsort;
 	vsort.reserve(pixelwidth * pixelheigh);
 
-	for(size_t j = 0; j < data->v.size(); j++){
+	for(size_t j = 0; j < data->voffset->size(); j++){
 		size_t pixelx = size_t(kx * data->getPosXid(j));
 		size_t pixely = size_t(ky * data->getPosYid(j));
 		size_t key = pixelx + pixely * pixelwidth;
@@ -175,7 +178,7 @@ BYTE DlgData::incColor(BYTE clr){
 	return BYTE(c);
 } // //////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDadaGenRndseed(){
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 	auto rnd = rand();
 	m_seed.SetWindowTextA(std::to_string(rnd).c_str());
 	m_seed.UpdateWindow();

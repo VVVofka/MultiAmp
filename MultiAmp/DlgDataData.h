@@ -18,7 +18,7 @@ public:
 	//std::vector<float_2> vspeed;
 
 	bool create(size_t sz_x, size_t sz_y, std::vector<size_t>* v_in, float* sigma, UINT32* seed);
-	bool generRndFlat();
+	bool generRndFlat(size_t new_count);
 
 	size_t cnt(){ return voffset->size(); }
 	size_t szAll(){ return szX * szY; }

@@ -7,7 +7,7 @@ XMLNode* Options::create(XMLDocument* doc){
 	XMLNode* masks_node = masks.create(node);
 	XMLNode* layscfg_node = lays.create(node);
 	XMLNode* datacfg_node = datacfg.create(node);
-	if(masks_node == NULL || layscfg_node == NULL)
+	if(masks_node == NULL || layscfg_node == NULL || datacfg_node == NULL)
 		return NULL;
 	return node;
 } // ///////////////////////////////////////////////////////////
@@ -19,11 +19,11 @@ XMLNode* Options::load(XMLDocument* doc){
 		if(name == XMLName){
 			XMLNode* masks_node = masks.load(curnode);
 			XMLNode* layscfg_node = lays.load(curnode);
-			if(masks_node != NULL && layscfg_node != NULL){
+			XMLNode* datacfg_node = datacfg.load(curnode);
+			if(masks_node != NULL && layscfg_node != NULL && datacfg_node != NULL){
 				node = curnode;
 				break;
 			}
-			XMLNode* datacfg_node = datacfg.load(curnode);
 		}
 	}
 	return node;

@@ -182,7 +182,6 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	structDataCfg datacfg = getDataCfg("tstDlg.xml");
 	DlgData dlgdata;
 	DlgDataData data;
-	datacfg.v
-	data.create(layscfg.bottomX(), layscfg.bottomY(), datacfg.v.size(), datacfg.sigma);
+	data.create(layscfg.bottomX(), layscfg.bottomY(), &datacfg.v, &datacfg.sigma, &datacfg.seed);
 	dlgdata.doModal(&data);
 } // /////////////////////////////////////////////////////////////////////////////////

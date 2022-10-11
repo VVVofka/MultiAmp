@@ -1,4 +1,6 @@
 #pragma once
+#include <afxstr.h>
+#include <afxwin.h>
 class ForMfsControls{
 public:
 	static float getFloatFromCEdit(CEdit& edit){
