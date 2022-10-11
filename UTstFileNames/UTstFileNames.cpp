@@ -14,6 +14,24 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace UTstFileNames{
 	TEST_CLASS(UTstFileNames){
 public:
+	TEST_METHOD(tstFloat){
+		float f = 0.75f;
+		char buf[255];
+		std::string s = float2sbin(f);
+		float fout = sbin2float(s.c_str());
+		sprintf(buf, "%f %s %f", f, s.c_str(), fout);
+		Logger::WriteMessage(buf);
+	} // //////////////////////////////////////////////////////////////////////////////
+	std::string float2sbin(float f){
+		char buf[33];
+		sprintf(buf, "%X", *(__int32*)&f);
+		return std::string(buf);
+	} // //////////////////////////////////////////////////////////////////////////////
+	float sbin2float(const char* s){
+		__int32 i;
+		sscanf_s(s, "%X", &i);
+		return *((float*)&i);
+	} // //////////////////////////////////////////////////////////////////////////////
 
 	TEST_METHOD(TestMethod1){
 		auto s = curDir();
@@ -35,7 +53,6 @@ public:
 #endif // WIN32
 
 #endif // DEBUG
-
-	}
+	} // //////////////////////////////////////////////////////////////////////////////
 	};
 }

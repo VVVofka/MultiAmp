@@ -14,7 +14,11 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 		std::string name(ele->Name());
 		if(name == XMLName){
 			size_t size = ele->IntAttribute("size", 1);
+			cfg.seed = ele->UnsignedAttribute("seed", 1234567);
+			std::string ssigma(ele->Attribute("sigma", ""));
+			cfg.sigma = ssigma.length() == 0 ? 0 : sbin2float(ssigma.c_str());
 			std::string sin = ele->GetText();
+
 			cfg.fill_v(sin);
 			if(cfg.v.size() != size){
 				printf("bad attribute size dataCfg");
@@ -43,7 +47,19 @@ XMLNode* DataCfg::set(XMLNode* parent_node, const structDataCfg& new_cfg){
 	XMLDocument* doc = parent_node->GetDocument();
 	XMLElement* ele_out = doc->NewElement(XMLName);
 	ele_out->SetAttribute("size", new_cfg.v.size());		
+	ele_out->SetAttribute("seed", new_cfg.seed);
+	ele_out->SetAttribute("sigma", new_cfg.sigma);
 	ele_out->SetText(new_cfg.get_s().c_str());
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
+std::string DataCfg::float2sbin(float f){
+	char buf[33];
+	sprintf_s(buf, "%X", *(__int32*)&f);
+	return std::string(buf);
+} // //////////////////////////////////////////////////////////////////////////////
+float DataCfg::sbin2float(const char* s){
+	__int32 i;
+	sscanf_s(s, "%X", &i);
+	return *((float*)&i);
+} // //////////////////////////////////////////////////////////////////////////////

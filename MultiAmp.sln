@@ -35,6 +35,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTstOptsTinyLib", "UTstOpts
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OptsTinyLibs", "OptsTinyLibs", "{D9F49E22-57FF-4002-84AD-F7102AFCCBD5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{160333C3-01A0-4BAC-81A5-15C618AA8E99}"
+	ProjectSection(SolutionItems) = preProject
+		Common\include\myRnd.h = Common\include\myRnd.h
+		Common\include\Util.h = Common\include\Util.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

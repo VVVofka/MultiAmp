@@ -1,9 +1,17 @@
 #include "pch.h"
 #include "DlgDataData.h"
 
-bool DlgDataData::create(size_t sz_x, size_t sz_y, float proc, float in_sigma){
+bool DlgDataData::create(size_t sz_x, size_t sz_y, std::vector<size_t>* in_v, float* in_sigma, UINT32* in_seed){
+	auto sz = sz_x * sz_y;
+	if(sz != in_v->size())
+		return false;
+	szX = sz_x, szY = sz_y;
+	voffset = in_v;
 	sigma = in_sigma;
-	v.resize((size_t)((szX = sz_x) * (szY = sz_y) * proc + 0.5));
+	seed = in_seed;
+	return true;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool DlgDataData::generRndFlat(){
 	std::vector<int> ar(szX * szY, -1);
 
 	std::random_device rd;   // non-deterministic generator
@@ -13,7 +21,7 @@ bool DlgDataData::create(size_t sz_x, size_t sz_y, float proc, float in_sigma){
 	std::uniform_real_distribution<> distSpeed(-1, 1);		// distribute results between  inclusive.
 
 	UINT64 dog = ar.size() * (UINT64)10;
-	for(size_t j = 0; j < v.size(); j++){
+	for(size_t j = 0; j < voffset->size(); j++){
 		size_t ofsX, ofsY, ofs;
 		while(true){
 			ofsX = distOfsX(gen);
@@ -21,13 +29,13 @@ bool DlgDataData::create(size_t sz_x, size_t sz_y, float proc, float in_sigma){
 			ofs = ofsY * szX + ofsX;
 			if(ar[ofs] == -1){
 				ar[ofs] = j;
-				v[j].offset = ofs;
-				v[j].speed = float_2((float)distSpeed(gen), (float)distSpeed(gen));
+				(*voffset)[j] = ofs;
+				//v[j].speed = float_2((float)distSpeed(gen), (float)distSpeed(gen));
 				break;
 			}
 			if(dog-- == 0)
 				return false;
 		}
 	}
-	return true;
+	return false;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////////

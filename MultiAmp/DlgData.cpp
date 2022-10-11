@@ -1,9 +1,11 @@
 #include "pch.h"
+#include <map>
 #include "MultiAmp.h"
 #include "DlgData.h"
 #include "afxdialogex.h"
 #include "EasyBMP.h"
-#include <map>
+#include "myRnd.h"
+#include "Util.h"
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
@@ -18,6 +20,7 @@ void DlgData::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_FLG_DATA_COUNT, m_cnt_proc_type);
 	DDX_Control(pDX, IDC_TXT_DATA_SIGMA, m_sigma);
 	DDX_Control(pDX, IDC_PCT_DATA_SCREEN, m_screen);
+	DDX_Control(pDX, IDC_TXT_DATA_RNDSEED, m_seed);
 } // ///////////////////////////////////////////////////////////////////////////
 BEGIN_MESSAGE_MAP(DlgData, CDialog)
 	ON_BN_CLICKED(IDC_FLG_DATA_COUNT, &DlgData::OnBnClickedFlgDataCount)
@@ -25,6 +28,7 @@ BEGIN_MESSAGE_MAP(DlgData, CDialog)
 	ON_BN_CLICKED(IDOK, &DlgData::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BT_DATA_GENER, &DlgData::OnBnClickedBtDataGener)
 	ON_WM_PAINT()
+	ON_BN_CLICKED(IDC_BT_DADA_GEN_RNDSEED, &DlgData::OnBnClickedBtDadaGenRndseed)
 END_MESSAGE_MAP()
 
 // DlgData message handlers
@@ -47,7 +51,7 @@ BOOL DlgData::OnInitDialog(){
 	m_size_y.SetWindowTextA(razd(data->szY).c_str());
 	m_size.SetWindowTextA(razd(data->szAll()).c_str());
 
-	std::string ssigma = float_to_str(data->sigma, 3);
+	std::string ssigma = float_to_str(*data->sigma, 3);
 	m_sigma.SetWindowTextA(ssigma.c_str());
 
 	curPointsCount = data->cnt();
@@ -80,7 +84,7 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
-	float sigma = getFloatFromCEdit(m_sigma);
+	float sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
 	curPointsCount = getNewPointsCount();
 	float proc = (float)curPointsCount / data->szAll();
 	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
@@ -89,18 +93,25 @@ void DlgData::OnBnClickedBtDataGener(){
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getNewPointsCount(){
 	int z = m_cnt_proc_type.GetCheck();
-	float value = getFloatFromCEdit(m_count_proc);
+	float value = ForMfsControls::getFloatFromCEdit(m_count_proc);
 	if(z == BST_CHECKED)
 		return size_t(value);	// count
 	return size_t(value * 0.01 * data->szAll() + 0.5);	// %
 } // /////////////////////////////////////////////////////////////////////////////
-float DlgData::getFloatFromCEdit(CEdit& edit){
-	CString sb;
-	edit.GetWindowTextA(sb);
-	sb.Replace(" ", "");
-	sb.Replace(',', '.');
-	return std::strtof((LPCSTR)sb, NULL);
-} // //////////////////////////////////////////////////////////////////////////////
+//float DlgData::getFloatFromCEdit(CEdit& edit){
+//	CString sb;
+//	edit.GetWindowTextA(sb);
+//	sb.Replace(" ", "");
+//	sb.Replace(',', '.');
+//	return std::strtof((LPCSTR)sb, NULL);
+//} // //////////////////////////////////////////////////////////////////////////////
+//float DlgData::getFloatFromCEdit(CEdit& edit){
+//	CString sb;
+//	edit.GetWindowTextA(sb);
+//	sb.Replace(" ", "");
+//	sb.Replace(',', '.');
+//	return std::strtof((LPCSTR)sb, NULL);
+//} // //////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val, int digits){
 	char buf[_CVTBUFSIZE];
 	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);
@@ -162,4 +173,10 @@ BYTE DlgData::incColor(BYTE clr){
 	if(c > 255)
 		return BYTE(clr + (255 - clr) * 0.5);
 	return BYTE(c);
+} // //////////////////////////////////////////////////////////////////////////////
+void DlgData::OnBnClickedBtDadaGenRndseed(){
+	srand(time(NULL));
+	auto rnd = rand();
+	m_seed.SetWindowTextA(std::to_string(rnd).c_str());
+	m_seed.UpdateWindow();
 } // //////////////////////////////////////////////////////////////////////////////

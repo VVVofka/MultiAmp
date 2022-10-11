@@ -56,6 +56,10 @@
 #define IDC_TXT_DATA_SIGMA              1045
 #define IDC_BT_DATA_GENER               1046
 #define IDC_PCT_DATA_SCREEN             1047
+#define IDC_EDIT1                       1048
+#define IDC_TXT_DATA_RNDSEED            1048
+#define IDC_ST_DATA_RNDSEED             1049
+#define IDC_BT_DADA_GEN_RNDSEED         1050
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -199,7 +203,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1048
+#define _APS_NEXT_CONTROL_VALUE         1051
 #define _APS_NEXT_SYMED_VALUE           111
 #endif
 #endif

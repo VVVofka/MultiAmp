@@ -6,6 +6,7 @@ XMLNode* Options::create(XMLDocument* doc){
 	node = doc->InsertEndChild(ele_out);
 	XMLNode* masks_node = masks.create(node);
 	XMLNode* layscfg_node = lays.create(node);
+	XMLNode* datacfg_node = datacfg.create(node);
 	if(masks_node == NULL || layscfg_node == NULL)
 		return NULL;
 	return node;
@@ -22,6 +23,7 @@ XMLNode* Options::load(XMLDocument* doc){
 				node = curnode;
 				break;
 			}
+			XMLNode* datacfg_node = datacfg.load(curnode);
 		}
 	}
 	return node;
