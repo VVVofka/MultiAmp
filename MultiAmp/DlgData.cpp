@@ -38,7 +38,7 @@ void DlgData::OnBnClickedFlgDataCount(){
 	m_count_proc.UpdateWindow();
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedFlgDataProc(){
-	size_t szall = data->szAll();
+	size_t szall = szAreaX * szAreaY;
 	float proc = (100.0f * curPointsCount) / szall;
 	std::string sproc = float_to_str(proc, 3);
 	m_count_proc.SetWindowTextA(sproc.c_str());
@@ -47,14 +47,14 @@ void DlgData::OnBnClickedFlgDataProc(){
 BOOL DlgData::OnInitDialog(){
 	CDialog::OnInitDialog();
 	m_cnt_proc_type.SetCheck(BST_CHECKED);
-	m_size_x.SetWindowTextA(razd(data->szX).c_str());
-	m_size_y.SetWindowTextA(razd(data->szY).c_str());
-	m_size.SetWindowTextA(razd(data->szAll()).c_str());
+	m_size_x.SetWindowTextA(razd(szAreaX).c_str());
+	m_size_y.SetWindowTextA(razd(szAreaY).c_str());
+	m_size.SetWindowTextA(razd(szAreaX * szAreaY).c_str());
 
-	std::string ssigma = float_to_str(*data->sigma, 3);
+	std::string ssigma = float_to_str(sigma, 3);
 	m_sigma.SetWindowTextA(ssigma.c_str());
 
-	curPointsCount = data->cnt();
+	curPointsCount = voffset.size();
 	std::string scnt = razd(curPointsCount);
 	m_count_proc.SetWindowTextA(scnt.c_str());
 
@@ -67,8 +67,19 @@ INT_PTR DlgData::DoModal(){
 	return CDialog::DoModal();
 }  // ///////////////////////////////////////////////////////////////////////////
 INT_PTR DlgData::doModal(DlgDataData* in_data){
-	data = in_data;
-	return DoModal();
+	szAreaX = in_data->szX;
+	szAreaY = in_data->szY;
+	sigma = *in_data->sigma;
+	seed = *in_data->seed;
+	voffset = *in_data->voffset;
+
+	INT_PTR ret = DoModal();
+	if(ret == IDOK){
+		*in_data->sigma = sigma;
+		*in_data->seed = seed;
+		*in_data->voffset = voffset;
+	}
+	return ret;
 }  // ///////////////////////////////////////////////////////////////////////////
 std::string DlgData::razd(size_t u){
 	size_t j = 0;
@@ -84,11 +95,14 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
-	*data->sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
+	sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
 	curPointsCount = getNewPointsCount();
 	bool suc = false;
-	if(*data->sigma < 0.1f)
-		suc = data->generRndFlat(curPointsCount);
+	if(sigma < 0.1f){
+		DlgDataData data;
+		data.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
+		suc = data.generRndFlat(curPointsCount);
+	}
 	newdata = true;
 	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 } // /////////////////////////////////////////////////////////////////////////////
@@ -97,7 +111,7 @@ size_t DlgData::getNewPointsCount(){
 	float value = ForMfsControls::getFloatFromCEdit(m_count_proc);
 	if(z == BST_CHECKED)
 		return size_t(value);	// count
-	return size_t(value * 0.01 * data->szAll() + 0.5);	// %
+	return size_t(value * 0.01 * szAreaX * szAreaY + 0.5);	// %
 } // /////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val, int digits){
 	char buf[_CVTBUFSIZE];
@@ -123,7 +137,7 @@ void DlgData::OnPaint(){
 
 	dc.FillSolidRect(r_CL, colorBack);		// fill background
 
-	double maxSizePoint = (double)max(data->szX, data->szY);
+	double maxSizePoint = (double)max(szAreaX, szAreaY);
 	int pixelwidth = r_CL.Width();
 	int pixelheigh = r_CL.Height();
 	double kx = pixelwidth / maxSizePoint;
@@ -134,9 +148,9 @@ void DlgData::OnPaint(){
 	std::vector<size_t> vsort;
 	vsort.reserve(pixelwidth * pixelheigh);
 
-	for(size_t j = 0; j < data->voffset->size(); j++){
-		size_t pixelx = size_t(kx * data->getPosXid(j));
-		size_t pixely = size_t(ky * data->getPosYid(j));
+	for(size_t j = 0; j < voffset.size(); j++){
+		size_t pixelx = size_t(kx * (voffset[j] % szAreaX));		//size_t pixelx = size_t(kx * data->getPosXid(j));
+		size_t pixely = size_t(ky * (voffset[j] / szAreaY));
 		size_t key = pixelx + pixely * pixelwidth;
 		MyMap::iterator it = mymap.find(key);
 		if(it == mymap.end()){

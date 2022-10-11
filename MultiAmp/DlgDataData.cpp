@@ -1,18 +1,11 @@
 #include "pch.h"
 #include "DlgDataData.h"
 
-bool DlgDataData::create(size_t sz_x, size_t sz_y, std::vector<size_t>* in_v, float* in_sigma, UINT32* in_seed){
+void DlgDataData::create(size_t sz_x, size_t sz_y, std::vector<size_t>* in_v, float* in_sigma, UINT32* in_seed){
 	szX = sz_x, szY = sz_y;
 	voffset = in_v;
 	sigma = in_sigma;
 	seed = in_seed;
-
-	//auto sz = sz_x * sz_y;
-	//if(sz != in_v->size()){
-	//	*sigma = 0;
-	//	generRndFlat(sz);
-	//}
-	return true;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool DlgDataData::generRndFlat(size_t new_count){
 	voffset->resize(new_count);

@@ -4,7 +4,7 @@
 
 class DlgData : public CDialog{
 	DECLARE_DYNAMIC(DlgData)
-	DlgDataData* data = NULL;
+	//DlgDataData* data = NULL;
 public:
 	DlgData(CWnd* pParent = nullptr);   // standard constructor
 	virtual ~DlgData();
@@ -43,6 +43,13 @@ private:
 
 	bool newdata = true;
 	size_t curPointsCount = 0;
+
+	size_t szAreaX = 0;
+	size_t szAreaY = 0;
+	float sigma = 0;
+	UINT32 seed = 0;
+	std::vector<size_t> voffset;
+
 public:
 	CEdit m_seed;
 	afx_msg void OnBnClickedBtDadaGenRndseed();

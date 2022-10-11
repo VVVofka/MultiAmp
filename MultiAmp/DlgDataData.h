@@ -17,7 +17,7 @@ public:
 	std::vector<size_t>* voffset = NULL;
 	//std::vector<float_2> vspeed;
 
-	bool create(size_t sz_x, size_t sz_y, std::vector<size_t>* v_in, float* sigma, UINT32* seed);
+	void create(size_t sz_x, size_t sz_y, std::vector<size_t>* v_in, float* sigma, UINT32* seed);
 	bool generRndFlat(size_t new_count);
 
 	size_t cnt(){ return voffset->size(); }
