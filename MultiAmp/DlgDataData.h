@@ -12,7 +12,7 @@ class DlgDataData{
 public:
 	size_t szX = 0;
 	size_t szY = 0;
-	float* sigma = NULL;
+	char* sigma = NULL;
 	UINT32* seed = NULL;
 	std::vector<size_t>* voffset = NULL;
 	//std::vector<float_2> vspeed;

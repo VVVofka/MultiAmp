@@ -17,7 +17,7 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 			cfg.seed = ele->UnsignedAttribute("seed", 1234567);
 
 			const char* pchar = ele->Attribute("sigma");
-			cfg.sigma = (pchar == NULL) ? 0 : sbin2float(pchar);
+			cfg.setSigma((pchar == NULL) ? "0" : pchar);
 			
 			std::string sin = ele->GetText();
 

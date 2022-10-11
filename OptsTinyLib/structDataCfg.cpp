@@ -1,6 +1,14 @@
 #include "structDataCfg.h"
 #include <regex>
 
+float structDataCfg::fsigma(){
+	float flt;
+	sscanf_s(sigma, "%f", &flt);
+	return flt;
+} // //////////////////////////////////////////////////////////////////////////////////////
+void structDataCfg::setSigma(const char* s){
+	strcpy_s(sigma, s);
+} // //////////////////////////////////////////////////////////////////////////////////////
 size_t structDataCfg::fill_v(const std::string& s){
 	std::regex regex{R"([\s]+)"}; // split on space
 	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
