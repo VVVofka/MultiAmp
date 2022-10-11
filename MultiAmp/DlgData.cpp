@@ -89,8 +89,6 @@ void DlgData::OnBnClickedBtDataGener(){
 	bool suc = false;
 	if(*data->sigma < 0.1f)
 		suc = data->generRndFlat(curPointsCount);
-//	float proc = (float)curPointsCount / data->szAll();
-//	data->create(data->szX, data->szY, proc, sigma);	//data.create(1024, 1024, 0.01f, 0.4f);
 	newdata = true;
 	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 } // /////////////////////////////////////////////////////////////////////////////
@@ -101,20 +99,6 @@ size_t DlgData::getNewPointsCount(){
 		return size_t(value);	// count
 	return size_t(value * 0.01 * data->szAll() + 0.5);	// %
 } // /////////////////////////////////////////////////////////////////////////////
-//float DlgData::getFloatFromCEdit(CEdit& edit){
-//	CString sb;
-//	edit.GetWindowTextA(sb);
-//	sb.Replace(" ", "");
-//	sb.Replace(',', '.');
-//	return std::strtof((LPCSTR)sb, NULL);
-//} // //////////////////////////////////////////////////////////////////////////////
-//float DlgData::getFloatFromCEdit(CEdit& edit){
-//	CString sb;
-//	edit.GetWindowTextA(sb);
-//	sb.Replace(" ", "");
-//	sb.Replace(',', '.');
-//	return std::strtof((LPCSTR)sb, NULL);
-//} // //////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val, int digits){
 	char buf[_CVTBUFSIZE];
 	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);

@@ -8,7 +8,7 @@ size_t structDataCfg::fill_v(const std::string& s){
 	size_t newsize = words.size();
 	v.resize(words.size());
 	for(size_t j = 0; j < newsize; j++)
-		v[j] = size_t(atol(words[j].c_str()));
+		v[j] = size_t(_atoi64(words[j].c_str()));
 	return newsize;
 } // //////////////////////////////////////////////////////////////////////////////////////
 std::string structDataCfg::get_s() const{

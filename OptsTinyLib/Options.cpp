@@ -28,6 +28,51 @@ XMLNode* Options::load(XMLDocument* doc){
 	}
 	return node;
 } // ///////////////////////////////////////////////////////////
+XMLNode* Options::loadMasks(XMLDocument* doc){
+	node = NULL;
+	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
+		std::string name(ele->Name());
+		if(name == XMLName){
+			XMLNode* datacfg_node = datacfg.load(curnode);
+			if(datacfg_node != NULL){
+				node = curnode;
+				break;
+			}
+		}
+	}
+	return node;
+} // ///////////////////////////////////////////////////////////
+XMLNode* Options::loadLaysCfg(XMLDocument* doc){
+	node = NULL;
+	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
+		std::string name(ele->Name());
+		if(name == XMLName){
+			XMLNode* layscfg_node = lays.load(curnode);
+			if(layscfg_node != NULL){
+				node = curnode;
+				break;
+			}
+		}
+	}
+	return node;
+} // ///////////////////////////////////////////////////////////
+XMLNode* Options::loadDataCfg(XMLDocument* doc){
+	node = NULL;
+	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
+		std::string name(ele->Name());
+		if(name == XMLName){
+			XMLNode* layscfg_node = lays.load(curnode);
+			if(layscfg_node != NULL){
+				node = curnode;
+				break;
+			}
+		}
+	}
+	return node;
+} // ///////////////////////////////////////////////////////////
 
 const char* Options::get_maskA() const{
 	return masks.get_maskA();
@@ -53,6 +98,17 @@ XMLNode* Options::set_laysCfg(const structLaysCfg& lays_cfg){
 structDataCfg Options::get_dataCfg() const{
 	return datacfg.cfg;
 } // ////////////////////////////////////////////////////////////////
-XMLNode* Options::set_dataCfg(const structDataCfg& data_cfg){
-	return datacfg.set(node, data_cfg);
+XMLNode* Options::set_dataCfg(XMLDocument* doc, const structDataCfg& data_cfg){
+	XMLNode* curnode = getNode(doc);
+	return datacfg.set(curnode, data_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+XMLNode* Options::getNode(XMLDocument* doc){
+	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
+		std::string name(ele->Name());
+		if(name == XMLName)
+			return curnode;
+	}
+	return NULL;
+} // ////////////////////////////////////////////////////////////////

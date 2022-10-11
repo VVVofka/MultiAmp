@@ -12,16 +12,39 @@ void Session::create(const char* f_name){
 	}
 } // //////////////////////////////////////////////////////////////
 void Session::load(const char* f_name){
-	fname = strlen(f_name) == 0 ? "session.xml" : f_name;
-	XMLError errLoad = doc.LoadFile(fname.c_str());
+	XMLError errLoad = loadDoc(f_name);
 	if(errLoad == XML_SUCCESS){
 		XMLNode* options_node = options.load(&doc);
 	} else{
 		create(fname.c_str());
 	}
 } // //////////////////////////////////////////////////////
+void Session::loadMasks(const char* f_name){
+	XMLError errLoad = loadDoc(f_name);
+	if(errLoad == XML_SUCCESS){
+		XMLNode* options_node = options.loadMasks(&doc);
+	} else{
+		create(fname.c_str());
+	}
+} // //////////////////////////////////////////////////////
+void Session::loadLaysCfg(const char* f_name){
+	XMLError errLoad = loadDoc(f_name);
+	if(errLoad == XML_SUCCESS){
+		XMLNode* options_node = options.loadLaysCfg(&doc);
+	} else{
+		create(fname.c_str());
+	}
+} // //////////////////////////////////////////////////////
+void Session::loadDataCgf(const char* f_name){
+	XMLError errLoad = loadDoc(f_name);
+	if(errLoad == XML_SUCCESS){
+		XMLNode* options_node = options.loadDataCfg(&doc);
+	} else{
+		create(fname.c_str());
+	}
+} // //////////////////////////////////////////////////////
 void Session::save(const char* f_name){
-	if(strlen(f_name) > 0)  
+	if(strlen(f_name) > 0)
 		fname = f_name;
 	XMLError errSave = doc.SaveFile(fname.c_str());
 } // ////////////////////////////////////////////////////////////////
@@ -66,5 +89,18 @@ structDataCfg Session::get_DataCfg() const{
 	return options.get_dataCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
-	return options.set_dataCfg(data_cfg);
+	return options.set_dataCfg(&doc, data_cfg);
+} // //////////////////////////////////////////////////////////////////////////////
+
+void Session::saveDataCfg(const structDataCfg& data_cfg){
+	XMLNode* options_node = options.loadDataCfg(&doc);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+XMLError Session::loadDoc(const char* f_name){
+	if(f_name == NULL || strlen(f_name) == 0)
+		fname = "session.xml";
+	else 
+		fname = f_name;
+	XMLError errLoad = doc.LoadFile(fname.c_str());
+	return errLoad;
+} // //////////////////////////////////////////////////////////////

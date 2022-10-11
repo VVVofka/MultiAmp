@@ -15,7 +15,7 @@ namespace UTstFileNames{
 	TEST_CLASS(UTstFileNames){
 public:
 	TEST_METHOD(tstFloat){
-		float f = 0.75f;
+		float f = 0.5f;
 		char buf[255];
 		std::string s = float2sbin(f);
 		float fout = sbin2float(s.c_str());

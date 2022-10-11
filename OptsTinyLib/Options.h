@@ -15,6 +15,9 @@ public:
 
 	XMLNode* create(XMLDocument* doc);
 	XMLNode* load(XMLDocument* doc);
+	XMLNode* loadMasks(XMLDocument* doc);
+	XMLNode* loadLaysCfg(XMLDocument* doc);
+	XMLNode* loadDataCfg(XMLDocument* doc);
 	XMLNode* node;
 
 	const char* get_maskA() const;
@@ -27,10 +30,10 @@ public:
 	XMLNode* set_laysCfg(const structLaysCfg& lays_cfg);
 
 	structDataCfg get_dataCfg() const;
-	XMLNode* set_dataCfg(const structDataCfg& data_cfg);
+	XMLNode* set_dataCfg(XMLDocument* doc, const structDataCfg& data_cfg);
 
 private:
 	const char XMLName[8] = "Options";	//	Options
-
+	XMLNode* getNode(XMLDocument* doc);
 };
 
