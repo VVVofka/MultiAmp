@@ -8,7 +8,10 @@ public:
 		edit.GetWindowTextA(sb);
 		sb.Replace(" ", "");
 		sb.Replace(',', '.');
-		return std::strtof((LPCSTR)sb, NULL);
+		//float ret = std::strtof((LPCSTR)sb, NULL);
+		float flt;
+		sscanf_s((LPCSTR)sb, "%f", &flt);
+		return flt;
 	} // //////////////////////////////////////////////////////////////////////////////
 	static UINT32 getUINT32FromCEdit(CEdit& edit){
 		CString sb;

@@ -96,6 +96,7 @@ std::string DlgData::razd(size_t u){
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
 	sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
+	seed = ForMfsControls::getUINT32FromCEdit(m_seed);
 	curPointsCount = getNewPointsCount();
 	bool suc = false;
 	if(sigma < 0.1f){
