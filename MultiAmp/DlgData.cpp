@@ -122,6 +122,10 @@ void DlgData::OnBnClickedBtDataGener(){
 		DlgDataData tmpdata;
 		tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
 		suc = tmpdata.generRndFlat(curPointsCount);
+	} else{	//Normal dist
+		DlgDataData tmpdata;
+		tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
+		suc = tmpdata.generRndNorm(curPointsCount, fsigma);
 	}
 	if(suc){
 		newdata = true;
@@ -129,14 +133,17 @@ void DlgData::OnBnClickedBtDataGener(){
 
 		auto btOK = (CButton*)GetDlgItem(IDOK);
 		btOK->EnableWindow(1);
-		btOK->UpdateWindow();
-	}
+//		btOK->UpdateWindow();
+
+		SetDlgItemTextA(IDC_ST_DATA_STATUS, "SUCESS");
+	}else
+		SetDlgItemTextA(IDC_ST_DATA_STATUS, "ERROR !");
+
+		UpdateWindow();
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getNewPointsCount(){
 	auto btCnt = (CButton*)GetDlgItem(IDC_FLG_DATA_COUNT);
 	auto btProc = (CButton*)GetDlgItem(IDC_FLG_DATA_PROC);
-	//	int z = m_cnt_proc_type.GetCheck();
-	//	if(z == BST_CHECKED){	// count
 	if(btCnt->GetCheck() && !btProc->GetCheck()){	// count
 		UINT32 value = ForMfsControls::getUINT32FromCEdit(m_count_proc);
 		return size_t(value);
