@@ -15,12 +15,14 @@ bool DlgDataData::generRndFlat(size_t new_count){
 	std::mt19937 gen(rd());  // to seed mersenne twister.
 	std::uniform_int_distribution<> distOfsX(0, szX - 1);	// distribute results between  inclusive.
 	std::uniform_int_distribution<> distOfsY(0, szY - 1);	// distribute results between  inclusive.
-	//std::uniform_real_distribution<> distSpeed(-1, 1);		// distribute results between  inclusive.
+	//std::uniform_real_distribution<> distSpeed(-1, 1);
 
 	UINT64 dog = ar.size() * (UINT64)10;
 	for(size_t j = 0; j < voffset->size(); j++){
 		size_t ofsX, ofsY, ofs;
 		while(true){
+			if(dog-- == 0)
+				return false;
 			ofsX = distOfsX(gen);
 			ofsY = distOfsY(gen);
 			ofs = ofsY * szX + ofsX;
@@ -29,8 +31,6 @@ bool DlgDataData::generRndFlat(size_t new_count){
 				(*voffset)[j] = ofs;
 				break;
 			}
-			if(dog-- == 0)
-				return false;
 		}
 	}
 	return true;
@@ -44,7 +44,7 @@ bool DlgDataData::generRndNorm(size_t new_count, float sigma){
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	std::normal_distribution<> distNorm(Mean, Sigma);
-	UINT64 dog = ar.size() * (UINT64)10;
+	UINT64 dog = ar.size() * (UINT64)8;
 	double boundx = szX * 0.5;
 	double boundy = szY * 0.5;
 	for(size_t j = 0; j < voffset->size(); j++){
