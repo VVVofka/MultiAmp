@@ -59,10 +59,17 @@ BOOL DlgData::OnInitDialog(){
 	m_count_proc.SetWindowTextA(scnt.c_str());
 
 	if(curPointsCount == 0){
-		//m_cnt_proc_type = 1;//.Set Check(BST_UNCHECKED);
+		auto btCnt = (CButton*)GetDlgItem(IDC_FLG_DATA_COUNT);
+		btCnt->SetCheck(0);
 
+		auto btProc = (CButton*)GetDlgItem(IDC_FLG_DATA_PROC);
+		btProc->SetCheck(1);
+		m_count_proc.SetWindowTextA("1.5");
+
+		auto btOK = (CButton*)GetDlgItem(IDOK);
+		btOK->EnableWindow(0);
+		btOK->UpdateWindow();
 	}
-
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
@@ -119,18 +126,25 @@ void DlgData::OnBnClickedBtDataGener(){
 	if(suc){
 		newdata = true;
 		CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
+
+		auto btOK = (CButton*)GetDlgItem(IDOK);
+		btOK->EnableWindow(1);
+		btOK->UpdateWindow();
 	}
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getNewPointsCount(){
-	int z = m_cnt_proc_type.GetCheck();
-	if(z == BST_CHECKED){	// count
+	auto btCnt = (CButton*)GetDlgItem(IDC_FLG_DATA_COUNT);
+	auto btProc = (CButton*)GetDlgItem(IDC_FLG_DATA_PROC);
+	//	int z = m_cnt_proc_type.GetCheck();
+	//	if(z == BST_CHECKED){	// count
+	if(btCnt->GetCheck() && !btProc->GetCheck()){	// count
 		UINT32 value = ForMfsControls::getUINT32FromCEdit(m_count_proc);
 		return size_t(value);
-	} else{
+	} else if(!btCnt->GetCheck() && btProc->GetCheck()){
 		float value = ForMfsControls::getFloatFromCEdit(m_count_proc);
 		double ret = value * 0.01 * szAreaX * szAreaY + 0.5;
 		return size_t(ret);	// %
-	}
+	}return 0;
 } // /////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val){
 	char buf[33];

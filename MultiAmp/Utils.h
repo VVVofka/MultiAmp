@@ -21,6 +21,7 @@ public:
 	static UINT32 getUINT32FromCEdit(CEdit& edit, std::string* s_out = NULL){
 		CString sb;
 		edit.GetWindowTextA(sb);
+		sb.Replace(" ", "");
 		UINT32 u;
 		sscanf_s((LPCSTR)sb, "%u", &u);
 		std::string s = std::to_string(u);
