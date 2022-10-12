@@ -54,4 +54,5 @@ public:
 	CEdit m_seed;
 	afx_msg void OnBnClickedBtDadaGenRndseed();
 	CButton m_proc;
+	CStatic m_status;
 };

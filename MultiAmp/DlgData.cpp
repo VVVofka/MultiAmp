@@ -114,17 +114,17 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
+	SetDlgItemTextA(IDC_ST_DATA_STATUS, "WORK ...");
+	UpdateWindow();
 	float fsigma = ForMfsControls::getFloatFromCEdit(m_sigma, &sigma);
 	UINT32 useed = ForMfsControls::getUINT32FromCEdit(m_seed, &seed);
 	curPointsCount = getNewPointsCount();
 	bool suc = false;
-	if(fsigma < 0.1f){
-		DlgDataData tmpdata;
-		tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
+	DlgDataData tmpdata;
+	tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
+	if(fsigma > 3.f || fsigma < 0.0001f){
 		suc = tmpdata.generRndFlat(curPointsCount);
 	} else{	//Normal dist
-		DlgDataData tmpdata;
-		tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
 		suc = tmpdata.generRndNorm(curPointsCount, fsigma);
 	}
 	if(suc){
@@ -133,13 +133,12 @@ void DlgData::OnBnClickedBtDataGener(){
 
 		auto btOK = (CButton*)GetDlgItem(IDOK);
 		btOK->EnableWindow(1);
-//		btOK->UpdateWindow();
 
 		SetDlgItemTextA(IDC_ST_DATA_STATUS, "SUCESS");
-	}else
+	} else
 		SetDlgItemTextA(IDC_ST_DATA_STATUS, "ERROR !");
 
-		UpdateWindow();
+	UpdateWindow();
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getNewPointsCount(){
 	auto btCnt = (CButton*)GetDlgItem(IDC_FLG_DATA_COUNT);
