@@ -17,7 +17,7 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 			cfg.seed = ele->UnsignedAttribute("seed", 1234567);
 
 			const char* pchar = ele->Attribute("sigma");
-			cfg.setSigma((pchar == NULL) ? "0" : pchar);
+			cfg.sigma = (pchar == NULL) ? "0" : pchar;
 			
 			std::string sin = ele->GetText();
 
@@ -49,8 +49,8 @@ XMLNode* DataCfg::set(XMLNode* parent_node, const structDataCfg& new_cfg){
 	XMLDocument* doc = parent_node->GetDocument();
 	XMLElement* ele_out = doc->NewElement(XMLName);
 	ele_out->SetAttribute("size", new_cfg.v.size());
-	ele_out->SetAttribute("seed", new_cfg.seed);
-	ele_out->SetAttribute("sigma", new_cfg.sigma);
+	ele_out->SetAttribute("seed", new_cfg.seed.c_str());
+	ele_out->SetAttribute("sigma", new_cfg.sigma.c_str());
 	ele_out->SetText(new_cfg.get_s().c_str());
 	node = parent_node->InsertEndChild(ele_out);
 	return node;

@@ -32,22 +32,22 @@ public:
 	CButton m_cnt_proc_type;
 	CEdit m_sigma;
 	CWnd m_screen;
-	
+
 	afx_msg void OnBnClickedBtDataGener();
 	afx_msg void OnPaint();
 private:
 	std::string razd(size_t u);
 	size_t getNewPointsCount();
 	BYTE incColor(BYTE clr);
-	std::string float_to_str(float val, int digits);
+	std::string float_to_str(float val);
 
 	bool newdata = true;
 	size_t curPointsCount = 0;
 
 	size_t szAreaX = 0;
 	size_t szAreaY = 0;
-	float sigma = 0;
-	UINT32 seed = 0;
+	std::string sigma = "0";
+	std::string seed = "012345";
 	std::vector<size_t> voffset;
 
 public:

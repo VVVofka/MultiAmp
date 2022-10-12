@@ -1,15 +1,15 @@
 #pragma once
 #include <vector>
 #include <string>
+using namespace std;
 class structDataCfg{
 public:
-	std::vector<size_t> v;
-	char sigma[32];
-	unsigned seed;
+	vector<size_t> v;
+	string sigma;
+	string seed;
 
 	float fsigma();
-	void setSigma(const char* s);
-	size_t fill_v(const std::string& s);
-	std::string get_s() const;
+	size_t fill_v(const string& s);
+	string get_s() const;
 };
 

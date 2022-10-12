@@ -3,11 +3,8 @@
 
 float structDataCfg::fsigma(){
 	float flt;
-	sscanf_s(sigma, "%f", &flt);
+	sscanf_s(sigma.c_str(), "%f", &flt);
 	return flt;
-} // //////////////////////////////////////////////////////////////////////////////////////
-void structDataCfg::setSigma(const char* s){
-	strcpy_s(sigma, s);
 } // //////////////////////////////////////////////////////////////////////////////////////
 size_t structDataCfg::fill_v(const std::string& s){
 	std::regex regex{R"([\s]+)"}; // split on space

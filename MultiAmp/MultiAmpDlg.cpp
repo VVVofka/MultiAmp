@@ -11,7 +11,7 @@
 #define new DEBUG_NEW
 #endif
 
-	// CMultiAmpDlg dialog
+// CMultiAmpDlg dialog
 CMultiAmpDlg::CMultiAmpDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MULTIAMP_DIALOG, pParent){
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -148,7 +148,7 @@ void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 	CDialogEx::OnTimer(nIDEvent);
 } // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedOk(){
-	CDialogEx::OnOK(); 
+	CDialogEx::OnOK();
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskA(){
 	auto maskA = getMaskA("tstDlg.xml");
@@ -185,6 +185,7 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	auto szx = layscfg.bottomX();
 	auto szy = layscfg.bottomY();
 	data.create(szx, szy, &datacfg.v, &datacfg.sigma, &datacfg.seed);
-	dlgdata.doModal(&data);
-	setDataCfg("tstDlg.xml", datacfg);
+	INT_PTR ret = dlgdata.doModal(&data);
+	if(ret = IDOK)
+		setDataCfg("tstDlg.xml", datacfg);
 } // /////////////////////////////////////////////////////////////////////////////////

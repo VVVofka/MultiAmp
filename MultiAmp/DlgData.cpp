@@ -51,8 +51,8 @@ BOOL DlgData::OnInitDialog(){
 	m_size_y.SetWindowTextA(razd(szAreaY).c_str());
 	m_size.SetWindowTextA(razd(szAreaX * szAreaY).c_str());
 
-	std::string ssigma = float_to_str(sigma, 3);
-	m_sigma.SetWindowTextA(ssigma.c_str());
+	m_sigma.SetWindowTextA(sigma.c_str());
+	m_seed.SetWindowTextA(seed.c_str());
 
 	curPointsCount = voffset.size();
 	std::string scnt = razd(curPointsCount);
@@ -69,8 +69,15 @@ INT_PTR DlgData::DoModal(){
 INT_PTR DlgData::doModal(DlgDataData* in_data){
 	szAreaX = in_data->szX;
 	szAreaY = in_data->szY;
+
 	sigma = *in_data->sigma;
+	if(sigma.length() == 0)
+		sigma = "0";
+
 	seed = *in_data->seed;
+	if(seed.length() == 0)
+		seed = "012345";
+
 	voffset = *in_data->voffset;
 
 	INT_PTR ret = DoModal();
@@ -95,26 +102,32 @@ std::string DlgData::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedBtDataGener(){
-	sigma = ForMfsControls::getFloatFromCEdit(m_sigma);
-	seed = ForMfsControls::getUINT32FromCEdit(m_seed);
+	float fsigma = ForMfsControls::getFloatFromCEdit(m_sigma, &sigma);
+	UINT32 useed = ForMfsControls::getUINT32FromCEdit(m_seed, &seed);
 	curPointsCount = getNewPointsCount();
 	bool suc = false;
-	if(sigma < 0.1f){
-		DlgDataData data;
-		data.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
-		suc = data.generRndFlat(curPointsCount);
+	if(fsigma < 0.1f){
+		DlgDataData tmpdata;
+		tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
+		suc = tmpdata.generRndFlat(curPointsCount);
 	}
-	newdata = true;
-	CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
+	if(suc){
+		newdata = true;
+		CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
+	}
 } // /////////////////////////////////////////////////////////////////////////////
 size_t DlgData::getNewPointsCount(){
 	int z = m_cnt_proc_type.GetCheck();
-	float value = ForMfsControls::getFloatFromCEdit(m_count_proc);
-	if(z == BST_CHECKED)
-		return size_t(value);	// count
-	return size_t(value * 0.01 * szAreaX * szAreaY + 0.5);	// %
+	if(z == BST_CHECKED){	// count
+		UINT32 value = ForMfsControls::getUINT32FromCEdit(m_count_proc);
+		return size_t(value);
+	} else{
+		float value = ForMfsControls::getFloatFromCEdit(m_count_proc);
+		double ret = value * 0.01 * szAreaX * szAreaY + 0.5;
+		return size_t(ret);	// %
+	}
 } // /////////////////////////////////////////////////////////////////////////////
-std::string DlgData::float_to_str(float val, int digits){
+std::string DlgData::float_to_str(float val){
 	char buf[_CVTBUFSIZE];
 	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);
 	if(err != 0){
@@ -150,7 +163,7 @@ void DlgData::OnPaint(){
 	vsort.reserve(pixelwidth * pixelheigh);
 
 	for(size_t j = 0; j < voffset.size(); j++){
-		size_t pixelx = size_t(kx * (voffset[j] % szAreaX));		//size_t pixelx = size_t(kx * data->getPosXid(j));
+		size_t pixelx = size_t(kx * (voffset[j] % szAreaX));		//size_t pixelx = size_t(kx * tmpdata->getPosXid(j));
 		size_t pixely = size_t(ky * (voffset[j] / szAreaY));
 		size_t key = pixelx + pixely * pixelwidth;
 		MyMap::iterator it = mymap.find(key);

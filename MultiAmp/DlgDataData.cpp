@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "DlgDataData.h"
 
-void DlgDataData::create(size_t sz_x, size_t sz_y, std::vector<size_t>* in_v, float* in_sigma, UINT32* in_seed){
+void DlgDataData::create(size_t sz_x, size_t sz_y, vector<size_t>* in_v, string* in_sigma, string* in_seed){
 	szX = sz_x, szY = sz_y;
 	voffset = in_v;
 	sigma = in_sigma;
