@@ -40,7 +40,7 @@ void DlgData::OnBnClickedFlgDataCount(){
 void DlgData::OnBnClickedFlgDataProc(){
 	size_t szall = szAreaX * szAreaY;
 	float proc = (100.0f * curPointsCount) / szall;
-	std::string sproc = float_to_str(proc, 3);
+	std::string sproc = float_to_str(proc);
 	m_count_proc.SetWindowTextA(sproc.c_str());
 	m_count_proc.UpdateWindow();
 } // ///////////////////////////////////////////////////////////////////////////
@@ -128,13 +128,9 @@ size_t DlgData::getNewPointsCount(){
 	}
 } // /////////////////////////////////////////////////////////////////////////////
 std::string DlgData::float_to_str(float val){
-	char buf[_CVTBUFSIZE];
-	int err = _gcvt_s(buf, _CVTBUFSIZE, val, digits);
-	if(err != 0){
-		printf("_gcvt_s failed with error code %d\n", err);
-		return "";
-	}
-	return buf;
+	char buf[33];
+	sprintf_s(buf, "%f", val);
+	return std::string(buf);
 } // //////////////////////////////////////////////////////////////////////////////
 void DlgData::OnPaint(){
 	if(newdata == false)

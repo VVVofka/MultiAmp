@@ -34,8 +34,8 @@ XMLNode* Options::loadMasks(XMLDocument* doc){
 		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			XMLNode* datacfg_node = datacfg.load(curnode);
-			if(datacfg_node != NULL){
+			XMLNode* maskscfg_node = masks.load(curnode);
+			if(maskscfg_node != NULL){
 				node = curnode;
 				break;
 			}
@@ -64,8 +64,8 @@ XMLNode* Options::loadDataCfg(XMLDocument* doc){
 		XMLElement* ele = curnode->ToElement();
 		std::string name(ele->Name());
 		if(name == XMLName){
-			XMLNode* layscfg_node = lays.load(curnode);
-			if(layscfg_node != NULL){
+			XMLNode* datacfg_node = datacfg.load(curnode);
+			if(datacfg_node != NULL){
 				node = curnode;
 				break;
 			}

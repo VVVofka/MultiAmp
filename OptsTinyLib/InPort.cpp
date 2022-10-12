@@ -1,5 +1,7 @@
 #include "InPort.h"
 #include "Session.h"
+
+ // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::string getMaskA(const char* fname){
     Session ses;
     ses.loadMasks(fname);
@@ -46,8 +48,7 @@ structDataCfg getDataCfg(const char* fname){
     return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
-    Session ses;
-    ses.loadDoc(f_name);
+    Session ses(f_name);
     auto ret = ses.set_DataCfg(data_cfg);
     ses.save(f_name);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -14,8 +14,6 @@ public:
 
 private:
 	const char XMLName[8] = "DataCfg";	// "LaysCfg"
-	std::string float2sbin(float f);
-	float sbin2float(const char* s);
 
 };
 

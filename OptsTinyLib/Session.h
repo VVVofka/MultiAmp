@@ -9,6 +9,8 @@ using namespace tinyxml2;
 
 class Session{
 public:
+	Session(){};
+	Session(const char* f_name){ loadDoc(f_name); };
 	Data data;
 	Options options;
 

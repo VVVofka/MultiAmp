@@ -14,13 +14,14 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 		std::string name(ele->Name());
 		if(name == XMLName){
 			size_t size = ele->IntAttribute("size", 1);
-			cfg.seed = ele->UnsignedAttribute("seed", 1234567);
 
-			const char* pchar = ele->Attribute("sigma");
-			cfg.sigma = (pchar == NULL) ? "0" : pchar;
-			
-			std::string sin = ele->GetText();
+			const char* ch_seed = ele->Attribute("seed");
+			cfg.seed = ch_seed != NULL ? ch_seed : "012345";
 
+			const char* ch_sigma = ele->Attribute("sigma");
+			cfg.sigma = ch_sigma != NULL ? ch_sigma : "0";
+
+			const std::string sin = ele->GetText();
 			cfg.fill_v(sin);
 			if(cfg.v.size() != size){
 				printf("bad attribute size dataCfg");
@@ -55,13 +56,3 @@ XMLNode* DataCfg::set(XMLNode* parent_node, const structDataCfg& new_cfg){
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
 } // ///////////////////////////////////////////////////////////////////////////////////
-std::string DataCfg::float2sbin(float f){
-	char buf[33];
-	sprintf_s(buf, "%X", *(__int32*)&f);
-	return std::string(buf);
-} // //////////////////////////////////////////////////////////////////////////////
-float DataCfg::sbin2float(const char* s){
-	__int32 i;
-	sscanf_s(s, "%X", &i);
-	return *((float*)&i);
-} // //////////////////////////////////////////////////////////////////////////////
