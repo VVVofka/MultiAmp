@@ -14,3 +14,5 @@ void setLaysCfg(const char* fname, const structLaysCfg& lays_cfg);
 
 structDataCfg getDataCfg(const char* fname);
 void setDataCfg(const char* fname, const structDataCfg& data_cfg);
+void clearDataCfg(const char* fname);
+

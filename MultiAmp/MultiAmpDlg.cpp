@@ -175,6 +175,10 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;
 	structLaysCfg ret = dlgcfgLays.doModal(layscfg);
+	if(layscfg.laysCnt() != ret.laysCnt() ||
+		layscfg.topX != ret.topX ||
+		layscfg.topY != ret.topY)
+		clearDataCfg("tstDlg.xml");
 	setLaysCfg("tstDlg.xml", ret);
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
@@ -186,6 +190,6 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	auto szy = layscfg.bottomY();
 	data.create(szx, szy, &datacfg.v, &datacfg.sigma, &datacfg.seed);
 	INT_PTR ret = dlgdata.doModal(&data);
-	if(ret = IDOK)
+	if(ret == IDOK)
 		setDataCfg("tstDlg.xml", datacfg);
 } // /////////////////////////////////////////////////////////////////////////////////

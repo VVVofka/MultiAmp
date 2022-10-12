@@ -10,6 +10,7 @@ public:
 
 	float fsigma();
 	size_t fill_v(const string& s);
+	size_t fill_v_bak(const string& s);
 	string get_s() const;
 };
 

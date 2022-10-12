@@ -21,8 +21,10 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 			const char* ch_sigma = ele->Attribute("sigma");
 			cfg.sigma = ch_sigma != NULL ? ch_sigma : "0";
 
-			const std::string sin = ele->GetText();
+			const char* p = ele->GetText();
+			const std::string sin = p == NULL ? "" : p;
 			cfg.fill_v(sin);
+
 			if(cfg.v.size() != size){
 				printf("bad attribute size dataCfg");
 				_RPT2(0, "bad attribute size dataCfg cfg.v.size=%u attribute=%u\n", cfg.v.size(), size);
@@ -55,4 +57,30 @@ XMLNode* DataCfg::set(XMLNode* parent_node, const structDataCfg& new_cfg){
 	ele_out->SetText(new_cfg.get_s().c_str());
 	node = parent_node->InsertEndChild(ele_out);
 	return node;
+} // ///////////////////////////////////////////////////////////////////////////////////
+void DataCfg::clear(XMLNode* parent_node){
+	std::string sseed("012345"), ssigma("0");
+	// If exist, delete node *****************
+	for(XMLNode* curnode = parent_node->FirstChild(); curnode; curnode = curnode->NextSibling()){
+		XMLElement* ele = curnode->ToElement();
+		std::string name(ele->Name());
+		if(name == XMLName){
+			const char* ch_seed = ele->Attribute("seed");
+			if(ch_seed != NULL) sseed = ch_seed;
+
+			const char* ch_sigma = ele->Attribute("sigma");
+			if(ch_sigma != NULL) ssigma = ch_sigma;
+
+			parent_node->DeleteChild(curnode);
+			break;
+		}
+	}
+	//****************
+	XMLDocument* doc = parent_node->GetDocument();
+	XMLElement* ele_out = doc->NewElement(XMLName);
+	ele_out->SetAttribute("size", "0");
+	ele_out->SetAttribute("seed", sseed.c_str());
+	ele_out->SetAttribute("sigma", ssigma.c_str());
+	ele_out->SetText("");
+	node = parent_node->InsertEndChild(ele_out);
 } // ///////////////////////////////////////////////////////////////////////////////////

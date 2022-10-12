@@ -36,7 +36,7 @@ public:
 
 	structDataCfg get_DataCfg() const;
 	XMLNode* set_DataCfg(const structDataCfg& data_cfg);
-	void saveDataCfg(const structDataCfg& data_cfg);
+	void clear_DataCfg();
 
 protected:
 	XMLDocument doc;

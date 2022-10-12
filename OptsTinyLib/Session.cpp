@@ -71,29 +71,28 @@ const char* Session::get_maskA() const{
 	return options.get_maskA();
 } // //////////////////////////////////////////////////////////////
 XMLNode* Session::set_maskA(const char* s){
-	return options.set_maskA(s);
+	return options.set_maskA(&doc, s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 const char* Session::get_maskF() const{
 	return options.get_maskF();
 } // //////////////////////////////////////////////////////////////
 XMLNode* Session::set_maskF(const char* s){
-	return options.set_maskF(s);
+	return options.set_maskF(&doc, s);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 structLaysCfg Session::get_LaysCfg() const{
 	return options.get_laysCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_LaysCfg(const structLaysCfg& lays_cfg){
-	return options.set_laysCfg(lays_cfg);
+	return options.set_laysCfg(&doc, lays_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 structDataCfg Session::get_DataCfg() const{
 	return options.get_dataCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
 	return options.set_dataCfg(&doc, data_cfg);
-} // //////////////////////////////////////////////////////////////////////////////
-
-void Session::saveDataCfg(const structDataCfg& data_cfg){
-	XMLNode* options_node = options.loadDataCfg(&doc);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+void Session::clear_DataCfg(){
+	options.clear_dataCfg(&doc);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 XMLError Session::loadDoc(const char* f_name){

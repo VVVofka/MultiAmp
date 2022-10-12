@@ -21,16 +21,17 @@ public:
 	XMLNode* node;
 
 	const char* get_maskA() const;
-	XMLNode* set_maskA(const char* s);
+	XMLNode* set_maskA(XMLDocument* doc, const char* s);
 	
 	const char* get_maskF() const;
-	XMLNode* set_maskF(const char* s);
+	XMLNode* set_maskF(XMLDocument* doc, const char* s);
 
 	structLaysCfg get_laysCfg() const;
-	XMLNode* set_laysCfg(const structLaysCfg& lays_cfg);
+	XMLNode* set_laysCfg(XMLDocument* doc, const structLaysCfg& lays_cfg);
 
 	structDataCfg get_dataCfg() const;
 	XMLNode* set_dataCfg(XMLDocument* doc, const structDataCfg& data_cfg);
+	void clear_dataCfg(XMLDocument* doc);
 
 private:
 	const char XMLName[8] = "Options";	//	Options

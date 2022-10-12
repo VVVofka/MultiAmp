@@ -58,6 +58,11 @@ BOOL DlgData::OnInitDialog(){
 	std::string scnt = razd(curPointsCount);
 	m_count_proc.SetWindowTextA(scnt.c_str());
 
+	if(curPointsCount == 0){
+		//m_cnt_proc_type = 1;//.Set Check(BST_UNCHECKED);
+
+	}
+
 	return TRUE;
 } // ///////////////////////////////////////////////////////////////////////////
 void DlgData::OnBnClickedOk(){
@@ -142,16 +147,25 @@ void DlgData::OnPaint(){
 	CRect r_CL;	// прямоугольник клиентской области
 	m_screen.GetClientRect(&r_CL);
 
-	const COLORREF colorPixel = RGB(70, 64, 0);
-	const COLORREF colorBack = RGB(0, 0, 48);
-
-	dc.FillSolidRect(r_CL, colorBack);		// fill background
+	const COLORREF colorPixel = RGB(96, 80, 0);
+	const COLORREF colorBack = RGB(0, 0, 64);
 
 	double maxSizePoint = (double)max(szAreaX, szAreaY);
 	int pixelwidth = r_CL.Width();
 	int pixelheigh = r_CL.Height();
 	double kx = pixelwidth / maxSizePoint;
 	double ky = pixelheigh / maxSizePoint;
+	CRect r = r_CL;
+	if(szAreaX > szAreaY){
+		double k = (double)szAreaY / (double)szAreaX;
+		r.top = LONG(pixelheigh * (1. - k) * 0.5);
+		r.bottom = LONG(pixelheigh * (1. + k) * 0.5);
+	} else 	if(szAreaY > szAreaX){
+		double k = (double)szAreaX / (double)szAreaY;
+		r.left = LONG(pixelwidth * (1. - k) * 0.5);
+		r.right = LONG(pixelwidth * (1. + k) * 0.5);
+	}
+	dc.FillSolidRect(r, colorBack);		// fill background
 
 	typedef std::map<size_t, COLORREF> MyMap;
 	MyMap mymap;
@@ -160,7 +174,7 @@ void DlgData::OnPaint(){
 
 	for(size_t j = 0; j < voffset.size(); j++){
 		size_t pixelx = size_t(kx * (voffset[j] % szAreaX));		//size_t pixelx = size_t(kx * tmpdata->getPosXid(j));
-		size_t pixely = size_t(ky * (voffset[j] / szAreaY));
+		size_t pixely = size_t(ky * (voffset[j] / szAreaX));
 		size_t key = pixelx + pixely * pixelwidth;
 		MyMap::iterator it = mymap.find(key);
 		if(it == mymap.end()){
@@ -175,7 +189,7 @@ void DlgData::OnPaint(){
 	for(const size_t i : vsort){
 		int pixelx = i % pixelwidth;
 		int pixely = i / pixelwidth;
-		dc.SetPixel(pixelx, pixely, mymap.find(i)->second);
+		dc.SetPixel(r.left + pixelx, r.top + pixely, mymap.find(i)->second);
 	}
 } // //////////////////////////////////////////////////////////////////////////////
 BYTE DlgData::incColor(BYTE clr){

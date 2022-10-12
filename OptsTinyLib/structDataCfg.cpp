@@ -7,6 +7,36 @@ float structDataCfg::fsigma(){
 	return flt;
 } // //////////////////////////////////////////////////////////////////////////////////////
 size_t structDataCfg::fill_v(const std::string& s){
+	size_t size_inp_str = s.length();
+	if(size_inp_str == 0) return 0;
+
+	size_t newsize = 0;
+	for(size_t j = 0; j < size_inp_str; j++)
+		if(s[j] == ' ')
+			newsize++;
+	v.resize(++newsize);
+	
+	const int BUFWORDLEN = 12;
+	char bufword[BUFWORDLEN];
+	int bufpos = 0;
+	char ch;
+	size_t vpos = 0;
+	for(size_t j = 0; j < size_inp_str; j++){
+		ch = s[j];
+		if(ch == ' '){
+			if(bufpos != 0){
+				bufword[bufpos] = 0;
+				bufpos = 0;
+				v[vpos++] = size_t(_atoi64(bufword));
+			}
+		} else if(ch >= '0' && ch <= '9')
+			bufword[bufpos++] = ch;
+	}
+	bufword[bufpos] = 0;
+	v[vpos] = size_t(_atoi64(bufword));
+	return newsize;
+} // //////////////////////////////////////////////////////////////////////////////////////
+size_t structDataCfg::fill_v_bak(const std::string& s){
 	std::regex regex{R"([\s]+)"}; // split on space
 	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
 	std::vector<std::string> words{it, {}};
