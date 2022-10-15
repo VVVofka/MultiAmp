@@ -73,6 +73,7 @@
     <ClInclude Include="structMiscCfg.h">
       <Filter>Session\MiscCfg</Filter>
     </ClInclude>
+    <ClInclude Include="myXML.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -115,5 +116,6 @@
     <ClCompile Include="MyTiny2Utils.cpp">
       <Filter>Session</Filter>
     </ClCompile>
+    <ClCompile Include="myXML.cpp" />
   </ItemGroup>
 </Project>

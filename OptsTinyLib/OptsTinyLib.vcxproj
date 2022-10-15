@@ -169,6 +169,7 @@
     <ClInclude Include="Masks.h" />
     <ClInclude Include="MiscCfg.h" />
     <ClInclude Include="MyTiny2Utils.h" />
+    <ClInclude Include="myXML.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Session.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Masks.cpp" />
     <ClCompile Include="MiscCfg.cpp" />
     <ClCompile Include="MyTiny2Utils.cpp" />
+    <ClCompile Include="myXML.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="OptsTinyLib.cpp" />
     <ClCompile Include="pch.cpp">
