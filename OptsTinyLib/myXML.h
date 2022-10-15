@@ -14,6 +14,8 @@ namespace myxml{
 		XMLNode* findNode(XMLDocument* doc, const char* node_name);
 		XMLNode* findNode(XMLNode* parrent_node, const char* node_name);
 		size_t getListNodes(const char* path_node, list<string>* list_nodes);
+		XMLNode* createNode(XMLDocument* doc, const char* name_node);
+		XMLNode* createNode(XMLNode* parrent_node, const char* name_node);
 	} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		XMLNode* getNode(XMLDocument* in_doc, const char* node_path);
 		XMLNode* getOrCreateNode(XMLDocument* in_doc, const char* node_path);

@@ -40,6 +40,17 @@ namespace myxml{
 			}
 			return list_nodes->size();
 		} // ////////////////////////////////////////////////////////////////////////////////////////////////
+		XMLNode* createNode(XMLDocument* doc, const char* name_node){
+			XMLElement* element = doc->NewElement(name_node);
+			XMLNode* node = doc->InsertEndChild(element);
+			return node;
+		} // ////////////////////////////////////////////////////////////////////////////////////////////////
+		XMLNode* createNode(XMLNode* parrent_node, const char* name_node){
+			XMLDocument* doc = parrent_node->GetDocument();
+			XMLElement* element = doc->NewElement(name_node);
+			XMLNode* node = parrent_node->InsertEndChild(element);
+			return node;
+		} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 	using namespace priv;
 	XMLNode* getNode(XMLDocument* doc, const char* node_path){
@@ -57,15 +68,16 @@ namespace myxml{
 		if(lastName == curname0)
 			return curnode;
 
+		last--;
 		while(++iter != last){
 			curnode = findNode(curnode, iter->c_str());
 			if(curnode == NULL)
 				return NULL;
-			const char* curname = getNodeName(curnode);
-			if(lastName == curname)
-				return curnode;
 		}
-		return NULL;
+
+		++iter;
+		curnode = findNode(curnode, iter->c_str());
+		return curnode;
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	XMLNode* getOrCreateNode(XMLDocument* doc, const char* node_path){
 		list<string> vnodes;
@@ -76,8 +88,9 @@ namespace myxml{
 
 		auto iter = vnodes.begin();
 		XMLNode* curnode = findNode(doc, iter->c_str());
-		if(curnode == NULL)
-			return NULL;
+		if(curnode == NULL){
+			curnode = createNode(doc);
+		}
 		const char* curname0 = getNodeName(curnode);
 		if(lastName == curname0)
 			return curnode;
