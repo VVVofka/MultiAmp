@@ -159,7 +159,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Data.h" />
     <ClInclude Include="DataCfg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InPort.h" />
@@ -168,6 +167,7 @@
     <ClInclude Include="MaskBase.h" />
     <ClInclude Include="MaskF.h" />
     <ClInclude Include="Masks.h" />
+    <ClInclude Include="MyTiny2Utils.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Session.h" />
@@ -176,13 +176,13 @@
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Data.cpp" />
     <ClCompile Include="DataCfg.cpp" />
     <ClCompile Include="InPort.cpp" />
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="MaskA.cpp" />
     <ClCompile Include="MaskF.cpp" />
     <ClCompile Include="Masks.cpp" />
+    <ClCompile Include="MyTiny2Utils.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="OptsTinyLib.cpp" />
     <ClCompile Include="pch.cpp">

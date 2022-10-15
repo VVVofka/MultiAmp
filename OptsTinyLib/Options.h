@@ -1,17 +1,16 @@
 #pragma once
-#include "Lays.h"
-#include "Masks.h"
-#include "DataCfg.h"
+#include "MyTiny2Utils.h"
 #include "structLaysCfg.h"
 #include "structDataCfg.h"
+#include "Lays.h"
+#include "Masks.h"
 
 using namespace tinyxml2;
 
-class Options{
+class Options : protected MyTiny2Utils{
 public:
 	Lays lays;
 	Masks masks;
-	DataCfg datacfg;
 
 	XMLNode* create(XMLDocument* doc);
 	XMLNode* load(XMLDocument* doc);
@@ -35,6 +34,5 @@ public:
 
 private:
 	const char XMLName[8] = "Options";	//	Options
-	XMLNode* getNode(XMLDocument* doc);
 };
 

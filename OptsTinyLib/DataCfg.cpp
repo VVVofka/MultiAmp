@@ -30,8 +30,7 @@ XMLNode* DataCfg::load(XMLNode* parent_node){
 				_RPT2(0, "bad attribute size dataCfg cfg.v.size=%u attribute=%u\n", cfg.v.size(), size);
 			}
 			parent_node->DeleteChild(curnode);
-			node = set(parent_node, cfg);
-			return node;
+			break;
 		}
 	}
 	node = set(parent_node, cfg);

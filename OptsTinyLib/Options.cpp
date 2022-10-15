@@ -6,8 +6,7 @@ XMLNode* Options::create(XMLDocument* doc){
 	node = doc->InsertEndChild(ele_out);
 	XMLNode* masks_node = masks.create(node);
 	XMLNode* layscfg_node = lays.create(node);
-	XMLNode* datacfg_node = datacfg.create(node);
-	if(masks_node == NULL || layscfg_node == NULL || datacfg_node == NULL)
+	if(masks_node == NULL || layscfg_node == NULL)
 		return NULL;
 	return node;
 } // ///////////////////////////////////////////////////////////
@@ -19,8 +18,7 @@ XMLNode* Options::load(XMLDocument* doc){
 		if(name == XMLName){
 			XMLNode* masks_node = masks.load(curnode);
 			XMLNode* layscfg_node = lays.load(curnode);
-			XMLNode* datacfg_node = datacfg.load(curnode);
-			if(masks_node != NULL && layscfg_node != NULL && datacfg_node != NULL){
+			if(masks_node != NULL && layscfg_node != NULL){
 				node = curnode;
 				break;
 			}
@@ -110,12 +108,3 @@ void Options::clear_dataCfg(XMLDocument* doc){
 	datacfg.clear(curnode);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-XMLNode* Options::getNode(XMLDocument* doc){
-	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
-		XMLElement* ele = curnode->ToElement();
-		std::string name(ele->Name());
-		if(name == XMLName)
-			return curnode;
-	}
-	return NULL;
-} // ////////////////////////////////////////////////////////////////

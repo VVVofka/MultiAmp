@@ -42,9 +42,6 @@
     <ClInclude Include="Lays.h">
       <Filter>Session\Options\Lays</Filter>
     </ClInclude>
-    <ClInclude Include="Data.h">
-      <Filter>Session\Data</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Misc</Filter>
     </ClInclude>
@@ -60,7 +57,10 @@
     </ClInclude>
     <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="structDataCfg.h" />
-    <ClInclude Include="DataCfg.h" />
+    <ClInclude Include="MyTiny2Utils.h" />
+    <ClInclude Include="DataCfg.h">
+      <Filter>Session\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -71,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="MaskF.cpp">
       <Filter>Session\Options\Masks</Filter>
-    </ClCompile>
-    <ClCompile Include="Data.cpp">
-      <Filter>Session\Data</Filter>
     </ClCompile>
     <ClCompile Include="Masks.cpp">
       <Filter>Session\Options\Masks</Filter>
@@ -95,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
     <ClCompile Include="structDataCfg.cpp" />
-    <ClCompile Include="DataCfg.cpp" />
+    <ClCompile Include="MyTiny2Utils.cpp" />
+    <ClCompile Include="DataCfg.cpp">
+      <Filter>Session\Data</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

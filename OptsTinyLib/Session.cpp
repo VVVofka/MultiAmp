@@ -5,20 +5,22 @@ void Session::create(const char* f_name){
 	fname = strlen(f_name) == 0 ? "session.xml" : f_name;
 	doc.DeleteChildren();
 	XMLNode* options_node = options.create(&doc);
-	if(options_node != NULL){
+	XMLNode* datacfg_node = datacfg.create(&doc);
+	if(options_node != NULL && datacfg_node != NULL){
 		//doc.NewComment("mycomment");
 		XMLError errSave = doc.SaveFile(fname.c_str());
 		if(errSave != XML_SUCCESS){ _RPT1(0, "errSave_create = %d\n", (int)errSave); }
 	}
 } // //////////////////////////////////////////////////////////////
-void Session::load(const char* f_name){
-	XMLError errLoad = loadDoc(f_name);
-	if(errLoad == XML_SUCCESS){
-		XMLNode* options_node = options.load(&doc);
-	} else{
-		create(fname.c_str());
-	}
-} // //////////////////////////////////////////////////////
+//void Session::load(const char* f_name){
+//	XMLError errLoad = loadDoc(f_name);
+//	if(errLoad == XML_SUCCESS){
+//		XMLNode* options_node = options.load(&doc);
+//		XMLNode* datacfg_node = datacfg.load(&doc);
+//	} else{
+//		create(fname.c_str());
+//	}
+//} // //////////////////////////////////////////////////////
 void Session::loadMasks(const char* f_name){
 	XMLError errLoad = loadDoc(f_name);
 	if(errLoad == XML_SUCCESS){
@@ -86,10 +88,13 @@ XMLNode* Session::set_LaysCfg(const structLaysCfg& lays_cfg){
 	return options.set_laysCfg(&doc, lays_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 structDataCfg Session::get_DataCfg() const{
-	return options.get_dataCfg();
+	return datacfg.cfg;
+	//return options.get_dataCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
-	return options.set_dataCfg(&doc, data_cfg);
+	XMLNode* curnode = getNode(doc);
+	return datacfg.set(curnode, data_cfg);
+//	return options.set_dataCfg(&doc, data_cfg);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Session::clear_DataCfg(){
 	options.clear_dataCfg(&doc);

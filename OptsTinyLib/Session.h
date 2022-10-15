@@ -1,9 +1,9 @@
 #pragma once
-#include "Data.h"
-#include "Options.h"
-#include "tinyxml2.h"
+#include "MyTiny2Utils.h"
 #include "structLaysCfg.h"
 #include "structDataCfg.h"
+#include "Options.h"
+#include "DataCfg.h"
 
 using namespace tinyxml2;
 
@@ -11,11 +11,11 @@ class Session{
 public:
 	Session(){};
 	Session(const char* f_name){ loadDoc(f_name); };
-	Data data;
 	Options options;
+	DataCfg datacfg;
 
 	void create(const char* f_name = "");
-	void load(const char* f_name = "");
+	//void load(const char* f_name = "");
 	void loadMasks(const char* f_name = "");
 	void loadLaysCfg(const char* f_name = "");
 	void loadDataCgf(const char* f_name = "");

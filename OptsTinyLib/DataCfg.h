@@ -1,10 +1,10 @@
 #pragma once
-#include "tinyxml2.h" 
+#include "MyTiny2Utils.h"
 #include "structDataCfg.h"
 using namespace tinyxml2;
-
-class DataCfg{
+class DataCfg : protected MyTiny2Utils{
 public:
+	DataCfg(XMLDocument* doc) : MyTiny2Utils("DataCfg", doc){ }
 	structDataCfg cfg;
 	XMLNode* node = NULL;
 
@@ -14,7 +14,7 @@ public:
 	void clear(XMLNode* parent_node);
 
 private:
-	const char XMLName[8] = "DataCfg";	// "LaysCfg"
+	//const char XMLName[8] = "DataCfg";	
 
 };
 

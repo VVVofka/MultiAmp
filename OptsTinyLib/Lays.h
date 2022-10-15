@@ -1,5 +1,4 @@
 #pragma once
-#include "tinyxml2.h" 
 #include "structLaysCfg.h"
 using namespace tinyxml2;
 
