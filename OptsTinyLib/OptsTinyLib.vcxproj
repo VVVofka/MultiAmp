@@ -167,12 +167,14 @@
     <ClInclude Include="MaskBase.h" />
     <ClInclude Include="MaskF.h" />
     <ClInclude Include="Masks.h" />
+    <ClInclude Include="MiscCfg.h" />
     <ClInclude Include="MyTiny2Utils.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Session.h" />
     <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
+    <ClInclude Include="structMiscCfg.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +184,7 @@
     <ClCompile Include="MaskA.cpp" />
     <ClCompile Include="MaskF.cpp" />
     <ClCompile Include="Masks.cpp" />
+    <ClCompile Include="MiscCfg.cpp" />
     <ClCompile Include="MyTiny2Utils.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="OptsTinyLib.cpp" />

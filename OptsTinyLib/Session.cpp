@@ -1,17 +1,17 @@
 #include "Session.h"
 using namespace tinyxml2;
 
-void Session::create(const char* f_name){
-	fname = strlen(f_name) == 0 ? "session.xml" : f_name;
-	doc.DeleteChildren();
-	XMLNode* options_node = options.create(&doc);
-	XMLNode* datacfg_node = datacfg.create(&doc);
-	if(options_node != NULL && datacfg_node != NULL){
-		//doc.NewComment("mycomment");
-		XMLError errSave = doc.SaveFile(fname.c_str());
-		if(errSave != XML_SUCCESS){ _RPT1(0, "errSave_create = %d\n", (int)errSave); }
-	}
-} // //////////////////////////////////////////////////////////////
+//void Session::create(const char* f_name){
+//	fname = strlen(f_name) == 0 ? "session.xml" : f_name;
+//	doc.DeleteChildren();
+//	XMLNode* options_node = options.create(&doc);
+//	XMLNode* datacfg_node = datacfg.create(&doc);
+//	if(options_node != NULL && datacfg_node != NULL){
+//		//doc.NewComment("mycomment");
+//		XMLError errSave = doc.SaveFile(fname.c_str());
+//		if(errSave != XML_SUCCESS){ _RPT1(0, "errSave_create = %d\n", (int)errSave); }
+//	}
+//} // //////////////////////////////////////////////////////////////
 //void Session::load(const char* f_name){
 //	XMLError errLoad = loadDoc(f_name);
 //	if(errLoad == XML_SUCCESS){

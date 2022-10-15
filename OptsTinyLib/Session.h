@@ -14,7 +14,7 @@ public:
 	Options options;
 	DataCfg datacfg;
 
-	void create(const char* f_name = "");
+	//void create(const char* f_name = "");
 	//void load(const char* f_name = "");
 	void loadMasks(const char* f_name = "");
 	void loadLaysCfg(const char* f_name = "");

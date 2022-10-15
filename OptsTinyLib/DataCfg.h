@@ -6,7 +6,6 @@ class DataCfg : protected MyTiny2Utils{
 public:
 	DataCfg(XMLDocument* doc) : MyTiny2Utils("DataCfg", doc){ }
 	structDataCfg cfg;
-	XMLNode* node = NULL;
 
 	XMLNode* create(XMLNode* parent_node);
 	XMLNode* load(XMLNode* parent_node);

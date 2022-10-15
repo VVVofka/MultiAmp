@@ -4,8 +4,14 @@
     <Filter Include="Session">
       <UniqueIdentifier>{89f3aba8-f6a7-4dd3-bf73-c7132a92fa45}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Session\Data">
+    <Filter Include="Misc">
+      <UniqueIdentifier>{d8a20fe2-7c71-4e2e-8649-2d3e85b46162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\DataCfg">
       <UniqueIdentifier>{772046e2-06fd-433b-87a9-5768b46bad82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Session\MiscCfg">
+      <UniqueIdentifier>{95bfbbef-0f6f-4a5c-ade6-3da4a946778f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Session\Options">
       <UniqueIdentifier>{a92d3dfe-af14-4e3e-9a67-ad070be00b39}</UniqueIdentifier>
@@ -15,12 +21,6 @@
     </Filter>
     <Filter Include="Session\Options\Masks">
       <UniqueIdentifier>{0fac00b7-ed63-494f-a072-dffba7bbbd1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Session\Options\Misc">
-      <UniqueIdentifier>{7ca7d814-07ee-4645-af4d-6fbbeb77bad0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Misc">
-      <UniqueIdentifier>{d8a20fe2-7c71-4e2e-8649-2d3e85b46162}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,11 +55,23 @@
     <ClInclude Include="MaskBase.h">
       <Filter>Session\Options\Masks</Filter>
     </ClInclude>
-    <ClInclude Include="structLaysCfg.h" />
-    <ClInclude Include="structDataCfg.h" />
-    <ClInclude Include="MyTiny2Utils.h" />
     <ClInclude Include="DataCfg.h">
-      <Filter>Session\Data</Filter>
+      <Filter>Session\DataCfg</Filter>
+    </ClInclude>
+    <ClInclude Include="structDataCfg.h">
+      <Filter>Session\DataCfg</Filter>
+    </ClInclude>
+    <ClInclude Include="MiscCfg.h">
+      <Filter>Session\MiscCfg</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTiny2Utils.h">
+      <Filter>Session</Filter>
+    </ClInclude>
+    <ClInclude Include="structLaysCfg.h">
+      <Filter>Session\Options\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="structMiscCfg.h">
+      <Filter>Session\MiscCfg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -91,10 +103,17 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
-    <ClCompile Include="structDataCfg.cpp" />
-    <ClCompile Include="MyTiny2Utils.cpp" />
     <ClCompile Include="DataCfg.cpp">
-      <Filter>Session\Data</Filter>
+      <Filter>Session\DataCfg</Filter>
+    </ClCompile>
+    <ClCompile Include="structDataCfg.cpp">
+      <Filter>Session\DataCfg</Filter>
+    </ClCompile>
+    <ClCompile Include="MiscCfg.cpp">
+      <Filter>Session\MiscCfg</Filter>
+    </ClCompile>
+    <ClCompile Include="MyTiny2Utils.cpp">
+      <Filter>Session</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
