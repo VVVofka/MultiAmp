@@ -55,70 +55,71 @@ namespace myxml{
 	using namespace priv;
 	XMLNode* getNode(XMLDocument* doc, const char* node_path){
 		list<string> vnodes;
-		size_t cntNodes = getListNodes(node_path, &vnodes);
+		getListNodes(node_path, &vnodes);
 
-		auto last = vnodes.end();
-		string lastName = last->c_str();
-
-		auto iter = vnodes.begin();
-		XMLNode* curnode = findNode(doc, iter->c_str());
-		if(curnode == NULL)
-			return NULL;
-		const char* curname0 = getNodeName(curnode);
-		if(lastName == curname0)
-			return curnode;
-
-		last--;
-		while(++iter != last){
-			curnode = findNode(curnode, iter->c_str());
+		XMLNode* curnode = NULL;
+		for(auto iter = vnodes.begin(); iter != vnodes.end(); iter++){
+			const char* nodename = iter->c_str();
+			if(iter == vnodes.begin())
+				curnode = findNode(doc, nodename);
+			else
+				curnode = findNode(curnode, nodename);
 			if(curnode == NULL)
 				return NULL;
 		}
-
-		++iter;
-		curnode = findNode(curnode, iter->c_str());
 		return curnode;
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	XMLNode* getOrCreateNode(XMLDocument* doc, const char* node_path){
 		list<string> vnodes;
-		size_t cntNodes = getListNodes(node_path, &vnodes);
+		getListNodes(node_path, &vnodes);
 
-		auto last = vnodes.end();
-		string lastName = last->c_str();
-
-		auto iter = vnodes.begin();
-		XMLNode* curnode = findNode(doc, iter->c_str());
-		if(curnode == NULL){
-			curnode = createNode(doc);
+		XMLNode* curnode = NULL;
+		for(auto iter = vnodes.begin(); iter != vnodes.end(); iter++){
+			const char* nodename = iter->c_str();
+			if(iter == vnodes.begin()){
+				curnode = findNode(doc, nodename);
+				if(curnode == NULL){
+					curnode = createNode(doc, nodename);
+					if(curnode == NULL)
+						return NULL;
+				}
+			} else{
+				XMLNode* parrentnode = curnode;
+				curnode = findNode(parrentnode, nodename);
+				if(curnode == NULL){
+					curnode = createNode(parrentnode, nodename);
+					if(curnode == NULL)
+						return NULL;
+				}
+			}
 		}
-		const char* curname0 = getNodeName(curnode);
-		if(lastName == curname0)
-			return curnode;
-
-		while(++iter != last){
-			curnode = findNode(curnode, iter->c_str());
-			if(curnode == NULL)
-				return NULL;
-			const char* curname = getNodeName(curnode);
-			if(lastName == curname)
-				return curnode;
-		}
-		return NULL;
+		return curnode;
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	XMLNode* getNode(const char* f_name, const char* node_path){
 		XMLDocument doc;
 		XMLError err = doc.LoadFile(f_name);
-		if(err != XML_SUCCESS){
-			//doc.ClearError();
-			//doc.Clear();
+		if(err != XML_SUCCESS)
 			return NULL;
-		}
 		return getNode(&doc, node_path);
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	XMLNode* getOrCreateNode(const char* f_name, const char* node_path){
 		XMLDocument doc;
 		doc.LoadFile(f_name);
 		return getOrCreateNode(&doc, node_path);
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////
+	const char* getAttribute(XMLNode* node, const char* name_atr, const char* def_val){
+		const char* text = node->ToElement()->Attribute(name_atr);
+		return (text == NULL) ? def_val : text;
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////
+	void setAttribute(XMLNode* node, const char* name_atr, const char* val){
+		node->ToElement()->SetAttribute(name_atr, val);
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////
+	const char* getText(XMLNode* node, const char* def_val){
+		const char* text = node->ToElement()->GetText();
+		return (text == NULL) ? def_val : text;
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////
+	void setText(XMLNode* node, const char* val){
+		node->ToElement()->SetText(val);
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

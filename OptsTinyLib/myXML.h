@@ -16,9 +16,15 @@ namespace myxml{
 		size_t getListNodes(const char* path_node, list<string>* list_nodes);
 		XMLNode* createNode(XMLDocument* doc, const char* name_node);
 		XMLNode* createNode(XMLNode* parrent_node, const char* name_node);
-	} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+	}	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		XMLNode* getNode(XMLDocument* in_doc, const char* node_path);
 		XMLNode* getOrCreateNode(XMLDocument* in_doc, const char* node_path);
 		XMLNode* getNode(const char* f_name, const char* node_path);
 		XMLNode* getOrCreateNode(const char* f_name, const char* node_path);
+
+		const char* getAttribute(XMLNode* node, const char* name_atr, const char* def_val);
+		void setAttribute(XMLNode* node, const char* name_atr, const char* val);
+		const char* getText(XMLNode* node, const char* def_val);
+		void setText(XMLNode* node, const char* val);
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
