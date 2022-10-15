@@ -6,22 +6,22 @@ MyTiny2Utils::MyTiny2Utils(const char* XML_Name){
 	strncpy_s(XMLName, XML_Name, sizeof(XMLName));
 } // ////////////////////////////////////////////////////////////////
 
-XMLDocument* MyTiny2Utils::getDoc(const char* f_name){
-	if(f_name == NULL) return NULL;
-	auto slen = strlen(f_name);
-	if(slen == 0 || slen > 255) return NULL;
-	XMLError errLoad = doc.LoadFile(f_name);
-	if(errLoad != XML_SUCCESS)
-		doc.Clear();
-	return &doc;
-} // //////////////////////////////////////////////////////////////
-XMLDocument* MyTiny2Utils::setDoc(const char* f_name){
-
-} // //////////////////////////////////////////////////////////////
-MyTiny2Utils::MyTiny2Utils(const char* XML_Name, XMLDocument* doc){
-	strncpy_s(XMLName, XML_Name, sizeof(XMLName));
-	node = getNode(doc);
-} // ////////////////////////////////////////////////////////////////
+//XMLDocument* MyTiny2Utils::getDoc(const char* f_name){
+//	if(f_name == NULL) return NULL;
+//	auto slen = strlen(f_name);
+//	if(slen == 0 || slen > 255) return NULL;
+//	XMLError errLoad = doc.LoadFile(f_name);
+//	if(errLoad != XML_SUCCESS)
+//		doc.Clear();
+//	return &doc;
+//} // //////////////////////////////////////////////////////////////
+//XMLDocument* MyTiny2Utils::setDoc(const char* f_name){
+//
+//} // //////////////////////////////////////////////////////////////
+//MyTiny2Utils::MyTiny2Utils(const char* XML_Name, XMLDocument* doc){
+//	strncpy_s(XMLName, XML_Name, sizeof(XMLName));
+//	node = getNode(doc);
+//} // ////////////////////////////////////////////////////////////////
 XMLNode* MyTiny2Utils::getNode(XMLDocument* doc){
 	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
 		XMLElement* ele = curnode->ToElement();

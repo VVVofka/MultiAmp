@@ -10,7 +10,7 @@ protected:
 	XMLNode* node = NULL;
 	XMLNode* parrentNode = NULL;
 
-	XMLDocument* getDoc(const char* f_name);
+	//XMLDocument* getDoc(const char* f_name);
 
 private:
 	XMLDocument doc;

@@ -26,7 +26,7 @@ void Session::loadMasks(const char* f_name){
 	if(errLoad == XML_SUCCESS){
 		XMLNode* options_node = options.loadMasks(&doc);
 	} else{
-		create(fname.c_str());
+		//create(fname.c_str());
 	}
 } // //////////////////////////////////////////////////////
 void Session::loadLaysCfg(const char* f_name){
@@ -34,7 +34,7 @@ void Session::loadLaysCfg(const char* f_name){
 	if(errLoad == XML_SUCCESS){
 		XMLNode* options_node = options.loadLaysCfg(&doc);
 	} else{
-		create(fname.c_str());
+		//create(fname.c_str());
 	}
 } // //////////////////////////////////////////////////////
 void Session::loadDataCgf(const char* f_name){
@@ -42,7 +42,7 @@ void Session::loadDataCgf(const char* f_name){
 	if(errLoad == XML_SUCCESS){
 		XMLNode* options_node = options.loadDataCfg(&doc);
 	} else{
-		create(fname.c_str());
+		//create(fname.c_str());
 	}
 } // //////////////////////////////////////////////////////
 void Session::save(const char* f_name){
@@ -92,9 +92,9 @@ structDataCfg Session::get_DataCfg() const{
 	//return options.get_dataCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
-	XMLNode* curnode = getNode(doc);
-	return datacfg.set(curnode, data_cfg);
-//	return options.set_dataCfg(&doc, data_cfg);
+	//XMLNode* curnode = getNode(doc);
+	//return datacfg.set(curnode, data_cfg);
+	return NULL;
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void Session::clear_DataCfg(){
 	options.clear_dataCfg(&doc);
