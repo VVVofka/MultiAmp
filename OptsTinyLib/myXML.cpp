@@ -3,6 +3,7 @@
 namespace myxml{
 	namespace priv{
 		using namespace std;
+		using namespace tinyxml2;
 		const char* getNodeName(XMLNode* p_node){
 			XMLElement* ele = p_node->ToElement();
 			const char* curName = ele->Name();
@@ -38,6 +39,8 @@ namespace myxml{
 					s += *p;
 				p++;
 			}
+			if(s.size() > 0)
+				list_nodes->push_back(s);
 			return list_nodes->size();
 		} // ////////////////////////////////////////////////////////////////////////////////////////////////
 		XMLNode* createNode(XMLDocument* doc, const char* name_node){
@@ -104,8 +107,15 @@ namespace myxml{
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	XMLNode* getOrCreateNode(const char* f_name, const char* node_path){
 		XMLDocument doc;
-		doc.LoadFile(f_name);
-		return getOrCreateNode(&doc, node_path);
+		auto err = doc.LoadFile(f_name);
+		if(err != XML_SUCCESS){
+			doc.ClearError();
+			doc.Clear();
+		}
+		auto ret = getOrCreateNode(&doc, node_path);
+		if(ret != NULL)
+			doc.SaveFile(f_name);
+		return ret;
 	} // ////////////////////////////////////////////////////////////////////////////////////////////////
 	const char* getAttribute(XMLNode* node, const char* name_atr, const char* def_val){
 		const char* text = node->ToElement()->Attribute(name_atr);
