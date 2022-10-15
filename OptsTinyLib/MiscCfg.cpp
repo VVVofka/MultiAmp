@@ -1,6 +1,7 @@
 #include "MiscCfg.h"
 
-XMLNode* MiscCfg::set(const structMiscCfg* in_cfg){
+XMLNode* MiscCfg::set(const char* f_name, const structMiscCfg* in_cfg){
+	XMLDocument* doc = getDoc(f_name);
 	cfg = *in_cfg;
 	if(node != NULL)
 		node->Parent()->DeleteChild(node);

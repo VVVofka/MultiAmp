@@ -4,14 +4,16 @@ using namespace tinyxml2;
 
 class MyTiny2Utils{
 protected:
-	MyTiny2Utils(const char* XML_Name, const char* f_name);
+	MyTiny2Utils(const char* XML_Name);
 
 	char XMLName[8] = "";
-	XMLDocument doc;
 	XMLNode* node = NULL;
 	XMLNode* parrentNode = NULL;
 
+	XMLDocument* getDoc(const char* f_name);
+
 private:
+	XMLDocument doc;
 	XMLNode* getNode(XMLDocument* doc);
 	XMLNode* getNode(XMLNode* doc);
 };
