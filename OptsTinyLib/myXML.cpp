@@ -173,6 +173,8 @@ MyXML::MyXML(const char* f_name, const char* path_node){
 
 const char* MyXML::getNodeName(tinyxml2::XMLNode* p_node){
 	tinyxml2::XMLElement* ele = p_node->ToElement();
+	if(ele == NULL)
+		return NULL;
 	const char* curName = ele->Name();
 	return curName;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,7 +189,10 @@ tinyxml2::XMLNode* MyXML::findChildNode(tinyxml2::XMLDocument* doc, const char* 
 tinyxml2::XMLNode* MyXML::findChildNode(tinyxml2::XMLNode* parrent_node, const char* find_node_name){
 	const std::string findName(find_node_name);
 	for(tinyxml2::XMLNode* curnode = parrent_node->FirstChild(); curnode; curnode = curnode->NextSibling()){
-		if(findName == getNodeName(curnode))
+		const char* nodename = getNodeName(curnode);
+		if(nodename == NULL)
+			continue;
+		if(findName == nodename)
 			return curnode;
 	}
 	return NULL;
@@ -303,7 +308,9 @@ tinyxml2::XMLNode* MyXML::setOrCreateNode(const char* f_name, const char* node_p
 	fillListNodes(node_path);
 	return setOrCreateNode();
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-tinyxml2::XMLNode* MyXML::setOrCreateNode(tinyxml2::XMLNode* start_node){
+tinyxml2::XMLNode* MyXML::setOrCreateNode(tinyxml2::XMLNode* start_node, const char* node_path){
+	setDoc(start_node->GetDocument());
+	fillListNodes(node_path);
 	node = start_node;
 	for(auto iter = lstNodes.begin(); iter != lstNodes.end(); iter++){
 		const char* nodename = iter->c_str();
@@ -319,7 +326,6 @@ tinyxml2::XMLNode* MyXML::setOrCreateNode(tinyxml2::XMLNode* start_node){
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 std::string MyXML::getText(const char* def_val){
 	if(node == NULL)
 		return def_val;
@@ -331,6 +337,20 @@ std::string MyXML::getAttribute(const char* atr_name, const char* def_val){
 		return def_val;
 	const char* text = node->ToElement()->Attribute(atr_name);
 	return (text == NULL) ? def_val : text;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+unsigned __int64 MyXML::getU64Attribute(const char* name_atr, unsigned __int64 defval){
+	char StrDefault[20];
+	sprintf_s(StrDefault, "%llu", defval);
+	std::string s = getAttribute(name_atr, StrDefault);
+	unsigned __int64 ret = std::stoull(s);
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+unsigned __int32 MyXML::getU32Attribute(const char* name_atr, unsigned __int32 defval){
+	char StrDefault[10];
+	sprintf_s(StrDefault, "%u", defval);
+	std::string s = getAttribute(name_atr, StrDefault);
+	unsigned __int32 ret = std::stoul(s);
+	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::setText(const char* val){
 	node->ToElement()->SetText(val);

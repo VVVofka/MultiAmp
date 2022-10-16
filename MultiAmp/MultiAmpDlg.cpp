@@ -146,17 +146,17 @@ void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 		json_in[0] = (char)0;
 	}
 	CDialogEx::OnTimer(nIDEvent);
-} // /////////////////////////////////////////////////////////
+} // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedOk(){
 	CDialogEx::OnOK();
-}  // /////////////////////////////////////////////////////////
+}  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskA(){
 	auto maskA = getMaskA("tstDlg.xml");
 	DlgMaskA dlgmaska;
 	auto newmask = dlgmaska.doModal(maskA);
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
 	setMaskA("tstDlg.xml", newmask.c_str());
-} // /////////////////////////////////////////////////////////
+} // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	auto maskF = getMaskF("tstDlg.xml");
 	DlgMaskF dlgmaskf;
@@ -170,7 +170,7 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmaskall.c_str());
 
 	setMaskF("tstDlg.xml", newmask.c_str());
-}  // /////////////////////////////////////////////////////////
+}  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
 	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;

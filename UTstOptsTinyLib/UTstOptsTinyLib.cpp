@@ -49,7 +49,7 @@ public:
 		s = xml.getAttribute("attrib1", "defstr");
 		Assert::IsTrue(s == "val_atr1");
 
-		xml.setOrCreateNode(xml.node, "four;five");
+		xml.setOrCreateNode(xml.node, "One;Two;four;five");
 		xml.Save();
 	} // ////////////////////////////////////////////////////////////////////////////
 	//TEST_METHOD(CreateDefault){

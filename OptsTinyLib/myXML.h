@@ -47,16 +47,21 @@ public:
 	tinyxml2::XMLNode* setNode(const char* f_name, const char* node_path);
 	tinyxml2::XMLNode* setOrCreateNode(const char* f_name, const char* node_path);
 	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* in_node, const char* node_path);
-	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLNode* in_node);
+	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLNode* in_node, const char* node_path);
 
 	std::string getText(const char* defval = "");
 	std::string getAttribute(const char* atr_name, const char* defval = "");
+
+	unsigned __int64 getU64Attribute(const char* name_atr, unsigned __int64 defval = 0);
+	unsigned __int32 getU32Attribute(const char* name_atr, unsigned __int32 defval = 0);
+
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
 	void setAttribute(const char* name_atr, const char* val);
 	void setAttribute(const char* name_atr, std::string& s){ setAttribute(name_atr, s.c_str()); };
 	void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
 	void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
+
 
 	void Load(const char* f_name);
 	void Save(const char* f_name);
