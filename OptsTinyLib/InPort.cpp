@@ -5,7 +5,7 @@
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::string getMaskA(const char* f_name){
 	MyXML xml(f_name, "Options;Masks;MaskA");
-	std:string ret = xml.getText("0001011101111111");
+	std::string ret = xml.getText("0001011101111111");
 	//Session ses;
 	//ses.loadMasks(fname);
 	//auto ret = ses.get_maskA();
@@ -22,7 +22,7 @@ void setMaskA(const char* f_name, const char* s){
 std::string getMaskF(const char* f_name){
 	MyXML xml(f_name, "Options;Masks;MaskF");
 	std::string defval(256, '0');
-	std:string ret = xml.getText(defval.c_str());
+	std::string ret = xml.getText(defval.c_str());
 	//Session ses;
 	//ses.loadMasks(f_name);
 	//auto ret = ses.get_maskF();

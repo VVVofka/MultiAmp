@@ -74,6 +74,7 @@
       <Filter>Session\MiscCfg</Filter>
     </ClInclude>
     <ClInclude Include="myXML.h" />
+    <ClInclude Include="myconv.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lays.cpp">
@@ -117,5 +118,6 @@
       <Filter>Session</Filter>
     </ClCompile>
     <ClCompile Include="myXML.cpp" />
+    <ClCompile Include="myconv.cpp" />
   </ItemGroup>
 </Project>
