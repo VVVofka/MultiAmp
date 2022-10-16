@@ -46,21 +46,37 @@ public:
 	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
 	tinyxml2::XMLNode* setNode(const char* f_name, const char* node_path);
 	tinyxml2::XMLNode* setOrCreateNode(const char* f_name, const char* node_path);
+	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* in_node, const char* node_path);
+	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLNode* in_node);
 
+	std::string getText(const char* defval = "");
+	std::string getAttribute(const char* atr_name, const char* defval = "");
+	void setText(const char* s);
+	void setText(std::string& s){ setText(s.c_str()); };
+	void setAttribute(const char* name_atr, const char* val);
+	void setAttribute(const char* name_atr, std::string& s){ setAttribute(name_atr, s.c_str()); };
+	void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
+	void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
+
+	void Load(const char* f_name);
+	void Save(const char* f_name);
+	void Save();
 private:
 	std::list<std::string> lstNodes;
+	std::string fileName;
 
 	tinyxml2::XMLDocument* setDoc(const char* f_name);
 	tinyxml2::XMLDocument* setDoc(tinyxml2::XMLDocument*);
 
-	tinyxml2::XMLNode* findNode(tinyxml2::XMLDocument* doc, const char* node_name);
-	tinyxml2::XMLNode* findNode(tinyxml2::XMLNode* parrent_node, const char* node_name);
+	static const char* getNodeName(tinyxml2::XMLNode* p_node);
+	static tinyxml2::XMLNode* findChildNode(tinyxml2::XMLDocument* doc, const char* node_name);
+	static tinyxml2::XMLNode* findChildNode(tinyxml2::XMLNode* parrent_node, const char* node_name);
 
 	size_t fillListNodes(const char* path_node);
 
 	static tinyxml2::XMLNode* createNode(tinyxml2::XMLDocument* doc, const char* name_node);
 	static tinyxml2::XMLNode* createNode(tinyxml2::XMLNode* parrent_node, const char* name_node);
 
-	tinyxml2::XMLNode* setNode();
+	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* start_node = NULL);
 	tinyxml2::XMLNode* setOrCreateNode();
 };

@@ -138,10 +138,10 @@ namespace myxml{
 XMLNode* setNode(const char* f_name, const char* node_path)
 	XMLNode* setNode(XMLDocument* doc, const char* node_path)
 		size_t fillListNodes(const char* path_node, list<string>* list_nodes)
-		XMLNode* findNode(XMLDocument* doc, const char* find_node_name)
+		XMLNode* findChildNode(XMLDocument* doc, const char* find_node_name)
 			const char* getNodeName(XMLNode* p_node)
 		const char* getNodeName(XMLNode* p_node)
-		XMLNode* findNode(XMLNode* parrent_node, const char* find_node_name)
+		XMLNode* findChildNode(XMLNode* parrent_node, const char* find_node_name)
 			const char* getNodeName(XMLNode* p_node)
 */
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -158,32 +158,25 @@ MyXML::MyXML(const char* f_name){
 	node = NULL;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 MyXML::MyXML(tinyxml2::XMLDocument* in_doc){
-	if(doc != NULL)
-		delete doc;
-	doc = in_doc;
+	setDoc(in_doc);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 MyXML::MyXML(tinyxml2::XMLNode* in_node){
-	if(doc != NULL)
-		delete doc;
+	setDoc(in_node->GetDocument());
 	node = in_node;
-	doc = node->GetDocument();
 }  // ///////////////////////////////////////////////////////////////////////////////////////////////////
 MyXML::MyXML(tinyxml2::XMLDocument* in_doc, const char* path_node){
-	if(doc != NULL)
-		delete doc;
-	doc = in_doc;
-	fillListNodes(path_node);
+	setOrCreateNode(in_doc, path_node);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 MyXML::MyXML(const char* f_name, const char* path_node){
-	setDoc(f_name);
-	fillListNodes(path_node);
+	setOrCreateNode(f_name, path_node);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
-const char* getNodeName(tinyxml2::XMLNode* p_node){
+
+const char* MyXML::getNodeName(tinyxml2::XMLNode* p_node){
 	tinyxml2::XMLElement* ele = p_node->ToElement();
 	const char* curName = ele->Name();
 	return curName;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-tinyxml2::XMLNode* MyXML::findNode(tinyxml2::XMLDocument* doc, const char* find_node_name){
+tinyxml2::XMLNode* MyXML::findChildNode(tinyxml2::XMLDocument* doc, const char* find_node_name){
 	const std::string findName(find_node_name);
 	for(tinyxml2::XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){
 		if(findName == getNodeName(curnode))
@@ -191,7 +184,7 @@ tinyxml2::XMLNode* MyXML::findNode(tinyxml2::XMLDocument* doc, const char* find_
 	}
 	return NULL;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-tinyxml2::XMLNode* MyXML::findNode(tinyxml2::XMLNode* parrent_node, const char* find_node_name){
+tinyxml2::XMLNode* MyXML::findChildNode(tinyxml2::XMLNode* parrent_node, const char* find_node_name){
 	const std::string findName(find_node_name);
 	for(tinyxml2::XMLNode* curnode = parrent_node->FirstChild(); curnode; curnode = curnode->NextSibling()){
 		if(findName == getNodeName(curnode))
@@ -200,6 +193,7 @@ tinyxml2::XMLNode* MyXML::findNode(tinyxml2::XMLNode* parrent_node, const char* 
 	return NULL;
 } // /////////////////////////////////////////////////////////////////////////////////////////////////
 tinyxml2::XMLDocument* MyXML::setDoc(const char* f_name){
+	fileName = f_name;
 	if(doc == NULL)
 		doc = new tinyxml2::XMLDocument();
 	auto err = doc->LoadFile(f_name);
@@ -210,7 +204,7 @@ tinyxml2::XMLDocument* MyXML::setDoc(const char* f_name){
 	return doc;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 tinyxml2::XMLDocument* MyXML::setDoc(tinyxml2::XMLDocument* in_doc){
-	if(doc != NULL)
+	if(doc != NULL && doc != in_doc)
 		delete doc;
 	doc = in_doc;
 	return doc;
@@ -246,14 +240,15 @@ tinyxml2::XMLNode* MyXML::createNode(tinyxml2::XMLNode* parrent_node, const char
 	return node;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 
-tinyxml2::XMLNode* MyXML::setNode(){
-	node = NULL;
+tinyxml2::XMLNode* MyXML::setNode(tinyxml2::XMLNode* start_node){
+	node = start_node;
 	for(auto iter = lstNodes.begin(); iter != lstNodes.end(); iter++){
 		const char* nodename = iter->c_str();
+		auto par = node == NULL ? NULL : node->Parent();
 		if(iter == lstNodes.begin())
-			node = findNode(doc, nodename);
+			node = findChildNode(doc, nodename);
 		else
-			node = findNode(node, nodename);
+			node = findChildNode(node, nodename);
 		if(node == NULL)
 			return NULL;
 	}
@@ -269,13 +264,18 @@ tinyxml2::XMLNode* MyXML::setNode(const char* f_name, const char* node_path){
 	fillListNodes(node_path);
 	return setNode();
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+tinyxml2::XMLNode* MyXML::setNode(tinyxml2::XMLNode* in_node, const char* node_path){
+	doc = in_node->GetDocument();
+	node = in_node;
+	return setNode();
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
 
 tinyxml2::XMLNode* MyXML::setOrCreateNode(){
 	node = NULL;
 	for(auto iter = lstNodes.begin(); iter != lstNodes.end(); iter++){
 		const char* nodename = iter->c_str();
 		if(iter == lstNodes.begin()){
-			node = findNode(doc, nodename);
+			node = findChildNode(doc, nodename);
 			if(node == NULL){
 				node = createNode(doc, nodename);
 				if(node == NULL)
@@ -283,7 +283,7 @@ tinyxml2::XMLNode* MyXML::setOrCreateNode(){
 			}
 		} else{
 			tinyxml2::XMLNode* parrentnode = node;
-			node = findNode(parrentnode, nodename);
+			node = findChildNode(parrentnode, nodename);
 			if(node == NULL){
 				node = createNode(parrentnode, nodename);
 				if(node == NULL)
@@ -303,3 +303,52 @@ tinyxml2::XMLNode* MyXML::setOrCreateNode(const char* f_name, const char* node_p
 	fillListNodes(node_path);
 	return setOrCreateNode();
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+tinyxml2::XMLNode* MyXML::setOrCreateNode(tinyxml2::XMLNode* start_node){
+	node = start_node;
+	for(auto iter = lstNodes.begin(); iter != lstNodes.end(); iter++){
+		const char* nodename = iter->c_str();
+		tinyxml2::XMLNode* parrentnode = node;
+		node = findChildNode(parrentnode, nodename);
+		if(node == NULL){
+			node = createNode(parrentnode, nodename);
+			if(node == NULL)
+				return NULL;
+		}
+	}
+	return node;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+std::string MyXML::getText(const char* def_val){
+	if(node == NULL)
+		return def_val;
+	const char* text = node->ToElement()->GetText();
+	return (text == NULL) ? def_val : text;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+std::string MyXML::getAttribute(const char* atr_name, const char* def_val){
+	if(node == NULL)
+		return def_val;
+	const char* text = node->ToElement()->Attribute(atr_name);
+	return (text == NULL) ? def_val : text;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+void MyXML::setText(const char* val){
+	node->ToElement()->SetText(val);
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+void MyXML::setAttribute(const char* name_atr, const char* val){
+	node->ToElement()->SetAttribute(name_atr, val);
+}// ////////////////////////////////////////////////////////////////////////////////////////////////
+void MyXML::Load(const char* f_name){
+	if(doc == NULL)
+		doc = new tinyxml2::XMLDocument();
+	doc->LoadFile(f_name);
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+void MyXML::Save(const char* f_name){
+	if(doc == NULL)
+		doc = new tinyxml2::XMLDocument();
+	doc->SaveFile(f_name);
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+void MyXML::Save(){
+	doc->SaveFile(fileName.c_str());
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+

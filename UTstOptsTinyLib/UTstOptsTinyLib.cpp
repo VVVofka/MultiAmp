@@ -32,16 +32,25 @@ public:
 		Assert::IsNull(node);
 	} // ////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(Create){
-		const char* tstFile = "tstCreate.xml";
-		XMLDocument doc;
-		doc.SaveFile(tstFile); // clear
-		XMLNode* node = myxml::getNode(tstFile, "One1");
-		Assert::IsNull(node);
-		node = myxml::getOrCreateNode(tstFile, "One1");
-		Assert::IsNotNull(node);
-		myxml::setText(node, "tst1");
-		std::string s = myxml::getText(node, "defval1");
-		Assert::IsTrue(s == "One1");
+		std::remove("tst1.xml"); // delete file
+		MyXML xml("tst1.xml", "One;Two");
+		std::string s;
+		s = xml.getText("defstr");
+		Assert::IsTrue(s == "defstr");
+		
+		xml.setText("hiHi");
+		s = xml.getText("defstr");
+		Assert::IsTrue(s == "hiHi");
+
+		s = xml.getAttribute("", "defstr");
+		Assert::IsTrue(s == "defstr");
+
+		xml.setAttribute("attrib1", "val_atr1");
+		s = xml.getAttribute("attrib1", "defstr");
+		Assert::IsTrue(s == "val_atr1");
+
+		xml.setOrCreateNode(xml.node, "four;five");
+		xml.Save();
 	} // ////////////////////////////////////////////////////////////////////////////
 	//TEST_METHOD(CreateDefault){
 	//	Session session;
