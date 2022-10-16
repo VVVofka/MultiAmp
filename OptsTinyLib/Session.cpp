@@ -92,7 +92,7 @@ structDataCfg Session::get_DataCfg() const{
 	//return options.get_dataCfg();
 } // //////////////////////////////////////////////////////////////////////////////
 XMLNode* Session::set_DataCfg(const structDataCfg& data_cfg){
-	//XMLNode* curnode = getNode(doc);
+	//XMLNode* curnode = setNode(doc);
 	//return datacfg.set(curnode, data_cfg);
 	return NULL;
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -20,7 +20,7 @@ MyTiny2Utils::MyTiny2Utils(const char* XML_Name){
 //} // //////////////////////////////////////////////////////////////
 //MyTiny2Utils::MyTiny2Utils(const char* XML_Name, XMLDocument* doc){
 //	strncpy_s(XMLName, XML_Name, sizeof(XMLName));
-//	node = getNode(doc);
+//	node = setNode(doc);
 //} // ////////////////////////////////////////////////////////////////
 XMLNode* MyTiny2Utils::getNode(XMLDocument* doc){
 	for(XMLNode* curnode = doc->FirstChild(); curnode; curnode = curnode->NextSibling()){

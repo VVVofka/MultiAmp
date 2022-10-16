@@ -30,8 +30,8 @@ namespace myxml{
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@		
 class MyXML{
 public:
-	tinyxml2::XMLDocument* doc;
-	tinyxml2::XMLNode* node;
+	tinyxml2::XMLDocument* doc = NULL;
+	tinyxml2::XMLNode* node = NULL;
 	char DELIMITER_NODES = ';';
 
 	MyXML();
@@ -42,18 +42,25 @@ public:
 	MyXML(const char* f_name, const char* path_node);
 	~MyXML();
 
+	tinyxml2::XMLNode* setNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
+	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
+	tinyxml2::XMLNode* setNode(const char* f_name, const char* node_path);
+	tinyxml2::XMLNode* setOrCreateNode(const char* f_name, const char* node_path);
+
+private:
+	std::list<std::string> lstNodes;
+
+	tinyxml2::XMLDocument* setDoc(const char* f_name);
+	tinyxml2::XMLDocument* setDoc(tinyxml2::XMLDocument*);
+
 	tinyxml2::XMLNode* findNode(tinyxml2::XMLDocument* doc, const char* node_name);
 	tinyxml2::XMLNode* findNode(tinyxml2::XMLNode* parrent_node, const char* node_name);
 
-	tinyxml2::XMLNode* getNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
-	tinyxml2::XMLNode* getOrCreateNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
-	tinyxml2::XMLNode* getNode(const char* f_name, const char* node_path);
-	tinyxml2::XMLNode* getOrCreateNode(const char* f_name, const char* node_path);
+	size_t fillListNodes(const char* path_node);
 
-private:
-	size_t getListNodes(const char* path_node, std::list<std::string>* list_nodes);
-	size_t getListNodes(const char* path_node);
-	std::list<std::string> lstNodes;
-	tinyxml2::XMLNode* createNode(tinyxml2::XMLDocument* doc, const char* name_node);
-	tinyxml2::XMLNode* createNode(tinyxml2::XMLNode* parrent_node, const char* name_node);
+	static tinyxml2::XMLNode* createNode(tinyxml2::XMLDocument* doc, const char* name_node);
+	static tinyxml2::XMLNode* createNode(tinyxml2::XMLNode* parrent_node, const char* name_node);
+
+	tinyxml2::XMLNode* setNode();
+	tinyxml2::XMLNode* setOrCreateNode();
 };
