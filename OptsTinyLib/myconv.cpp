@@ -1,4 +1,6 @@
 #include "myconv.h"
+#include <iomanip>
+#include <sstream>
 
 size_t myconv::strToSize_t(const char* s){
 #ifndef WIN32
@@ -120,5 +122,12 @@ std::string myconv::vSizetToStr(const std::vector<size_t>& v, const char delimit
 	}
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+std::string myconv::fltToStr(float pi, int digits){
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(digits) << pi;
+	std::string ret = stream.str();
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 

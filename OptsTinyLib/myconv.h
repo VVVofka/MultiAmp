@@ -10,5 +10,7 @@ namespace myconv{
 
 	std::string vIntToStr(const std::vector<int>& v, const char delimiter = ' ');
 	std::string vSizetToStr(const std::vector<size_t>& v, const char delimiter = ' ');
+
+	std::string fltToStr(float val, int digits = 2);
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

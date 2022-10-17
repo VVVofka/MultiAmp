@@ -6,6 +6,8 @@
 #include "EasyBMP.h"
 //#include "myRnd.h"
 #include "Utils.h"
+#include "..\OptsTinyLib\myconv.h"
+
 IMPLEMENT_DYNAMIC(DlgData, CDialog)
 
 DlgData::DlgData(CWnd* pParent /*=nullptr*/) : CDialog(IDD_DATA, pParent){} // ///////////////////////////////////////////////////////////////////////////
@@ -51,7 +53,10 @@ BOOL DlgData::OnInitDialog(){
 	m_size_y.SetWindowTextA(razd(szAreaY).c_str());
 	m_size.SetWindowTextA(razd(szAreaX * szAreaY).c_str());
 
-	m_sigma.SetWindowTextA(sigma.c_str());
+	float fsigma = (float)atof(sigma.c_str());
+	std::string ssigma = myconv::fltToStr(fsigma, 4);
+	m_sigma.SetWindowTextA(ssigma.c_str());
+
 	m_seed.SetWindowTextA(seed.c_str());
 
 	curPointsCount = voffset.size();
@@ -117,14 +122,14 @@ void DlgData::OnBnClickedBtDataGener(){
 	SetDlgItemTextA(IDC_ST_DATA_STATUS, "WORK ...");
 	GetDlgItem(IDC_BT_DATA_GENER)->EnableWindow(0);
 	UpdateWindow();
-	float fsigma = ForMfsControls::getFloatFromCEdit(m_sigma, &sigma);
+	float fsigma = ForMfsControls::getFloatFromCEdit(m_sigma);	// , &sigma
 	UINT32 useed = ForMfsControls::getUINT32FromCEdit(m_seed, &seed);
 	curPointsCount = getNewPointsCount();
 	bool suc = false;
 	DlgDataData tmpdata;
 	tmpdata.create(szAreaX, szAreaY, &voffset, &sigma, &seed);
 	if(fsigma > 3.f || fsigma < 0.0001f)
-		suc = tmpdata.generRndFlat(curPointsCount);
+		suc = tmpdata.generRndFlat(curPointsCount, useed);
 	else	//Normal dist
 		suc = tmpdata.generRndNorm(curPointsCount, fsigma, useed);
 	if(suc){
@@ -132,6 +137,8 @@ void DlgData::OnBnClickedBtDataGener(){
 		CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();
 		GetDlgItem(IDOK)->EnableWindow(1);
 		SetDlgItemTextA(IDC_ST_DATA_STATUS, "SUCCESS");
+		seed = std::to_string(useed);
+		sigma = myconv::fltToStr(fsigma, 4);
 	} else
 		SetDlgItemTextA(IDC_ST_DATA_STATUS, "ERROR ! ! !");
 	GetDlgItem(IDC_BT_DATA_GENER)->EnableWindow(1);

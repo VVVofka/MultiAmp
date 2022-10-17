@@ -7,12 +7,12 @@ void DlgDataData::create(size_t sz_x, size_t sz_y, vector<size_t>* in_v, string*
 	sigma = in_sigma;
 	seed = in_seed;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DlgDataData::generRndFlat(size_t new_count){
+bool DlgDataData::generRndFlat(size_t new_count, unsigned seed){
 	voffset->resize(new_count);
 	std::vector<int> ar(szX * szY, -1);
 
-	std::random_device rd;   // non-deterministic generator
-	std::mt19937 gen(rd());  // to seed mersenne twister.
+	//	std::random_device rd;   	std::mt19937 gen(rd());  
+	std::mt19937 gen(seed);
 	std::uniform_int_distribution<> distOfsX(0, szX - 1);	// distribute results between  inclusive.
 	std::uniform_int_distribution<> distOfsY(0, szY - 1);	// distribute results between  inclusive.
 	//std::uniform_real_distribution<> distSpeed(-1, 1);
