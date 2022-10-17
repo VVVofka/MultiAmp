@@ -12,8 +12,8 @@ public:
 		float flt;
 		sscanf_s((LPCSTR)sb, "%f", &flt);
 		std::string s = std::to_string(flt);
-		edit.SetWindowTextA(s.c_str());
-		edit.UpdateWindow();
+		//edit.SetWindowTextA(s.c_str());
+		//edit.UpdateWindow();
 		if(s_out != NULL)
 			*s_out = s;
 		return flt;

@@ -35,14 +35,14 @@ bool DlgDataData::generRndFlat(size_t new_count){
 	}
 	return true;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool DlgDataData::generRndNorm(size_t new_count, float sigma){
+bool DlgDataData::generRndNorm(size_t new_count, float sigma, unsigned seed){
 	voffset->resize(new_count);
 	std::vector<int> ar(szX * szY, -1);
 
 	const double Mean = 0;	// мат ож
 	const double Sigma = (double)sigma;
-	std::random_device rd;
-	std::mt19937 gen(rd());
+	//std::random_device rd;	std::mt19937 gen(rd());
+	std::mt19937 gen(seed);
 	std::normal_distribution<> distNorm(Mean, Sigma);
 	UINT64 dog = ar.size() * (UINT64)8;
 	double boundx = szX * 0.5;

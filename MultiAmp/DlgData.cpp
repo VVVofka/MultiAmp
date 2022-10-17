@@ -126,7 +126,7 @@ void DlgData::OnBnClickedBtDataGener(){
 	if(fsigma > 3.f || fsigma < 0.0001f)
 		suc = tmpdata.generRndFlat(curPointsCount);
 	else	//Normal dist
-		suc = tmpdata.generRndNorm(curPointsCount, fsigma);
+		suc = tmpdata.generRndNorm(curPointsCount, fsigma, useed);
 	if(suc){
 		newdata = true;
 		CWnd::FromHandle(m_screen.m_hWnd)->Invalidate();

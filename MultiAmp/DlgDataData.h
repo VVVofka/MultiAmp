@@ -14,7 +14,7 @@ public:
 
 	void create(size_t sz_x, size_t sz_y, vector<size_t>* v_in, string* sigma, string* seed);
 	bool generRndFlat(size_t new_count);
-	bool generRndNorm(size_t new_count, float sigma);
+	bool generRndNorm(size_t new_count, float sigma, unsigned seed);
 
 	size_t cnt(){ return voffset->size(); }
 	size_t szAll(){ return szX * szY; }

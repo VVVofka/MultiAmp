@@ -1,7 +1,6 @@
 #include "InPort.h"
 #include "Session.h"
 #include "myXML.h"
-#include <array>
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::string getMaskA(const char* f_name){
 	MyXML xml(f_name, "Options;Masks;MaskA");
@@ -49,8 +48,11 @@ structLaysCfg getLaysCfg(const char* f_name){
 	ret.topX = xml.getSizetAttribute("topX", 1);
 	ret.topY = xml.getSizetAttribute("topY", 1);
 	ret.digits = xml.getSizetAttribute("digits", 2);
+
+	xml.setOrCreateNode("kF");
 	std::string s = xml.getText();
 	ret.vkf = myconv::strToVInt(s);
+	
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
