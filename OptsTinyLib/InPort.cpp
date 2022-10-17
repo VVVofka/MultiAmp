@@ -1,5 +1,4 @@
 #include "InPort.h"
-#include "Session.h"
 #include "myXML.h"
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 std::string getMaskA(const char* f_name){

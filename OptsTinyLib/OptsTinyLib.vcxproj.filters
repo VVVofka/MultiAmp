@@ -7,41 +7,11 @@
     <Filter Include="Misc">
       <UniqueIdentifier>{d8a20fe2-7c71-4e2e-8649-2d3e85b46162}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Session\DataCfg">
-      <UniqueIdentifier>{772046e2-06fd-433b-87a9-5768b46bad82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Session\MiscCfg">
-      <UniqueIdentifier>{95bfbbef-0f6f-4a5c-ade6-3da4a946778f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Session\Options">
-      <UniqueIdentifier>{a92d3dfe-af14-4e3e-9a67-ad070be00b39}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Session\Options\Lays">
-      <UniqueIdentifier>{eb9de409-839e-4c3e-9585-12b286f7250a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Session\Options\Masks">
-      <UniqueIdentifier>{0fac00b7-ed63-494f-a072-dffba7bbbd1c}</UniqueIdentifier>
+    <Filter Include="Session\structs">
+      <UniqueIdentifier>{a0781958-4a64-4450-afa2-9d9e9d3af386}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MaskA.h">
-      <Filter>Session\Options\Masks</Filter>
-    </ClInclude>
-    <ClInclude Include="MaskF.h">
-      <Filter>Session\Options\Masks</Filter>
-    </ClInclude>
-    <ClInclude Include="Session.h">
-      <Filter>Session</Filter>
-    </ClInclude>
-    <ClInclude Include="Options.h">
-      <Filter>Session\Options</Filter>
-    </ClInclude>
-    <ClInclude Include="Masks.h">
-      <Filter>Session\Options\Masks</Filter>
-    </ClInclude>
-    <ClInclude Include="Lays.h">
-      <Filter>Session\Options\Lays</Filter>
-    </ClInclude>
     <ClInclude Include="framework.h">
       <Filter>Misc</Filter>
     </ClInclude>
@@ -52,49 +22,19 @@
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="InPort.h" />
-    <ClInclude Include="MaskBase.h">
-      <Filter>Session\Options\Masks</Filter>
-    </ClInclude>
-    <ClInclude Include="DataCfg.h">
-      <Filter>Session\DataCfg</Filter>
-    </ClInclude>
-    <ClInclude Include="structDataCfg.h">
-      <Filter>Session\DataCfg</Filter>
-    </ClInclude>
-    <ClInclude Include="MiscCfg.h">
-      <Filter>Session\MiscCfg</Filter>
-    </ClInclude>
-    <ClInclude Include="MyTiny2Utils.h">
-      <Filter>Session</Filter>
-    </ClInclude>
-    <ClInclude Include="structLaysCfg.h">
-      <Filter>Session\Options\Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="structMiscCfg.h">
-      <Filter>Session\MiscCfg</Filter>
-    </ClInclude>
     <ClInclude Include="myXML.h" />
     <ClInclude Include="myconv.h" />
+    <ClInclude Include="structDataCfg.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="structLaysCfg.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="structMiscCfg.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lays.cpp">
-      <Filter>Session\Options\Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="MaskA.cpp">
-      <Filter>Session\Options\Masks</Filter>
-    </ClCompile>
-    <ClCompile Include="MaskF.cpp">
-      <Filter>Session\Options\Masks</Filter>
-    </ClCompile>
-    <ClCompile Include="Masks.cpp">
-      <Filter>Session\Options\Masks</Filter>
-    </ClCompile>
-    <ClCompile Include="Session.cpp">
-      <Filter>Session</Filter>
-    </ClCompile>
-    <ClCompile Include="Options.cpp">
-      <Filter>Session\Options</Filter>
-    </ClCompile>
     <ClCompile Include="OptsTinyLib.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
@@ -105,19 +45,10 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
-    <ClCompile Include="DataCfg.cpp">
-      <Filter>Session\DataCfg</Filter>
-    </ClCompile>
-    <ClCompile Include="structDataCfg.cpp">
-      <Filter>Session\DataCfg</Filter>
-    </ClCompile>
-    <ClCompile Include="MiscCfg.cpp">
-      <Filter>Session\MiscCfg</Filter>
-    </ClCompile>
-    <ClCompile Include="MyTiny2Utils.cpp">
-      <Filter>Session</Filter>
-    </ClCompile>
     <ClCompile Include="myXML.cpp" />
     <ClCompile Include="myconv.cpp" />
+    <ClCompile Include="structDataCfg.cpp">
+      <Filter>Session\structs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

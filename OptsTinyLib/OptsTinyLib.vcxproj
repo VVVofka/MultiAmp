@@ -159,38 +159,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DataCfg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="InPort.h" />
-    <ClInclude Include="Lays.h" />
-    <ClInclude Include="MaskA.h" />
-    <ClInclude Include="MaskBase.h" />
-    <ClInclude Include="MaskF.h" />
-    <ClInclude Include="Masks.h" />
-    <ClInclude Include="MiscCfg.h" />
     <ClInclude Include="myconv.h" />
-    <ClInclude Include="MyTiny2Utils.h" />
     <ClInclude Include="myXML.h" />
-    <ClInclude Include="Options.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Session.h" />
     <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="structMiscCfg.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataCfg.cpp" />
     <ClCompile Include="InPort.cpp" />
-    <ClCompile Include="Lays.cpp" />
-    <ClCompile Include="MaskA.cpp" />
-    <ClCompile Include="MaskF.cpp" />
-    <ClCompile Include="Masks.cpp" />
-    <ClCompile Include="MiscCfg.cpp" />
     <ClCompile Include="myconv.cpp" />
-    <ClCompile Include="MyTiny2Utils.cpp" />
     <ClCompile Include="myXML.cpp" />
-    <ClCompile Include="Options.cpp" />
     <ClCompile Include="OptsTinyLib.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -198,7 +180,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Session.cpp" />
     <ClCompile Include="structDataCfg.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
