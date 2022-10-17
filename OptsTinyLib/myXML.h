@@ -49,6 +49,7 @@ public:
 	tinyxml2::XMLNode* setOrCreateNode(const char* f_name, const char* node_path);
 	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* in_node, const char* node_path);
 	tinyxml2::XMLNode* setOrCreateNode(tinyxml2::XMLNode* in_node, const char* node_path);
+	tinyxml2::XMLNode* setOrCreateNode(const char* node_path);
 
 	std::string getText(const char* defval = "");
 	std::string getAttribute(const char* atr_name, const char* defval = "");

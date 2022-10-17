@@ -324,6 +324,9 @@ tinyxml2::XMLNode* MyXML::setOrCreateNode(tinyxml2::XMLNode* start_node, const c
 	}
 	return node;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+tinyxml2::XMLNode* MyXML::setOrCreateNode(const char* node_path){
+	return setOrCreateNode(node, node_path);
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 std::string MyXML::getText(const char* def_val){

@@ -14,6 +14,7 @@ std::string getMaskA(const char* f_name){
 void setMaskA(const char* f_name, const char* s){
 	MyXML xml(f_name, "Options;Masks;MaskA");
 	xml.setText(s);
+	xml.Save(f_name);
 	//Session ses(f_name);
 	//auto ret = ses.set_maskA(s);
 	//ses.save(f_name);
@@ -32,6 +33,7 @@ std::string getMaskF(const char* f_name){
 void setMaskF(const char* f_name, const char* s){
 	MyXML xml(f_name, "Options;Masks;MaskF");
 	xml.setText(s);
+	xml.Save(f_name);
 	//Session ses(f_name);
 	//auto ret = ses.set_maskF(s);
 	//ses.save(f_name);
@@ -44,15 +46,27 @@ structLaysCfg getLaysCfg(const char* f_name){
 	   return ret;*/
 	MyXML xml(f_name, "Options;LaysCfg");
 	structLaysCfg ret;
-	ret.topX = size_t(xml.getU64Attribute("topX", 1));
-	ret.topY = size_t(xml.getU64Attribute("topY", 1));
-	//ret.
-	return structLaysCfg();
+	ret.topX = xml.getSizetAttribute("topX", 1);
+	ret.topY = xml.getSizetAttribute("topY", 1);
+	ret.digits = xml.getSizetAttribute("digits", 2);
+	std::string s = xml.getText();
+	ret.vkf = myconv::strToVInt(s);
+	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
 	//Session ses(f_name);
 	//auto ret = ses.set_LaysCfg(lays_cfg);
 	//ses.save(f_name);
+	MyXML xml(f_name, "Options;LaysCfg");
+	xml.setAttribute("topX", lays_cfg.topX);
+	xml.setAttribute("topY", lays_cfg.topY);
+	xml.setAttribute("digits", lays_cfg.digits);
+
+	xml.setOrCreateNode("kF");
+	std::string s = myconv::vIntToStr(lays_cfg.vkf);
+	xml.setText(s);
+	
+	xml.Save(f_name);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 structDataCfg getDataCfg(const char* fname){

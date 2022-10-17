@@ -2,7 +2,7 @@
 #include <vector>
 struct structLaysCfg{
 	size_t topX = 1, topY = 1;
-	int digits = 2;
+	size_t digits = 2;
 	std::vector<int> vkf;
 
 	size_t laysCnt(){ return vkf.size(); }

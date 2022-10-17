@@ -100,4 +100,15 @@ std::vector<size_t> myconv::strToVSizet(const std::string& s){
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 
+std::string myconv::vIntToStr(const std::vector<int>& v, const char delimiter){
+	std::string ret;
+	size_t size = v.size();
+	for(size_t j = 0; j < size; j++){
+		ret += std::to_string(v[j]);
+		if(j != size - 1)
+			ret += delimiter;
+	}
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
