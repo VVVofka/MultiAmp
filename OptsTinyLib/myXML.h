@@ -61,7 +61,6 @@ public:
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
 	void setAttribute(const char* name_atr, const char* val);
-	void setAttribute(const char* name_atr, std::string& s){ setAttribute(name_atr, s.c_str()); };
 	void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
 	void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
 	void setAttribute(const char* name_atr, size_t val);

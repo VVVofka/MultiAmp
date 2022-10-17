@@ -69,19 +69,33 @@ void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
 	xml.Save(f_name);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-structDataCfg getDataCfg(const char* fname){
+structDataCfg getDataCfg(const char* f_name){
+	MyXML xml(f_name, "DataCfg");
+	structDataCfg ret;
+	ret.seed = xml.getAttribute("seed", "123456");
+	ret.sigma = xml.getAttribute("sigma", "0.2");
+	ret.v = myconv::strToVSizet(xml.getText());
 	//Session ses;
 	//ses.loadDataCgf(fname);
 	//auto ret = ses.get_DataCfg();
 	//return ret;
-	return structDataCfg();
+	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
+	MyXML xml(f_name, "DataCfg");
+	xml.setAttribute("seed", data_cfg.seed.c_str());
+	xml.setAttribute("sigma", data_cfg.sigma.c_str());
+	std::string s = myconv::vSizetToStr(data_cfg.v);
+	xml.setText(s);
+	xml.Save(f_name);
 	//Session ses(f_name);
 	//auto ret = ses.set_DataCfg(data_cfg);
 	//ses.save(f_name);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 void clearDataCfg(const char* f_name){
+	MyXML xml(f_name, "DataCfg");
+	xml.setText("");
+	xml.Save(f_name);
 	//Session ses(f_name);
 	//ses.clear_DataCfg();
 	//ses.save(f_name);

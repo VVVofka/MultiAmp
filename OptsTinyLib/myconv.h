@@ -9,5 +9,6 @@ namespace myconv{
 	std::vector<size_t> strToVSizet(const std::string& s);
 
 	std::string vIntToStr(const std::vector<int>& v, const char delimiter = ' ');
+	std::string vSizetToStr(const std::vector<size_t>& v, const char delimiter = ' ');
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
