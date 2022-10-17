@@ -42,11 +42,12 @@ protected:
 private:
 	std::string dllName();
 public:
-	afx_msg void OnBnClickedButton1();
-	afx_msg void OnBnClickedBtJson();
+//	afx_msg void OnBnClickedButton1();
+//	afx_msg void OnBnClickedBtJson();
 	afx_msg void OnBnClickedBtMaskA();
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedBtMaskF();
 	afx_msg void OnBnClickedBtLays();
 	afx_msg void OnBnClickedBtData();
+	afx_msg void OnBnClickedBtDataMisc();
 };

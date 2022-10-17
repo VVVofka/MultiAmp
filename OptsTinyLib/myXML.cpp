@@ -361,6 +361,12 @@ size_t MyXML::getSizetAttribute(const char* name_atr, size_t defval){
 	size_t ret = myconv::strToSize_t(s.c_str());
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+time_t MyXML::getTimetAttribute(const char* name_atr, time_t defval){
+	std::string sdef = std::to_string(defval);
+	std::string s = getAttribute(name_atr, sdef.c_str());
+	time_t ret = atoll(s.c_str());
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::setText(const char* val){
 	node->ToElement()->SetText(val);
 } // ////////////////////////////////////////////////////////////////////////////////////////////////

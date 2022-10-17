@@ -57,6 +57,7 @@ public:
 	unsigned __int64 getU64Attribute(const char* name_atr, unsigned __int64 defval = 0);
 	unsigned __int32 getU32Attribute(const char* name_atr, unsigned __int32 defval = 0);
 	size_t getSizetAttribute(const char* name_atr, size_t defval = 0);
+	time_t getTimetAttribute(const char* name_atr, time_t defval = 0);
 
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };

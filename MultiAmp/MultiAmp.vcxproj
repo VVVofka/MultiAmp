@@ -218,6 +218,7 @@
     <ClInclude Include="DlgDataData.h" />
     <ClInclude Include="DlgMaskA.h" />
     <ClInclude Include="DlgMaskF.h" />
+    <ClInclude Include="DlgMisc.h" />
     <ClInclude Include="EasyBMP.h" />
     <ClInclude Include="EasyBMP_BMP.h" />
     <ClInclude Include="EasyBMP_DataStructures.h" />
@@ -240,6 +241,7 @@
     <ClCompile Include="DlgDataData.cpp" />
     <ClCompile Include="DlgMaskA.cpp" />
     <ClCompile Include="DlgMaskF.cpp" />
+    <ClCompile Include="DlgMisc.cpp" />
     <ClCompile Include="EasyBMP.cpp" />
     <ClCompile Include="FSliders.cpp" />
     <ClCompile Include="MultiAmp.cpp" />

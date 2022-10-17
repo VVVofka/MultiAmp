@@ -10,6 +10,7 @@
 #define IDB_CELL_FULL                   106
 #define IDD_DLG_MASK_F                  107
 #define IDD_DlgCfgLays                  108
+#define IDD_DLG_MISC                    111
 #define IDR_MAINFRAME                   128
 #define IDB_BITMAP0                     132
 #define IDB_BITMAP1                     133
@@ -26,6 +27,7 @@
 #define IDC_BT_LAYS                     1014
 #define IDC_BT_DATA                     1015
 #define IDC_BUTTON2                     1016
+#define IDC_BT_DATA_MISC                1016
 #define IDC_BUTTON3                     1017
 #define IDC_SYMETRY_F                   1020
 #define IDC_CNT_LAYS_X_MIN              1021
@@ -204,6 +206,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        147
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1052
-#define _APS_NEXT_SYMED_VALUE           111
+#define _APS_NEXT_SYMED_VALUE           112
 #endif
 #endif

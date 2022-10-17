@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "framework.h"
-#include "MultiAmp.h"
 #include "MultiAmpDlg.h"
+#include "MultiAmp.h"
 #include "afxdialogex.h"
 #include "resource.h"
 #include "DlgCfgLays.h"
 #include "DlgData.h"
+#include "DlgMisc.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -23,14 +24,15 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CMultiAmpDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
+//	ON_BN_CLICKED(IDC_BUTTON1, &CMultiAmpDlg::OnBnClickedButton1)
+//	ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
 	ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
 	ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
 	ON_WM_TIMER()
 	ON_BN_CLICKED(IDC_BT_MASK_F, &CMultiAmpDlg::OnBnClickedBtMaskF)
 	ON_BN_CLICKED(IDC_BT_LAYS, &CMultiAmpDlg::OnBnClickedBtLays)
 	ON_BN_CLICKED(IDC_BT_DATA, &CMultiAmpDlg::OnBnClickedBtData)
+	ON_BN_CLICKED(IDC_BT_DATA_MISC, &CMultiAmpDlg::OnBnClickedBtDataMisc)
 END_MESSAGE_MAP()
 
 // CMultiAmpDlg message handlers
@@ -93,25 +95,6 @@ void CMultiAmpDlg::OnPaint(){
 HCURSOR CMultiAmpDlg::OnQueryDragIcon(){
 	return static_cast<HCURSOR>(m_hIcon);
 } // /////////////////////////////////////////////////////////////////////////////////////
-void CMultiAmpDlg::OnBnClickedButton1(){
-	HMODULE hLib;
-	auto dllname = dllName();
-	auto spath = TEXT(dllname.c_str());
-	hLib = LoadLibrary(spath);
-	if(hLib != NULL){
-		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json_out, char* json_in) = NULL;
-		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
-		if(pFunction != NULL){
-			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json_out, json_in);
-			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
-			//_RPT1(_CRT_WARN, "%d\n", ret);
-		} else{
-			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
-		}
-	} else{
-		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
-	}
-} // ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 std::string CMultiAmpDlg::dllName(){
 	std::string fHelpPathName(AfxGetApp()->m_pszHelpFilePath);
 	auto lenPath = fHelpPathName.length();
@@ -120,8 +103,6 @@ std::string CMultiAmpDlg::dllName(){
 
 	auto start = lenPath - lenName;
 	return fHelpPathName.replace(start, lenName, fName);
-} // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CMultiAmpDlg::OnBnClickedBtJson(){
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnTimer(UINT_PTR nIDEvent){
 	if(json_in[0] == (char)255){
@@ -176,4 +157,9 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	INT_PTR ret = dlgdata.doModal(&data);
 	if(ret == IDOK)
 		setDataCfg("tstDlg.xml", datacfg);
+} // /////////////////////////////////////////////////////////////////////////////////
+void CMultiAmpDlg::OnBnClickedBtDataMisc(){
+	DlgMisc dlgmisc;
+
+
 } // /////////////////////////////////////////////////////////////////////////////////

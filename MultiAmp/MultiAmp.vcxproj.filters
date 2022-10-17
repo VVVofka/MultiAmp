@@ -96,6 +96,9 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DlgMisc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MultiAmp.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="EasyBMP.cpp">
       <Filter>EasyBMP</Filter>
+    </ClCompile>
+    <ClCompile Include="DlgMisc.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
