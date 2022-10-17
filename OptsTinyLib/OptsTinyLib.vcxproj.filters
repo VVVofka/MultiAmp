@@ -10,6 +10,9 @@
     <Filter Include="Session\structs">
       <UniqueIdentifier>{a0781958-4a64-4450-afa2-9d9e9d3af386}</UniqueIdentifier>
     </Filter>
+    <Filter Include="my">
+      <UniqueIdentifier>{adbe1b53-8938-4972-af9a-657b5048d4a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -22,8 +25,6 @@
       <Filter>Misc</Filter>
     </ClInclude>
     <ClInclude Include="InPort.h" />
-    <ClInclude Include="myXML.h" />
-    <ClInclude Include="myconv.h" />
     <ClInclude Include="structDataCfg.h">
       <Filter>Session\structs</Filter>
     </ClInclude>
@@ -32,6 +33,12 @@
     </ClInclude>
     <ClInclude Include="structMiscCfg.h">
       <Filter>Session\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="myconv.h">
+      <Filter>my</Filter>
+    </ClInclude>
+    <ClInclude Include="myXML.h">
+      <Filter>my</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -45,10 +52,14 @@
       <Filter>Misc</Filter>
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
-    <ClCompile Include="myXML.cpp" />
-    <ClCompile Include="myconv.cpp" />
     <ClCompile Include="structDataCfg.cpp">
       <Filter>Session\structs</Filter>
+    </ClCompile>
+    <ClCompile Include="myconv.cpp">
+      <Filter>my</Filter>
+    </ClCompile>
+    <ClCompile Include="myXML.cpp">
+      <Filter>my</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

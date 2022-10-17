@@ -5,11 +5,11 @@
 #include "..\OptsTinyLib\InPort.h"
 //#include "..\OptsTinyLib\tinyxml2.h"
 
-// https://rapidjson.org/
-#include "../Common/include/rapidjson/document.h"
-#include "../Common/include/rapidjson/writer.h"
-#include "../Common/include/rapidjson/stringbuffer.h"
-using namespace rapidjson;
+//// https://rapidjson.org/
+//#include "../Common/include/rapidjson/document.h"
+//#include "../Common/include/rapidjson/writer.h"
+//#include "../Common/include/rapidjson/stringbuffer.h"
+//using namespace rapidjson;
 
 class CMultiAmpDlg : public CDialogEx{
 	const int ID_TIMER_1 = 197;
