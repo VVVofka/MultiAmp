@@ -86,18 +86,21 @@ structMiscCfg getMiscCfg(const char* f_name){
 	ret.curRndSeed = xml.getU32Attribute("curRndSeed", 1234567);
 	ret.dtCreate = xml.getTimetAttribute("dtCreate", 0);
 	ret.dtLastStop = xml.getTimetAttribute("dtLastStop", 0);
-	ret.sComments = xml.getAttribute("sComments");
+
+	xml.setOrCreateNode("sComments");
+	ret.sComments = xml.getText("");
+
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setMiscCfg(const char* f_name, const structMiscCfg& lays_cfg){
 	MyXML xml(f_name, "Misc");
-	xml.setAttribute("topX", lays_cfg.topX);
-	xml.setAttribute("topY", lays_cfg.topY);
-	xml.setAttribute("digits", lays_cfg.digits);
+	xml.setAttribute("curIteration", lays_cfg.curIteration);
+	xml.setAttribute("curRndSeed", lays_cfg.curRndSeed);
+	xml.setAttribute("dtCreate", lays_cfg.dtCreate);
+	xml.setAttribute("dtLastStop", lays_cfg.dtLastStop);
 
-	xml.setOrCreateNode("kF");
-	std::string s = myconv::vIntToStr(lays_cfg.vkf);
-	xml.setText(s);
+	xml.setOrCreateNode("sComments");
+	xml.setText(lays_cfg.sComments.c_str());
 	
 	xml.Save(f_name);
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
