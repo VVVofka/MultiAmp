@@ -3,13 +3,6 @@
 #include "DlgMaskA.h"
 #include "DlgMaskF.h"
 #include "..\OptsTinyLib\InPort.h"
-//#include "..\OptsTinyLib\tinyxml2.h"
-
-//// https://rapidjson.org/
-//#include "../Common/include/rapidjson/document.h"
-//#include "../Common/include/rapidjson/writer.h"
-//#include "../Common/include/rapidjson/stringbuffer.h"
-//using namespace rapidjson;
 
 class CMultiAmpDlg : public CDialogEx{
 	const int ID_TIMER_1 = 197;
@@ -42,8 +35,6 @@ protected:
 private:
 	std::string dllName();
 public:
-//	afx_msg void OnBnClickedButton1();
-//	afx_msg void OnBnClickedBtJson();
 	afx_msg void OnBnClickedBtMaskA();
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedBtMaskF();
