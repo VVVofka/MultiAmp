@@ -12,5 +12,9 @@ namespace myconv{
 	std::string vSizetToStr(const std::vector<size_t>& v, const char delimiter = ' ');
 
 	std::string fltToStr(float val, int digits = 2);
+
+	tm getTMstruct(__time64_t long_time = 0);
+
+
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

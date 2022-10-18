@@ -3,6 +3,31 @@
 #include <afxwin.h>
 class ForMfsControls{
 public:
+	static size_t strToSize_t(const char* s){
+#ifndef WIN32
+		return size_t(std::stoull(s));
+#else
+		return size_t(std::stoul(s));
+#endif // WIN32
+	} // ////////////////////////////////////////////////////////////////////////////////////
+	static int getIntFromCEdit(CEdit& edit, std::string* s_out = NULL){
+		CString sb;
+		edit.GetWindowTextA(sb);
+		sb.Replace(" ", "");
+		int u;
+		sscanf_s((LPCSTR)sb, "%d", &u);
+		std::string s = std::to_string(u);
+//		edit.SetWindowTextA(s.c_str());
+//		edit.UpdateWindow();
+		if(s_out != NULL)
+			*s_out = s;
+		return u;
+	} // //////////////////////////////////////////////////////////////////////////////
+	static std::string getStrFromCEdit(CEdit& edit){
+		CString sb;
+		edit.GetWindowTextA(sb);
+		return std::string(sb);
+	} // //////////////////////////////////////////////////////////////////////////////
 	static float getFloatFromCEdit(CEdit& edit, std::string* s_out = NULL){
 		CString sb;
 		edit.GetWindowTextA(sb);
@@ -24,6 +49,30 @@ public:
 		sb.Replace(" ", "");
 		UINT32 u;
 		sscanf_s((LPCSTR)sb, "%u", &u);
+		std::string s = std::to_string(u);
+		edit.SetWindowTextA(s.c_str());
+		edit.UpdateWindow();
+		if(s_out != NULL)
+			*s_out = s;
+		return u;
+	} // //////////////////////////////////////////////////////////////////////////////
+	static UINT64 getUINT64FromCEdit(CEdit& edit, std::string* s_out = NULL){
+		CString sb;
+		edit.GetWindowTextA(sb);
+		sb.Replace(" ", "");
+		UINT64 u = std::stoull((LPCSTR)sb);
+		std::string s = std::to_string(u);
+		edit.SetWindowTextA(s.c_str());
+		edit.UpdateWindow();
+		if(s_out != NULL)
+			*s_out = s;
+		return u;
+	} // //////////////////////////////////////////////////////////////////////////////
+	static size_t getSizetFromCEdit(CEdit& edit, std::string* s_out = NULL){
+		CString sb;
+		edit.GetWindowTextA(sb);
+		sb.Replace(" ", "");
+		size_t u = strToSize_t(sb);
 		std::string s = std::to_string(u);
 		edit.SetWindowTextA(s.c_str());
 		edit.UpdateWindow();

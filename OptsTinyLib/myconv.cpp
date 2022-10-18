@@ -128,6 +128,11 @@ std::string myconv::fltToStr(float pi, int digits){
 	std::string ret = stream.str();
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
+#include <time.h>
+tm myconv::getTMstruct(__time64_t long_time){
+	struct tm structtime;
+	if(long_time == 0)
+		_time64(&long_time);	// Get time as 64-bit integer.
+	_localtime64_s(&structtime, &long_time);	// Convert to local time.
+	return structtime;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
