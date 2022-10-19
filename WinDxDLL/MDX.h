@@ -55,7 +55,7 @@ public:
 	// Fore color in *.hlsl
 	// --------------------------------------------------------------------------------------
 	HRESULT InitDevice(HWND ghWnd,
-					   D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST
+		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST
 	){// Create Direct3D device and shaders. Call from wWinMain()
 		primitive = Primitive;
 		g_hWnd = ghWnd;
@@ -114,9 +114,9 @@ protected:
 
 		for(UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; driverTypeIndex++){
 			g_driverType = driverTypes[driverTypeIndex];
-			 //g_driverType = driverTypes[2];
+			//g_driverType = driverTypes[2];
 			hr = D3D11CreateDeviceAndSwapChain(NULL, g_driverType, NULL, createDeviceFlags, featureLevels, numFeatureLevels,
-											   D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, &g_featureLevel, &g_pImmediateContext);
+				D3D11_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice, &g_featureLevel, &g_pImmediateContext);
 			if(SUCCEEDED(hr)) break;
 		}
 		RETURN_IF_FAIL(hr);
@@ -148,17 +148,16 @@ protected:
 		HRESULT hr = S_OK;
 		ID3DBlob* pVSBlob = NULL;
 		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";		//LPCSTR pProfile = "vs_5_0";
-		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
+		hr = CompileShaderFromFile(L"..\\..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);	// ..\\..\\ -Win32\Debug
 		if(FAILED(hr)){
-			hr = CompileShaderFromFile(L"..\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
+			hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 			if(FAILED(hr)){
 				wchar_t* q = NULL;
 				errno_t err = _get_wpgmptr(&q);
 				if(err == 0){
 					MessageBox(NULL, L"The vertex shader in DXInterOpPsVs.hlsl cannot be compiled", q, MB_OK);
 					return hr;
-				}
-				else
+				} else
 					return NULL;
 			}
 		}
@@ -178,7 +177,7 @@ protected:
 
 		// Create the input layout
 		hr = g_pd3dDevice->CreateInputLayout(layout, numElements, pVSBlob->GetBufferPointer(),
-											 pVSBlob->GetBufferSize(), &g_pVertexLayout);
+			pVSBlob->GetBufferSize(), &g_pVertexLayout);
 		pVSBlob->Release();
 		RETURN_IF_FAIL(hr);
 
@@ -213,8 +212,8 @@ protected:
 		// the release configuration of this program.
 		dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
-		//FILE* f = fopen("tzt.tzt", "w");		fclose(f);
-	   // Read shader file to string buffer
+		FILE* f = fopen("tzt.tzt", "w, ccs=UNICODE");		fwrite(szFileName,2, std::wstring(szFileName).size(), f);		fclose(f);
+		// Read shader file to string buffer
 		std::ifstream shaderFileStream(szFileName);
 		std::stringstream ssbuff;
 		ssbuff << shaderFileStream.rdbuf();
@@ -223,7 +222,7 @@ protected:
 
 		ID3DBlob* pErrorBlob;
 		hr = D3DCompile(hlslProgram.c_str(), hlslProgram.size(), NULL, NULL, NULL,
-						szEntryPoint, szShaderModel, dwShaderFlags, 0, ppBlobOut, &pErrorBlob);
+			szEntryPoint, szShaderModel, dwShaderFlags, 0, ppBlobOut, &pErrorBlob);
 		if(FAILED(hr)){
 			if(pErrorBlob != NULL){
 				OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
@@ -238,9 +237,9 @@ protected:
 		ID3DBlob* pPSBlob = NULL;
 		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "ps_5_0" : "ps_4_0";
 
-		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
+		hr = CompileShaderFromFile(L"..\\..\\WinDxDLL\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);	// ..\\..\\ -Win32\Debug
 		if(FAILED(hr)){
-			hr = CompileShaderFromFile(L"..\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
+			hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
 			if(FAILED(hr)){
 				MessageBox(NULL, L"The pixel shader in DXInterOpPsVs.hlsl cannot be compiled.", L"Error", MB_OK);
 				return hr;
