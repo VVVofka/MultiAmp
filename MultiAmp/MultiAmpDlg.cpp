@@ -24,8 +24,6 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-//	ON_BN_CLICKED(IDC_BUTTON1, &CMultiAmpDlg::OnBnClickedButton1)
-//	ON_BN_CLICKED(IDC_BT_JSON, &CMultiAmpDlg::OnBnClickedBtJson)
 	ON_BN_CLICKED(IDC_BT_MASK_A, &CMultiAmpDlg::OnBnClickedBtMaskA)
 	ON_BN_CLICKED(IDOK, &CMultiAmpDlg::OnBnClickedOk)
 	ON_WM_TIMER()
@@ -160,6 +158,8 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;
-
-
+	structMiscCfg misccfg =getMiscCfg("tstDlg.xml");
+	INT_PTR ret = dlgmisc.doModal(&misccfg);
+	if(ret == IDOK)
+		setMiscCfg("tstDlg.xml", misccfg);
 } // /////////////////////////////////////////////////////////////////////////////////

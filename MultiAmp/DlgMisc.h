@@ -15,7 +15,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	structMiscCfg* data;
+	structMiscCfg* data = NULL;
 
 	DECLARE_MESSAGE_MAP()
 public:
