@@ -167,6 +167,7 @@
     <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
     <ClInclude Include="structMiscCfg.h" />
+    <ClInclude Include="structsAll.h" />
     <ClInclude Include="tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>

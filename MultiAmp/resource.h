@@ -18,6 +18,7 @@
 #define IDD_CFG_LAYS                    143
 #define IDD_DATA                        145
 #define IDC_BUTTON1                     1000
+#define IDC_BT_MAIN_RUN                 1000
 #define IDC_BT_JSON                     1001
 #define IDAPPLY                         1001
 #define IDC_SYMETRY                     1002
@@ -29,6 +30,9 @@
 #define IDC_BUTTON2                     1016
 #define IDC_BT_DATA_MISC                1016
 #define IDC_BUTTON3                     1017
+#define IDC_BT_MAIN_LOAD                1017
+#define IDC_BT_MAIN_LOAD2               1018
+#define IDC_BT_MAIN_SAVE                1018
 #define IDC_SYMETRY_F                   1020
 #define IDC_CNT_LAYS_X_MIN              1021
 #define IDC_CNT_LAYS_Y_MIN              1022
@@ -94,7 +98,6 @@
 #define IDC_CAPT_MISC_DTSTOP_HOUR       1081
 #define IDC_ED_MISC_DTSTOP_MINUTE       1082
 #define IDC_CAPT_MISC_DTSTOP_MINUTE     1083
-#define IDC_ED_MISC_DT_SEC              1084
 #define IDC_ED_MISC_DTSTOP_SEC          1084
 #define IDC_CAPT_MISC_DTSTOP_SEC        1085
 #define IDC_CAPT_MISC_COMMENT           1086

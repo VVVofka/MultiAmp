@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BT_LAYS, &CMultiAmpDlg::OnBnClickedBtLays)
 	ON_BN_CLICKED(IDC_BT_DATA, &CMultiAmpDlg::OnBnClickedBtData)
 	ON_BN_CLICKED(IDC_BT_DATA_MISC, &CMultiAmpDlg::OnBnClickedBtDataMisc)
+	ON_BN_CLICKED(IDC_BT_MAIN_RUN, &CMultiAmpDlg::OnBnClickedBtMainRun)
 END_MESSAGE_MAP()
 
 // CMultiAmpDlg message handlers
@@ -160,10 +161,28 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;
 	structMiscCfg misccfg = getMiscCfg("tstDlg.xml");
 
-	_tzset();
-	_time64(&misccfg.dtCreate);
+	//_tzset();	_time64(&misccfg.dtCreate);
 
 	INT_PTR ret = dlgmisc.doModal(&misccfg);
 	if(ret == IDOK)
 		setMiscCfg("tstDlg.xml", misccfg);
+} // /////////////////////////////////////////////////////////////////////////////////
+void CMultiAmpDlg::OnBnClickedBtMainRun(){
+	HMODULE hLib;
+	auto dllname = dllName();
+	auto spath = TEXT(dllname.c_str());
+	hLib = LoadLibrary(spath);
+	if(hLib != NULL){
+		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json_out, char* json_in) = NULL;
+		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
+		if(pFunction != NULL){
+			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json_out, json_in);
+			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+			//_RPT1(_CRT_WARN, "%d\n", ret);
+		} else{
+			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
+		}
+	} else{
+		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
+	}
 } // /////////////////////////////////////////////////////////////////////////////////

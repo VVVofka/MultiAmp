@@ -40,6 +40,9 @@
     <ClInclude Include="myXML.h">
       <Filter>my</Filter>
     </ClInclude>
+    <ClInclude Include="structsAll.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OptsTinyLib.cpp">

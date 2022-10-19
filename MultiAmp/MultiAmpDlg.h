@@ -41,4 +41,5 @@ public:
 	afx_msg void OnBnClickedBtLays();
 	afx_msg void OnBnClickedBtData();
 	afx_msg void OnBnClickedBtDataMisc();
+	afx_msg void OnBnClickedBtMainRun();
 };
