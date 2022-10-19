@@ -158,7 +158,11 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;
-	structMiscCfg misccfg =getMiscCfg("tstDlg.xml");
+	structMiscCfg misccfg = getMiscCfg("tstDlg.xml");
+
+	_tzset();
+	_time64(&misccfg.dtCreate);
+
 	INT_PTR ret = dlgmisc.doModal(&misccfg);
 	if(ret == IDOK)
 		setMiscCfg("tstDlg.xml", misccfg);

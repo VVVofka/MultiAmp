@@ -35,6 +35,7 @@ void DlgMisc::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_ED_MISC_COMMENT, m_comment);
 }
 BEGIN_MESSAGE_MAP(DlgMisc, CDialog)
+	ON_BN_CLICKED(IDOK, &DlgMisc::OnBnClickedOk)
 END_MESSAGE_MAP()
 // DlgMisc message handlers
 
@@ -56,19 +57,21 @@ BOOL DlgMisc::OnInitDialog(){
 	_localtime64_s(&tmcreate, &dtstart);
 	_localtime64_s(&tmstop, &dtstop);
 
-	m_year_create.SetWindowTextA(std::to_string(tmcreate.tm_year).c_str());
-	m_month_create.SetWindowTextA(std::to_string(tmcreate.tm_mon).c_str());
+	m_year_create.SetWindowTextA(std::to_string(tmcreate.tm_year + 1900).c_str());
+	m_month_create.SetWindowTextA(std::to_string(tmcreate.tm_mon + 1).c_str());
 	m_day_create.SetWindowTextA(std::to_string(tmcreate.tm_mday).c_str());
 	m_hour_create.SetWindowTextA(std::to_string(tmcreate.tm_hour).c_str());
 	m_min_create.SetWindowTextA(std::to_string(tmcreate.tm_min).c_str());
 	m_sec_create.SetWindowTextA(std::to_string(tmcreate.tm_sec).c_str());
 
-	m_year_stop.SetWindowTextA(std::to_string(tmstop.tm_year).c_str());
-	m_month_stop.SetWindowTextA(std::to_string(tmstop.tm_mon).c_str());
+	m_year_stop.SetWindowTextA(std::to_string(tmstop.tm_year + 1900).c_str());
+	m_month_stop.SetWindowTextA(std::to_string(tmstop.tm_mon + 1).c_str());
 	m_day_stop.SetWindowTextA(std::to_string(tmstop.tm_mday).c_str());
 	m_hour_stop.SetWindowTextA(std::to_string(tmstop.tm_hour).c_str());
 	m_min_stop.SetWindowTextA(std::to_string(tmstop.tm_min).c_str());
 	m_sec_stop.SetWindowTextA(std::to_string(tmstop.tm_sec).c_str());
+
+	m_comment.SetWindowTextA(data->sComments.c_str());
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -76,33 +79,35 @@ BOOL DlgMisc::OnInitDialog(){
 INT_PTR DlgMisc::doModal(structMiscCfg* in_data){
 	data = in_data;
 	INT_PTR ret = DoModal();
-	if(ret == IDOK){
-		in_data->curRndSeed = ForMfsControls::getUINT32FromCEdit(m_seed);
-		in_data->curIteration = ForMfsControls::getUINT64FromCEdit(m_iteration);
-
-		struct tm tmcreate, tmstop;
-
-		tmcreate.tm_year = 1900 + ForMfsControls::getIntFromCEdit(m_year_create);
-		tmcreate.tm_mon = 1 + ForMfsControls::getIntFromCEdit(m_month_create);
-		tmcreate.tm_mday = ForMfsControls::getIntFromCEdit(m_day_create);
-		tmcreate.tm_hour = ForMfsControls::getIntFromCEdit(m_hour_create);
-		tmcreate.tm_min = ForMfsControls::getIntFromCEdit(m_min_create);
-		tmcreate.tm_sec = ForMfsControls::getIntFromCEdit(m_sec_create);
-
-		tmstop.tm_year = 1900 + ForMfsControls::getIntFromCEdit(m_year_stop);
-		tmstop.tm_mon = 1 + ForMfsControls::getIntFromCEdit(m_month_stop);
-		tmstop.tm_mday = ForMfsControls::getIntFromCEdit(m_day_stop);
-		tmstop.tm_hour = ForMfsControls::getIntFromCEdit(m_hour_stop);
-		tmstop.tm_min = ForMfsControls::getIntFromCEdit(m_min_stop);
-		tmstop.tm_sec = ForMfsControls::getIntFromCEdit(m_sec_stop);
-
-		in_data->dtCreate = _mktime64(&tmcreate);
-		in_data->dtLastStop = _mktime64(&tmstop);
-		in_data->sComments = ForMfsControls::getStrFromCEdit(m_comment);
-	}
 	return ret;
 } // ///////////////////////////////////////////////////////////////////////////////////////
 INT_PTR DlgMisc::DoModal(){
 	return CDialog::DoModal();
+} // ///////////////////////////////////////////////////////////////////////////////////////
+void DlgMisc::OnBnClickedOk(){
+	data->curRndSeed = ForMfsControls::getUINT32FromCEdit(m_seed);
+	data->curIteration = ForMfsControls::getUINT64FromCEdit(m_iteration);
+
+	struct tm tmcreate, tmstop;
+
+	tmcreate.tm_year = ForMfsControls::getIntFromCEdit(m_year_create) - 1900;
+	tmcreate.tm_mon = ForMfsControls::getIntFromCEdit(m_month_create) - 1;
+	tmcreate.tm_mday = ForMfsControls::getIntFromCEdit(m_day_create);
+	tmcreate.tm_hour = ForMfsControls::getIntFromCEdit(m_hour_create);
+	tmcreate.tm_min = ForMfsControls::getIntFromCEdit(m_min_create);
+	tmcreate.tm_sec = ForMfsControls::getIntFromCEdit(m_sec_create);
+
+	tmstop.tm_year = ForMfsControls::getIntFromCEdit(m_year_stop) - 1900;
+	tmstop.tm_mon = ForMfsControls::getIntFromCEdit(m_month_stop) - 1;
+	tmstop.tm_mday = ForMfsControls::getIntFromCEdit(m_day_stop);
+	tmstop.tm_hour = ForMfsControls::getIntFromCEdit(m_hour_stop);
+	tmstop.tm_min = ForMfsControls::getIntFromCEdit(m_min_stop);
+	tmstop.tm_sec = ForMfsControls::getIntFromCEdit(m_sec_stop);
+
+	data->dtCreate = _mktime64(&tmcreate);
+	data->dtLastStop = _mktime64(&tmstop);
+	data->sComments = ForMfsControls::getStrFromCEdit(m_comment);
+
+	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////
 

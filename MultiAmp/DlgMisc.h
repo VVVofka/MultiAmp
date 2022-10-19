@@ -39,4 +39,5 @@ public:
 	CEdit m_comment;
 	virtual BOOL OnInitDialog();
 	virtual INT_PTR DoModal();
+	afx_msg void OnBnClickedOk();
 }; // ######################################################################################

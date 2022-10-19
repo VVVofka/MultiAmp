@@ -44,3 +44,7 @@
 </Options>
 
 <DataCfg seed="123456" sigma="0.2000">184 186 137 69</DataCfg>
+
+<Misc curIteration="0" curRndSeed="1234567" dtCreate="1666159608" dtLastStop="1612314306">
+    <sComments>здесь коммент</sComments>
+</Misc>
