@@ -2,6 +2,7 @@
 #include <time.h>
 #include <cstdint>
 #include <string>
+#pragma warning(disable : 26495)
 struct structMiscCfg{
 	uint32_t curRndSeed;
 	uint64_t curIteration;

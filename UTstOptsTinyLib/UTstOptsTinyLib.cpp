@@ -8,29 +8,6 @@ using namespace tinyxml2;
 namespace UTstOptsTinyLib{
 	TEST_CLASS(UTstOptsTinyLib){
 public:
-	TEST_METHOD(getNode_NULL){
-		const char* tstFileNull = "tst.xml";
-		XMLNode* node = myxml::getNode(tstFileNull, "");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";;");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, "One");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";One");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, "One;");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";One;");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";One;");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";One;Two");
-		Assert::IsNull(node);
-		node = myxml::getNode(tstFileNull, ";One;Two;");
-		Assert::IsNull(node);
-	} // ////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(Create){
 		std::remove("tst1.xml"); // delete file
 		MyXML xml("tst1.xml", "One;Two");

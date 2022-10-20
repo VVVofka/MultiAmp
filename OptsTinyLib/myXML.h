@@ -4,31 +4,6 @@
 #include "tinyxml2.h" 
 #include "myconv.h"
 
-namespace myxml{
-	//using namespace tinyxml2;
-	//using namespace std;
-
-	namespace priv{
-		const char DELIMITER_NODES = ';';
-
-		const char* getNodeName(tinyxml2::XMLNode* p_node);
-		tinyxml2::XMLNode* findNode(tinyxml2::XMLDocument* doc, const char* node_name);
-		tinyxml2::XMLNode* findNode(tinyxml2::XMLNode* parrent_node, const char* node_name);
-		size_t getListNodes(const char* path_node, std::list<std::string>* list_nodes);
-		tinyxml2::XMLNode* createNode(tinyxml2::XMLDocument* doc, const char* name_node);
-		tinyxml2::XMLNode* createNode(tinyxml2::XMLNode* parrent_node, const char* name_node);
-
-	}	// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	tinyxml2::XMLNode* getNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
-	tinyxml2::XMLNode* getOrCreateNode(tinyxml2::XMLDocument* in_doc, const char* node_path);
-	tinyxml2::XMLNode* getNode(const char* f_name, const char* node_path);
-	tinyxml2::XMLNode* getOrCreateNode(const char* f_name, const char* node_path);
-
-	const char* getAttribute(tinyxml2::XMLNode* node, const char* name_atr, const char* def_val);
-	void setAttribute(tinyxml2::XMLNode* node, const char* name_atr, const char* val);
-	const char* getText(tinyxml2::XMLNode* node, const char* def_val);
-	void setText(tinyxml2::XMLNode* node, const char* val);
-} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@		
 class MyXML{
 public:
 	tinyxml2::XMLDocument* doc = NULL;
@@ -62,10 +37,13 @@ public:
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
 	void setAttribute(const char* name_atr, const char* val);
-	void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
-	void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
-	void setAttribute(const char* name_atr, size_t val);
-
+	//void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
+	//void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
+	void setAttributeTime_t(const char* name_atr, time_t val);
+	void setAttributeSize_t(const char* name_atr, size_t val);
+	void setAttributeU64(const char* name_atr, uint64_t val);
+	void setAttributeU32(const char* name_atr, uint32_t val);
+	template<typename T> void setAttributeT(const char* name_atr, T val){setAttribute(name_atr, std::to_string(val).c_str());}
 
 	void Load(const char* f_name);
 	void Save(const char* f_name);

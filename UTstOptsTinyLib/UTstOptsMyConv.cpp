@@ -7,13 +7,6 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace UTstOptsTinyLib{
 	TEST_CLASS(UTstOptsMyConv){
 public:
-	TEST_METHOD(sizet_str){
-		std::string s;
-		s = myconv::size_tToStr(0);
-		Assert::AreEqual(s.c_str(), "0");
-		s = myconv::size_tToStr(234745624);
-		Assert::AreEqual(s.c_str(), "234745624");
-	} // ////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(str_sizet){
 		size_t s;
 		s = myconv::strToSize_t("0");
