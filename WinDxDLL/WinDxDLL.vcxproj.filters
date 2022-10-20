@@ -167,6 +167,9 @@
     <ClCompile Include="ProcessParams.cpp">
       <Filter>Lays</Filter>
     </ClCompile>
+    <ClCompile Include="MDX.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Main.rc">

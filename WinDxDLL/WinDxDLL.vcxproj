@@ -212,6 +212,7 @@
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Masks.cpp" />
+    <ClCompile Include="MDX.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="pch.cpp">
