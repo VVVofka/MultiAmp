@@ -170,6 +170,9 @@
     <ClCompile Include="MDX.cpp">
       <Filter>InterOp</Filter>
     </ClCompile>
+    <ClCompile Include="MDX2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Main.rc">
