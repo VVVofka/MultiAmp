@@ -221,27 +221,16 @@ time_t MyXML::getTimetAttribute(const char* name_atr, time_t defval){
 	time_t ret = atoll(s.c_str());
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+template<typename T>
+void MyXML::setAttributeT(const char* name_atr, T val){ 
+	std::string s = std::to_string(val);
+	setAttributeS(name_atr, s.c_str()); 
+} // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::setText(const char* val){
 	node->ToElement()->SetText(val);
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-void MyXML::setAttribute(const char* name_atr, const char* val){
+void MyXML::setAttributeS(const char* name_atr, const char* val){
 	node->ToElement()->SetAttribute(name_atr, val);
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
-void MyXML::setAttributeSize_t(const char* name_atr, size_t val){
-	std::string s = std::to_string(val);
-	setAttribute(name_atr, s.c_str());
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
-void MyXML::setAttributeTime_t(const char* name_atr, time_t val){
-	std::string s = std::to_string(val);
-	setAttribute(name_atr, s.c_str());
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
-void MyXML::setAttributeU64(const char* name_atr, uint64_t val){
-	std::string s = std::to_string(val);
-	setAttribute(name_atr, s.c_str());
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
-void MyXML::setAttributeU32(const char* name_atr, uint32_t val){
-	std::string s = std::to_string(val);
-	setAttribute(name_atr, s.c_str());
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::Load(const char* f_name){
 	if(doc == NULL)

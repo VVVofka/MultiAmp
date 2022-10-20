@@ -36,14 +36,8 @@ public:
 
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
-	void setAttribute(const char* name_atr, const char* val);
-	//void setAttribute(std::string& name_atr, std::string& s){ setAttribute(name_atr.c_str(), s.c_str()); };
-	//void setAttribute(std::string& name_atr, const char* s){ setAttribute(name_atr.c_str(), s); };
-	void setAttributeTime_t(const char* name_atr, time_t val);
-	void setAttributeSize_t(const char* name_atr, size_t val);
-	void setAttributeU64(const char* name_atr, uint64_t val);
-	void setAttributeU32(const char* name_atr, uint32_t val);
-	template<typename T> void setAttributeT(const char* name_atr, T val){setAttribute(name_atr, std::to_string(val).c_str());}
+	void setAttributeS(const char* name_atr, const char* val);
+	template<typename T> void setAttributeT(const char* name_atr, T val);
 
 	void Load(const char* f_name);
 	void Save(const char* f_name);
@@ -67,3 +61,4 @@ private:
 	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* start_node = NULL);
 	tinyxml2::XMLNode* setOrCreateNode();
 };
+

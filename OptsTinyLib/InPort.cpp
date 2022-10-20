@@ -42,9 +42,9 @@ structLaysCfg getLaysCfg(const char* f_name){
 } // //////////////////////////////////////////////////////////////////////////
 void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
 	MyXML xml(f_name, "Options;LaysCfg");
-	xml.setAttributeSize_t("topX", lays_cfg.topX);
-	xml.setAttributeSize_t("topY", lays_cfg.topY);
-	xml.setAttributeSize_t("digits", lays_cfg.digits);
+	xml.setAttributeT<size_t>("topX", lays_cfg.topX);
+	xml.setAttributeT<size_t>("topY", lays_cfg.topY);
+	xml.setAttributeT<size_t>("digits", lays_cfg.digits);
 
 	xml.setOrCreateNode("kF");
 	std::string s = myconv::vIntToStr(lays_cfg.vkf);
@@ -67,8 +67,8 @@ structDataCfg getDataCfg(const char* f_name){
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
 	MyXML xml(f_name, "DataCfg");
-	xml.setAttribute("seed", data_cfg.seed.c_str());
-	xml.setAttribute("sigma", data_cfg.sigma.c_str());
+	xml.setAttributeT<const char*>("seed", data_cfg.seed.c_str());
+	xml.setAttributeT<const char*>("sigma", data_cfg.sigma.c_str());
 	std::string s = myconv::vSizetToStr(data_cfg.v);
 	xml.setText(s);
 	xml.Save(f_name);
@@ -94,10 +94,10 @@ structMiscCfg getMiscCfg(const char* f_name){
 } // //////////////////////////////////////////////////////////////////////////
 void setMiscCfg(const char* f_name, const structMiscCfg& lays_cfg){
 	MyXML xml(f_name, "Misc");
-	xml.setAttributeU64("curIteration", lays_cfg.curIteration);
-	xml.setAttributeU32("curRndSeed", lays_cfg.curRndSeed);
-	xml.setAttributeTime_t("dtCreate", lays_cfg.dtCreate);
-	xml.setAttributeTime_t("dtLastStop", lays_cfg.dtLastStop);
+	xml.setAttributeT<uint64_t>("curIteration", lays_cfg.curIteration);
+	xml.setAttributeT<uint32_t>("curRndSeed", lays_cfg.curRndSeed);
+	xml.setAttributeT<time_t>("dtCreate", lays_cfg.dtCreate);
+	xml.setAttributeT<time_t>("dtLastStop", lays_cfg.dtLastStop);
 
 	xml.setOrCreateNode("sComments");
 	xml.setText(lays_cfg.sComments.c_str());
