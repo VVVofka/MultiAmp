@@ -28,20 +28,16 @@ public:
 	tinyxml2::XMLNode* setOrCreateNode(const char* node_path);
 
 	std::string getText(const char* defval = "");
-	std::string getAttribute(const char* atr_name, const char* defval = "");
-
-	unsigned __int64 getU64Attribute(const char* name_atr, unsigned __int64 defval = 0);
-	unsigned __int32 getU32Attribute(const char* name_atr, unsigned __int32 defval = 0);
-	size_t getSizetAttribute(const char* name_atr, size_t defval = 0);
-	//time_t getTimetAttribute(const char* name_atr, time_t defval = 0);
+	std::string getAttributeS(const char* atr_name, const char* defval = "");
+	std::string getAttributeS(const char* atr_name, const std::string& defval = "");
 	template<typename T> T getAttributeT(const char* name_atr, T defval = 0){
-		std::string sdef = std::to_string(defval);
-		std::string s = getAttribute(name_atr, sdef.c_str());
+		std::string s = getAttributeS(name_atr, std::to_string(defval));
 		return parse_string<T>(s.c_str());
 	}
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
 	void setAttributeS(const char* name_atr, const char* val);
+	void setAttributeS(const char* name_atr, const std::string& val);
 	template<typename T> void setAttributeT(const char* name_atr, T val){
 		node->ToElement()->SetAttribute(name_atr, std::to_string(val).c_str());
 	}

@@ -30,9 +30,9 @@ void setMaskF(const char* f_name, const char* s){
 structLaysCfg getLaysCfg(const char* f_name){
 	MyXML xml(f_name, "Options;LaysCfg");
 	structLaysCfg ret;
-	ret.topX = xml.getSizetAttribute("topX", 1);
-	ret.topY = xml.getSizetAttribute("topY", 1);
-	ret.digits = xml.getSizetAttribute("digits", 2);
+	ret.topX = xml.getAttributeT<size_t>("topX", 1);
+	ret.topY = xml.getAttributeT<size_t>("topY", 1);
+	ret.digits = xml.getAttributeT<size_t>("digits", 2);
 
 	xml.setOrCreateNode("kF");
 	std::string s = xml.getText();
@@ -56,8 +56,8 @@ void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
 structDataCfg getDataCfg(const char* f_name){
 	MyXML xml(f_name, "DataCfg");
 	structDataCfg ret;
-	ret.seed = xml.getAttribute("seed", "123456");
-	ret.sigma = xml.getAttribute("sigma", "0.2");
+	ret.seed = xml.getAttributeS("seed", "123456");
+	ret.sigma = xml.getAttributeS("sigma", "0.2");
 	ret.v = myconv::strToVSizet(xml.getText());
 	//Session ses;
 	//ses.loadDataCgf(fname);
@@ -67,8 +67,8 @@ structDataCfg getDataCfg(const char* f_name){
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
 	MyXML xml(f_name, "DataCfg");
-	xml.setAttributeS("seed", data_cfg.seed.c_str());
-	xml.setAttributeS("sigma", data_cfg.sigma.c_str());
+	xml.setAttributeS("seed", data_cfg.seed);
+	xml.setAttributeS("sigma", data_cfg.sigma);
 	std::string s = myconv::vSizetToStr(data_cfg.v);
 	xml.setText(s);
 	xml.Save(f_name);
@@ -82,13 +82,13 @@ void clearDataCfg(const char* f_name){
 structMiscCfg getMiscCfg(const char* f_name){
 	MyXML xml(f_name, "Misc");
 	structMiscCfg ret;
-	ret.curIteration = xml.getSizetAttribute("curIteration", 0);
-	ret.curRndSeed = xml.getU32Attribute("curRndSeed", 1234567);
+	ret.curIteration = xml.getAttributeT<uint64_t>("curIteration", 0);
+	ret.curRndSeed = xml.getAttributeT<uint32_t>("curRndSeed", 1234567);
 	ret.dtCreate = xml.getAttributeT<time_t>("dtCreate", 0);
 	ret.dtLastStop = xml.getAttributeT<time_t>("dtLastStop", 0);
 
 	xml.setOrCreateNode("sComments");
-	ret.sComments = xml.getText("");
+	ret.sComments = xml.getText("No comments.");
 
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////
