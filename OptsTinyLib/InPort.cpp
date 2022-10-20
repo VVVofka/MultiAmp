@@ -67,8 +67,8 @@ structDataCfg getDataCfg(const char* f_name){
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
 	MyXML xml(f_name, "DataCfg");
-	xml.setAttributeT<const char*>("seed", data_cfg.seed.c_str());
-	xml.setAttributeT<const char*>("sigma", data_cfg.sigma.c_str());
+	xml.setAttributeS("seed", data_cfg.seed.c_str());
+	xml.setAttributeS("sigma", data_cfg.sigma.c_str());
 	std::string s = myconv::vSizetToStr(data_cfg.v);
 	xml.setText(s);
 	xml.Save(f_name);
@@ -84,8 +84,8 @@ structMiscCfg getMiscCfg(const char* f_name){
 	structMiscCfg ret;
 	ret.curIteration = xml.getSizetAttribute("curIteration", 0);
 	ret.curRndSeed = xml.getU32Attribute("curRndSeed", 1234567);
-	ret.dtCreate = xml.getTimetAttribute("dtCreate", 0);
-	ret.dtLastStop = xml.getTimetAttribute("dtLastStop", 0);
+	ret.dtCreate = xml.getAttributeT<time_t>("dtCreate", 0);
+	ret.dtLastStop = xml.getAttributeT<time_t>("dtLastStop", 0);
 
 	xml.setOrCreateNode("sComments");
 	ret.sComments = xml.getText("");

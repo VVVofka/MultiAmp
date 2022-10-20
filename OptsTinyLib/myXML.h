@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <string>
+#include <sstream>      // std::ostringstream
 #include "tinyxml2.h" 
 #include "myconv.h"
 
@@ -32,12 +33,18 @@ public:
 	unsigned __int64 getU64Attribute(const char* name_atr, unsigned __int64 defval = 0);
 	unsigned __int32 getU32Attribute(const char* name_atr, unsigned __int32 defval = 0);
 	size_t getSizetAttribute(const char* name_atr, size_t defval = 0);
-	time_t getTimetAttribute(const char* name_atr, time_t defval = 0);
-
+	//time_t getTimetAttribute(const char* name_atr, time_t defval = 0);
+	template<typename T> T getAttributeT(const char* name_atr, T defval = 0){
+		std::string sdef = std::to_string(defval);
+		std::string s = getAttribute(name_atr, sdef.c_str());
+		return parse_string<T>(s.c_str());
+	}
 	void setText(const char* s);
 	void setText(std::string& s){ setText(s.c_str()); };
 	void setAttributeS(const char* name_atr, const char* val);
-	template<typename T> void setAttributeT(const char* name_atr, T val);
+	template<typename T> void setAttributeT(const char* name_atr, T val){
+		node->ToElement()->SetAttribute(name_atr, std::to_string(val).c_str());
+	}
 
 	void Load(const char* f_name);
 	void Save(const char* f_name);
@@ -60,5 +67,14 @@ private:
 
 	tinyxml2::XMLNode* setNode(tinyxml2::XMLNode* start_node = NULL);
 	tinyxml2::XMLNode* setOrCreateNode();
-};
 
+	// parse_string
+	template <typename RETURN_TYPE, typename STRING_TYPE>
+	RETURN_TYPE parse_string(const STRING_TYPE& str){
+		std::stringstream buf;
+		buf << str;
+		RETURN_TYPE val;
+		buf >> val;
+		return val;
+	}
+};

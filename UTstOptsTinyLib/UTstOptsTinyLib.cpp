@@ -22,34 +22,17 @@ public:
 		s = xml.getAttribute("", "defstr");
 		Assert::IsTrue(s == "defstr");
 
-		xml.setAttribute("attrib1", "val_atr1");
+		xml.setAttributeS("attrib1", "val_atr1");
 		s = xml.getAttribute("attrib1", "defstr");
 		Assert::IsTrue(s == "val_atr1");
+
+		xml.setAttributeT<int>("attrib2", 77);
+		int iret = xml.getAttributeT<int>("attrib2", 0);
+		Assert::IsTrue(iret == 77);
 
 		xml.setOrCreateNode(xml.node, "One;Two;four;five");
 		xml.Save();
 	} // ////////////////////////////////////////////////////////////////////////////
-	//TEST_METHOD(CreateDefault){
-	//	Session session;
-	//	session.create();
-	//	std::string smaska = session.get_maskA();
-	//	Assert::IsTrue(smaska == DEFMASKA);
-	//}
-	//TEST_METHOD(ChangeMaskA){
-	//	const char tstmask[] = "0101010101010101";
-	//	Session session1, session2;
-	//	session1.create("ChangeMaskA1.xml");
-	//	session1.set_maskA(tstmask);
-	//	session1.save("ChangeMaskA2.xml");
-	//	session2.load("ChangeMaskA2.xml");
-	//	std::string smaska2 = session2.get_maskA();
-	//	Assert::IsTrue(smaska2 == tstmask);
 
-	//	std::string smaska1 = session1.get_maskA();
-	//	Assert::IsTrue(smaska1 == tstmask);
-	//	session1.load("ChangeMaskA1.xml");
-	//	std::string smaska1reload = session1.get_maskA();
-	//	Assert::IsTrue(smaska1reload == DEFMASKA);
-	//}
 	};
 }

@@ -215,23 +215,29 @@ size_t MyXML::getSizetAttribute(const char* name_atr, size_t defval){
 	size_t ret = myconv::strToSize_t(s.c_str());
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
-time_t MyXML::getTimetAttribute(const char* name_atr, time_t defval){
-	std::string sdef = std::to_string(defval);
-	std::string s = getAttribute(name_atr, sdef.c_str());
-	time_t ret = atoll(s.c_str());
-	return ret;
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
-template<typename T>
-void MyXML::setAttributeT(const char* name_atr, T val){ 
-	std::string s = std::to_string(val);
-	setAttributeS(name_atr, s.c_str()); 
-} // ////////////////////////////////////////////////////////////////////////////////////////////////
+//time_t MyXML::getTimetAttribute(const char* name_atr, time_t defval){
+//	std::string sdef = std::to_string(defval);
+//	std::string s = getAttribute(name_atr, sdef.c_str());
+//	time_t ret = atoll(s.c_str());
+//	return ret;
+//} // ////////////////////////////////////////////////////////////////////////////////////////////////
+//template<typename T>
+//T MyXML::getAttributeT(const char* name_atr, T defval){
+//	std::string sdef = std::to_string(defval);
+//	std::string s = getAttribute(name_atr, sdef.c_str());
+//	T ret = parse_string<T>(s.c_str());
+//	return ret;
+//} // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::setText(const char* val){
 	node->ToElement()->SetText(val);
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::setAttributeS(const char* name_atr, const char* val){
 	node->ToElement()->SetAttribute(name_atr, val);
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+//template<typename T>
+//void MyXML::setAttributeT(const char* name_atr, T val){
+//	node->ToElement()->SetAttribute(name_atr, std::to_string(val).c_str());
+//} // ////////////////////////////////////////////////////////////////////////////////////////////////
 void MyXML::Load(const char* f_name){
 	if(doc == NULL)
 		doc = new tinyxml2::XMLDocument();
