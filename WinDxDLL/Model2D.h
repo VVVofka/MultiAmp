@@ -9,10 +9,13 @@
 #include "Utils.h"
 #include "Vertex.h"
 #include "Masks.h"
+
 #include "Options.h"
+#include "..\OptsTinyLib\structsAll.h"
 
 class Model2D{
 public:
+	structAll* cfgAll;
 	Options options;
 	std::vector<Vertex2D> v_scr;
 	std::vector<std::vector<int>> v_areas;
