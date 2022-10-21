@@ -111,7 +111,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 		case 79:{ // key 'o'  // I=73
 			pauseRender = true;
 			if(model.options.showDlg()){
-				model.Create();
+				model.Create(model.cfgAll);
 				mdx.CleanupDevice();
 				mdx.InitDevice(g_hWnd, model.v_scr);
 			}

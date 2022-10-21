@@ -3,6 +3,8 @@
 #include "DlgMaskA.h"
 #include "DlgMaskF.h"
 #include "..\OptsTinyLib\InPort.h"
+#include "../OptsTinyLib/structsAll.h"
+
 
 class CMultiAmpDlg : public CDialogEx{
 	const int ID_TIMER_1 = 197;
@@ -34,6 +36,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 private:
 	std::string dllName();
+	structAll cfg_all;
 public:
 	afx_msg void OnBnClickedBtMaskA();
 	afx_msg void OnBnClickedOk();

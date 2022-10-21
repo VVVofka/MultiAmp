@@ -23,8 +23,8 @@ extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, in
 //	int ret = openwnd(hInstance, nCmdShow, NULL);
 //	return ret;
 //} // //////////////////////////////////////////////////////////////////////////////////
-extern "C" _declspec(dllexport) int openWindow1json(HINSTANCE hInstance, int nCmdShow, char* json_in, char* json_out){
-	int ret = openwnd(hInstance, nCmdShow, json_in, json_out);
+extern "C" _declspec(dllexport) int openWindow1json(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
+	int ret = openwnd(hInstance, nCmdShow, cfg_all);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
 

@@ -136,36 +136,35 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	setMaskF("tstDlg.xml", newmask.c_str());
 }  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
-	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
+	cfg_all.lays = getLaysCfg("tstDlg.xml");
 	DlgCfgLays dlgcfgLays;
-	structLaysCfg ret = dlgcfgLays.doModal(layscfg);
-	if(layscfg.laysCnt() != ret.laysCnt() ||
-		layscfg.topX != ret.topX ||
-		layscfg.topY != ret.topY)
+	structLaysCfg ret = dlgcfgLays.doModal(cfg_all.lays);
+	if(cfg_all.lays.laysCnt() != ret.laysCnt() ||
+		cfg_all.lays.topX != ret.topX ||
+		cfg_all.lays.topY != ret.topY)
 		clearDataCfg("tstDlg.xml");
 	setLaysCfg("tstDlg.xml", ret);
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
-	structLaysCfg layscfg = getLaysCfg("tstDlg.xml");
-	structDataCfg datacfg = getDataCfg("tstDlg.xml");
+	cfg_all.lays = getLaysCfg("tstDlg.xml");
+	cfg_all.data = getDataCfg("tstDlg.xml");
 	DlgData dlgdata;
 	DlgDataData data;
-	auto szx = layscfg.bottomX();
-	auto szy = layscfg.bottomY();
-	data.create(szx, szy, &datacfg.v, &datacfg.sigma, &datacfg.seed);
+	auto szx = cfg_all.lays.bottomX();
+	auto szy = cfg_all.lays.bottomY();
+	data.create(szx, szy, &cfg_all.data.v, &cfg_all.data.sigma, &cfg_all.data.seed);
 	INT_PTR ret = dlgdata.doModal(&data);
 	if(ret == IDOK)
-		setDataCfg("tstDlg.xml", datacfg);
+		setDataCfg("tstDlg.xml", cfg_all.data);
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;
-	structMiscCfg misccfg = getMiscCfg("tstDlg.xml");
-
+	cfg_all.misc = getMiscCfg("tstDlg.xml");
 	//_tzset();	_time64(&misccfg.dtCreate);
 
-	INT_PTR ret = dlgmisc.doModal(&misccfg);
+	INT_PTR ret = dlgmisc.doModal(&cfg_all.misc);
 	if(ret == IDOK)
-		setMiscCfg("tstDlg.xml", misccfg);
+		setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	HMODULE hLib;
@@ -173,10 +172,10 @@ void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	auto spath = TEXT(dllname.c_str());
 	hLib = LoadLibrary(spath);
 	if(hLib != NULL){
-		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, char* json_out, char* json_in) = NULL;
+		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
 		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
 		if(pFunction != NULL){
-			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, json_out, json_in);
+			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 			//_RPT1(_CRT_WARN, "%d\n", ret);
 		} else{
