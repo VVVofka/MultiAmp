@@ -209,7 +209,7 @@ void MDX::Render(UINT stride){  //  Call from main loop wWinMain()
 	// Clear the back buffer 
 	g_pImmediateContext->ClearRenderTargetView(g_pRenderTargetView, BackColor);
 
-	// Render the triangle
+	// Render 
 	g_pImmediateContext->VSSetShader(g_pVertexShader, NULL, 0);
 	g_pImmediateContext->PSSetShader(g_pPixelShader, NULL, 0);
 	g_pImmediateContext->Draw(g_numVertices, 0);

@@ -9,9 +9,9 @@ HRESULT MDX2::InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices, D3D_PRIMITI
 	RETURN_IF_FAIL(MDX::CreatePixelShader());
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
-void MDX2::Render(){               //  Call from main loop wWinMain()
-	g_pAMPComputeEngine->run();		// MAIN
-	MDX::Render(sizeof(Vertex2D));
+void MDX2::Render(){				//  Call from main loop wWinMain()
+	g_pAMPComputeEngine->run();		// work with lays ( MAIN )
+	MDX::Render(sizeof(Vertex2D));	// draw on screen
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 void MDX2::CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 	MDX::CleanupDevice();

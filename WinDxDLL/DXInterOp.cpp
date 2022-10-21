@@ -43,7 +43,7 @@ int work(char* json_in, char* json_out){
 			DispatchMessage(&msg);
 		} else{
 			if(!pauseRender){
-				mdx.Render();	// MAIN 
+				mdx.Render();	// MAIN !!!
 				cnt++;
 				time_t ctime;
 				time(&ctime);

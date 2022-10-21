@@ -13,6 +13,7 @@
 #include "Masks.h"
 #include "Utils.h"
 #include "Options.h"
+#include "myRnd.h"
 
 extern Model2D model;
 
@@ -42,6 +43,7 @@ private:
 	//std::random_device rd;   // non-deterministic generator
 	//std::mt19937 gen;        // to seed mersenne twister. rand: gen(rd())
 	std::uniform_int_distribution<int> distrLastAY, distrLastAX;
+	LehmerRng m_myrnd;
 
 public:
 	void dumpA(size_t nlay);
