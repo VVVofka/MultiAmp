@@ -37,7 +37,6 @@ int work(char* json_in, char* json_out){
 	time_t ltime;
 	time(&ltime);
 	int cnt = 0;
-	//mdx.PreRender();
 	while(WM_QUIT != msg.message){
 		if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
 			TranslateMessage(&msg);

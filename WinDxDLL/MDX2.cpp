@@ -4,10 +4,8 @@ HRESULT MDX2::InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices, D3D_PRIMITI
 	HRESULT hr = MDX::InitDevice(ghWnd, Primitive);
 	g_numVertices = (unsigned int)vertices.size();
 	RETURN_IF_FAIL(MDX::CreateSwapChain());
-
-	RETURN_IF_FAIL(MDX::CreateVertexShader("VS2"));
 	RETURN_IF_FAIL(CreateComputeShader());
-	
+	RETURN_IF_FAIL(MDX::CreateVertexShader("VS2"));
 	RETURN_IF_FAIL(MDX::CreatePixelShader());
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////

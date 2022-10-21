@@ -11,7 +11,6 @@ public:
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	void Render();
 	void CleanupDevice();
-	//void PreRender();
 private:
 	HRESULT CreateComputeShader();
 }; // ***********************************************************************

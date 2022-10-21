@@ -196,14 +196,26 @@ HRESULT MDX::CreatePixelShader(){
 	pPSBlob->Release();
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
+HRESULT MDX::CreateComputeShader(){
+	// Bind a resource view to the CS buffer
+	D3D11_BUFFER_DESC descBuf;
+	ZeroMemory(&descBuf, sizeof(descBuf));
+	g_pVertexPosBuffer->GetDesc(&descBuf);
+
+	D3D11_SHADER_RESOURCE_VIEW_DESC DescRV;
+	ZeroMemory(&DescRV, sizeof(DescRV));
+	DescRV.Format = DXGI_FORMAT_R32_TYPELESS;
+	DescRV.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+	DescRV.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
+	DescRV.Buffer.FirstElement = 0;
+	DescRV.Buffer.NumElements = descBuf.ByteWidth / sizeof(int);
+	RETURN_IF_FAIL(g_pd3dDevice->CreateShaderResourceView(g_pVertexPosBuffer, &DescRV, &g_pVertexPosBufferRV));
+	return S_OK;
+} // ///////////////////////////////////////////////////////////////////////////////////////////////////
 void MDX::Render(UINT stride){  //  Call from main loop wWinMain()
 								// stride = sizeof(Vertex2D)
 								// Bind the vertex shader data though the compute shader result buffer view
 	
-	//UINT offset = 0;
-	//g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
-	//g_pImmediateContext->IASetPrimitiveTopology(primitive);
-
 	ID3D11ShaderResourceView* aRViews[1] = {g_pVertexPosBufferRV};
 	g_pImmediateContext->VSSetShaderResources(0, 1, aRViews);
 
@@ -221,20 +233,4 @@ void MDX::Render(UINT stride){  //  Call from main loop wWinMain()
 	// Present the information rendered to the back buffer to the front buffer (the screen)
 	g_pSwapChain->Present(0, 0);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
-HRESULT MDX::CreateComputeShader(){
-	// Bind a resource view to the CS buffer
-	D3D11_BUFFER_DESC descBuf;
-	ZeroMemory(&descBuf, sizeof(descBuf));
-	g_pVertexPosBuffer->GetDesc(&descBuf);
-
-	D3D11_SHADER_RESOURCE_VIEW_DESC DescRV;
-	ZeroMemory(&DescRV, sizeof(DescRV));
-	DescRV.Format = DXGI_FORMAT_R32_TYPELESS;
-	DescRV.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-	DescRV.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
-	DescRV.Buffer.FirstElement = 0;
-	DescRV.Buffer.NumElements = descBuf.ByteWidth / sizeof(int);
-	RETURN_IF_FAIL(g_pd3dDevice->CreateShaderResourceView(g_pVertexPosBuffer, &DescRV, &g_pVertexPosBufferRV));
-	return S_OK;
-} // ///////////////////////////////////////////////////////////////////////////////////////////////////
 
