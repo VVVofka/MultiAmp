@@ -16,21 +16,22 @@ static bool pauseRender = false;
 // loop. Idle time is used to render the scene.
 #pragma warning(suppress : 28251)
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, char* json_in, char* json_out){
+int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, structAll* cfg_all){
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
+	if(FAILED(model.Create(cfg_all)))
+		return E_POINTER;
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
-		return 0;
-	int work(char* json_in, char* json_out);
-	return work(json_in, json_out);
-} // ////////////////////////////////////////////////////////////////////////////
-int work(char* json_in, char* json_out){
-	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
-	model.Create();
+		return E_NOINTERFACE;
 	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
+	int work();
+	return work();
+} // ////////////////////////////////////////////////////////////////////////////
+int work(){
+	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
 
 	// Main message loop
 	MSG msg = {0};
@@ -53,8 +54,6 @@ int work(char* json_in, char* json_out){
 					char buf[32];
 					sprintf_s(buf, 32, "fps: %d", cnt / interval);
 					SetWindowTextA(g_hWnd, buf);
-					json_out[0] = (char)255;
-					strcpy(json_out + 1, buf);
 					cnt = 0;
 				}
 			}

@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Model2D.h"
-void Model2D::Create(){
+bool Model2D::Create(structAll* cfg_all){
+	if(cfg_all == NULL)
+		return false;
+	cfgAll = cfg_all;
 	int seed = options.seedRnd();
 	seed = 123; // TODO: seed rnd?
 	if(seed >= 0)
@@ -42,6 +45,7 @@ void Model2D::Create(){
 	fillrnd((int)nlay, (int)szarea, kRnd, kSigma);
 	options.iArr[InpOptions::LaysCnt] = int(nlay);
 	options.saveAuto();
+	return true;
 } // //////////////////////////////////////////////////////////////////////////////////
 Vertex2D Model2D::norm(int curpos, INT2 sizes) const{
 	const int iy = curpos / sizes.x;

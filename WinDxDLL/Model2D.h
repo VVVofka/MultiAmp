@@ -33,7 +33,7 @@ public:
 	const INT2& sizeYX() const {return vsz[vsz.size() - 1];}
 	size_t LaysCnt() const { return v_areas.size(); }
 
-	void Create();
+	bool Create(structAll* cfg_all);
 	void dumpA(int nlay) const;
 	void dumpD(int nlay) const;
 	FLT2* getFLT2(){return options.getFLT2();}
