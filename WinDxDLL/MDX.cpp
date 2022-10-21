@@ -199,9 +199,10 @@ HRESULT MDX::CreatePixelShader(){
 void MDX::Render(UINT stride){  //  Call from main loop wWinMain()
 								// stride = sizeof(Vertex2D)
 								// Bind the vertex shader data though the compute shader result buffer view
-	UINT offset = 0;
-	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
-	g_pImmediateContext->IASetPrimitiveTopology(primitive);
+	
+	//UINT offset = 0;
+	//g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
+	//g_pImmediateContext->IASetPrimitiveTopology(primitive);
 
 	ID3D11ShaderResourceView* aRViews[1] = {g_pVertexPosBufferRV};
 	g_pImmediateContext->VSSetShaderResources(0, 1, aRViews);
