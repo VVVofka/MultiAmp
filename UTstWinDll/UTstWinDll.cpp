@@ -16,12 +16,22 @@ public:
 		std::vector<size_t> vin;
 		std::vector<Vertex2D> vout;
 		const INT2 sz(3, 4);
-		vin.push_back(1); // x=1 y=0
+		vin.push_back(1);  // x=1 y=0
 		vin.push_back(11); // x=3 y=2 (right bottom)
-		vin.push_back(6); // x=2 y=1
-		vin.push_back(8); // x=0 y=2 (left bottom)
+		vin.push_back(6);  // x=2 y=1
+		vin.push_back(8);  // x=0 y=2 (left bottom)
 		model.fillScreenPoints(vin, vout, sz);
-		Assert::AreEqual(0.1f, vout[0].Pos.x, 0.0001f, L"0x");
+		Assert::AreEqual(-0.25f, vout[0].Pos.x, 0.0001f, L"0x");
+		Assert::AreEqual(-0.6666666666f, vout[0].Pos.y, 0.0001f, L"0y");
+
+		Assert::AreEqual(0.75f, vout[1].Pos.x, 0.0001f, L"1x");
+		Assert::AreEqual(0.6666666666f, vout[1].Pos.y, 0.0001f, L"1y");
+
+		Assert::AreEqual(0.25f, vout[2].Pos.x, 0.0001f, L"2x");
+		Assert::AreEqual(0.0f, vout[2].Pos.y, 0.0001f, L"2y");
+
+		Assert::AreEqual(-0.75f, vout[3].Pos.x, 0.0001f, L"3x");
+		Assert::AreEqual(0.6666666666f, vout[3].Pos.y, 0.0001f, L"3y");
 	} // //////////////////////////////////////////////////////////////////////
 	TEST_METHOD(RndsetUpper6){
 		LehmerRng rnd;
@@ -41,7 +51,7 @@ public:
 		for(size_t j = 0; j < v.size(); j++)
 			s += std::to_string(v[j]) + ' ';
 		Logger::WriteMessage(s.c_str());
-		Assert::IsTrue(k < 0.2);
+		Assert::IsTrue(k < 0.4);
 	} // //////////////////////////////////////////////////////////////////////
 	TEST_METHOD(Rnd6){
 		LehmerRng rnd;

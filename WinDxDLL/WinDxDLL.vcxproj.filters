@@ -102,6 +102,9 @@
     <ClInclude Include="myRnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Model2D_Static.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -171,6 +174,9 @@
       <Filter>InterOp</Filter>
     </ClCompile>
     <ClCompile Include="MDX2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model2D_Static.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

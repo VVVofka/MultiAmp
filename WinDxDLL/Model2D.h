@@ -6,22 +6,13 @@
 #include <D3D11.h>
 #include <DirectXMath.h>
 
-#include "Utils.h"
-#include "Vertex.h"
+#include "Model2D_Static.h"
 #include "Masks.h"
 
 #include "Options.h"
 
 #include "..\OptsTinyLib\structAll.h"
 #include "myRnd.h"
-class Model2D_Static{
-public:
-	//	using Model2D::fillScreenPoints;
-	static void setConsole();
-	void fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& v, const INT2& sz);
-private:
-	Vertex2D norm(int curpos, const INT2& sizes) const;
-}; // *****************************************************************************
 
 class Model2D : public Model2D_Static{
 public:
@@ -51,8 +42,7 @@ public:
 	void dumpD(int nlay) const;
 	FLT2* getFLT2(){return options.getFLT2();}
 
-	//std::mt19937 rnd_gen;        // to seed mersenne twister. rand: gen(rd())
-	LehmerRng myrnd;
+	LehmerRng myrnd;	//std::mt19937 rnd_gen; // to seed mersenne twister. rand: gen(rd())
 
 protected:
 	void fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma);
