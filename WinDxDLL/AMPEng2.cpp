@@ -62,7 +62,7 @@ void AMPEng2::run(){
 void AMPEng2::dumpA(size_t nlay){
 	const char separ[] = " ";
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
-	setConsole();
+	model.setConsole();
 	array<int, 2> av(*vgpu_a[nlay].get());
 	std::cout << "A[" << nlay << "] y*x: " << av.extent[0] << "*" << av.extent[1] << std::endl;
 	if(nlay == vgpu_a.size() - 1){
@@ -92,7 +92,7 @@ void AMPEng2::dumpA(size_t nlay){
 	}
 } // ////////////////////////////////////////////////////////////////
 void AMPEng2::dumpA(){
-	setConsole();
+	model.setConsole();
 	for(int nlay = 0; nlay < (int)model.LaysCnt(); nlay++){
 		dumpA(nlay);
 		std::cout << std::endl;
@@ -100,7 +100,7 @@ void AMPEng2::dumpA(){
 } // ////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::dumpD(size_t nlay){
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
-	setConsole();
+	model.setConsole();
 	array<DrQuadro, 2> av(*vgpu_f[nlay].get());
 	std::cout << "Dirs[" << nlay << "] y*x: " << av.extent[0] << "*" << av.extent[1] << std::endl;
 	for(int y = 0; y < av.extent[0]; y++){

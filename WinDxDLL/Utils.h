@@ -13,7 +13,7 @@ using namespace Concurrency::fast_math;
 
 #define NORMAL_TO_AREA(POS, WIDTH) (float(2 * (POS) + 1) / (WIDTH) - 1.f)
 
-void setConsole();
+//void setConsole();
 
 struct FLT2{
 	float y;

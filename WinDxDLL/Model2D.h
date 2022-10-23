@@ -11,10 +11,19 @@
 #include "Masks.h"
 
 #include "Options.h"
+
 #include "..\OptsTinyLib\structAll.h"
 #include "myRnd.h"
+class Model2D_Static{
+public:
+	//	using Model2D::fillScreenPoints;
+	static void setConsole();
+	void fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& v, const INT2& sz);
+private:
+	Vertex2D norm(int curpos, const INT2& sizes) const;
+}; // *****************************************************************************
 
-class Model2D{
+class Model2D : public Model2D_Static{
 public:
 	structAll* cfgAll;
 	Options options;
@@ -45,14 +54,7 @@ public:
 	//std::mt19937 rnd_gen;        // to seed mersenne twister. rand: gen(rd())
 	LehmerRng myrnd;
 
-private:
-	Vertex2D norm(int curpos, const INT2& sizes) const;
-	void fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma);
 protected:
+	void fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma);
 	// TODO: static
-	void fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& v, const INT2& sz);
-}; // *****************************************************************************
-class Model2D_Dbg : public Model2D{
-public:
-	using Model2D::fillScreenPoints;
 }; // *****************************************************************************

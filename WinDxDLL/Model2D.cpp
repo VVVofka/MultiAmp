@@ -44,7 +44,7 @@ bool Model2D::CreateOld(structAll* cfg_all){
 	// fill v_poss (for screen only) & v_areas for the last lay
 	fillrnd((int)nlay, (int)szarea, kRnd, kSigma);
 	options.iArr[InpOptions::LaysCnt] = int(nlay);
-	options.saveAuto();
+	//- options.saveAuto();
 	return true;
 } // //////////////////////////////////////////////////////////////////////////////////
 bool Model2D::Create(structAll* cfg_all){
@@ -85,10 +85,10 @@ bool Model2D::Create(structAll* cfg_all){
 	const INT2& szLay0 = sizeYX();
 	fillScreenPoints(cfgAll->data.v, v_scr, szLay0);
 	options.iArr[InpOptions::LaysCnt] = int(nlay);
-	options.saveAuto();
+	//options.saveAuto();
 	return true;
 } // //////////////////////////////////////////////////////////////////////////////////
-Vertex2D Model2D::norm(int curpos, const INT2& sizes) const{
+Vertex2D Model2D_Static::norm(int curpos, const INT2& sizes) const{
 	const int iy = curpos / sizes.x;
 	const float y = NORMAL_TO_AREA(iy, sizes.y);
 	const int ix = curpos % sizes.x;
@@ -125,7 +125,7 @@ void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
 	//	v_scr.push_back(vert2);
 	//} // 	while(v_scr.size() < szpos)
 } // /////////////////////////////////////////////////////////////////////////////////
-void Model2D::fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& vout, const INT2& sz){
+void Model2D_Static::fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& vout, const INT2& sz){
 	size_t szall = sz.x * sz.y;
 	assert(vin.size() == szall);
 	vout.resize(szall);
@@ -155,3 +155,17 @@ void Model2D::dumpD(int nlay) const{
 		printf("\n");
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+void Model2D_Static::setConsole(){
+#pragma warning(push)
+#pragma warning(disable : 4996)
+	if(::GetConsoleWindow() == NULL){
+		if(::AllocConsole()){
+			(void)freopen("CONIN$", "r", stdin);
+			(void)freopen("CONOUT$", "w", stdout);
+			(void)freopen("CONOUT$", "w", stderr);
+			SetFocus(::GetConsoleWindow());
+		}
+	}
+#pragma warning(pop)
+} // ///////////////////////////////////////////////////////////////////////////
+

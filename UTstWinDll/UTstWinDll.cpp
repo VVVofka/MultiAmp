@@ -12,7 +12,7 @@ namespace UTstWinDll{
 public:
 
 	TEST_METHOD(fillScreenPoints){
-		Model2D_Dbg model;
+		Model2D_Static model;
 		std::vector<size_t> vin;
 		std::vector<Vertex2D> vout;
 		const INT2 sz(3, 4);
