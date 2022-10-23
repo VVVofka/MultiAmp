@@ -38,12 +38,12 @@ public:
 		Assert::AreEqual(v.size(), (size_t)1);
 		Assert::AreEqual(v[0], (int)0);
 
-		v = myconv::strToVInt("3691;945");
-		Assert::AreEqual(v.size(), (size_t)2);
+		v = myconv::strToVInt("3691 945");
+		Assert::AreEqual((size_t)2, v.size());
 		Assert::AreEqual(v[0], (int)3691);
 		Assert::AreEqual(v[1], (int)945);
 
-		v = myconv::strToVInt("-3691;-945");
+		v = myconv::strToVInt("-3691 -945");
 		Assert::AreEqual(v.size(), (size_t)2);
 		Assert::AreEqual(v[0], (int)-3691);
 		Assert::AreEqual(v[1], (int)-945);

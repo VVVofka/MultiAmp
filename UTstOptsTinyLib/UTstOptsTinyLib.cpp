@@ -19,11 +19,11 @@ public:
 		s = xml.getText("defstr");
 		Assert::IsTrue(s == "hiHi");
 
-		s = xml.getAttribute("", "defstr");
+		s = xml.getAttributeS("", "defstr");
 		Assert::IsTrue(s == "defstr");
 
 		xml.setAttributeS("attrib1", "val_atr1");
-		s = xml.getAttribute("attrib1", "defstr");
+		s = xml.getAttributeS("attrib1", "defstr");
 		Assert::IsTrue(s == "val_atr1");
 
 		xml.setAttributeT<int>("attrib2", 77);

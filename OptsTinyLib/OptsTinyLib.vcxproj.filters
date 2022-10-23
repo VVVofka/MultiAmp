@@ -40,7 +40,10 @@
     <ClInclude Include="myXML.h">
       <Filter>my</Filter>
     </ClInclude>
-    <ClInclude Include="structsAll.h">
+    <ClInclude Include="structAll.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="structCfgBase.h">
       <Filter>Session\structs</Filter>
     </ClInclude>
   </ItemGroup>
@@ -63,6 +66,12 @@
     </ClCompile>
     <ClCompile Include="myXML.cpp">
       <Filter>my</Filter>
+    </ClCompile>
+    <ClCompile Include="structAll.cpp">
+      <Filter>Session\structs</Filter>
+    </ClCompile>
+    <ClCompile Include="structMiscCfg.cpp">
+      <Filter>Session\structs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

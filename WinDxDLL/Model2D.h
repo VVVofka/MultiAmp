@@ -11,7 +11,7 @@
 #include "Masks.h"
 
 #include "Options.h"
-#include "..\OptsTinyLib\structsAll.h"
+#include "..\OptsTinyLib\structAll.h"
 
 class Model2D{
 public:

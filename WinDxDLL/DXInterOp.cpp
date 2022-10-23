@@ -19,7 +19,7 @@ static bool pauseRender = false;
 int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, structAll* cfg_all){
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	if(FAILED(model.Create(cfg_all)))
+	if(model.Create(cfg_all) == false)
 		return E_POINTER;
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
 		return E_NOINTERFACE;
@@ -45,6 +45,7 @@ int work(){
 		} else{
 			if(!pauseRender){
 				mdx.Render();	// MAIN !!!
+				model.cfgAll->misc.curIteration++;
 				cnt++;
 				time_t ctime;
 				time(&ctime);

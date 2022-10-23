@@ -1,5 +1,5 @@
 #pragma once
-#include "..\OptsTinyLib\structsAll.h"
+#include "..\OptsTinyLib\structAll.h"
 
 int tstdllMain(HINSTANCE hInstance, int nCmdShow, int a, int b);
 int openwnd(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all);

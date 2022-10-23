@@ -3,7 +3,7 @@
 #include "DlgMaskA.h"
 #include "DlgMaskF.h"
 #include "..\OptsTinyLib\InPort.h"
-#include "../OptsTinyLib/structsAll.h"
+#include "../OptsTinyLib/structAll.h"
 
 
 class CMultiAmpDlg : public CDialogEx{

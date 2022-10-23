@@ -15,7 +15,7 @@ size_t structDataCfg::fill_v(const std::string& s){
 		if(s[j] == ' ')
 			newsize++;
 	v.resize(++newsize);
-	
+
 	const int BUFWORDLEN = 12;
 	char bufword[BUFWORDLEN];
 	int bufpos = 0;
@@ -56,9 +56,8 @@ std::string structDataCfg::get_s() const{
 	}
 	return sret;
 } // ///////////////////////////////////////////////////////////////////////////////////
-//void tst(){
-//	std::string s{"String to   split here, and here, and here,..."};
-//	std::regex regex{R"([\s,]+)"}; // split on space and comma
-//	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
-//	std::vector<std::string> words{it, {}};
-//} // /////////////////////////////////////////////////////////////////////////////
+bool structDataCfg::isEqual(const structCfgBase* other){
+	structDataCfg* p = (structDataCfg*)other;
+	if(sigma != p->sigma || seed != p->seed) return false;
+	return v != p->v;
+} // /////////////////////////////////////////////////////////////////////////////
