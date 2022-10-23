@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "../WinDxDLL/myRnd.h"
+#include "../WinDxDLL/Model2D.h"
 #include <array>
 #include <algorithm>
 #pragma warning(disable : 4996)
@@ -10,22 +11,24 @@ namespace UTstWinDll{
 	TEST_CLASS(UTstWinDll){
 public:
 
-	TEST_METHOD(Rnd1){
-		LehmerRng rnd(0);
-		FILE* f = fopen("rnd.txt", "w");
-		for(int j = 0; j < 1000; j++){
-			uint32_t r = rnd.rand();
-			std::string s = std::to_string(r) + " ";
-			fputs(s.c_str(), f);
-		}
-		fclose(f);
-		//remove("rnd.txt");
+	TEST_METHOD(fillScreenPoints){
+		Model2D_Dbg model;
+		std::vector<size_t> vin;
+		std::vector<Vertex2D> vout;
+		const INT2 sz(3, 4);
+		vin.push_back(1); // x=1 y=0
+		vin.push_back(11); // x=3 y=2 (right bottom)
+		vin.push_back(6); // x=2 y=1
+		vin.push_back(8); // x=0 y=2 (left bottom)
+		model.fillScreenPoints(vin, vout, sz);
+		Assert::AreEqual(0.1f, vout[0].Pos.x, 0.0001f, L"0x");
 	} // //////////////////////////////////////////////////////////////////////
 	TEST_METHOD(RndsetUpper6){
 		LehmerRng rnd;
-		rnd.setUpper(6);
-		std::array<uint64_t, 6> v = {0};
-		uint64_t cnttest = 60000000;
+		const size_t sz = 2;
+		rnd.setUpper(sz);
+		std::array<uint64_t, sz> v = {0};
+		const uint64_t cnttest = sz * 10000000;
 		for(uint64_t j = 0; j < cnttest; j++){
 			uint32_t r = rnd.randk();
 			Assert::IsTrue(r < v.size());
@@ -39,16 +42,15 @@ public:
 			s += std::to_string(v[j]) + ' ';
 		Logger::WriteMessage(s.c_str());
 		Assert::IsTrue(k < 0.2);
-		remove("rnd.txt");
 	} // //////////////////////////////////////////////////////////////////////
 	TEST_METHOD(Rnd6){
 		LehmerRng rnd;
 		const size_t sz = 2;
 		std::array<uint64_t, sz> v = {0};
-		uint64_t cnttest = sz * 10000000;
+		const uint64_t cnttest = sz * 10000000;
 		for(uint64_t j = 0; j < cnttest; j++){
 			uint32_t r = rnd.rand(sz);
-			Assert::IsTrue(r < sz);
+			Assert::IsTrue(r < v.size());
 			v[r]++;
 		}
 		auto min = *std::min_element(v.begin(), v.end());
