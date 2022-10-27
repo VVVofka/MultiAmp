@@ -13,7 +13,7 @@ public:
 		const int_2 sz_0,
 		const std::vector<int>& va_inp,			// xy.x * xy.y
 		const std::vector<float_2>& vf_inp,		// (szx_0 * szy_0)
-		const float k_decAfterMove
+		//const float k_decAfterMove
 	);
 	~MLay0();
 
