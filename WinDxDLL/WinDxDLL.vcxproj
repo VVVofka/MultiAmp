@@ -189,6 +189,8 @@
     <ClInclude Include="MDX2.h" />
     <ClInclude Include="MLay0.h" />
     <ClInclude Include="MLayBase.h" />
+    <ClInclude Include="MLayMid.h" />
+    <ClInclude Include="MLays.h" />
     <ClInclude Include="MLaysCPUCfg.h" />
     <ClInclude Include="Model2D.h" />
     <ClInclude Include="Model2D_Static.h" />
@@ -221,6 +223,8 @@
     <ClCompile Include="MDX2.cpp" />
     <ClCompile Include="MLay0.cpp" />
     <ClCompile Include="MLayBase.cpp" />
+    <ClCompile Include="MLayMid.cpp" />
+    <ClCompile Include="MLays.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Model2D_Static.cpp" />
     <ClCompile Include="Options.cpp" />

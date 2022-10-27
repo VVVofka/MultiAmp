@@ -120,6 +120,12 @@
     <ClInclude Include="MLay0.h">
       <Filter>Lays\MLay</Filter>
     </ClInclude>
+    <ClInclude Include="MLayMid.h">
+      <Filter>Lays\MLay</Filter>
+    </ClInclude>
+    <ClInclude Include="MLays.h">
+      <Filter>Lays\MLay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -198,6 +204,12 @@
       <Filter>Lays\MLay</Filter>
     </ClCompile>
     <ClCompile Include="MLay0.cpp">
+      <Filter>Lays\MLay</Filter>
+    </ClCompile>
+    <ClCompile Include="MLayMid.cpp">
+      <Filter>Lays\MLay</Filter>
+    </ClCompile>
+    <ClCompile Include="MLays.cpp">
       <Filter>Lays\MLay</Filter>
     </ClCompile>
   </ItemGroup>
