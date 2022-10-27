@@ -13,8 +13,8 @@ public:
 		const int_2 sz_0,					// size x lay0
 		const MLaysCPUCfg cfg,				// count gpu mt cpu
 		const std::vector<int>& vi_inp,		// szx_0 * szy_0
-		const std::vector<float_2>& vf_inp,	// (szx_0 * szy_0)
-		const float k_decAfterMove
+		const std::vector<float_2>& vf_inp	// (szx_0 * szy_0)
+		//const float k_decAfterMove
 	);
 	bool isLoad();
 

@@ -12,13 +12,11 @@ public:
 	void Create(
 		const int_2 sz_0,
 		const std::vector<int>& va_inp,			// xy.x * xy.y
-		const std::vector<float_2>& vf_inp,		// (szx_0 * szy_0)
-		//const float k_decAfterMove
+		const std::vector<float_2>& vf_inp		// (szx_0 * szy_0)
 	);
 	~MLay0();
 
 	int countPoint = 0;
-	float kDecAfterMove = 0.f;
 	int SetRndScreenPoints(const int count, std::mt19937& gen);
 	void SetScreenPoints(const int count, const int_2* ptr);
 

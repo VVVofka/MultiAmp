@@ -1,8 +1,7 @@
 #include "MLay0.h"
-
-void MLay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp, const float k_decAfterMove){
+#include "Utils.h"
+void MLay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp){	
 	sz = sz_0;
-	kDecAfterMove = k_decAfterMove;
 	countPoint = defPointsCnt(va_inp);
 	va.Create(sz, va_inp, MCPUtype::GPU);
 	vf.Create(sz, vf_inp, MCPUtype::GPU);
@@ -24,6 +23,7 @@ int MLay0::SetRndScreenPoints(const int count, std::mt19937& gen){
 
 	SAFE_DELETE(vgpuScreen);
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
+
 	return sz1;
 } // ///////////////////////////////////////////////////////////////////////////////
 void MLay0::SetScreenPoints(const int count, const int_2* ptr){
@@ -37,8 +37,8 @@ void MLay0::cpuPoint2gpuPoint(const int count_point){
 	for(int y = 0; y < sz.y; y++)
 		for(int x = 0; x < sz.x; x++)
 			if(va.vcpu[y * sz.x + x] >= 0){
-				cpuv[ret].Pos.x = (float)(2 * x + 1) * sz.x - 1.f;
-				cpuv[ret].Pos.y = (float)(2 * y + 1) * sz.y - 1.f;
+				cpuv[ret].Pos.y = NORMAL_TO_AREA(y, sz.y);	//cpuv[ret].Pos.y = (float)(2 * y + 1) * sz.y - 1.f;
+				cpuv[ret].Pos.x = NORMAL_TO_AREA(x, sz.x);	//cpuv[ret].Pos.x = (float)(2 * x + 1) * sz.x - 1.f;
 				ret++;
 			}
 	_ASSERTE(ret == count_point);

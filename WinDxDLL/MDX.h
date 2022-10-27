@@ -55,7 +55,7 @@ protected:
 	HRESULT CreateVertexShader(const char* snaderName);
 	HRESULT CompileShaderFromFile(LPCWSTR szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);
 	HRESULT CreatePixelShader();
-	void Render(UINT stride);
+	void Render();
 	HRESULT CreateComputeShader();
 }; // ******************************************************************************************
 

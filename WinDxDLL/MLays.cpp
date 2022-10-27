@@ -1,11 +1,13 @@
 #include "MLays.h"
+
 bool MLays::Create(
 	const int_2 sz_lay0,				// size x lay0
 	const MLaysCPUCfg cfg,				// count gpu mt cpu
-	const std::vector<int>& va_inp,			// szx_0 * szy_0
-	const std::vector<float_2>& vf_inp,		// szx_0 * szy_0
-	const float k_decAfterMove){
-	lay0.Create(sz_lay0, va_inp, vf_inp, k_decAfterMove);
+	const std::vector<int>& va_inp,		// szx_0 * szy_0
+	const std::vector<float_2>& vf_inp	// szx_0 * szy_0
+//	const float k_decAfterMove
+){
+	lay0.Create(sz_lay0, va_inp, vf_inp);	// , k_decAfterMove
 	if(lay0.isLoad() == false) return false;
 	int_2 sz_lay1 = sz_lay0 / 2;
 	cntMidMLays = (int)fillvMidLays(sz_lay1, cfg);
