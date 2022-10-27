@@ -9,5 +9,6 @@ public:
 	static void setConsole();
 	static void fillScreenPoints(const std::vector<size_t>& vin, std::vector<Vertex2D>& v, const INT2& sz);
 private:
+	// [-1.0 ... +1.0]
 	static Vertex2D norm(int curpos, const INT2& sizes);
 }; // *****************************************************************************
