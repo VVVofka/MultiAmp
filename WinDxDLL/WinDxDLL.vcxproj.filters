@@ -22,6 +22,9 @@
     <Filter Include="Lays">
       <UniqueIdentifier>{c123f49e-3c10-4475-8710-531586352dd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lays\MLay">
+      <UniqueIdentifier>{60227630-f005-469a-9d96-2479e172ff9a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -105,6 +108,15 @@
     <ClInclude Include="Model2D_Static.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MLayBase.h">
+      <Filter>Lays\MLay</Filter>
+    </ClInclude>
+    <ClInclude Include="MVGpuCpu.h">
+      <Filter>Lays\MLay</Filter>
+    </ClInclude>
+    <ClInclude Include="MLaysCPUCfg.h">
+      <Filter>Lays\MLay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -178,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="Model2D_Static.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MLayBase.cpp">
+      <Filter>Lays\MLay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

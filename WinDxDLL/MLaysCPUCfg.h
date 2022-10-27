@@ -1,14 +1,14 @@
 #pragma once
-enum class CPUtype{ GPU = 0, MT = 1, CPU = 2 };
+enum class MCPUtype{ GPU = 0, MT = 1, CPU = 2 };
 
-class LaysCPUCfg{
+class MLaysCPUCfg{
 public:
 	int gpu;	// lays count for parallel on gpu, include lay0
 	int mt;		// lays count for parallel on cpu
 	int cpu;	// lays count for cpu
 
-	LaysCPUCfg(){ gpu = mt = cpu = 0; };
-	LaysCPUCfg(int gpu, int mt, int cpu){
+	MLaysCPUCfg(){ gpu = mt = cpu = 0; };
+	MLaysCPUCfg(int gpu, int mt, int cpu){
 		this->gpu = gpu;
 		this->mt = mt;
 		this->cpu = cpu;
@@ -19,11 +19,11 @@ public:
 	bool check() const{ return gpu >= 1 && mt >= 0 && cpu >= 0; }
 	bool check(int cnt_lays) const{ return check() && cnt() == cnt_lays && cnt_lays >= 2; }
 
-	CPUtype getType(int idx) const{
+	MCPUtype getType(int idx) const{
 		if(idx < gpu)	// = used both lays (up & dn) in parallel_for_each()
-			return CPUtype::GPU;
+			return MCPUtype::GPU;
 		if(idx < gpu + mt)
-			return CPUtype::MT;
-		return CPUtype::CPU;
-	}
+			return MCPUtype::MT;
+		return MCPUtype::CPU;
+	} // //////////////////////////////////////////////////////////////////////
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

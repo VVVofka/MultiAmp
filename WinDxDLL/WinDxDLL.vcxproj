@@ -187,8 +187,11 @@
     <ClInclude Include="Masks.h" />
     <ClInclude Include="MDX.h" />
     <ClInclude Include="MDX2.h" />
+    <ClInclude Include="MLayBase.h" />
+    <ClInclude Include="MLaysCPUCfg.h" />
     <ClInclude Include="Model2D.h" />
     <ClInclude Include="Model2D_Static.h" />
+    <ClInclude Include="MVGpuCpu.h" />
     <ClInclude Include="myRnd.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
@@ -215,6 +218,7 @@
     <ClCompile Include="Masks.cpp" />
     <ClCompile Include="MDX.cpp" />
     <ClCompile Include="MDX2.cpp" />
+    <ClCompile Include="MLayBase.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Model2D_Static.cpp" />
     <ClCompile Include="Options.cpp" />

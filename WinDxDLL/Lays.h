@@ -3,7 +3,7 @@
 #include "LayMid.h"
 #include "LaysCPUCfg.h"
 
-class Lays : public Lay0{
+class Lays{	//  : public Lay0
 public:
 	Lay0 lay0;
 	std::vector<LayMid> vMidLays;

@@ -48,11 +48,11 @@ bool Model2D::Create(structAll* cfg_all){
 	//INT2 minsz = INT2(options.iArr[InpOptions::LaysSzUpY], options.iArr[InpOptions::LaysSzUpX]);
 	INT2 minsz = INT2(cfgAll->lays.topY, cfgAll->lays.topX);
 
-	//int maxszXY = options.iArr[InpOptions::LaysSzDn];
+	int maxszXY = options.iArr[InpOptions::LaysSzDn];
 	//double kRnd = options.dArr[InpOptions::kFillRnd];
 	DBL2 kSigma(options.dArr[InpOptions::kSigmaY], options.dArr[InpOptions::kSigmaX]);
 
-	//const int RESERV_LAYS_CNT = 16;
+	const int RESERV_LAYS_CNT = 16;
 	v_areas.clear(); 
 	v_areas.reserve(RESERV_LAYS_CNT);
 
