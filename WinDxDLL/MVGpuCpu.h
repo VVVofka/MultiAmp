@@ -36,5 +36,5 @@ public:
 	void gpu2cpu(){ concurrency::copy(*vgpu, vcpu.begin()); }
 	void cpu2gpu(){ concurrency::copy(vcpu.begin(), *vgpu); }
 
-}; //class VGpuCpu
+}; //class MVGpuCpu
 

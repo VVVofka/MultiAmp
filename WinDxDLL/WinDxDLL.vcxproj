@@ -187,6 +187,7 @@
     <ClInclude Include="Masks.h" />
     <ClInclude Include="MDX.h" />
     <ClInclude Include="MDX2.h" />
+    <ClInclude Include="MLay0.h" />
     <ClInclude Include="MLayBase.h" />
     <ClInclude Include="MLaysCPUCfg.h" />
     <ClInclude Include="Model2D.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Masks.cpp" />
     <ClCompile Include="MDX.cpp" />
     <ClCompile Include="MDX2.cpp" />
+    <ClCompile Include="MLay0.cpp" />
     <ClCompile Include="MLayBase.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Model2D_Static.cpp" />
