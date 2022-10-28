@@ -31,6 +31,9 @@
     <Filter Include="Lays\MLay\Process_Param">
       <UniqueIdentifier>{a04fbf18-8c3a-4f01-94c7-1455938e0912}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lays\MLay\Processes">
+      <UniqueIdentifier>{740fdde5-e12c-48f4-814a-7eb7a171c923}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -132,6 +135,21 @@
     <ClInclude Include="ProcessParams.h">
       <Filter>Lays\MLay\Process_Param</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessA.h">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClInclude>
+    <ClInclude Include="Processes.h">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessF.h">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClInclude>
+    <ClInclude Include="Masks_a.h">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClInclude>
+    <ClInclude Include="Masks_f.h">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -217,6 +235,39 @@
     </ClCompile>
     <ClCompile Include="ProcessParams.cpp">
       <Filter>Lays\MLay\Process_Param</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessA.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessA0.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessA1.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessAcpu.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="Processes.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessF.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessF0.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessF1.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessFcpu.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="Masks_a.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
+    </ClCompile>
+    <ClCompile Include="Masks_f.cpp">
+      <Filter>Lays\MLay\Processes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
