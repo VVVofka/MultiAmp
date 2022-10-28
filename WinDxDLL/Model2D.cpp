@@ -1,4 +1,3 @@
-//#include "pch.h"
 #include "Model2D.h"
 bool Model2D::CreateOld(structAll* cfg_all){
 	if(cfg_all == NULL)
