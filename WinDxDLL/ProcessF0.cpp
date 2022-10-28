@@ -1,5 +1,7 @@
-#include "ProcessF.h"
 #include <amp_math.h>
+#include "ProcessF.h"
+#include "ProcessParam.h"
+
 namespace executor{
 	using namespace concurrency;
 	using namespace concurrency::graphics;

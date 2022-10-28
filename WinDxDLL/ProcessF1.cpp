@@ -1,4 +1,5 @@
 #include "ProcessF.h"
+#include "ProcessParam.h"
 #include <amp_math.h>
 #define X 1
 #define Y 0
