@@ -1,5 +1,5 @@
 #include "Model2D.h"
-bool Model2D::CreateOld(structAll* cfg_all){
+bool Model2D::Create(structAll* cfg_all){
 	if(cfg_all == NULL)
 		return false;
 	cfgAll = cfg_all;
@@ -38,7 +38,7 @@ bool Model2D::CreateOld(structAll* cfg_all){
 	//- options.saveAuto();
 	return true;
 } // //////////////////////////////////////////////////////////////////////////////////
-bool Model2D::Create(structAll* cfg_all){
+bool Model2D::CreateOld(structAll* cfg_all){
 	if(cfg_all == NULL)
 		return false;
 	cfgAll = cfg_all;
@@ -52,10 +52,10 @@ bool Model2D::Create(structAll* cfg_all){
 	DBL2 kSigma(options.dArr[InpOptions::kSigmaY], options.dArr[InpOptions::kSigmaX]);
 
 	const int RESERV_LAYS_CNT = 16;
-	v_areas.clear(); 
+	v_areas.clear();
 	v_areas.reserve(RESERV_LAYS_CNT);
 
-	v_dirs.clear(); 
+	v_dirs.clear();
 	v_dirs.reserve(RESERV_LAYS_CNT);
 
 	vsz.clear(); vsz.reserve(RESERV_LAYS_CNT);
@@ -87,34 +87,35 @@ bool Model2D::Create(structAll* cfg_all){
 	return true;
 } // //////////////////////////////////////////////////////////////////////////////////
 void Model2D::fillrnd(int nlay, size_t szarea, double kFill, DBL2 kSigma){
-	//	std::uniform_int_distribution<int> dist(0, int(szarea) - 1);
-		//size_t szpos = size_t(szarea * kFill + 0.5);
-		//v_scr.reserve(szpos);
+	std::mt19937 rnd_gen;
+	std::uniform_int_distribution<int> dist(0, int(szarea) - 1);
+	size_t szpos = size_t(szarea * kFill + 0.5);
+	v_scr.reserve(szpos);
 
-		//const INT2 sz(vsz[nlay]);
-		//std::normal_distribution<> distry(sz.y * 0.5, sz.y * 0.3 * kSigma.y);
-		//std::normal_distribution<> distrx(sz.x * 0.5, sz.x * 0.3 * kSigma.x);
+	const INT2 sz(vsz[nlay]);
+	std::normal_distribution<> distry(sz.y * 0.5, sz.y * 0.3 * kSigma.y);
+	std::normal_distribution<> distrx(sz.x * 0.5, sz.x * 0.3 * kSigma.x);
 
-		//while(v_scr.size() < szpos){
-		//	int curpos = 0;
-		//	do{
-		//		//curpos = dist(gen);
-		//		int y = 0, x = 0;
-		//		do{
-		//			y = (int)distry(rnd_gen);
-		//		} while(y < 0 || y >= sz.y);
-		//		do{
-		//			x = (int)distrx(rnd_gen);
-		//		} while(x < 0 || x >= sz.x);
+	while(v_scr.size() < szpos){
+		int curpos = 0;
+		do{
+			//curpos = dist(gen);
+			int y = 0, x = 0;
+			do{
+				y = (int)distry(rnd_gen);
+			} while(y < 0 || y >= sz.y);
+			do{
+				x = (int)distrx(rnd_gen);
+			} while(x < 0 || x >= sz.x);
 
-		//		curpos = y * sz.x + x;
-		//		assert(curpos < (int)v_areas[nlay].size());
-		//	} while(v_areas[nlay][curpos] >= 0);
-		//	v_areas[nlay][curpos] = (unsigned int)v_scr.size(); // 0 ... szpos-1
+			curpos = y * sz.x + x;
+			assert(curpos < (int)v_areas[nlay].size());
+		} while(v_areas[nlay][curpos] >= 0);
+		v_areas[nlay][curpos] = (unsigned int)v_scr.size(); // 0 ... szpos-1
 
-		//	const Vertex2D vert2 = norm(curpos, sz);
-		//	v_scr.push_back(vert2);
-		//} // 	while(v_scr.size() < szpos)
+		const Vertex2D vert2 = Model2D_Static::norm(curpos, sz);
+		v_scr.push_back(vert2);
+	} // 	while(v_scr.size() < szpos)
 } // /////////////////////////////////////////////////////////////////////////////////
 
 void Model2D::dumpA(int nlay) const{

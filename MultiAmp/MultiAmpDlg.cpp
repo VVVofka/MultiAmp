@@ -167,6 +167,7 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 		setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
+	cfg_all.load("tstDlg.xml");
 	HMODULE hLib;
 	auto dllname = dllName();
 	auto spath = TEXT(dllname.c_str());

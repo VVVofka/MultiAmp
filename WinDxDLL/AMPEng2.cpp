@@ -43,7 +43,7 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	//INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift
-	INT2 shift(model.myrnd.rand(0), model.myrnd.rand(0));   // rand shift
+	INT2 shift(model.myrnd.rand(model.sizeY()), model.myrnd.rand(model.sizeX()));   // rand shift
 	//printf("\nshift = y:%d x:%d\n", shift.y, shift.x);	dumpA(nlastlay);
 	RunA::RunLast(shift, *vgpu_a[nlastlay], *vgpu_a[nlastlay - 1], *amask);
 	for(int nlay = (int)nlastlay - 1; nlay > 0; nlay--){
