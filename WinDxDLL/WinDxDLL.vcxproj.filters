@@ -25,6 +25,12 @@
     <Filter Include="Lays\MLay">
       <UniqueIdentifier>{60227630-f005-469a-9d96-2479e172ff9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lays\Lay">
+      <UniqueIdentifier>{0fd5e459-77e3-4e38-be0a-4a4feaa88b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lays\MLay\Process_Param">
+      <UniqueIdentifier>{a04fbf18-8c3a-4f01-94c7-1455938e0912}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,30 +84,6 @@
     <ClInclude Include="Options\OptionExternDecl.h">
       <Filter>InterOp</Filter>
     </ClInclude>
-    <ClInclude Include="Lay0.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="LayBase.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="LayMid.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="VGpuCpu.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="Lays.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessParam.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="ProcessParams.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
-    <ClInclude Include="LaysCPUCfg.h">
-      <Filter>Lays</Filter>
-    </ClInclude>
     <ClInclude Include="myRnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -125,6 +107,30 @@
     </ClInclude>
     <ClInclude Include="MLays.h">
       <Filter>Lays\MLay</Filter>
+    </ClInclude>
+    <ClInclude Include="Lay0.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="LayBase.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="LayMid.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="Lays.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="LaysCPUCfg.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="VGpuCpu.h">
+      <Filter>Lays\Lay</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessParam.h">
+      <Filter>Lays\MLay\Process_Param</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessParams.h">
+      <Filter>Lays\MLay\Process_Param</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,24 +179,6 @@
     <ClCompile Include="Options.cpp">
       <Filter>InterOp</Filter>
     </ClCompile>
-    <ClCompile Include="Lay0.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="LayBase.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="LayMid.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="Lays.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessParam.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
-    <ClCompile Include="ProcessParams.cpp">
-      <Filter>Lays</Filter>
-    </ClCompile>
     <ClCompile Include="MDX.cpp">
       <Filter>InterOp</Filter>
     </ClCompile>
@@ -211,6 +199,24 @@
     </ClCompile>
     <ClCompile Include="MLays.cpp">
       <Filter>Lays\MLay</Filter>
+    </ClCompile>
+    <ClCompile Include="Lay0.cpp">
+      <Filter>Lays\Lay</Filter>
+    </ClCompile>
+    <ClCompile Include="LayBase.cpp">
+      <Filter>Lays\Lay</Filter>
+    </ClCompile>
+    <ClCompile Include="LayMid.cpp">
+      <Filter>Lays\Lay</Filter>
+    </ClCompile>
+    <ClCompile Include="Lays.cpp">
+      <Filter>Lays\Lay</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParam.cpp">
+      <Filter>Lays\MLay\Process_Param</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParams.cpp">
+      <Filter>Lays\MLay\Process_Param</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

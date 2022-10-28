@@ -15,6 +15,8 @@
 #include "Options.h"
 #include "myRnd.h"
 
+#include "MLay0.h"
+
 extern Model2D model;
 
 using namespace Concurrency;
@@ -32,12 +34,11 @@ class AMPEng2{
 	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 
 public:
+	MLay0 lay0;
 	AMPEng2(ID3D11Device* d3ddevice);
 	void run();    // main function in render
 
-	HRESULT get_data_d3dbuffer(void** d3dbuffer) const{
-		return Concurrency::direct3d::get_buffer(*ar_screen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
-	} // ///////////////////////////////////////////////////////////////////////////////////////////////
+	HRESULT get_data_d3dbuffer(void** d3dbuffer) const;
 
 private:
 	//std::random_device rd;   // non-deterministic generator

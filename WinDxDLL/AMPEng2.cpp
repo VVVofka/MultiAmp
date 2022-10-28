@@ -38,6 +38,8 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 
 	auto pamsk = new array<int, 1>(16, model.options.aMask(), m_accl_view);
 	amask = std::unique_ptr<array<int, 1>>(pamsk);
+
+
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	//INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift
@@ -58,6 +60,9 @@ void AMPEng2::run(){
 		//for(int n=0; n<(int)vpos.size(); n++) printf("%d\t%f\t%f\n", n, vpos[n].Pos.y, vpos[n].Pos.x);
 	}
 	RunDlast::Run(shift, *vgpu_f[nlastlay - 1], *ar_screen, *vgpu_a[nlastlay], *ar_last_dirs, model.sizeYX(), model.options.normDir());
+} // ///////////////////////////////////////////////////////////////////////////////////////////////
+HRESULT AMPEng2::get_data_d3dbuffer(void** d3dbuffer) const{
+	return Concurrency::direct3d::get_buffer(*ar_screen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::dumpA(size_t nlay){
 	const char separ[] = " ";

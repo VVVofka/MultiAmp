@@ -14,8 +14,6 @@ public:
 private:
 	HRESULT CreateComputeShader();
 }; // ***********************************************************************
-
-   
    /*
 D3D11_INPUT_ELEMENT_DESC layout[] =
 {
