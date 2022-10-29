@@ -6,18 +6,17 @@
 #include "Vertex.h"
 
 class MLay0 : public MLayBase{
-public:
 	concurrency::array<Vertex2D, 1>* vgpuScreen = NULL;		//[pointsCnt] for render [-1...+1]
-
+public:
 	void Create(
 		const int_2 sz_0,
 		const std::vector<int>& va_inp,			// sz_0.x * sz_0.y
-		const std::vector<float_2>& vf_inp		// sz_0.x * sz_0.y
+		const std::vector<float_2>& vf_inp,		// sz_0.x * sz_0.y
+		concurrency::array<Vertex2D, 1>* vgpu_Screen
 	);
 	~MLay0();
 
 	int countPoint = 0;
-	int SetRndScreenPoints(const int count, std::mt19937& gen);
 	void SetScreenPoints(const int count, const int_2* ptr);
 
 	bool isLoad()const;

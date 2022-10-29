@@ -1,31 +1,17 @@
 #include "MLay0.h"
 #include "Utils.h"
-void MLay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp){	
+void MLay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp, concurrency::array<Vertex2D, 1>* vgpu_Screen){
 	sz = sz_0;
 	countPoint = defPointsCnt(va_inp);
 	va.Create(sz, va_inp, MCPUtype::GPU);
 	vf.Create(sz, vf_inp, MCPUtype::GPU);
 	cpuPoint2gpuPoint(countPoint);
+	vgpuScreen = vgpu_Screen;
 } // /////////////////////////////////////////////////////////////////
 MLay0::~MLay0(){
 	SAFE_DELETE(vgpuScreen);
 } // ///////////////////////////////////////////////////////////////////////////////
-int MLay0::SetRndScreenPoints(const int count, std::mt19937& gen){
-	const int sz1 = sz.x * sz.y;
-	std::vector<int> v(sz1);
-	for(int j = 0; j < sz1; j++){
-		v[j] = j;
-		va.vcpu[j] = -1;
-	}
-	std::shuffle(v.begin(), v.end(), gen);
-	for(int j = 0; j < count; j++)
-		va.vcpu[v[j]] = j;
 
-	SAFE_DELETE(vgpuScreen);
-	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
-
-	return sz1;
-} // ///////////////////////////////////////////////////////////////////////////////
 void MLay0::SetScreenPoints(const int count, const int_2* ptr){
 	SAFE_DELETE(vgpuScreen);
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
