@@ -11,8 +11,8 @@ public:
 
 	void Create(
 		const int_2 sz_0,
-		const std::vector<int>& va_inp,			// xy.x * xy.y
-		const std::vector<float_2>& vf_inp		// (szx_0 * szy_0)
+		const std::vector<int>& va_inp,			// sz_0.x * sz_0.y
+		const std::vector<float_2>& vf_inp		// sz_0.x * sz_0.y
 	);
 	~MLay0();
 
