@@ -14,32 +14,26 @@ namespace executor{
 		Lay0& lay_0 = lays->lay0;
 		const ProcessParam* param = up_lay.param;
 		const float klayf = param->klayf;
-		const float klayv = param->klayv;
 		const float kLaminar = param->kLaminar;
 		const float kTurbul = param->kTurbul;
 		const float levelTurbul = param->levelTurbul;
-		const float kf = param->kfv;
-		const float kv = 1.f - kf;
 
 		const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
 		const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
-		const concurrency::array<float_2, 2>& up_vgpu_v = *up_lay.vv.vgpu;
 
 		concurrency::array<int, 2>& dn_vgpu_a = *lay_0.va.vgpu;
 		concurrency::array<float_2, 2>& dn_vgpu_f = *lay_0.vf.vgpu;
-		concurrency::array<float_2, 2>& dn_vgpu_v = *lay_0.vv.vgpu;
 
 		concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
 		const concurrency::array<float_2, 2>& f_masks = *fmasks->gv;
 		const float_2 rSizeDn(lay_0.sz);
 		const float kDecAfterMove = lay_0.kDecAfterMove;
-		const float kinert = lay_0.kinert;
 
 		parallel_for_each(up_vgpu_a.extent,
-			[&dn_vgpu_a, &dn_vgpu_f, &dn_vgpu_v,
-			&up_vgpu_a, &up_vgpu_f, &up_vgpu_v,
+			[&dn_vgpu_a, &dn_vgpu_f, 
+			&up_vgpu_a, &up_vgpu_f, 
 			&f_masks, &screen,
-			shift, klayf, klayv, kLaminar, kTurbul, levelTurbul, kDecAfterMove, rSizeDn, kf, kv, kinert
+			shift, klayf, kLaminar, kTurbul, levelTurbul, kDecAfterMove, rSizeDn, kf
 			](index<2> idx)restrict(amp) {
 				// TODO: optimize!
 				const int x0 = mad(idx[X], 2, shift.x) % dn_vgpu_a.extent[X];

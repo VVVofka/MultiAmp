@@ -178,11 +178,6 @@
     <ClInclude Include="AMPEng2.h" />
     <ClInclude Include="DxInterOp.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="Lay0.h" />
-    <ClInclude Include="LayBase.h" />
-    <ClInclude Include="LayMid.h" />
-    <ClInclude Include="Lays.h" />
-    <ClInclude Include="LaysCPUCfg.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Masks.h" />
     <ClInclude Include="Masks_a.h" />
@@ -212,16 +207,11 @@
     <ClInclude Include="RunDlast.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vertex.h" />
-    <ClInclude Include="VGpuCpu.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEng2.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DXInterOp.cpp" />
-    <ClCompile Include="Lay0.cpp" />
-    <ClCompile Include="LayBase.cpp" />
-    <ClCompile Include="LayMid.cpp" />
-    <ClCompile Include="Lays.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Masks.cpp" />
     <ClCompile Include="Masks_a.cpp" />

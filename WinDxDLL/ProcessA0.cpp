@@ -13,16 +13,14 @@ namespace executor{
 
 		concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;		//
 		concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;	//
-		concurrency::array<float_2, 2>& up_vgpu_v = *up_lay.vv.vgpu;	//
 
 		const concurrency::array<int, 2>& dn_vgpu_a = *dn_lay.va.vgpu; // -1:no point, >=0: id point in vscreen
 		const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu; 
-		const concurrency::array<float_2, 2>& dn_vgpu_v = *dn_lay.vv.vgpu; 
 
 		parallel_for_each(
 			up_vgpu_a.extent,
-			[shift, &dn_vgpu_a, &dn_vgpu_f, &dn_vgpu_v, 
-			&up_vgpu_a, &up_vgpu_f, &up_vgpu_v]
+			[shift, &dn_vgpu_a, &dn_vgpu_f, 
+			&up_vgpu_a, &up_vgpu_f]
 		(index<2> idUp)restrict(amp) {
 				// TODO: to unsigned?
 				const int x0 = (idUp[X] * 2 + shift.x) % dn_vgpu_a.extent[X];
@@ -39,11 +37,6 @@ namespace executor{
 					dn_vgpu_f[index<2>(y0, x1)] +
 					dn_vgpu_f[index<2>(y1, x0)] +
 					dn_vgpu_f[index<2>(y1, x1)];
-				up_vgpu_v[idUp] =
-					dn_vgpu_v[index<2>(y0, x0)] +
-					dn_vgpu_v[index<2>(y0, x1)] +
-					dn_vgpu_v[index<2>(y1, x0)] +
-					dn_vgpu_v[index<2>(y1, x1)];
 			});
 	} // ///////////////////////////////////////////////////////////////////////////////////
 }

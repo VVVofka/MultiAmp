@@ -12,7 +12,7 @@ public:
 		const int_2 sz_0,
 		const std::vector<int>& va_inp,			// sz_0.x * sz_0.y
 		const std::vector<float_2>& vf_inp,		// sz_0.x * sz_0.y
-		concurrency::array<Vertex2D, 1>* vgpu_Screen
+		concurrency::array<Vertex2D, 1>* vgpu_Screen = NULL
 	);
 	~MLay0();
 
