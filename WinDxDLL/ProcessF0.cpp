@@ -14,20 +14,16 @@ namespace executor{
 		Lay0& lay_0 = lays->lay0;
 		const ProcessParam* param = up_lay.param;
 		const float klayf = param->klayf;
-		const float klayv = param->klayv;
 		const float kLaminar = param->kLaminar;
 		const float kTurbul = param->kTurbul;
 		const float levelTurbul = param->levelTurbul;
 		const float kf = param->kfv;
-		const float kv = 1.f - kf;
 
 		const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
 		const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
-		const concurrency::array<float_2, 2>& up_vgpu_v = *up_lay.vv.vgpu;
 
 		concurrency::array<int, 2>& dn_vgpu_a = *lay_0.va.vgpu;
 		concurrency::array<float_2, 2>& dn_vgpu_f = *lay_0.vf.vgpu;
-		concurrency::array<float_2, 2>& dn_vgpu_v = *lay_0.vv.vgpu;
 
 		concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
 		const concurrency::array<float_2, 2>& f_masks = *fmasks->gv;
@@ -36,10 +32,10 @@ namespace executor{
 		const float kinert = lay_0.kinert;
 
 		parallel_for_each(up_vgpu_a.extent,
-			[&dn_vgpu_a, &dn_vgpu_f, &dn_vgpu_v,
-			&up_vgpu_a, &up_vgpu_f, &up_vgpu_v,
+			[&dn_vgpu_a, &dn_vgpu_f, 
+			&up_vgpu_a, &up_vgpu_f, 
 			&f_masks, &screen,
-			shift, klayf, klayv, kLaminar, kTurbul, levelTurbul, kDecAfterMove, rSizeDn, kf, kv, kinert
+			shift, klayf, kLaminar, kTurbul, levelTurbul, kDecAfterMove, rSizeDn, kf, kinert
 			](index<2> idx)restrict(amp) {
 				// TODO: optimize!
 				const int x0 = mad(idx[X], 2, shift.x) % dn_vgpu_a.extent[X];
@@ -57,27 +53,6 @@ namespace executor{
 				dn_vgpu_f[idc2] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][2] * klayf + dn_vgpu_f[idc2] * kinert;
 				dn_vgpu_f[idc3] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][3] * klayf + dn_vgpu_f[idc3] * kinert;
 
-				float_2 avgv = (dn_vgpu_v[idc0] += up_vgpu_v[idx] * klayv);
-				avgv += (dn_vgpu_v[idc1] += up_vgpu_v[idx] * klayv);
-				avgv += (dn_vgpu_v[idc2] += up_vgpu_v[idx] * klayv);
-				avgv += (dn_vgpu_v[idc3] += up_vgpu_v[idx] * klayv);
-
-				float hypo = fast_math::sqrtf(avgv.x * avgv.x + avgv.y * avgv.y);
-
-				if(hypo < levelTurbul){
-					avgv *= kLaminar;
-					dn_vgpu_v[idc0] += avgv;
-					dn_vgpu_v[idc1] += avgv;
-					dn_vgpu_v[idc2] += avgv;
-					dn_vgpu_v[idc3] += avgv;
-				} else{
-					hypo *= kTurbul;
-					dn_vgpu_v[idc0] -= hypo;
-					dn_vgpu_v[idc1] += float_2(hypo, -hypo);
-					dn_vgpu_v[idc2] += float_2(-hypo, hypo);
-					dn_vgpu_v[idc3] += hypo;
-				}
-
 				// TODO: Blocks (p.207 Greg) or Textures (p.212 Greg)
 				// TODO: разнести x, y, i (p.203 Greg)
 
@@ -90,12 +65,12 @@ namespace executor{
 				//	Bottom Horizontal
 				auto idxsrc = idc0;
 				auto idxdst = idc1;
-				if((kf * dn_vgpu_f[idxsrc].x + kv * dn_vgpu_v[idxsrc].x) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to rigth (bottom horizontal)
+				if((kf * dn_vgpu_f[idxsrc].x) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to rigth (bottom horizontal)
 					dn_vgpu_f[idxsrc].x *= kDecAfterMove;
 					screen[dn_vgpu_a[idxdst] = dn_vgpu_a[idxsrc]].Pos.x = normx1;
 					screen[dn_vgpu_a[idxdst]].Pos.y = normy0;
 					dn_vgpu_a[idxsrc] = -1;
-				} else if((kf * dn_vgpu_f[idxdst].x + kv * dn_vgpu_v[idxdst].x) < 0 && dn_vgpu_a[idxsrc] < 0){ // Move to left (bottom horizontal)
+				} else if((kf * dn_vgpu_f[idxdst].x) < 0 && dn_vgpu_a[idxsrc] < 0){ // Move to left (bottom horizontal)
 					dn_vgpu_f[idxdst].x *= kDecAfterMove;
 					screen[dn_vgpu_a[idxsrc] = dn_vgpu_a[idxdst]].Pos.x = normx0;
 					screen[dn_vgpu_a[idxsrc]].Pos.y = normy0;
@@ -104,12 +79,12 @@ namespace executor{
 
 				// Left Vertical
 				idxdst = idc2;
-				if((kf * dn_vgpu_f[idxsrc].y + kv * dn_vgpu_v[idxsrc].y) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to up (left vertical)
+				if((kf * dn_vgpu_f[idxsrc].y) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to up (left vertical)
 					dn_vgpu_f[idxsrc].y *= kDecAfterMove;
 					screen[dn_vgpu_a[idxdst] = dn_vgpu_a[idxsrc]].Pos.x = normx0;
 					screen[dn_vgpu_a[idxdst]].Pos.y = normy1;
 					dn_vgpu_a[idxsrc] = -1;
-				} else if((kf * dn_vgpu_f[idxdst].y + kv * dn_vgpu_v[idxdst].y) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to down (left vertical)
+				} else if((kf * dn_vgpu_f[idxdst].y) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to down (left vertical)
 					dn_vgpu_f[idxdst].y *= kDecAfterMove;
 					screen[dn_vgpu_a[idxsrc] = dn_vgpu_a[idxdst]].Pos.x = normx0;
 					screen[dn_vgpu_a[idxsrc]].Pos.y = normy0;
@@ -119,12 +94,12 @@ namespace executor{
 				// Top Horizontal
 				idxsrc = idc2;
 				idxdst = idc3;
-				if((kf * dn_vgpu_f[idxsrc].x + kv * dn_vgpu_v[idxsrc].x) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to right (top horizontal)
+				if((kf * dn_vgpu_f[idxsrc].x) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to right (top horizontal)
 					dn_vgpu_f[idxsrc].x *= kDecAfterMove;
 					screen[dn_vgpu_a[idxdst] = dn_vgpu_a[idxsrc]].Pos.x = normx1;
 					screen[dn_vgpu_a[idxdst]].Pos.y = normy1;
 					dn_vgpu_a[idxsrc] = -1;
-				} else if((kf * dn_vgpu_f[idxdst].x + kv * dn_vgpu_v[idxdst].x) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to left (top horizontal)
+				} else if((kf * dn_vgpu_f[idxdst].x) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to left (top horizontal)
 					dn_vgpu_f[idxdst].x *= kDecAfterMove;
 					screen[dn_vgpu_a[idxsrc] = dn_vgpu_a[idxdst]].Pos.x = normx0;
 					screen[dn_vgpu_a[idxsrc]].Pos.y = normy1;

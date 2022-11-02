@@ -25,9 +25,9 @@ namespace executor{
 		const concurrency::array<float_2, 2>& f_masks = *fmasks->gv;
 
 		parallel_for_each(up_vgpu_a.extent,
-			[&dn_vgpu_a, &dn_vgpu_f, &dn_vgpu_v,
-			&up_vgpu_a, &up_vgpu_f, &up_vgpu_v,
-			&f_masks, klayf, klayv, kLaminar, kTurbul, levelTurbul
+			[&dn_vgpu_a, &dn_vgpu_f, 
+			&up_vgpu_a, &up_vgpu_f, 
+			&f_masks, klayf, kLaminar, kTurbul, levelTurbul
 			](index<2> idx)restrict(amp) {
 				const int x0 = idx[X] * 2;
 				const int y0 = idx[Y] * 2;
