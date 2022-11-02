@@ -15,8 +15,6 @@
 #include "Options.h"
 #include "myRnd.h"
 
-#include "MLay0.h"
-
 extern Model2D model;
 
 using namespace Concurrency;
@@ -34,7 +32,6 @@ class AMPEng2{
 	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 
 public:
-	MLay0 lay0;
 	AMPEng2(ID3D11Device* d3ddevice);
 	void run();    // main function in render
 

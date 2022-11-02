@@ -108,12 +108,12 @@ namespace executor{
 
 				// Right Vertical
 				idxsrc = idc1;
-				if((kf * dn_vgpu_f[idxsrc].y + kv * dn_vgpu_v[idxsrc].y) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to up (right vertical)
+				if((kf * dn_vgpu_f[idxsrc].y) > 0 && dn_vgpu_a[idxdst] < 0){	// Move to up (right vertical)
 					dn_vgpu_f[idxsrc].y *= kDecAfterMove;
 					screen[dn_vgpu_a[idxdst] = dn_vgpu_a[idxsrc]].Pos.x = normx1;
 					screen[dn_vgpu_a[idxdst]].Pos.y = normy1;
 					dn_vgpu_a[idxsrc] = -1;
-				} else if((kf * dn_vgpu_f[idxdst].y + kv * dn_vgpu_v[idxdst].y) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to down (right vertical)
+				} else if((kf * dn_vgpu_f[idxdst].y) < 0 && dn_vgpu_a[idxsrc] < 0){	// Move to down (right vertical)
 					dn_vgpu_f[idxdst].y *= kDecAfterMove;
 					screen[dn_vgpu_a[idxsrc] = dn_vgpu_a[idxdst]].Pos.x = normx1;
 					screen[dn_vgpu_a[idxsrc]].Pos.y = normy0;
