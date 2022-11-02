@@ -11,7 +11,6 @@ namespace executor{
 
 		std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
 		std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
-		std::vector<float_2>& dn_vcpu_v = dn_lay->vv.vcpu;
 
 		const size_t maxy = (size_t)up_lay->sz.y;
 		const size_t maxx = (size_t)up_lay->sz.x;
@@ -33,10 +32,6 @@ namespace executor{
 				up_lay->vf.vcpu[idUp] =
 					dn_vcpu_f[idDn1] + dn_vcpu_f[idDn1 + 1] +
 					dn_vcpu_f[idDn2] + dn_vcpu_f[idDn2 + 1];
-
-				up_lay->vv.vcpu[idUp] =
-					dn_vcpu_v[idDn1] + dn_vcpu_v[idDn1 + 1] +
-					dn_vcpu_v[idDn2] + dn_vcpu_v[idDn2 + 1];
 			}
 		}
 	} // ///////////////////////////////////////////////////////////////////////////
@@ -48,7 +43,6 @@ namespace executor{
 
 		std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
 		std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
-		std::vector<float_2>& dn_vcpu_v = dn_lay->vv.vcpu;
 
 		const size_t maxy = (size_t)up_lay->sz.y;
 		const size_t maxx = (size_t)up_lay->sz.x;
@@ -70,10 +64,6 @@ namespace executor{
 				up_lay->vf.vcpu[idUp] =
 					dn_vcpu_f[idDn1] + dn_vcpu_f[idDn1 + 1] +
 					dn_vcpu_f[idDn2] + dn_vcpu_f[idDn2 + 1];
-
-				up_lay->vv.vcpu[idUp] =
-					dn_vcpu_v[idDn1] + dn_vcpu_v[idDn1 + 1] +
-					dn_vcpu_v[idDn2] + dn_vcpu_v[idDn2 + 1];
 			}
 			});
 	} // ///////////////////////////////////////////////////////////////////////////
