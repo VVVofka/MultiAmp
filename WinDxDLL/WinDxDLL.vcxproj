@@ -185,6 +185,7 @@
     <ClInclude Include="Model2D.h" />
     <ClInclude Include="Model2D_Static.h" />
     <ClInclude Include="myRnd.h" />
+    <ClInclude Include="OneLine0.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
     <ClInclude Include="pch.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="MDX2.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Model2D_Static.cpp" />
+    <ClCompile Include="OneLine0.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

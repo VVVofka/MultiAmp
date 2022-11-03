@@ -19,6 +19,9 @@
     <Filter Include="InterOp">
       <UniqueIdentifier>{7ab0c97a-c3f2-400b-8f80-e13532abf007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="OneLine">
+      <UniqueIdentifier>{36e1b4db-69f3-4cf5-9d6a-b1fa72eef87f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,6 +81,9 @@
     <ClInclude Include="Model2D_Static.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OneLine0.h">
+      <Filter>OneLine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -133,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="Model2D_Static.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OneLine0.cpp">
+      <Filter>OneLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
