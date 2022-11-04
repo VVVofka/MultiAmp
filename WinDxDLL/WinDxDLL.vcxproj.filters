@@ -19,6 +19,9 @@
     <Filter Include="InterOp">
       <UniqueIdentifier>{7ab0c97a-c3f2-400b-8f80-e13532abf007}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lays">
+      <UniqueIdentifier>{45afef6d-1ddb-4dff-a64a-b59e6027302a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -78,6 +81,24 @@
     <ClInclude Include="Model2D_Static.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lay0.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="LayBase.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="LayMid.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Lays.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="LaysCPUCfg.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="VGpuCpu.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -133,6 +154,18 @@
     </ClCompile>
     <ClCompile Include="Model2D_Static.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lay0.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="LayBase.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="LayMid.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Lays.cpp">
+      <Filter>Lays</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
