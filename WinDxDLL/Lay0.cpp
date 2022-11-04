@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "Lay0.h"
 
-void Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp, const float k_decAfterMove){
+void Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp){
 	sz = sz_0;
-	kDecAfterMove = k_decAfterMove;
 	countPoint = defPointsCnt(va_inp);
 	va.Create(sz, va_inp, CPUtype::GPU);
 	vf.Create(sz, vf_inp, CPUtype::GPU);
@@ -55,16 +54,10 @@ bool Lay0::isLoad()const{
 	return true;
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpA(const int digits)const{
-	char buf[4096];
-	sprintf_s(buf, "a: Lay0: x*y: %d*%d\n", sz.x, sz.y);
-	std::string ret(buf);
-	return ret + LayBase::sDumpA(digits);
+	return "a: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpA(digits);
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpF(const int digits)const{
-	char buf[4096];
-	sprintf_s(buf, "f: Lay0: x*y= %d*%d\n", sz.x, sz.y);
-	std::string ret(buf);
-	return ret + LayBase::sDumpF(digits);
+	return "f: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpF(digits);
 } // ////////////////////////////////////////////////////////////////	
 std::string Lay0::DumpA(const int digits) const{
 	std::string s(sDumpA(digits));

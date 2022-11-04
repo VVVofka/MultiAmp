@@ -22,7 +22,6 @@ bool LayBase::isLoad() const{
 	return true;
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayBase::sDumpA(const int digits)const{
-	char buf[4096];
 	std::string ret, sformat("%" + std::to_string(digits) + "d ");
 	for(int y = 0; y < sz.y; y++){
 		//int y = sz.y - yr - 1;
@@ -32,6 +31,7 @@ std::string LayBase::sDumpA(const int digits)const{
 			if(q < 0){
 				ret += " . ";
 			} else{
+				char buf[64];
 				sprintf_s(buf, sformat.c_str(), q);
 				ret += buf;
 			}
@@ -41,9 +41,9 @@ std::string LayBase::sDumpA(const int digits)const{
 	return ret;
 } // ////////////////////////////////////////////////////////////////
 std::string LayBase::sDump(const VGpuCpu<float_2>& v, const int digits)const{
-	char buf[4096];
 	std::string ret, sformat("%+." + std::to_string(digits) + "f ");
 	for(int y = 0; y < sz.y; y++){
+		char buf[64];
 		//int y = sz.y - yr - 1;
 		for(int x = 0; x < sz.x; x++){
 			int idx = id(x, y);
