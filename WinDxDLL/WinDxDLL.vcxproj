@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClInclude Include="AMPEng2.h" />
     <ClInclude Include="DxInterOp.h" />
+    <ClInclude Include="Engine2.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Lay0.h" />
     <ClInclude Include="LayBase.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="AMPEng2.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="DXInterOp.cpp" />
+    <ClCompile Include="Engine2.cpp" />
     <ClCompile Include="Lay0.cpp" />
     <ClCompile Include="LayBase.cpp" />
     <ClCompile Include="LayMid.cpp" />

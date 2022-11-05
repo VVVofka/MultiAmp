@@ -24,7 +24,7 @@ void MDX::CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 	SAFE_RELEASE(g_pSwapChain);
 	SAFE_RELEASE(g_pImmediateContext);
 	SAFE_RELEASE(g_pd3dDevice);
-}
+} // ///////////////////////////////////////////////////////////////////////////////////////////
 HRESULT MDX::CreateSwapChain(){
 	HRESULT hr = S_OK;
 	RECT rc;

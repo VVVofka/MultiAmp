@@ -99,6 +99,9 @@
     <ClInclude Include="VGpuCpu.h">
       <Filter>Lays</Filter>
     </ClInclude>
+    <ClInclude Include="Engine2.h">
+      <Filter>Lays</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -149,9 +152,6 @@
     <ClCompile Include="MDX.cpp">
       <Filter>InterOp</Filter>
     </ClCompile>
-    <ClCompile Include="MDX2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Model2D_Static.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -165,6 +165,12 @@
       <Filter>Lays</Filter>
     </ClCompile>
     <ClCompile Include="Lays.cpp">
+      <Filter>Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="MDX2.cpp">
+      <Filter>InterOp</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine2.cpp">
       <Filter>Lays</Filter>
     </ClCompile>
   </ItemGroup>
