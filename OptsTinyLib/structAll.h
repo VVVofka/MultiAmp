@@ -5,7 +5,7 @@
 #include "InPort.h"
 #include <vector>
 
-class structAll{
+class structAll{ 
 public:
 	structDataCfg data;
 	structLaysCfg lays;
