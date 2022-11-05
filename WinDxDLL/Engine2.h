@@ -15,12 +15,14 @@
 #include "Utils.h"
 #include "myRnd.h"
 #include "Lays.h"
+#include "..\OptsTinyLib\structAll.h"
 
 using namespace Concurrency;
 using namespace concurrency::direct3d;
 
 class Engine2{
 	accelerator_view m_accl_view;
+	structAll* cfg_all = NULL;
 	//size_t nlastlay = 0;     // N last lay
 
 	std::unique_ptr<array<Vertex2D, 1>>	ar_screen; // for screen
@@ -33,7 +35,7 @@ class Engine2{
 public:
 	Lays lays;
 
-	Engine2(ID3D11Device* d3ddevice);
+	Engine2(ID3D11Device* d3ddevice, structAll* cfg_all);
 	void run();    // main function in render
 
 	HRESULT get_data_d3dbuffer(void** d3dbuffer) const;	// for screen

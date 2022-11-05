@@ -17,17 +17,23 @@ static bool pauseRender = false;
 int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, structAll* cfg_all){
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	if(model.Create(cfg_all) == false)
+	if(model.Create() == false)
 		return E_POINTER;
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
 		return E_NOINTERFACE;
+
+#ifndef NEW_ENGINE
 	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
+#else // NEW_ENGINE
+	if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
+#endif // NEWENINE
+
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
 	int work();
 	return work();
-} // ////////////////////////////////////////////////////////////////////////////
+	} // ////////////////////////////////////////////////////////////////////////////
 int work(){
 	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
 
@@ -110,7 +116,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 		case 79:{ // key 'o'  // I=73
 			pauseRender = true;
 			if(model.options.showDlg()){
-				model.Create(model.cfgAll);
+				model.Create();
 				mdx.CleanupDevice();
 				mdx.InitDevice(g_hWnd, model.v_scr);
 			}

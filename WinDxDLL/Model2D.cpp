@@ -1,8 +1,5 @@
 #include "Model2D.h"
-bool Model2D::Create(structAll* cfg_all){
-	if(cfg_all == NULL)
-		return false;
-	cfgAll = cfg_all;
+bool Model2D::Create(){
 	INT2 minsz = INT2(options.iArr[InpOptions::LaysSzUpY], options.iArr[InpOptions::LaysSzUpX]);
 	int maxszXY = options.iArr[InpOptions::LaysSzDn];
 	double kRnd = options.dArr[InpOptions::kFillRnd];

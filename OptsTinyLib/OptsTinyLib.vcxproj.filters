@@ -67,9 +67,6 @@
     <ClCompile Include="myXML.cpp">
       <Filter>my</Filter>
     </ClCompile>
-    <ClCompile Include="structAll.cpp">
-      <Filter>Session\structs</Filter>
-    </ClCompile>
     <ClCompile Include="structMiscCfg.cpp">
       <Filter>Session\structs</Filter>
     </ClCompile>

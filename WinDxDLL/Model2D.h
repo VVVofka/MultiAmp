@@ -36,7 +36,7 @@ public:
 	size_t sizeAll(int nlay) const{ return vsz[nlay].Square(); }
 	size_t sizeAll() const{ return vsz[vsz.size() - 1].Square();}
 
-	bool Create(structAll* cfg_all);
+	bool Create();
 	bool CreateOld(structAll* cfg_all);
 	void dumpA(int nlay) const;
 	void dumpD(int nlay) const;

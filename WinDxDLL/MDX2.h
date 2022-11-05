@@ -5,7 +5,7 @@
 #include <vector>
 #include "Engine2.h"
 
-//#define NEW_ENGINE
+#define NEW_ENGINE
 
 class MDX2 : public MDX{
 
@@ -14,15 +14,18 @@ class MDX2 : public MDX{
 	AMPEng2* g_pAMPComputeEngine = NULL;
 #else // NEW_ENGINE
 	Engine2* g_pAMPComputeEngine = NULL;
+	structAll* cfg_all;
 #endif // NEW_ENGINE
 
 public:
 	HRESULT InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices,
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	HRESULT InitDevice(HWND ghWnd, structAll* cfg_all,
+		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	void Render();
 	void CleanupDevice();
 private:
-	HRESULT CreateComputeShader();
+	HRESULT CreateComputeShader(structAll* cfg_all = NULL);
 }; // ***********************************************************************
    /*
 D3D11_INPUT_ELEMENT_DESC layout[] =
