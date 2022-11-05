@@ -1,16 +1,16 @@
 #include "pch.h"
 #include "Lays.h"
-bool Lays::Create(
-	const int_2 sz_lay0,				// size x lay0
-	const LaysCPUCfg cfg,				// count gpu mt cpu
-	const std::vector<int>& va_inp,			// szx_0 * szy_0
-	const std::vector<float_2>& vf_inp		// szx_0 * szy_0
+concurrency::array<Vertex2D, 1>* Lays::Create(
+	const int_2 sz_lay0,				// size lay0
+	const LaysCPUCfg& cfg,				// count gpu mt cpu
+	const std::vector<int>& va_inp		// szx_0 * szy_0
 	){
-	lay0.Create(sz_lay0, va_inp, vf_inp);
-	if(lay0.isLoad() == false) return false;
+	auto ret = lay0.Create(sz_lay0, va_inp);
+	if(lay0.isLoad() == false) return NULL;
 	int_2 sz_lay1 = sz_lay0 / 2;
 	cntMidLays = (int)fillvMidLays(sz_lay1, cfg);
-	return isLoad();
+	if(isLoad() == false) return NULL;
+	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 bool Lays::isLoad(){
 	if(lay0.isLoad() == false) return false;
@@ -55,15 +55,13 @@ std::string Lays::sDumpA(int idx, const int digits)const{
 	return ret;
 } // /////////////////////////////////////////////////////////////////////////////
 std::string Lays::sDumpF(int idx, const int digits)const{
-	if(idx > cntMidLays)
+	if(idx > cntMidLays || idx == 0)
 		return "";
-	if(idx == 0)
-		return "f:Lay0: " + lay0.sDumpF(digits);
 	if(idx > 0)
 		return "f:Lay" + std::to_string(idx) + ": " + vMidLays[idx - 1].sDumpF(digits);
 
 	// if(idx < 0)
-	std::string ret = "f:Lay0: " + lay0.sDumpF(digits);
+	std::string ret;
 	for(int jmid = 0; jmid < cntMidLays; jmid++)
 		ret += "f:Lay" + std::to_string(jmid + 1) + ": " + vMidLays[jmid].sDumpF(digits);
 	return ret;

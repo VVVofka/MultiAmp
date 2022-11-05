@@ -3,6 +3,7 @@
 #include <amp_short_vectors.h>
 #include <vector>
 #include "LaysCPUCfg.h"
+#include "Utils.h"
 
 using namespace Concurrency::graphics;
 template<class T>
@@ -22,14 +23,14 @@ public:
 		if(is_gpu)
 			vgpu = new concurrency::array<T, 2>(size.y, size.x, vcpu.begin());
 	} // ////////////////////////////////////////////////////////////////////////////
-	void Create(const int_2 size, const std::vector<T>& vi_inp, const CPUtype cpu_type){
+	void Create(const int_2 size, const std::vector<T>& vi_inp, const bool is_gpu){
 		size_t size1 = (size_t)size.x * (size_t)size.y;
 		_ASSERTE(size1 == vi_inp.size());
 		vcpu.resize(size1);
 		for(size_t j = 0; j < size1; j++)
 			vcpu[j] = vi_inp[j];
 		SAFE_DELETE(vgpu);
-		if(cpu_type == CPUtype::GPU)
+		if(is_gpu)
 			vgpu = new concurrency::array<T, 2>(size.y, size.x, vcpu.begin());
 	} // //////////////////////////////////////////////////////////////////////////////
 

@@ -1,30 +1,21 @@
 #pragma once
-#include <vector>
-#include <string>
-
-#include "MDX.h"
-#include "VGpuCpu.h"
+#include <string>		// dor Dump
+#include "VGpuCpu.h"	// for va
 
 class LayBase{
 public:
 	int_2 sz;
-
 	VGpuCpu<int> va;
-	VGpuCpu<float_2> vf;
 
 	void Create(const int_2 xy, const bool is_gpu);
-	inline int id(const int x, const int y) const{ return y * sz.x + x; }
-
-	void gpu2cpu();
-	void cpu2gpu();
-
+	void Create(const int_2 xy, const std::vector<int>& va_inp, const bool is_gpu);
+	int id(const int x, const int y) const{ return y * sz.x + x; }
 	bool isLoad()const;
 
 protected:
-	std::string sDumpA(const int digits)const;
-	std::string sDumpF(const int digits)const;
+	void gpu2cpu(){ va.gpu2cpu(); }
+	void cpu2gpu(){ va.cpu2gpu(); }
 
-private:
-	std::string sDump(const VGpuCpu<float_2>& v, const int digits)const;
+	std::string sDumpA(const int digits)const;
 };
 

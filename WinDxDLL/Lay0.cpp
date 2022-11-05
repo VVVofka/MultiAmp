@@ -1,12 +1,11 @@
 #include "pch.h"
 #include "Lay0.h"
+#include "Utils.h"
 
-void Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, const std::vector<float_2>& vf_inp){
-	sz = sz_0;
+concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp){
+	LayBase::Create(sz, true);
 	countPoint = defPointsCnt(va_inp);
-	va.Create(sz, va_inp, CPUtype::GPU);
-	vf.Create(sz, vf_inp, CPUtype::GPU);
-	cpuPoint2gpuPoint(countPoint);
+	return cpuPoint2gpuPoint(countPoint);
 } // /////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
@@ -30,7 +29,7 @@ void Lay0::SetScreenPoints(const int count, const int_2* ptr){
 	SAFE_DELETE(vgpuScreen);
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
 } // ///////////////////////////////////////////////////////////////////////////////
-void Lay0::cpuPoint2gpuPoint(const int count_point){
+concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const int count_point){
 	_ASSERTE(count_point >= 0);
 	int ret = 0;
 	std::vector<Vertex2D> cpuv(count_point);
@@ -44,6 +43,7 @@ void Lay0::cpuPoint2gpuPoint(const int count_point){
 	_ASSERTE(ret == count_point);
 	SAFE_DELETE(vgpuScreen);
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(ret, cpuv.begin());
+	return vgpuScreen;
 } // ///////////////////////////////////////////////////////////////////////////////
 bool Lay0::isLoad()const{
 	if(sz.x <= 0) return false;
@@ -56,16 +56,8 @@ bool Lay0::isLoad()const{
 std::string Lay0::sDumpA(const int digits)const{
 	return "a: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpA(digits);
 } // ////////////////////////////////////////////////////////////////
-std::string Lay0::sDumpF(const int digits)const{
-	return "f: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpF(digits);
-} // ////////////////////////////////////////////////////////////////	
 std::string Lay0::DumpA(const int digits) const{
 	std::string s(sDumpA(digits));
-	_RPT0(0, s.c_str());
-	return s;
-} // ////////////////////////////////////////////////////////////////
-std::string Lay0::DumpF(const int digits) const{
-	std::string s(sDumpF(digits));
 	_RPT0(0, s.c_str());
 	return s;
 } // ////////////////////////////////////////////////////////////////

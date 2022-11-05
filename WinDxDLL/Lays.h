@@ -9,11 +9,10 @@ public:
 	std::vector<LayMid> vMidLays;
 	int cntMidLays = 0;
 
-	bool Create(
-		const int_2 sz_0,					// size x lay0
-		const LaysCPUCfg cfg,				// count gpu mt cpu
-		const std::vector<int>& vi_inp,		// szx_0 * szy_0
-		const std::vector<float_2>& vf_inp	// (szx_0 * szy_0)
+	concurrency::array<Vertex2D, 1>* Create(
+		const int_2 sz_0,			// size x lay0
+		const LaysCPUCfg& cfg,		// count gpu mt cpu
+		const std::vector<int>& vi		// szx_0 * szy_0
 	);
 	bool isLoad();
 

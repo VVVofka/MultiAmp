@@ -9,11 +9,7 @@ class Lay0 : public LayBase{
 public:
 	concurrency::array<Vertex2D, 1>* vgpuScreen = NULL;		//[pointsCnt] for render [-1...+1]
 
-	void Create(
-		const int_2 sz_0,
-		const std::vector<int>& va_inp,			// xy.x * xy.y
-		const std::vector<float_2>& vf_inp		// (szx_0 * szy_0)
-	);
+	concurrency::array<Vertex2D, 1>* Create(const int_2 sz_0, const std::vector<int>& va_inp);
 	~Lay0();
 
 	int countPoint = 0;
@@ -22,10 +18,11 @@ public:
 
 	bool isLoad()const;
 	std::string sDumpA(const int digits)const;
-	std::string sDumpF(const int digits)const;
 	std::string DumpA(const int digits = 2)const;
-	std::string DumpF(const int digits = 2)const;
-	void cpuPoint2gpuPoint(const int count_point);
+	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const int count_point);
+
+	using LayBase::cpu2gpu;
+	using LayBase::gpu2cpu;
 
 private:
 	static int defPointsCnt(const std::vector<int>& vi_inp);
