@@ -8,7 +8,7 @@ public:
 	CPUtype cpuType = CPUtype::GPU;
 	bool gpuIn = false;
 
-	void Create(const int_2 xy, const CPUtype cpu_type, const bool gpu_in);
+	void Create(const int_2 xy, const CPUtype cpu_type, const bool gpu_in, accelerator_view& m_accl_view);
 	void gpu2cpu();
 	void cpu2gpu();
 

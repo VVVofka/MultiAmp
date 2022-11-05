@@ -1,11 +1,13 @@
-#include "pch.h"
 #include "Lays.h"
+Lays::Lays(accelerator_view& m_accl_view){
+	this->m_accl_view = &m_accl_view;
+} // ////////////////////////////////////////////////////////////////////////////////
 concurrency::array<Vertex2D, 1>* Lays::Create(
 	const int_2 sz_lay0,				// size lay0
 	const LaysCPUCfg& cfg,				// count gpu mt cpu
 	const std::vector<int>& va_inp		// szx_0 * szy_0
 	){
-	auto ret = lay0.Create(sz_lay0, va_inp);
+	auto ret = lay0.Create(sz_lay0, va_inp, *m_accl_view);
 	if(lay0.isLoad() == false) return NULL;
 	int_2 sz_lay1 = sz_lay0 / 2;
 	cntMidLays = (int)fillvMidLays(sz_lay1, cfg);
@@ -34,7 +36,7 @@ int Lays::fillvMidLays(const int_2 sz_1, const LaysCPUCfg cfgcpu){
 	for(int j = 0; j < cnt_mid_lays; j++){
 		const CPUtype curtype = cfgcpu.getType(j + 1);
 		const bool gpu_in = prevtype == CPUtype::GPU && curtype != CPUtype::GPU;
-		vMidLays[j].Create(sz_cur, curtype, gpu_in);
+		vMidLays[j].Create(sz_cur, curtype, gpu_in, *m_accl_view);
 		sz_cur /= 2;
 		prevtype = curtype;
 	}

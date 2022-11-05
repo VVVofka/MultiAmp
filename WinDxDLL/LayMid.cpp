@@ -1,9 +1,8 @@
-#include "pch.h"
 #include "LayMid.h"
 
-void LayMid::Create(const int_2 xy, const CPUtype cpu_type, const bool gpu_in){
+void LayMid::Create(const int_2 xy, const CPUtype cpu_type, const bool gpu_in, accelerator_view& m_accl_view){
 	const bool is_gpu = gpu_in || cpu_type == CPUtype::GPU;
-	LayBase::Create(xy, is_gpu);
+	LayBase::Create(xy, is_gpu, m_accl_view);
 	cpuType = cpu_type;
 	gpuIn = gpu_in;
 } // /////////////////////////////////////////////////////////////////////////////////

@@ -1,13 +1,12 @@
-#include "pch.h"
 #include "LayBase.h"
 
-void LayBase::Create(const int_2 xy, const bool is_gpu){
+void LayBase::Create(const int_2 xy, const bool is_gpu, accelerator_view& m_accl_view){
 	sz = xy;
-	va.Create(sz, is_gpu);
+	va.Create(sz, is_gpu, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
-void LayBase::Create(const int_2 xy, const std::vector<int>& va_inp, const bool is_gpu){
+void LayBase::Create(const int_2 xy, const std::vector<int>& va_inp, const bool is_gpu, accelerator_view& m_accl_view){
 	sz = xy;
-	va.Create(sz, va_inp, is_gpu);
+	va.Create(sz, va_inp, is_gpu, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 bool LayBase::isLoad() const{
 	if(sz.x <= 0 || sz.y <= 0) return false;

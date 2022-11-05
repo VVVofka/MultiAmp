@@ -1,4 +1,4 @@
-#include "pch.h"
+//#include "pch.h"
 #include "AMPEng2.h"
 
 AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)){
@@ -38,8 +38,6 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 
 	auto pamsk = new array<int, 1>(16, model.options.aMask(), m_accl_view);
 	amask = std::unique_ptr<array<int, 1>>(pamsk);
-
-
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	//INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift

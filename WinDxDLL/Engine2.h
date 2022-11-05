@@ -32,5 +32,10 @@ class Engine2{
 
 public:
 	Lays lays;
+
+	Engine2(ID3D11Device* d3ddevice);
+	void run();    // main function in render
+
+	HRESULT get_data_d3dbuffer(void** d3dbuffer) const;	// for screen
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

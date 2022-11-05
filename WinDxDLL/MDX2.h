@@ -3,9 +3,19 @@
 #include "AMPEng2.h"
 #include "Vertex.h"
 #include <vector>
+#include "Engine2.h"
+
+//#define NEW_ENGINE
 
 class MDX2 : public MDX{
+
+	// TODO: del g_pAMPComputeEngine 
+#ifndef NEW_ENGINE
 	AMPEng2* g_pAMPComputeEngine = NULL;
+#else // NEW_ENGINE
+	Engine2* g_pAMPComputeEngine = NULL;
+#endif // NEW_ENGINE
+
 public:
 	HRESULT InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices,
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);

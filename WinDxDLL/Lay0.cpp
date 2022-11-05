@@ -1,34 +1,33 @@
-#include "pch.h"
 #include "Lay0.h"
 #include "Utils.h"
 
-concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp){
-	LayBase::Create(sz, true);
+concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, accelerator_view& m_accl_view){
+	LayBase::Create(sz, true, m_accl_view);
 	countPoint = defPointsCnt(va_inp);
 	return cpuPoint2gpuPoint(countPoint);
 } // /////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
 } // ///////////////////////////////////////////////////////////////////////////////
-int Lay0::SetRndScreenPoints(const int count, std::mt19937& gen){
-	const int sz1 = sz.x * sz.y;
-	std::vector<int> v(sz1);
-	for(int j = 0; j < sz1; j++){
-		v[j] = j;
-		va.vcpu[j] = -1;
-	}
-	std::shuffle(v.begin(), v.end(), gen);
-	for(int j = 0; j < count; j++)
-		va.vcpu[v[j]] = j;
-
-	SAFE_DELETE(vgpuScreen);
-	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
-	return sz1;
-} // ///////////////////////////////////////////////////////////////////////////////
-void Lay0::SetScreenPoints(const int count, const int_2* ptr){
-	SAFE_DELETE(vgpuScreen);
-	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
-} // ///////////////////////////////////////////////////////////////////////////////
+//int Lay0::SetRndScreenPoints(const int count, std::mt19937& gen){
+//	const int sz1 = sz.x * sz.y;
+//	std::vector<int> v(sz1);
+//	for(int j = 0; j < sz1; j++){
+//		v[j] = j;
+//		va.vcpu[j] = -1;
+//	}
+//	std::shuffle(v.begin(), v.end(), gen);
+//	for(int j = 0; j < count; j++)
+//		va.vcpu[v[j]] = j;
+//
+//	SAFE_DELETE(vgpuScreen);
+//	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
+//	return sz1;
+//} // ///////////////////////////////////////////////////////////////////////////////
+//void Lay0::SetScreenPoints(const int count, const int_2* ptr){
+//	SAFE_DELETE(vgpuScreen);
+//	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
+//} // ///////////////////////////////////////////////////////////////////////////////
 concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const int count_point){
 	_ASSERTE(count_point >= 0);
 	int ret = 0;

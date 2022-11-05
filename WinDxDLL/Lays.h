@@ -5,6 +5,8 @@
 
 class Lays{	//  : public Lay0
 public:
+	Lays(){};
+	Lays(accelerator_view& m_accl_view);
 	Lay0 lay0;
 	std::vector<LayMid> vMidLays;
 	int cntMidLays = 0;
@@ -27,5 +29,6 @@ private:
 		const int_2 sz_1,
 		const LaysCPUCfg cfg			// count gpu mt cpu
 	);
+	accelerator_view* m_accl_view;
 };
 

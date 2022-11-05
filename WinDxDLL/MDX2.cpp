@@ -16,7 +16,11 @@ void MDX2::CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 	SAFE_DELETE(g_pAMPComputeEngine);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 HRESULT MDX2::CreateComputeShader(){ // from this->InitDevice()
+#ifndef NEW_ENGINE
 	g_pAMPComputeEngine = new AMPEng2(g_pd3dDevice);
+#else
+	g_pAMPComputeEngine = new Engine2(g_pd3dDevice);
+#endif // NEWENINE
 	RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
 	return MDX::CreateComputeShader();
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
