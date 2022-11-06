@@ -30,6 +30,11 @@ HRESULT MDX2::CreateComputeShader(structAll* cfg_all){ // from this->InitDevice(
 	g_pAMPComputeEngine = new AMPEng2(g_pd3dDevice);
 #else
 	g_pAMPComputeEngine = new Engine2(g_pd3dDevice, cfg_all);
+	int_2 sz0 = int_2(cfg_all->lays.bottomX(), cfg_all->lays.bottomY());
+
+	int gpucnt = cfg_all->lays.vkf.size() - (cfg_all->lays.cpuSingle + cfg_all->lays.cpuMultiThreaded);
+	LaysCPUCfg laysCpuCfg = LaysCPUCfg(gpucnt, cfg_all->lays.cpuMultiThreaded, cfg_all->lays.cpuSingle);
+	g_pAMPComputeEngine->lays.Create(sz0, laysCpuCfg, cfg_all->data.v);
 #endif // NEWENINE
 	RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
 	return MDX::CreateComputeShader();

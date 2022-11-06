@@ -33,6 +33,8 @@ structLaysCfg getLaysCfg(const char* f_name){
 	ret.topX = xml.getAttributeT<size_t>("topX", 1);
 	ret.topY = xml.getAttributeT<size_t>("topY", 1);
 	ret.digits = xml.getAttributeT<size_t>("digits", 2);
+	ret.cpuSingle = xml.getAttributeT<size_t>("singleCPU", 0);
+	ret.cpuMultiThreaded = xml.getAttributeT<size_t>("multithreadedCPU", 0);
 
 	xml.setOrCreateNode("kF");
 	std::string s = xml.getText();
@@ -45,6 +47,8 @@ void setLaysCfg(const char* f_name, const structLaysCfg& lays_cfg){
 	xml.setAttributeT<size_t>("topX", lays_cfg.topX);
 	xml.setAttributeT<size_t>("topY", lays_cfg.topY);
 	xml.setAttributeT<size_t>("digits", lays_cfg.digits);
+	xml.setAttributeT<size_t>("singleCPU", lays_cfg.cpuSingle);
+	xml.setAttributeT<size_t>("multithreadedCPU", lays_cfg.cpuMultiThreaded);
 
 	xml.setOrCreateNode("kF");
 	std::string s = myconv::vIntToStr(lays_cfg.vkf);

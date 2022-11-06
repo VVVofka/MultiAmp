@@ -25,6 +25,7 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 #ifndef NEW_ENGINE
 	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
 #else // NEW_ENGINE
+
 	if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
 #endif // NEWENINE
 

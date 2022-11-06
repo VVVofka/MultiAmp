@@ -7,6 +7,8 @@ public:
 	size_t topX = 1, topY = 1;
 	size_t digits = 2;
 	std::vector<int> vkf;
+	size_t cpuSingle = 0;
+	size_t cpuMultiThreaded = 0;
 
 	size_t laysCnt(){ return vkf.size(); }
 	size_t bottomX(){ return topX << (vkf.size() - 1); }
@@ -19,8 +21,11 @@ public:
 		return topX == p->topX
 			&& topY == p->topY
 			&& digits == p->digits
-			&& vkf == p->vkf;
-	}
+			&& vkf == p->vkf
+			&& cpuSingle == p->cpuSingle
+			&& cpuMultiThreaded == p->cpuMultiThreaded
+			;
+	} // ///////////////////////////////////////////////////////////////////////////////////
 
 private:
 };

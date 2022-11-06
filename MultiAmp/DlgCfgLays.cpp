@@ -22,6 +22,8 @@ void DlgCfgLays::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_SPIN_CNT, m_spinCnt);
 	DDX_Control(pDX, IDC_ST_LAYSCFG_POINTS_ALL, m_pointsAll);
 	DDX_Control(pDX, IDOK, m_btOK);
+	DDX_Control(pDX, IDC_ED_LAYS_CPU_SINGLE, m_cpu_single);
+	DDX_Control(pDX, IDC_ED_LAYS_CPU_MULTI, m_cpu_multi);
 } // //////////////////////////////////////////////////////////////////////////////
 
 BEGIN_MESSAGE_MAP(DlgCfgLays, CDialog)
@@ -106,6 +108,9 @@ BOOL DlgCfgLays::OnInitDialog(){
 	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 
+	m_cpu_single.SetWindowTextA(std::to_string(cfgOut.cpuSingle).c_str());
+	m_cpu_multi.SetWindowTextA(std::to_string(cfgOut.cpuMultiThreaded).c_str());
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult){
@@ -161,7 +166,7 @@ void DlgCfgLays::OnEnChangeEdLaysCnt(){
 		chngCnt((size_t)cnt);
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////
-int DlgCfgLays::iEdit(const int id, const int def, const int digits){
+int DlgCfgLays::iEdit(const int id, const int def){
 	BOOL bSuccess = FALSE;
 	int out = GetDlgItemInt(id, &bSuccess, FALSE);
 	return bSuccess ? out : def;
@@ -224,10 +229,6 @@ void DlgCfgLays::slid2ed(size_t idx){
 	if(strcmp(buf1, buf2) != 0)
 		SetDlgItemText(IDC_LAYSCFG_EDIT00 + idx, buf2);
 } // /////////////////////////////////////////////////////////////////
-void DlgCfgLays::OnBnClickedOk(){
-	fsliders.saveVK(cfgOut.laysCnt());
-	CDialog::OnOK();
-} // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string DlgCfgLays::razd(size_t u){
 	size_t j = 0;
 	std::string s = std::to_string(u % 10);
@@ -241,4 +242,9 @@ std::string DlgCfgLays::razd(size_t u){
 		std::swap(s[j], s[len - j - 1]);
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
-// TODO: delete!!!
+void DlgCfgLays::OnBnClickedOk(){
+	fsliders.saveVK(cfgOut.laysCnt());
+	cfgOut.cpuSingle = iEdit(m_cpu_single.GetDlgCtrlID(), 0);
+	cfgOut.cpuMultiThreaded= iEdit(m_cpu_multi.GetDlgCtrlID(), 0);
+	CDialog::OnOK();
+} // ///////////////////////////////////////////////////////////////////////////////////////////

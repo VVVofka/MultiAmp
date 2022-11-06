@@ -9,7 +9,6 @@
 #define IDD_MASK_A                      104
 #define IDB_CELL_FULL                   106
 #define IDD_DLG_MASK_F                  107
-#define IDD_DlgCfgLays                  108
 #define IDD_DLG_MISC                    111
 #define IDR_MAINFRAME                   128
 #define IDB_BITMAP0                     132
@@ -31,7 +30,6 @@
 #define IDC_BT_DATA_MISC                1016
 #define IDC_BUTTON3                     1017
 #define IDC_BT_MAIN_LOAD                1017
-#define IDC_BT_MAIN_LOAD2               1018
 #define IDC_BT_MAIN_SAVE                1018
 #define IDC_SYMETRY_F                   1020
 #define IDC_CNT_LAYS_X_MIN              1021
@@ -102,6 +100,9 @@
 #define IDC_CAPT_MISC_DTSTOP_SEC        1085
 #define IDC_CAPT_MISC_COMMENT           1086
 #define IDC_ED_MISC_COMMENT             1087
+#define IDC_ED_LAYS_CPU_SINGLE          1088
+#define IDC_ED_LAYS_CPU_SINGLE2         1089
+#define IDC_ED_LAYS_CPU_MULTI           1089
 #define IDC_CHECK00                     1100
 #define IDC_CHECK01                     1101
 #define IDC_CHECK02                     1102
@@ -245,7 +246,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        148
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1088
+#define _APS_NEXT_CONTROL_VALUE         1089
 #define _APS_NEXT_SYMED_VALUE           112
 #endif
 #endif

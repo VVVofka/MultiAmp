@@ -40,16 +40,16 @@ public:
 
 private:
 	void chngCnt(size_t cnt);
-	int iEdit(const int id, const int def, const int digits = 2);
+	int iEdit(const int id, const int def);
 	void slid2ed(size_t idx);
 	std::string DlgCfgLays::razd(size_t u);
 public:
 	CButton m_btOK;
 
-	int iTopX(){ return  iEdit(IDC_CNT_LAYS_X_MIN, 1, 2); };
-	int iTopY(){ return iEdit(IDC_CNT_LAYS_Y_MIN, 1, 2); };
-	int iLaysCnt(const int def = 5){ return iEdit(IDC_ED_LAYS_CNT, def, 2); };
-	int iKoefF(int idx){ return iEdit(IDC_LAYSCFG_EDIT00 + idx, 1, 3); };
+	int iTopX(){ return  iEdit(IDC_CNT_LAYS_X_MIN, 1); };
+	int iTopY(){ return iEdit(IDC_CNT_LAYS_Y_MIN, 1); };
+	int iLaysCnt(const int def = 5){ return iEdit(IDC_ED_LAYS_CNT, def); };
+	int iKoefF(int idx){ return iEdit(IDC_LAYSCFG_EDIT00 + idx, 1); };
 
 	afx_msg void OnDeltaposSpinTopx(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDeltaposSpinTopy(NMHDR* pNMHDR, LRESULT* pResult);
@@ -97,4 +97,6 @@ public:
 	afx_msg void OnEnKillfocusLayscfgEdit18();
 	afx_msg void OnEnKillfocusLayscfgEdit19();
 
+	CEdit m_cpu_single;
+	CEdit m_cpu_multi;
 };
