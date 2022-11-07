@@ -12,6 +12,9 @@ LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) : L
 		LayBase::cpuType = CPUtype::MT;
 	else
 		LayBase::cpuType = CPUtype::CPU;
+	const bool togpu = LayBase::gpuIn || LayBase::cpuType == CPUtype::GPU;
+	LayBase::va.Create(sz, togpu, m_accl_view);
+	vf.Create(sz, togpu, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void LayMid::gpu2cpu(){
 	LayBase::gpu2cpu();

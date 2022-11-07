@@ -25,10 +25,8 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 #ifndef NEW_ENGINE
 	if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
 #else // NEW_ENGINE
-
 	if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
 #endif // NEWENINE
-
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
@@ -50,7 +48,7 @@ int work(){
 		} else{
 			if(!pauseRender){
 				mdx.Render();	// MAIN !!!
-				model.cfgAll->misc.curIteration++;
+				//model.cfgAll->misc.curIteration++;
 				cnt++;
 				time_t ctime;
 				time(&ctime);
