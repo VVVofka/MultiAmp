@@ -2,14 +2,16 @@
 #include "Utils.h"
 
 Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_all, m_accl_view){
-	countPoint = cfg_all->data.v.size();	// defPointsCnt(va_inp);
-	cpuPoint2gpuPoint(countPoint);
+	//cpuPoint2gpuPoint(countPoint);
+	LayBase::cpuType = CPUtype::GPU;
+	LayBase::gpuIn = false;
+
+	fill_vScreen();
+	fill_va();
 } // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
 } // ///////////////////////////////////////////////////////////////////////////////
-//concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, accelerator_view& m_accl_view){
-//}// ///////////////////////////////////////////////////////////////////////////////
 //int Lay0::SetRndScreenPoints(const int count, std::mt19937& gen){
 //	const int sz1 = sz.x * sz.y;
 //	std::vector<int> v(sz1);
@@ -46,10 +48,39 @@ concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const int count_point){
 	return vgpuScreen;
 } // ///////////////////////////////////////////////////////////////////////////////
 bool Lay0::isLoad()const{
-	if(sz.x <= 0) return false;
-	if(sz.y <= 0) return false;
+	if(sz.x <= 0 || sz.y <= 0) return false;
 	if(va.vcpu.size() < 4) return false;
 	if(va.vgpu == NULL) return false;
 	if(vgpuScreen == NULL) return false;
 	return true;
 } // ///////////////////////////////////////////////////////////////////////////////
+void Lay0::fill_vScreen(){
+	countPoint = cfg_all->data.v.size();	// defPointsCnt(va_inp);
+	vcpuScreen.resize(countPoint);
+	size_t szx = cfg_all->lays.bottomX();
+	size_t szy = cfg_all->lays.bottomY();
+	for(int j = 0; j < countPoint; j++){
+		const size_t idx = cfg_all->data.v[j];
+
+		const size_t ux = idx % szx;
+		const float x = NORMAL_TO_AREA(ux, szx);
+		
+		const size_t uy = idx / szx;
+		const float y = NORMAL_TO_AREA(uy, szy);
+		
+		vcpuScreen[j] = Vertex2D(y, x);
+	}
+	SAFE_DELETE(vgpuScreen);
+	vgpuScreen = new concurrency::array<Vertex2D, 1>(countPoint, vcpuScreen.begin());
+} // ///////////////////////////////////////////////////////////////////////////////
+void Lay0::fill_va(){
+	std::vector<int> vtmp(sz.x * sz.y, -1);
+	size_t szx = cfg_all->lays.bottomX();
+	size_t szy = cfg_all->lays.bottomY();
+	for(int j = 0; j < countPoint; j++){
+		const size_t idx = cfg_all->data.v[j];
+		vtmp[idx] = j;
+	}
+	LayBase::va.Create(sz, vtmp, true, m_accl_view);
+} // ///////////////////////////////////////////////////////////////////////////////
+

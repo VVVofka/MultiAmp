@@ -6,7 +6,11 @@
 class LayBase{
 public:
 	LayBase(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	int nlay = 0;
 	int_2 sz;
+	CPUtype cpuType = CPUtype::GPU;
+	bool gpuIn = false; // underlying lay is GPU and cur isn't GPU
+
 	VGpuCpu<int> va;
 	
 	accelerator_view* m_accl_view = NULL;
@@ -20,5 +24,7 @@ protected:
 	void cpu2gpu(){ va.cpu2gpu(); }
 
 	std::string sDumpA(const int digits)const;
-};
+
+private:
+}; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
