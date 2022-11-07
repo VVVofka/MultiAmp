@@ -67,11 +67,9 @@ int work(){
 	return (int)msg.wParam;
 } // /////////////////////////////////////////////////////////////////////////////
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
-	static bool isfrs = true;
 	// Register class
-	WNDCLASSEX wcex{};
-	if(isfrs){
-		isfrs = false;
+	static WNDCLASSEX wcex{};
+	if(wcex.lpfnWndProc == 0){
 		wcex.cbSize = sizeof(WNDCLASSEX);
 		wcex.style = CS_HREDRAW | CS_VREDRAW;
 		wcex.lpfnWndProc = WndProc;
