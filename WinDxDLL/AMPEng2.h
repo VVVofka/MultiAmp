@@ -1,4 +1,8 @@
 #pragma once
+#include "NewEngine.h"
+
+#ifndef NEW_ENGINE // not NEW_ENGINE
+
 #include <amp.h>
 #include <amp_graphics.h>
 #include <vector>
@@ -51,4 +55,5 @@ public:
 	void dumpDLast();
 	void dumpPos();
 }; // *******************************************************************************************************
+#endif // NEW_ENGINE
 

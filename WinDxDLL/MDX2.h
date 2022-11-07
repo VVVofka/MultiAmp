@@ -1,16 +1,15 @@
 #pragma once
+#include "NewEngine.h"
 #include "MDX.h"
 #include "AMPEng2.h"
 #include "Vertex.h"
 #include <vector>
 #include "Engine2.h"
 
-#define NEW_ENGINE
-
 class MDX2 : public MDX{
 
 	// TODO: del g_pAMPComputeEngine 
-#ifndef NEW_ENGINE
+#ifndef NEW_ENGINE // not NEW_ENGINE
 	AMPEng2* g_pAMPComputeEngine = NULL;
 #else // NEW_ENGINE
 	Engine2* g_pAMPComputeEngine = NULL;

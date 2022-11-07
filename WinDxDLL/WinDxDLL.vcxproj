@@ -191,6 +191,7 @@
     <ClInclude Include="Model2D.h" />
     <ClInclude Include="Model2D_Static.h" />
     <ClInclude Include="myRnd.h" />
+    <ClInclude Include="NewEngine.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
     <ClInclude Include="pch.h" />

@@ -1,10 +1,9 @@
 #pragma once
+#include "NewEngine.h"
 #include <amp.h>
 #include <amp_graphics.h>
 #include <D3D11.h>
 #include <vector>
-//#include <random>
-
 //#include "Model2D.h"
 //#include "RunA.h"
 //#include "RunD.h"
@@ -28,6 +27,7 @@ class Engine2{
 	//std::vector<std::unique_ptr<array<int, 2>>> vgpu_a;
 	//std::vector<std::unique_ptr<array<DrQuadro, 2>>> vgpu_f;
 	//std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
+
 	std::unique_ptr<array<int, 1>> amask;
 	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 

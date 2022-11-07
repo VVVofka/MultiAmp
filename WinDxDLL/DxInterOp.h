@@ -2,6 +2,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
 #pragma once
+#include "NewEngine.h"
+
 #include <Windows.h>
 #include <iostream>
 #include <fstream>
@@ -25,4 +27,3 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 
 MDX2 mdx;
 Model2D model = Model2D();
-

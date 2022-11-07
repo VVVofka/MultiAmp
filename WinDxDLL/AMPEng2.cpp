@@ -1,5 +1,5 @@
-//#include "pch.h"
 #include "AMPEng2.h"
+#ifndef NEW_ENGINE // not NEW_ENGINE
 
 AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)){
 	distrLastAY = std::uniform_int_distribution<int>(0, model.sizeY() - 1);
@@ -147,3 +147,4 @@ void AMPEng2::dumpPos(){
 		printf("%d:\t%+.3f %+.3f\n", n, p.y, p.x);
 	}
 } // ////////////////////////////////////////////////////////////////////////////////////////
+#endif // NEW_ENGINE

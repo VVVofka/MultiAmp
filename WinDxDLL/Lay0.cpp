@@ -71,7 +71,7 @@ void Lay0::fill_vScreen(){
 		vcpuScreen[j] = Vertex2D(y, x);
 	}
 	SAFE_DELETE(vgpuScreen);
-	vgpuScreen = new concurrency::array<Vertex2D, 1>(countPoint, vcpuScreen.begin());
+	vgpuScreen = new concurrency::array<Vertex2D, 1>(countPoint, vcpuScreen.begin(), *m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_va(){
 	std::vector<int> vtmp(sz.x * sz.y, -1);
