@@ -1,16 +1,11 @@
 #include "Engine2.h"
 
 Engine2::Engine2(ID3D11Device* d3ddevice, structAll* cfg_all) : 
-		m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)), lays(m_accl_view)
+		m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)), lays(cfg_all, &m_accl_view)
 		{
-	this->cfg_all = cfg_all;
-
-	// TODO: fill arscreen
-
-	//lays.Create();
 } // /////////////////////////////////////////////////////////////////////////////////////////////////////
 HRESULT Engine2::get_data_d3dbuffer(void** d3dbuffer) const{
-	return Concurrency::direct3d::get_buffer(*ar_screen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
+	return Concurrency::direct3d::get_buffer(*lays.lay0.vgpuScreen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void Engine2::run(){
 	////INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift

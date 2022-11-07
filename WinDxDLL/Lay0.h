@@ -7,14 +7,11 @@
 
 class Lay0 : public LayBase{
 public:
+	Lay0(structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	~Lay0();
 	concurrency::array<Vertex2D, 1>* vgpuScreen = NULL;		//[pointsCnt] for render [-1...+1]
 
-	concurrency::array<Vertex2D, 1>* Create(const int_2 sz_0, const std::vector<int>& va_inp, accelerator_view& m_accl_view);
-	~Lay0();
-
 	int countPoint = 0;
-	//int SetRndScreenPoints(const int count, std::mt19937& gen);
-	//void SetScreenPoints(const int count, const int_2* ptr);
 
 	bool isLoad()const;
 	std::string sDumpA(const int digits)const;
@@ -25,6 +22,5 @@ public:
 	using LayBase::gpu2cpu;
 
 private:
-	static int defPointsCnt(const std::vector<int>& vi_inp);
-};
+}; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

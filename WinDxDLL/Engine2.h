@@ -22,13 +22,12 @@ using namespace concurrency::direct3d;
 
 class Engine2{
 	accelerator_view m_accl_view;
-	structAll* cfg_all = NULL;
 	//size_t nlastlay = 0;     // N last lay
 
-	std::unique_ptr<array<Vertex2D, 1>>	ar_screen; // for screen
-	std::vector<std::unique_ptr<array<int, 2>>> vgpu_a;
-	std::vector<std::unique_ptr<array<DrQuadro, 2>>> vgpu_f;
-	std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
+	//std::unique_ptr<array<Vertex2D, 1>>	ar_screen; // for screen
+	//std::vector<std::unique_ptr<array<int, 2>>> vgpu_a;
+	//std::vector<std::unique_ptr<array<DrQuadro, 2>>> vgpu_f;
+	//std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
 	std::unique_ptr<array<int, 1>> amask;
 	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 

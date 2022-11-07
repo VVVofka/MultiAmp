@@ -3,12 +3,12 @@
 #include "LayBase.h"
 class LayMid : public LayBase{
 public:
+	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
 	VGpuCpu<float_2> vf;
 
 	CPUtype cpuType = CPUtype::GPU;
-	bool gpuIn = false;
+	bool gpuIn = false; // underlying lay is GPU and cur isn't GPU
 
-	void Create(const int_2 xy, const CPUtype cpu_type, const bool gpu_in, accelerator_view& m_accl_view);
 	void gpu2cpu();
 	void cpu2gpu();
 

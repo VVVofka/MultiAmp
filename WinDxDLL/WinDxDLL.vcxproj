@@ -209,6 +209,7 @@
     <ClCompile Include="Engine2.cpp" />
     <ClCompile Include="Lay0.cpp" />
     <ClCompile Include="LayBase.cpp" />
+    <ClCompile Include="LayDumps.cpp" />
     <ClCompile Include="LayMid.cpp" />
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="Main.cpp" />

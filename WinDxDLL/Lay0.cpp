@@ -1,14 +1,15 @@
 #include "Lay0.h"
 #include "Utils.h"
 
-concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, accelerator_view& m_accl_view){
-	LayBase::Create(sz, true, m_accl_view);
-	countPoint = defPointsCnt(va_inp);
-	return cpuPoint2gpuPoint(countPoint);
-} // /////////////////////////////////////////////////////////////////
+Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_all, m_accl_view){
+	countPoint = cfg_all->data.v.size();	// defPointsCnt(va_inp);
+	cpuPoint2gpuPoint(countPoint);
+} // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
 } // ///////////////////////////////////////////////////////////////////////////////
+//concurrency::array<Vertex2D, 1>* Lay0::Create(const int_2 sz_0, const std::vector<int>& va_inp, accelerator_view& m_accl_view){
+//}// ///////////////////////////////////////////////////////////////////////////////
 //int Lay0::SetRndScreenPoints(const int count, std::mt19937& gen){
 //	const int sz1 = sz.x * sz.y;
 //	std::vector<int> v(sz1);
@@ -52,18 +53,3 @@ bool Lay0::isLoad()const{
 	if(vgpuScreen == NULL) return false;
 	return true;
 } // ///////////////////////////////////////////////////////////////////////////////
-std::string Lay0::sDumpA(const int digits)const{
-	return "a: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpA(digits);
-} // ////////////////////////////////////////////////////////////////
-std::string Lay0::DumpA(const int digits) const{
-	std::string s(sDumpA(digits));
-	_RPT0(0, s.c_str());
-	return s;
-} // ////////////////////////////////////////////////////////////////
-int Lay0::defPointsCnt(const std::vector<int>& v){
-	int ret = 0;
-	for(int j = 0; j < (int)v.size(); j++) 
-		if(v[j] >= 0) 
-			ret++;
-	return ret;
-} // /////////////////////////////////////////////////////////////////////////////
