@@ -67,22 +67,26 @@ int work(){
 	return (int)msg.wParam;
 } // /////////////////////////////////////////////////////////////////////////////
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
+	static bool isfrs = true;
 	// Register class
 	WNDCLASSEX wcex{};
-	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
-	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = NULL;
-	wcex.lpszClassName = L"AMPC++WindowClass";
-	wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-	if(!RegisterClassEx(&wcex))  return E_FAIL;
-
+	if(isfrs){
+		isfrs = false;
+		wcex.cbSize = sizeof(WNDCLASSEX);
+		wcex.style = CS_HREDRAW | CS_VREDRAW;
+		wcex.lpfnWndProc = WndProc;
+		wcex.cbClsExtra = 0;
+		wcex.cbWndExtra = 0;
+		wcex.hInstance = hInstance;
+		wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+		wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
+		wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+		wcex.lpszMenuName = NULL;
+		wcex.lpszClassName = L"AMPC++WindowClass";
+		wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+		if(!RegisterClassEx(&wcex))
+			return E_FAIL;
+	}
 	// Create window
 	g_hInst = hInstance;
 	RECT rc = {0, 0, 900, 900};
@@ -117,7 +121,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			if(model.options.showDlg()){
 				model.Create();
 				mdx.CleanupDevice();
+#ifndef NEW_ENGINE // not NEW_ENGINE
 				mdx.InitDevice(g_hWnd, model.v_scr);
+#else // NEW_ENGINE
+				mdx.InitDevice(g_hWnd, mdx.cfg_all);
+#endif // NEW_ENGINE
 			}
 			pauseRender = false;
 			break; }

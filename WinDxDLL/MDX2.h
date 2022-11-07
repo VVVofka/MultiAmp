@@ -11,16 +11,17 @@ class MDX2 : public MDX{
 	// TODO: del g_pAMPComputeEngine 
 #ifndef NEW_ENGINE // not NEW_ENGINE
 	AMPEng2* g_pAMPComputeEngine = NULL;
-#else // NEW_ENGINE
-	Engine2* g_pAMPComputeEngine = NULL;
-	structAll* cfg_all;
-#endif // NEW_ENGINE
-
 public:
 	HRESULT InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices,
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+#else // NEW_ENGINE
+	Engine2* g_pAMPComputeEngine = NULL;
+public:
+	structAll* cfg_all;
 	HRESULT InitDevice(HWND ghWnd, structAll* cfg_all,
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+#endif // NEW_ENGINE
+
 	void Render();
 	void CleanupDevice();
 private:

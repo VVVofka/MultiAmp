@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "MDX2.h"
 
+#ifndef NEW_ENGINE // not NEW_ENGINE
 // from 2x: dWInterOp.cpp mn() & dlg options
 HRESULT MDX2::InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices, D3D_PRIMITIVE_TOPOLOGY Primitive){// Create Direct3D device and shaders. Call from wWinMain()
 	HRESULT hr = MDX::InitDevice(ghWnd, Primitive);
@@ -11,8 +12,11 @@ HRESULT MDX2::InitDevice(HWND ghWnd, std::vector<Vertex2D> vertices, D3D_PRIMITI
 	RETURN_IF_FAIL(MDX::CreatePixelShader());
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
+#else // NEW_ENGINE
 // from 2x: dWInterOp.cpp mn() & dlg options
 HRESULT MDX2::InitDevice(HWND ghWnd, structAll* cfg_all, D3D_PRIMITIVE_TOPOLOGY Primitive){// Create Direct3D device and shaders. Call from wWinMain()
+	if(g_pAMPComputeEngine != NULL)
+		CleanupDevice();
 	HRESULT hr = MDX::InitDevice(ghWnd, Primitive);
 	g_numVertices = (unsigned int)cfg_all->data.v.size();
 	RETURN_IF_FAIL(MDX::CreateSwapChain());
@@ -21,6 +25,7 @@ HRESULT MDX2::InitDevice(HWND ghWnd, structAll* cfg_all, D3D_PRIMITIVE_TOPOLOGY 
 	RETURN_IF_FAIL(MDX::CreatePixelShader());
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
+#endif // NEW_ENGINE
 void MDX2::CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 	MDX::CleanupDevice();
 	SAFE_DELETE(g_pAMPComputeEngine);

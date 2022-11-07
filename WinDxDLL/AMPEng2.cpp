@@ -67,7 +67,7 @@ void AMPEng2::dumpA(size_t nlay){
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	model.setConsole();
 	array<int, 2> av(*vgpu_a[nlay].get());
-	std::cout << "A[" << nlay << "] y*x: " << av.extent[0] << "*" << av.extent[1] << std::endl;
+	std::cout << "A[" << nlay << "] y*x: " << av.extent[0] << '*' << av.extent[1] << std::endl;
 	if(nlay == vgpu_a.size() - 1){
 		for(int y = 0; y < av.extent[0]; y++){
 			for(int x = 0; x < av.extent[1]; x++){
@@ -105,7 +105,7 @@ void AMPEng2::dumpD(size_t nlay){
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	model.setConsole();
 	array<DrQuadro, 2> av(*vgpu_f[nlay].get());
-	std::cout << "Dirs[" << nlay << "] y*x: " << av.extent[0] << "*" << av.extent[1] << std::endl;
+	std::cout << "Dirs[" << nlay << "] y*x: " << av.extent[0] << '*' << av.extent[1] << std::endl;
 	for(int y = 0; y < av.extent[0]; y++){
 		for(int x = 0; x < av.extent[1]; x++){
 			//if(av[y][x].not0()){
@@ -127,7 +127,7 @@ void AMPEng2::dumpDLast(){
 		szx = ar_last_dirs->extent[1];
 	if(szy <= 0 || szx <= 0) return;
 	array<FLT2, 2> av(*ar_last_dirs);
-	std::cout << "DirsLast[" << model.LaysCnt() - 1 << "] y*x: " << szy << "*" << szx;
+	std::cout << "DirsLast[" << model.LaysCnt() - 1 << "] y*x: " << szy << '*' << szx;
 	for(int y = 0; y < szy; y++){
 		printf("\n%+.2f", av[0][0].y);
 		for(int x = 1; x < szx; x++)
