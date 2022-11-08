@@ -16,6 +16,7 @@ public:
 	size_t sizeY(int n_lay){ return topY << (vkf.size() - size_t(n_lay + 1)); }
 	size_t bottomY(){ return topY << (vkf.size() - 1); }
 	size_t bottomX(){ return topX << (vkf.size() - 1); }
+	size_t bottomSquare(){ return bottomX() * bottomY(); }
 
 	bool isGPU(int n_lay){ return n_lay < (int)laysCnt() - int(cpuSingle + cpuMultiThreaded); }
 	bool isMT(int n_lay){ return !isGPU(n_lay) && (n_lay < (int)laysCnt() - int(cpuSingle)); }

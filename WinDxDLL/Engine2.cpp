@@ -10,6 +10,7 @@ HRESULT Engine2::get_data_d3dbuffer(void** d3dbuffer) const{
 	return Concurrency::direct3d::get_buffer(*lays.lay0.vgpuScreen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void Engine2::run(){
+	processes.RunAll();
 	////INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift
 	//INT2 shift(model.myrnd.rand(model.sizeY()), model.myrnd.rand(model.sizeX()));   // rand shift
 	////printf("\nshift = y:%d x:%d\n", shift.y, shift.x);	dumpA(nlastlay);

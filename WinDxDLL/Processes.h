@@ -1,18 +1,25 @@
 #pragma once
 #include "ProcessA.h"
 #include "ProcessF.h"
-#include "..\OptsTinyLib\structAll.h"
 #include "Lays.h"
 #include "MasksAll.h"
+#include "myRnd.h"
+#include "..\OptsTinyLib\structAll.h"
 
 class Processes{
 public:
 	Processes(structAll* p_cfg_all, Lays* p_lays);
+	~Processes();
+
 	ProcessA processA;
 	ProcessF processF;
 	Lays* lays;
 	MasksAll masks;
 	structAll* cfg_all;
 
-	void RunAll(const int_2 shift);
+	void RunAll();
+
+private:
+	LehmerRng rnd;
+	uint64_t curIteration;
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
