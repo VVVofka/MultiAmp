@@ -12,7 +12,7 @@ class ProcessF{
 	MaskF* fmasks = NULL;
 
 public:
-	void Create(Lays* p_lays, MaskF* p_Masks_f);
+	ProcessF(Lays* p_lays, MaskF* p_Masks_f);
 	void RunAll(const int_2 shift);
 
 private:

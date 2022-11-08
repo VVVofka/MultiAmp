@@ -3,6 +3,7 @@
 #include "ProcessF.h"
 #include "..\OptsTinyLib\structAll.h"
 #include "Lays.h"
+#include "MasksAll.h"
 
 class Processes{
 public:
@@ -10,8 +11,8 @@ public:
 	ProcessA processA;
 	ProcessF processF;
 	Lays* lays;
+	MasksAll masks;
 	structAll* cfg_all;
 
-	void Create(Lays* p_lays, MaskA* p_Mask_a, MaskF* p_Masks_f);
 	void RunAll(const int_2 shift);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

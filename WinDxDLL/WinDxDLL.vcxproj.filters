@@ -135,6 +135,12 @@
     <ClInclude Include="MaskF.h">
       <Filter>Process\Masks</Filter>
     </ClInclude>
+    <ClInclude Include="ProcessParam.h">
+      <Filter>Process</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessParams.h">
+      <Filter>Process</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -244,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="MaskF.cpp">
       <Filter>Process\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParam.cpp">
+      <Filter>Process</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessParams.cpp">
+      <Filter>Process</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

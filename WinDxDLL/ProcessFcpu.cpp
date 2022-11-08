@@ -8,8 +8,9 @@ using namespace concurrency;
 
 void ProcessF::cpuRun(const int ncurlay){
 	_ASSERTE(ncurlay > 0);
-	const LayMid* up_lay = &lays->vMidLays[ncurlay];
-	LayMid* dn_lay = &lays->vMidLays[ncurlay - 1];
+	//auto up_lay = &lays->vMidLays[ncurlay];
+	const LayMid* up_lay = lays->vMidLays[ncurlay];
+	LayMid* dn_lay = lays->vMidLays[ncurlay - 1];
 
 	const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
 	const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
@@ -20,7 +21,7 @@ void ProcessF::cpuRun(const int ncurlay){
 	const size_t szUpY = (size_t)up_lay->sz.y;
 	const size_t szUpX = (size_t)up_lay->sz.x;
 	const size_t szDnX = szUpX * 2;
-	const std::array<float_2, 16 * 4>& f_masks = fmasks->v;
+	const std::array<float_2, 16 * 4>& f_masks = fmasks->vcpu;
 
 	for(size_t y = 0, idUp = 0; y < szUpY; y++){
 		for(size_t x = 0; x < szUpX; x++, idUp++){

@@ -7,9 +7,9 @@ using namespace concurrency;
 using namespace concurrency::graphics;
 void ProcessF::gpuRun1(const int ncurlay){
 	_ASSERTE(ncurlay > 0);
-	const LayMid& up_lay = lays->vMidLays[ncurlay];
-	LayMid& dn_lay = lays->vMidLays[ncurlay - 1];
-	const ProcessParam* param = up_lay.param;
+	const LayMid& up_lay = *lays->vMidLays[ncurlay];
+	LayMid& dn_lay = *lays->vMidLays[ncurlay - 1];
+	const ProcessParam* param = &up_lay.param;
 	const float klayf = param->klayf;
 	const float kLaminar = param->kLaminar;
 	const float kTurbul = param->kTurbul;
@@ -21,7 +21,7 @@ void ProcessF::gpuRun1(const int ncurlay){
 	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay.va.vgpu;
 	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
 
-	const concurrency::array<float_2, 2>& f_masks = *fmasks->gv;
+	const concurrency::array<float_2, 2>& f_masks = *fmasks->vgpu;
 
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &dn_vgpu_f,

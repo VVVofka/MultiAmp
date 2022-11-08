@@ -168,10 +168,9 @@
     <ClInclude Include="myconv.h" />
     <ClInclude Include="myXML.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="structCfgBase.h" />
     <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
-    <ClInclude Include="structMasks.h" />
+    <ClInclude Include="structMasksCfg.h" />
     <ClInclude Include="structMiscCfg.h" />
     <ClInclude Include="structAll.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -187,9 +186,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="structAll.cpp" />
     <ClCompile Include="structDataCfg.cpp" />
-    <ClCompile Include="structMasks.cpp" />
-    <ClCompile Include="structMiscCfg.cpp" />
+    <ClCompile Include="structMasksCfg.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

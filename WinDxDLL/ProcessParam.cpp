@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "ProcessParam.h"
 
 std::string ProcessParam::sDump() const{

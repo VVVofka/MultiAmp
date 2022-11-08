@@ -56,8 +56,3 @@ std::string structDataCfg::get_s() const{
 	}
 	return sret;
 } // ///////////////////////////////////////////////////////////////////////////////////
-bool structDataCfg::isEqual(const structCfgBase* other){
-	structDataCfg* p = (structDataCfg*)other;
-	if(sigma != p->sigma || seed != p->seed) return false;
-	return v != p->v;
-} // /////////////////////////////////////////////////////////////////////////////

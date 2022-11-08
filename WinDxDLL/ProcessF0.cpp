@@ -9,9 +9,9 @@ using namespace concurrency::direct3d;
 #define Y 0
 
 void ProcessF::gpuRun0(const int_2 shift){
-	const LayMid& up_lay = lays->vMidLays[0];
+	const LayMid& up_lay = *lays->vMidLays[0];
 	Lay0& lay_0 = lays->lay0;
-	const ProcessParam* param = up_lay.param;
+	const ProcessParam* param = &up_lay.param;
 	const float klayf = param->klayf;
 	const float kLaminar = param->kLaminar;
 	const float kTurbul = param->kTurbul;
@@ -25,7 +25,7 @@ void ProcessF::gpuRun0(const int_2 shift){
 	concurrency::array<float_2, 2>& dn_vgpu_f = *lay_0.vf.vgpu;
 
 	concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
-	const concurrency::array<float_2, 2>& f_masks = *fmasks->gv;
+	const concurrency::array<float_2, 2>& f_masks = *fmasks->vgpu;
 	const float_2 rSizeDn(lay_0.sz);
 	const float kDecAfterMove = lay_0.kDecAfterMove;
 	const float kinert = lay_0.kinert;
@@ -52,7 +52,6 @@ void ProcessF::gpuRun0(const int_2 shift){
 			dn_vgpu_f[idc2] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][2] * klayf + dn_vgpu_f[idc2] * kinert;
 			dn_vgpu_f[idc3] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][3] * klayf + dn_vgpu_f[idc3] * kinert;
 
-			// TODO: Blocks (p.207 Greg) or Textures (p.212 Greg)
 			// TODO: разнести x, y, i (p.203 Greg)
 
 			// move vscreen points

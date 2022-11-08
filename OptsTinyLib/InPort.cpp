@@ -1,27 +1,6 @@
 #include "InPort.h"
 #include "myXML.h"
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-std::string getMaskA(const char* f_name){
-	MyXML xml(f_name, "Options;Masks;MaskA");
-	return xml.getText("0001011101111111");
-} // //////////////////////////////////////////////////////////////////////////
-void setMaskA(const char* f_name, const char* s){
-	MyXML xml(f_name, "Options;Masks;MaskA");
-	xml.setText(s);
-	xml.Save(f_name);
-} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-std::string getMaskF(const char* f_name){
-	MyXML xml(f_name, "Options;Masks;MaskF");
-	std::string defval(256, '0');
-	std::string ret = xml.getText(defval.c_str());
-	return ret;
-} // //////////////////////////////////////////////////////////////////////////
-void setMaskF(const char* f_name, const char* s){
-	MyXML xml(f_name, "Options;Masks;MaskF");
-	xml.setText(s);
-	xml.Save(f_name);
-} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 structLaysCfg getLaysCfg(const char* f_name){
 	MyXML xml(f_name, "Options;LaysCfg");
@@ -59,10 +38,6 @@ structDataCfg getDataCfg(const char* f_name){
 	ret.seed = xml.getAttributeS("seed", "123456");
 	ret.sigma = xml.getAttributeS("sigma", "0.2");
 	ret.v = myconv::strToVSizet(xml.getText());
-	//Session ses;
-	//ses.loadDataCgf(fname);
-	//auto ret = ses.get_DataCfg();
-	//return ret;
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////
 void setDataCfg(const char* f_name, const structDataCfg& data_cfg){
@@ -103,4 +78,38 @@ void setMiscCfg(const char* f_name, const structMiscCfg& lays_cfg){
 	xml.setText(lays_cfg.sComments.c_str());
 	
 	xml.Save(f_name);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+std::string getMaskA(const char* f_name){
+	MyXML xml(f_name, "Options;Masks;MaskA");
+	return xml.getText("0001011101111111");
+} // //////////////////////////////////////////////////////////////////////////
+void setMaskA(const char* f_name, const char* s){
+	MyXML xml(f_name, "Options;Masks;MaskA");
+	xml.setText(s);
+	xml.Save(f_name);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+std::string getMaskF(const char* f_name){
+	MyXML xml(f_name, "Options;Masks;MaskF");
+	std::string defval(256, '0');
+	std::string ret = xml.getText(defval.c_str());
+	return ret;
+} // //////////////////////////////////////////////////////////////////////////
+void setMaskF(const char* f_name, const char* s){
+	MyXML xml(f_name, "Options;Masks;MaskF");
+	xml.setText(s);
+	xml.Save(f_name);
+} // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+structMasksCfg getMasksCfg(const char* f_name){
+	structMasksCfg ret;
+
+	std::string sa = getMaskA(f_name);
+	ret.seta(sa);
+
+	std::string sf = getMaskA(f_name);
+	ret.setf(sf);
+
+	return ret;
 } // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

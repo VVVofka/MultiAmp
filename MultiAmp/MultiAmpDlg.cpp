@@ -155,7 +155,7 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	data.create(szx, szy, &cfg_all.data.v, &cfg_all.data.sigma, &cfg_all.data.seed);
 	INT_PTR ret = dlgdata.doModal(&data);
 	if(ret == IDOK)
-		setDataCfg("tstDlg.xml", cfg_all.data);	
+		setDataCfg("tstDlg.xml", cfg_all.data);			// InPort.cpp
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;

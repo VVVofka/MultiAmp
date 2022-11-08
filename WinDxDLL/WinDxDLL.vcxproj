@@ -201,6 +201,8 @@
     <ClInclude Include="ProcessA.h" />
     <ClInclude Include="Processes.h" />
     <ClInclude Include="ProcessF.h" />
+    <ClInclude Include="ProcessParam.h" />
+    <ClInclude Include="ProcessParams.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RunA.h" />
     <ClInclude Include="RunD.h" />
@@ -244,6 +246,8 @@
     <ClCompile Include="ProcessF0.cpp" />
     <ClCompile Include="ProcessF1.cpp" />
     <ClCompile Include="ProcessFcpu.cpp" />
+    <ClCompile Include="ProcessParam.cpp" />
+    <ClCompile Include="ProcessParams.cpp" />
     <ClCompile Include="RunA.cpp" />
     <ClCompile Include="RunD.cpp" />
     <ClCompile Include="RunDlast.cpp" />

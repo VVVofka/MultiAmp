@@ -3,6 +3,7 @@
 #include "structLaysCfg.h"
 #include "structDataCfg.h"
 #include "structMiscCfg.h"
+#include "structMasksCfg.h"
 
 std::string getMaskA(const char* fname);
 void setMaskA(const char* fname, const char* s);
@@ -20,3 +21,4 @@ void clearDataCfg(const char* fname);
 structMiscCfg getMiscCfg(const char* fname);
 void setMiscCfg(const char* fname, const structMiscCfg& lays_cfg);
 
+structMasksCfg getMasksCfg(const char* f_name);

@@ -2,6 +2,7 @@
 #include <string>		// dor Dump
 #include "VGpuCpu.h"	// for va
 #include "..\OptsTinyLib\structAll.h"
+#include "ProcessParam.h"
 
 class LayBase{
 public:
@@ -18,6 +19,8 @@ public:
 
 	int id(const int x, const int y) const{ return y * sz.x + x; }
 	bool isLoad()const;
+
+	ProcessParam param;
 
 protected:
 	void gpu2cpu(){ va.gpu2cpu(); }
