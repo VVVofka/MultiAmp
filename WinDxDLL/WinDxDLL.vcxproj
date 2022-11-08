@@ -186,6 +186,7 @@
     <ClInclude Include="LaysCPUCfg.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Masks.h" />
+    <ClInclude Include="Masks_a.h" />
     <ClInclude Include="MDX.h" />
     <ClInclude Include="MDX2.h" />
     <ClInclude Include="Model2D.h" />
@@ -195,6 +196,9 @@
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ProcessA.h" />
+    <ClInclude Include="Processes.h" />
+    <ClInclude Include="ProcessF.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RunA.h" />
     <ClInclude Include="RunD.h" />
@@ -215,6 +219,7 @@
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Masks.cpp" />
+    <ClCompile Include="Masks_a.cpp" />
     <ClCompile Include="MDX.cpp" />
     <ClCompile Include="MDX2.cpp" />
     <ClCompile Include="Model2D.cpp" />
@@ -226,6 +231,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ProcessA.cpp" />
+    <ClCompile Include="ProcessA0.cpp" />
+    <ClCompile Include="ProcessA1.cpp" />
+    <ClCompile Include="ProcessAcpu.cpp" />
+    <ClCompile Include="Processes.cpp" />
+    <ClCompile Include="ProcessF.cpp" />
+    <ClCompile Include="ProcessF0.cpp" />
+    <ClCompile Include="ProcessF1.cpp" />
+    <ClCompile Include="ProcessFcpu.cpp" />
     <ClCompile Include="RunA.cpp" />
     <ClCompile Include="RunD.cpp" />
     <ClCompile Include="RunDlast.cpp" />

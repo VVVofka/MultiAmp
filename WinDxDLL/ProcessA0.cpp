@@ -2,7 +2,6 @@
 #include <amp_math.h>
 #define X 1
 #define Y 0
-namespace executor{
 	using namespace concurrency;
 	using namespace concurrency::graphics;
 	using namespace concurrency::direct3d;
@@ -39,6 +38,5 @@ namespace executor{
 					dn_vgpu_f[index<2>(y1, x1)];
 			});
 	} // ///////////////////////////////////////////////////////////////////////////////////
-}
 #undef Y
 #undef X

@@ -14,6 +14,7 @@
 #include "Utils.h"
 #include "myRnd.h"
 #include "Lays.h"
+#include "Processes.h"
 #include "..\OptsTinyLib\structAll.h"
 
 using namespace Concurrency;
@@ -33,6 +34,8 @@ class Engine2{
 
 public:
 	Lays lays;
+	Processes processes;
+
 
 	Engine2(ID3D11Device* d3ddevice, structAll* cfg_all);
 	void run();    // main function in render
