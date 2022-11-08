@@ -37,9 +37,9 @@ void ProcessA::cpuRun(const int n_lay){
 } // ///////////////////////////////////////////////////////////////////////////
 void ProcessA::mtRun(const int n_lay){
 	_ASSERTE(n_lay > 0);
-	const std::array<int, 16>& a_masks = amask->v;
-	LayMid* up_lay = &lays->vMidLays[n_lay];
-	LayMid* dn_lay = &lays->vMidLays[n_lay - 1];
+	const std::array<int, 16>& a_masks = amask->vcpu;
+	LayMid* up_lay = lays->vMidLays[n_lay];
+	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
 
 	std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
 	std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
