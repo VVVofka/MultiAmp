@@ -3,8 +3,9 @@
 #include <amp_math.h>
 #define X 1
 #define Y 0
-using namespace concurrency;
+
 using namespace concurrency::graphics;
+
 void ProcessF::gpuRun1(const int ncurlay){
 	_ASSERTE(ncurlay > 0);
 	const LayMid& up_lay = *lays->vMidLays[ncurlay];

@@ -5,7 +5,6 @@
 #include "Vertex.h"
 #include "Utils.h"
 
-using namespace concurrency;
 using namespace concurrency::fast_math;
 using namespace concurrency::direct3d;
 

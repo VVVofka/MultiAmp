@@ -2,7 +2,6 @@
 #include "ProcessF.h"
 #include "ProcessParam.h"
 
-using namespace concurrency;
 using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 #define X 1

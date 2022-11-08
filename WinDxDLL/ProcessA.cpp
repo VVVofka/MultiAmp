@@ -1,6 +1,4 @@
 #include "ProcessA.h"
-//using namespace concurrency;
-//using namespace concurrency::graphics;
 
 ProcessA::ProcessA(Lays* p_lays, MaskA* p_Mask_a){
 	lays = p_lays;

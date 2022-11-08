@@ -2,9 +2,6 @@
 #include "ProcessF.h"
 #include<float.h>
 #include<ppl.h>	//	parallel_for
-using namespace concurrency;
-//using namespace concurrency::graphics;
-//using namespace concurrency::direct3d;
 
 void ProcessF::cpuRun(const int ncurlay){
 	_ASSERTE(ncurlay > 0);

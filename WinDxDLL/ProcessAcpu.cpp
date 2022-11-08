@@ -1,6 +1,5 @@
 #include "ProcessA.h"
 #include <ppl.h>				//	parallel_for
-using namespace concurrency;
 using namespace concurrency::graphics;
 
 void ProcessA::cpuRun(const int n_lay){
