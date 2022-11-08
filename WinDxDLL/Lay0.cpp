@@ -14,14 +14,14 @@ Lay0::~Lay0(){
 } // ///////////////////////////////////////////////////////////////////////////////
 //int Lay0::SetRndScreenPoints(const int count, std::mt19937& gen){
 //	const int sz1 = sz.x * sz.y;
-//	std::vector<int> v(sz1);
+//	std::vector<int> vcpu(sz1);
 //	for(int j = 0; j < sz1; j++){
-//		v[j] = j;
+//		vcpu[j] = j;
 //		va.vcpu[j] = -1;
 //	}
-//	std::shuffle(v.begin(), v.end(), gen);
+//	std::shuffle(vcpu.begin(), vcpu.end(), gen);
 //	for(int j = 0; j < count; j++)
-//		va.vcpu[v[j]] = j;
+//		va.vcpu[vcpu[j]] = j;
 //
 //	SAFE_DELETE(vgpuScreen);
 //	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);

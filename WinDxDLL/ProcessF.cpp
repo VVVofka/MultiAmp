@@ -1,5 +1,5 @@
 #include "ProcessF.h"
-void ProcessF::Create(Lays* p_lays, Masks_f* p_Masks_f){
+void ProcessF::Create(Lays* p_lays, MaskF* p_Masks_f){
 	lays = p_lays;
 	fmasks = p_Masks_f;
 	//rSizeDn0 = float_2(1.f / lays->lay0.sz.x, 1.f / lays->lay0.sz.y); // TODO: use in amp?

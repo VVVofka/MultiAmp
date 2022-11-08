@@ -186,7 +186,9 @@
     <ClInclude Include="LaysCPUCfg.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Masks.h" />
-    <ClInclude Include="Masks_a.h" />
+    <ClInclude Include="MasksAll.h" />
+    <ClInclude Include="MaskA.h" />
+    <ClInclude Include="MaskF.h" />
     <ClInclude Include="MDX.h" />
     <ClInclude Include="MDX2.h" />
     <ClInclude Include="Model2D.h" />
@@ -219,7 +221,9 @@
     <ClCompile Include="Lays.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Masks.cpp" />
-    <ClCompile Include="Masks_a.cpp" />
+    <ClCompile Include="MasksAll.cpp" />
+    <ClCompile Include="MaskA.cpp" />
+    <ClCompile Include="MaskF.cpp" />
     <ClCompile Include="MDX.cpp" />
     <ClCompile Include="MDX2.cpp" />
     <ClCompile Include="Model2D.cpp" />

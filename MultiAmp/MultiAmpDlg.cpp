@@ -115,14 +115,14 @@ void CMultiAmpDlg::OnBnClickedOk(){
 	CDialogEx::OnOK();
 }  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskA(){
-	auto maskA = getMaskA("tstDlg.xml");
+	std::string maskA = getMaskA("tstDlg.xml");		// InPort.cpp
 	DlgMaskA dlgmaska;
 	auto newmask = dlgmaska.doModal(maskA);
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
 	setMaskA("tstDlg.xml", newmask.c_str());
 } // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskF(){
-	auto maskF = getMaskF("tstDlg.xml");
+	auto maskF = getMaskF("tstDlg.xml");		// InPort.cpp
 	DlgMaskF dlgmaskf;
 	std::string newmask = dlgmaskf.doModal(maskF);
 	std::string newmaskall;
@@ -133,17 +133,17 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	}
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmaskall.c_str());
 
-	setMaskF("tstDlg.xml", newmask.c_str());
+	setMaskF("tstDlg.xml", newmask.c_str());		// InPort.cpp
 }  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
-	cfg_all.lays = getLaysCfg("tstDlg.xml");
+	cfg_all.lays = getLaysCfg("tstDlg.xml");		// InPort.cpp
 	DlgCfgLays dlgcfgLays;
 	structLaysCfg ret = dlgcfgLays.doModal(cfg_all.lays);
 	if(cfg_all.lays.laysCnt() != ret.laysCnt() ||
 		cfg_all.lays.topX != ret.topX ||
 		cfg_all.lays.topY != ret.topY)
-		clearDataCfg("tstDlg.xml");
-	setLaysCfg("tstDlg.xml", ret);
+		clearDataCfg("tstDlg.xml");		// InPort.cpp
+	setLaysCfg("tstDlg.xml", ret);		// InPort.cpp
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
 	cfg_all.lays = getLaysCfg("tstDlg.xml");
@@ -155,7 +155,7 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	data.create(szx, szy, &cfg_all.data.v, &cfg_all.data.sigma, &cfg_all.data.seed);
 	INT_PTR ret = dlgdata.doModal(&data);
 	if(ret == IDOK)
-		setDataCfg("tstDlg.xml", cfg_all.data);
+		setDataCfg("tstDlg.xml", cfg_all.data);	
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;

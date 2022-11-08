@@ -171,6 +171,7 @@
     <ClInclude Include="structCfgBase.h" />
     <ClInclude Include="structDataCfg.h" />
     <ClInclude Include="structLaysCfg.h" />
+    <ClInclude Include="structMasks.h" />
     <ClInclude Include="structMiscCfg.h" />
     <ClInclude Include="structAll.h" />
     <ClInclude Include="tinyxml2.h" />
@@ -187,6 +188,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="structDataCfg.cpp" />
+    <ClCompile Include="structMasks.cpp" />
     <ClCompile Include="structMiscCfg.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

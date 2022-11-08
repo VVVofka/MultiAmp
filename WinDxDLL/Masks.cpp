@@ -151,7 +151,7 @@ void Blocks2D2::Add(int index,
 	v[index].setDir(nCell, nItem++, dirx31, diry31);
 	v[index].setDir(nCell, nItem++, dirx32, diry32);
 	v[index].setDir(nCell++, nItem, dirx33, diry33);
-	//v[index].Dump("Main:");
+	//vcpu[index].Dump("Main:");
 
 	Block2D2 hor = v[index].reflectHor();
 	Block2D2 ver = v[index].reflectVer();
@@ -164,7 +164,7 @@ void Blocks2D2::Add(int index,
 	for(int m = 0; m < 7; m++){
 		int a = vmodifs[m].A();
 		v[a] = vmodifs[m];
-		//v[a].Dump(" add \tm:" + std::to_string(m) + " \ta:");
+		//vcpu[a].Dump(" add \tm:" + std::to_string(m) + " \ta:");
 	}
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 std::string Blocks2D2::dump(){

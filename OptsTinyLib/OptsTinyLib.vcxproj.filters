@@ -46,6 +46,9 @@
     <ClInclude Include="structCfgBase.h">
       <Filter>Session\structs</Filter>
     </ClInclude>
+    <ClInclude Include="structMasks.h">
+      <Filter>Session\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OptsTinyLib.cpp">
@@ -68,6 +71,9 @@
       <Filter>my</Filter>
     </ClCompile>
     <ClCompile Include="structMiscCfg.cpp">
+      <Filter>Session\structs</Filter>
+    </ClCompile>
+    <ClCompile Include="structMasks.cpp">
       <Filter>Session\structs</Filter>
     </ClCompile>
   </ItemGroup>

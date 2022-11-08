@@ -2,7 +2,7 @@
 using namespace concurrency;
 using namespace concurrency::graphics;
 
-void ProcessA::Create(Lays* p_lays, Masks_a* p_Mask_a){
+void ProcessA::Create(Lays* p_lays, MaskA* p_Mask_a){
 	lays = p_lays;
 	amask = p_Mask_a;
 } // ///////////////////////////////////////////////////////////////////////////

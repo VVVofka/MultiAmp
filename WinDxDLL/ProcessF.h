@@ -2,17 +2,17 @@
 #include <amp_graphics.h>
 
 #include "Lays.h"
-#include "Masks_f.h"
+#include "MaskF.h"
 
 using namespace Concurrency::graphics;
 class ProcessF{
 	typedef void (ProcessF::* pFunc)(const int n_lay);
 
 	Lays* lays = NULL;
-	Masks_f* fmasks = NULL;
+	MaskF* fmasks = NULL;
 
 public:
-	void Create(Lays* p_lays, Masks_f* p_Masks_f);
+	void Create(Lays* p_lays, MaskF* p_Masks_f);
 	void RunAll(const int_2 shift);
 
 private:

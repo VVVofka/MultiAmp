@@ -6,16 +6,16 @@
 
 #include "LayMid.h"
 #include "Lays.h"
-#include "Masks_a.h"
+#include "MaskA.h"
 
 class ProcessA{
 	typedef void (ProcessA::* pFunc)(const int n_lay);
 
 	Lays* lays = NULL;
-	Masks_a* amask = NULL;
+	MaskA* amask = NULL;
 
 public:
-	void Create(Lays* p_lays, Masks_a* p_Mask_a);
+	void Create(Lays* p_lays, MaskA* p_Mask_a);
 	void RunAll(const int_2 shift);	// return sum vabs from last lay
 
 private:

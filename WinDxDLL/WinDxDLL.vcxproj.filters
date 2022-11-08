@@ -31,6 +31,9 @@
     <Filter Include="Process\ProcessF">
       <UniqueIdentifier>{a346cd3b-f20f-49eb-be78-b3a6e33871ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Process\Masks">
+      <UniqueIdentifier>{f3fa27e0-57cd-4939-b212-c5a8dd9e1b2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,14 +120,20 @@
     <ClInclude Include="ProcessA.h">
       <Filter>Process\ProcessA</Filter>
     </ClInclude>
-    <ClInclude Include="Masks_a.h">
-      <Filter>Process\ProcessA</Filter>
-    </ClInclude>
     <ClInclude Include="Processes.h">
       <Filter>Process</Filter>
     </ClInclude>
     <ClInclude Include="ProcessF.h">
       <Filter>Process\ProcessF</Filter>
+    </ClInclude>
+    <ClInclude Include="MasksAll.h">
+      <Filter>Process\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskA.h">
+      <Filter>Process\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="MaskF.h">
+      <Filter>Process\Masks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,9 +215,6 @@
     <ClCompile Include="ProcessA0.cpp">
       <Filter>Process\ProcessA</Filter>
     </ClCompile>
-    <ClCompile Include="Masks_a.cpp">
-      <Filter>Process\ProcessA</Filter>
-    </ClCompile>
     <ClCompile Include="ProcessA1.cpp">
       <Filter>Process\ProcessA</Filter>
     </ClCompile>
@@ -229,6 +235,15 @@
     </ClCompile>
     <ClCompile Include="ProcessFcpu.cpp">
       <Filter>Process\ProcessF</Filter>
+    </ClCompile>
+    <ClCompile Include="MasksAll.cpp">
+      <Filter>Process\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="MaskA.cpp">
+      <Filter>Process\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="MaskF.cpp">
+      <Filter>Process\Masks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
