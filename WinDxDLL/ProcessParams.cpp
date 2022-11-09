@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "ProcessParams.h"
 
 void ProcessParams::setKF(const std::vector<float> v_in){

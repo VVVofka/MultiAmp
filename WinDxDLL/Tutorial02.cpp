@@ -2,7 +2,6 @@
 // This application displays a triangle using Direct3D 11
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
-#include "pch.h"
 #ifdef MODE2
 #include <windows.h>
 #include <d3d11.h>

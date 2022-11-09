@@ -2,7 +2,6 @@
 // This application demonstrates creating a Direct3D 11 device
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
-#include "pch.h"
 #ifdef MODE1
 #include <windows.h>
 #include <d3d11.h>

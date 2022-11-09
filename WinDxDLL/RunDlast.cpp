@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "RunDlast.h"
 //#define AMPDBG_DLAST
 void RunDlast::Run(const INT2 shift,

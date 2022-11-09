@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "RunA.h"
 void RunA::Create(std::vector<std::unique_ptr<array<int, 2>>> vgpu_a){
 	size_t nlastlay = vgpu_a.size() - 1;

@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "Masks.h"
 
 FLT2* Blocks2D2::setDefault(){  // x, y !!!

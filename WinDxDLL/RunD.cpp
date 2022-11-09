@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "RunD.h"
 
 void RunD::Run(const array<DrQuadro, 2>& srcd,

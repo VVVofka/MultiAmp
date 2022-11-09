@@ -2,7 +2,6 @@
 // This application displays a 3D cube using Direct3D 11
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
-#include "pch.h"
 #ifdef MODE4
 #include <windows.h>
 #include <d3d11.h>

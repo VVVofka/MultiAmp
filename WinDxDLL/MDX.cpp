@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "MDX.h"
 #pragma warning(suppress : 4996)
 
