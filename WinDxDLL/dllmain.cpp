@@ -25,7 +25,8 @@ extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, in
 
 // TODO: rename
 extern "C" _declspec(dllexport) int openWindow1json(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
-	int ret = openwnd(hInstance, nCmdShow, cfg_all);
+	//int ret = openwnd(hInstance, nCmdShow, cfg_all);
+	int ret = mn(hInstance, NULL, NULL, nCmdShow, cfg_all);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
 

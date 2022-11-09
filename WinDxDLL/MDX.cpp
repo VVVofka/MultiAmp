@@ -7,8 +7,7 @@
 HRESULT MDX::InitDevice(HWND ghWnd, D3D_PRIMITIVE_TOPOLOGY Primitive){// Create Direct3D device and shaders. Call from wWinMain()
 	primitive = Primitive;
 	g_hWnd = ghWnd;
-	HRESULT hr = S_OK;
-	return hr;
+	return S_OK;
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 void MDX::CleanupDevice(){     //  Call from wWinMain() twice: onExit & onError
 	if(g_pImmediateContext) g_pImmediateContext->ClearState();

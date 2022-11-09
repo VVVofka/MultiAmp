@@ -227,7 +227,6 @@
     <ClInclude Include="FSliders.h" />
     <ClInclude Include="MultiAmp.h" />
     <ClInclude Include="MultiAmpDlg.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utils.h" />

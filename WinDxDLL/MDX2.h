@@ -7,7 +7,6 @@
 #include "Engine2.h"
 
 class MDX2 : public MDX{
-
 	// TODO: del g_pAMPComputeEngine 
 #ifndef NEW_ENGINE // not NEW_ENGINE
 	AMPEng2* g_pAMPComputeEngine = NULL;

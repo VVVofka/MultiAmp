@@ -1,14 +1,10 @@
+#include "DXInterOp.h"
 // File: InterOp.cpp
 // https://hackmag.com/coding/computing-with-gpu/
 // This application demonstrates the usage of AMP C++ interOp APIs with Direct3D 11. 
 // It displays the animation of a triangle rotation. 
-//
-// Copyright (c) Microsoft Corporation. All rights reserved.
 // --------------------------------------------------------------------------------------
-//#include <windows.h>
-#include "DXInterOp.h"
 static bool pauseRender = false;
-
 // --------------------------------------------------------------------------------------
 // Entry point to the program. Initializes everything and goes into a message processing 
 // loop. Idle time is used to render the scene.
@@ -30,9 +26,8 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
-	int work();
-	return work();
-	} // ////////////////////////////////////////////////////////////////////////////
+	int work();	return work();
+} // ////////////////////////////////////////////////////////////////////////////
 int work(){
 	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
 

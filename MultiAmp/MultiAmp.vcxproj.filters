@@ -45,9 +45,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DlgMaskA.h">
       <Filter>Dlgs\A</Filter>
     </ClInclude>
