@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "MDX2.h"
 
 #ifndef NEW_ENGINE // not NEW_ENGINE
