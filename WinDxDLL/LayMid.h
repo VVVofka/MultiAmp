@@ -3,7 +3,7 @@
 #include "LayBase.h"
 class LayMid : public LayBase{
 public:
-	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view);
 	VGpuCpu<float_2> vf;
 
 	void gpu2cpu();

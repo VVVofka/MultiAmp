@@ -5,7 +5,7 @@
 
 class Lays{	//  : public Lay0
 public:
-	Lays(structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	Lays(structAll* cfg_all, accelerator_view* m_accl_view);
 	~Lays();
 
 	Lay0 lay0;
@@ -21,5 +21,5 @@ public:
 	std::string DumpF(int idx = -1, const int digits = 2)const;
 
 private:
-};
+}; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -7,7 +7,6 @@ Processes::Processes(structAll* p_cfg_all, Lays* p_lays) :
 	processF(p_lays, &masks.f),
 	rnd(p_cfg_all->misc.curRndSeed){
 
-	lays = p_lays;
 	cfg_all = p_cfg_all;
 	curIteration = p_cfg_all->misc.curIteration;
 	rnd.setUpper(p_cfg_all->lays.bottomSquare());

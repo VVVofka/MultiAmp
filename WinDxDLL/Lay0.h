@@ -7,7 +7,7 @@
 
 class Lay0 : public LayBase{
 public:
-	Lay0(structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	Lay0(structAll* cfg_all, accelerator_view* m_accl_view);
 	~Lay0();
 
 	std::vector<Vertex2D> vcpuScreen;

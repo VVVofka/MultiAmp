@@ -13,7 +13,6 @@ public:
 
 	ProcessA processA;
 	ProcessF processF;
-	Lays* lays;
 	MasksAll masks;
 	structAll* cfg_all;
 

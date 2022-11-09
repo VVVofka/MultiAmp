@@ -108,7 +108,7 @@ structMasksCfg getMasksCfg(const char* f_name){
 	std::string sa = getMaskA(f_name);
 	ret.seta(sa);
 
-	std::string sf = getMaskA(f_name);
+	std::string sf = getMaskF(f_name);
 	ret.setf(sf);
 
 	return ret;

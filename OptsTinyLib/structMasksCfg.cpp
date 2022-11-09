@@ -12,7 +12,7 @@ void structMasksCfg::setf(const std::string& s){
 		vf[j] = char2float_2(s[j]);
 } // ///////////////////////////////////////////////////////////////////////////////////
 float_2 structMasksCfg::char2float_2(const char ch){
-	const float d = 0.7071067811865475;
+	const float d = 0.7071067811865475f;
 	switch(ch){
 	case '0':
 		return float_2(0, 0);
