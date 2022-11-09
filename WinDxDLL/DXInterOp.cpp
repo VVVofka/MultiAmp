@@ -9,10 +9,21 @@ static bool pauseRender = false;
 // Entry point to the program. Initializes everything and goes into a message processing 
 // loop. Idle time is used to render the scene.
 #pragma warning(suppress : 28251)
+
 //int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, structAll* cfg_all){
-	UNREFERENCED_PARAMETER(hPrevInstance);
-	UNREFERENCED_PARAMETER(lpCmdLine);
+int mndbg(HINSTANCE hInstance, structAll* cfg_all){
+	int nCmdShow = SW_SHOWDEFAULT;
+	if(FAILED(InitWindow(hInstance, nCmdShow)))
+		return E_NOINTERFACE;
+	if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
+		mdx.CleanupDevice();
+		return E_FAIL;
+	}
+	mdx.Render();
+	mdx.CleanupDevice();
+	return NOERROR;
+} // ////////////////////////////////////////////////////////////////////////////////
+int mn(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
 	if(model.Create() == false)
 		return E_POINTER;
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
@@ -27,10 +38,8 @@ int mn(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdS
 		return E_FAIL;
 	}
 	int work();	return work();
-} // ////////////////////////////////////////////////////////////////////////////
+	} // ////////////////////////////////////////////////////////////////////////////
 int work(){
-	//model.Create(szlay0, 1024 * 2, 0.035, Sigma);
-
 	// Main message loop
 	MSG msg = {0};
 	time_t ltime;
@@ -121,16 +130,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 #endif // NEW_ENGINE
 			}
 			pauseRender = false;
-			break; }
+			break;
+		}
 		case VK_PAUSE:
 			break;
 		default:
 			model.setConsole();
 			printf("%d\n", (int)wParam);
 			break;
-		}
+	}
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
-	}
+}
 	return 0;
 } // ////////////////////////////////////////////////////////////////////////////////////

@@ -1,17 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Session">
-      <UniqueIdentifier>{89f3aba8-f6a7-4dd3-bf73-c7132a92fa45}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Misc">
       <UniqueIdentifier>{d8a20fe2-7c71-4e2e-8649-2d3e85b46162}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Session\structs">
-      <UniqueIdentifier>{a0781958-4a64-4450-afa2-9d9e9d3af386}</UniqueIdentifier>
-    </Filter>
     <Filter Include="my">
       <UniqueIdentifier>{adbe1b53-8938-4972-af9a-657b5048d4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="structs">
+      <UniqueIdentifier>{a0781958-4a64-4450-afa2-9d9e9d3af386}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,13 +23,13 @@
     </ClInclude>
     <ClInclude Include="InPort.h" />
     <ClInclude Include="structDataCfg.h">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClInclude>
     <ClInclude Include="structLaysCfg.h">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClInclude>
     <ClInclude Include="structMiscCfg.h">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClInclude>
     <ClInclude Include="myconv.h">
       <Filter>my</Filter>
@@ -41,10 +38,10 @@
       <Filter>my</Filter>
     </ClInclude>
     <ClInclude Include="structAll.h">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClInclude>
     <ClInclude Include="structMasksCfg.h">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +56,7 @@
     </ClCompile>
     <ClCompile Include="InPort.cpp" />
     <ClCompile Include="structDataCfg.cpp">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClCompile>
     <ClCompile Include="myconv.cpp">
       <Filter>my</Filter>
@@ -68,8 +65,7 @@
       <Filter>my</Filter>
     </ClCompile>
     <ClCompile Include="structMasksCfg.cpp">
-      <Filter>Session\structs</Filter>
+      <Filter>structs</Filter>
     </ClCompile>
-    <ClCompile Include="structAll.cpp" />
   </ItemGroup>
 </Project>
