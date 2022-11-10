@@ -138,7 +138,7 @@
     <ClInclude Include="ProcessParams.h">
       <Filter>Process</Filter>
     </ClInclude>
-    <ClInclude Include="MyWndDll.h">
+    <ClInclude Include="mywnd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -254,7 +254,7 @@
     <ClCompile Include="ProcessParams.cpp">
       <Filter>Process</Filter>
     </ClCompile>
-    <ClCompile Include="MyWndDll.cpp">
+    <ClCompile Include="mywnd.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

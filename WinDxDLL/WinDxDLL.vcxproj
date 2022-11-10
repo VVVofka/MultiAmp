@@ -194,7 +194,7 @@
     <ClInclude Include="Model2D.h" />
     <ClInclude Include="Model2D_Static.h" />
     <ClInclude Include="myRnd.h" />
-    <ClInclude Include="MyWndDll.h" />
+    <ClInclude Include="mywnd.h" />
     <ClInclude Include="NewEngine.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="Options\OptionExternDecl.h" />
@@ -230,7 +230,7 @@
     <ClCompile Include="MDX2.cpp" />
     <ClCompile Include="Model2D.cpp" />
     <ClCompile Include="Model2D_Static.cpp" />
-    <ClCompile Include="MyWndDll.cpp" />
+    <ClCompile Include="mywnd.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="ProcessA.cpp" />
     <ClCompile Include="ProcessA0.cpp" />

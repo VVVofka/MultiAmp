@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "../WinDxDLL/myRnd.h"
 #include "../WinDxDLL/Model2D.h"
+#include "../WinDxDLL/mywnd.h"
 #include <array>
 #include <algorithm>
 #pragma warning(disable : 4996)
