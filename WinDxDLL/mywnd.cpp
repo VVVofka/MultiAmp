@@ -1,16 +1,19 @@
 #include "mywnd.h"
+#include "MDX2.h"
 namespace mywnd{
-
-	LRESULT CALLBACK    tmpWndProc(HWND, UINT, WPARAM, LPARAM);
-
-	int mywnd::run(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
-		if(model.Create() == false)
+	bool pauseRender;
+	MDX2 mdx;
+	Model2D model2;
+	HINSTANCE g_hInst;
+	HWND g_hWnd;
+		int run(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
+		if(model2.Create() == false)
 			return E_POINTER;
 		if(FAILED(InitWindow(hInstance, nCmdShow)))
 			return E_NOINTERFACE;
 
 #ifndef NEW_ENGINE
-		if(FAILED(mdx.InitDevice(g_hWnd, model.v_scr))){
+		if(FAILED(mdx.InitDevice(g_hWnd, model2.v_scr))){
 #else // NEW_ENGINE
 		if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
 #endif // NEWENINE
@@ -19,7 +22,7 @@ namespace mywnd{
 		}
 		return work();
 	} // ///////////////////////////////////////////////////////////////////////////////////////////
-	int mywnd::work(){
+	int work(){
 		// Main message loop
 		MSG msg = {0};
 		time_t ltime;
@@ -32,7 +35,7 @@ namespace mywnd{
 			} else{
 				if(!pauseRender){
 					mdx.Render();	// MAIN !!!
-					//model.cfgAll->misc.curIteration++;
+					//model2.cfgAll->misc.curIteration++;
 					cnt++;
 					time_t ctime;
 					time(&ctime);
@@ -50,7 +53,7 @@ namespace mywnd{
 		mdx.CleanupDevice();
 		return (int)msg.wParam;
 	} // /////////////////////////////////////////////////////////////////////////////
-	HRESULT mywnd::InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
+	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
 		// Register class
 		static WNDCLASSEX wcex{};
 		if(wcex.lpfnWndProc == 0){
@@ -99,23 +102,23 @@ namespace mywnd{
 				SendMessage(hWnd, WM_CLOSE, 0, 0);
 				break;
 			case 79:{ // key 'o'  // I=73
-				mywnd::pauseRender = true;
-				if(model.options.showDlg()){
-					model.Create();
-					mywnd::mdx.CleanupDevice();
+				pauseRender = true;
+				if(model2.options.showDlg()){
+					model2.Create();
+					mdx.CleanupDevice();
 #ifndef NEW_ENGINE // not NEW_ENGINE
-					mywnd::mdx.InitDevice(mywnd::g_hWnd, model.v_scr);
+					mdx.InitDevice(g_hWnd, model2.v_scr);
 #else // NEW_ENGINE
 					mdx.InitDevice(g_hWnd, mdx.cfg_all);
 #endif // NEW_ENGINE
 				}
-				mywnd::pauseRender = false;
+				pauseRender = false;
 				break;
 			}
 			case VK_PAUSE:
 				break;
 			default:
-				model.setConsole();
+				model2.setConsole();
 				printf("%d\n", (int)wParam);
 				break;
 			}

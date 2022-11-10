@@ -1,5 +1,8 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
-#include "Main.h"
+//#include "Main.h"
+#include <Windows.h>
+#include "mywnd.h"
+#include "..\OptsTinyLib\structAll.h"
 
 BOOL APIENTRY DllMain(HMODULE hModule,
 					   DWORD  ul_reason_for_call,
@@ -15,7 +18,8 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	return TRUE;
 } // /////////////////////////////////////////////////////////////////////
 extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, int a, int b){
-	int ret = tstdllMain(hInstance, nCmdShow, a, b);
+	int ret = 0;
+	//ret = tstdllMain(hInstance, nCmdShow, a, b);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
 //extern "C" _declspec(dllexport) int openWindow1(HINSTANCE hInstance, int nCmdShow){
@@ -25,8 +29,9 @@ extern "C" _declspec(dllexport) int tstdll(HINSTANCE hInstance, int nCmdShow, in
 
 // TODO: rename
 extern "C" _declspec(dllexport) int openWindow1json(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
-	//int ret = openwnd(hInstance, nCmdShow, cfg_all);
-	int ret = mn(hInstance, nCmdShow, cfg_all);	// def in Main.h;  Body in DXInterOp.cpp
+	int ret = 0;
+	//ret = mn(hInstance, nCmdShow, cfg_all);	// def in Main.h;  Body in DXInterOp.cpp
+	//ret = mywnd::run(hInstance, nCmdShow, cfg_all);
 	return ret;
 } // //////////////////////////////////////////////////////////////////////////////////
 

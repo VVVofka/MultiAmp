@@ -6,12 +6,18 @@
 #include <array>
 #include <algorithm>
 #pragma warning(disable : 4996)
+#pragma comment(lib, ".lib")
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UTstWinDll{
 	TEST_CLASS(UTstWinDll){
 public:
-
+	TEST_METHOD(dllstart1){
+		HINSTANCE hInstance = GetModuleHandle(NULL);	// GetApp()->m_hInstance;
+		int nCmdShow = SW_SHOWDEFAULT;
+		structAll cfg_all;
+		mywnd::run(hInstance, nCmdShow, &cfg_all);
+	} // /////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(fillScreenPoints){
 		Model2D_Static model;
 		std::vector<size_t> vin;
