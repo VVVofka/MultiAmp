@@ -6,7 +6,7 @@
 #include <array>
 #include <algorithm>
 #pragma warning(disable : 4996)
-#pragma comment(lib, ".lib")
+//#pragma comment(lib, "MDX2.obj")
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace UTstWinDll{
