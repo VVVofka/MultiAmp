@@ -1,18 +1,6 @@
-#include "DXInterOp.h"
-// File: InterOp.cpp
-// https://hackmag.com/coding/computing-with-gpu/
-// This application demonstrates the usage of AMP C++ interOp APIs with Direct3D 11. 
-// It displays the animation of a triangle rotation. 
-// --------------------------------------------------------------------------------------
-static bool pauseRender = false;
-// --------------------------------------------------------------------------------------
-// Entry point to the program. Initializes everything and goes into a message processing 
-// loop. Idle time is used to render the scene.
-#pragma warning(suppress : 28251)
+#include "MyWndDll.h"
 
-//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow){
-
-int mn(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
+int MyWndDll::run(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
 	if(model.Create() == false)
 		return E_POINTER;
 	if(FAILED(InitWindow(hInstance, nCmdShow)))
@@ -26,9 +14,9 @@ int mn(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
 		mdx.CleanupDevice();
 		return E_FAIL;
 	}
-	int work();	return work();
-	} // ////////////////////////////////////////////////////////////////////////////
-int work(){
+	return work();
+	} // ///////////////////////////////////////////////////////////////////////////////////////////
+int MyWndDll::work(){
 	// Main message loop
 	MSG msg = {0};
 	time_t ltime;
@@ -59,7 +47,7 @@ int work(){
 	mdx.CleanupDevice();
 	return (int)msg.wParam;
 } // /////////////////////////////////////////////////////////////////////////////
-HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
+HRESULT MyWndDll::InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
 	// Register class
 	static WNDCLASSEX wcex{};
 	if(wcex.lpfnWndProc == 0){
@@ -92,7 +80,7 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and cr
 	return S_OK;
 } // //////////////////////////////////////////////////////////////////////////////////////////////
 // Called every time the application receives a message
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
+LRESULT CALLBACK MyWndDll::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	switch(message){
 	case WM_PAINT:
 		PAINTSTRUCT ps;
@@ -127,9 +115,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			model.setConsole();
 			printf("%d\n", (int)wParam);
 			break;
-	}
+		}
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
-}
+	}
 	return 0;
 } // ////////////////////////////////////////////////////////////////////////////////////
