@@ -166,23 +166,31 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	if(ret == IDOK)
 		setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
+//#include "..\WinDxDLL\mywnd.h"
+#include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	cfg_all.load("tstDlg.xml");
-	HMODULE hLib;
-	auto dllname = dllName();
-	auto spath = TEXT(dllname.c_str());
-	hLib = LoadLibrary(spath);
-	if(hLib != NULL){
-		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
-		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
-		if(pFunction != NULL){
-			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
-			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
-			//_RPT1(_CRT_WARN, "%d\n", ret);
-		} else{
-			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
-		}
-	} else{
-		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
-	}
+	auto ret = fnAMPEngine2Lib();
+	_ASSERTE(ret == 7);
+	//mywnd::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////
+//void CMultiAmpDlg::OnBnClickedBtMainRun(){
+//	cfg_all.load("tstDlg.xml");
+//	HMODULE hLib;
+//	auto dllname = dllName();
+//	auto spath = TEXT(dllname.c_str());
+//	hLib = LoadLibrary(spath);
+//	if(hLib != NULL){
+//		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
+//		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
+//		if(pFunction != NULL){
+//			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+//			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+//			//_RPT1(_CRT_WARN, "%d\n", ret);
+//		} else{
+//			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
+//		}
+//	} else{
+//		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
+//	}
+//} // /////////////////////////////////////////////////////////////////////////////////
