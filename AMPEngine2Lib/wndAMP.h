@@ -13,11 +13,8 @@
 //#include "Options.h"
 
 namespace eng2{
-	//LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-
-	//int run(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all);
-	//HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
-
-	//int work();
-}
+	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
+	int work();
+	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

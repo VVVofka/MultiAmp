@@ -166,14 +166,47 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	if(ret == IDOK)
 		setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
-//#include "..\WinDxDLL\mywnd.h"
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 #include "..\AMPEngine2Lib\wndAMP.h"
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
-	cfg_all.load("tstDlg.xml");
-	auto ret = eng2::fnAMPEngine2Lib();
-	_ASSERTE(ret == 7);
-	eng2::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+//	cfg_all.load("tstDlg.xml");
+	STARTUPINFO si;
+	PROCESS_INFORMATION pi;
+
+	ZeroMemory(&si, sizeof(si));
+	si.cb = sizeof(si);
+	ZeroMemory(&pi, sizeof(pi));
+
+	if(argc != 2){
+		printf("Usage: %s [cmdline]\n", argv[0]);
+		return;
+	}
+
+	// Start the child process. 
+	if(!CreateProcess(NULL,   // No module name (use command line)
+		"",        // Command line
+		NULL,           // Process handle not inheritable
+		NULL,           // Thread handle not inheritable
+		FALSE,          // Set handle inheritance to FALSE
+		0,              // No creation flags
+		NULL,           // Use parent's environment block
+		NULL,           // Use parent's starting directory 
+		&si,            // Pointer to STARTUPINFO structure
+		&pi)           // Pointer to PROCESS_INFORMATION structure
+		){
+		printf("CreateProcess failed (%d).\n", GetLastError());
+		return;
+	}
+
+	// Wait until child process exits.
+	WaitForSingleObject(pi.hProcess, INFINITE);
+
+	// Close process and thread handles. 
+	CloseHandle(pi.hProcess);
+	CloseHandle(pi.hThread);
+
+	//eng2::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+	eng2::run(NULL, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////
 //void CMultiAmpDlg::OnBnClickedBtMainRun(){
 //	cfg_all.load("tstDlg.xml");
