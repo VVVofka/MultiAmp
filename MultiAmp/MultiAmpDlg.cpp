@@ -168,11 +168,12 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 } // /////////////////////////////////////////////////////////////////////////////////
 //#include "..\WinDxDLL\mywnd.h"
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
+#include "..\AMPEngine2Lib\wndAMP.h"
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	cfg_all.load("tstDlg.xml");
-	auto ret = fnAMPEngine2Lib();
+	auto ret = eng2::fnAMPEngine2Lib();
 	_ASSERTE(ret == 7);
-	//mywnd::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+	eng2::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////
 //void CMultiAmpDlg::OnBnClickedBtMainRun(){
 //	cfg_all.load("tstDlg.xml");

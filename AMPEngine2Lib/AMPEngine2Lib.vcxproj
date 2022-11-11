@@ -161,9 +161,11 @@
   <ItemGroup>
     <ClInclude Include="AMPEngine2Lib.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="wndAMP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Lib.cpp" />
+    <ClCompile Include="wndAMP.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

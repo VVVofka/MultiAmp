@@ -16,9 +16,15 @@
     <ClInclude Include="framework.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="wndAMP.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Lib.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="wndAMP.cpp">
       <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
