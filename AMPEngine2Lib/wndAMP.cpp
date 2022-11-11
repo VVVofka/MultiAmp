@@ -75,10 +75,8 @@ namespace eng2{
 		case WM_PAINT:
 			PAINTSTRUCT ps;
 			BeginPaint(hWnd, &ps);
+			// TODO: Add any drawing code that uses hdc here...
 			EndPaint(hWnd, &ps);
-			break;
-		case WM_DESTROY:
-			PostQuitMessage(0);
 			break;
 		case WM_KEYDOWN:
 			switch(wParam){
@@ -102,6 +100,9 @@ namespace eng2{
 				printf("%d\n", (int)wParam);
 				break;
 			}
+		case WM_DESTROY:
+			PostQuitMessage(0);
+			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}

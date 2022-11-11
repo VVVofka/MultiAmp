@@ -12,9 +12,9 @@ struct structAll{
 	structMasksCfg masks;
 
 	void load(const char* f_name){
-		data = getDataCfg(f_name);
-		lays = getLaysCfg(f_name);
-		misc = getMiscCfg(f_name);
-		masks = getMasksCfg(f_name);
+		data = getxml::getDataCfg(f_name);
+		lays = getxml::getLaysCfg(f_name);
+		misc = getxml::getMiscCfg(f_name);
+		masks = getxml::getMasksCfg(f_name);
 	} // ///////////////////////////////////////////////////////////////////
 };

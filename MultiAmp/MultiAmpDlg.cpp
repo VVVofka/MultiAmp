@@ -115,14 +115,14 @@ void CMultiAmpDlg::OnBnClickedOk(){
 	CDialogEx::OnOK();
 }  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskA(){
-	std::string maskA = getMaskA("tstDlg.xml");		// InPort.cpp
+	std::string maskA = getxml::getMaskA("tstDlg.xml");		// InPort.cpp
 	DlgMaskA dlgmaska;
 	auto newmask = dlgmaska.doModal(maskA);
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmask.c_str());
-	setMaskA("tstDlg.xml", newmask.c_str());
+	getxml::setMaskA("tstDlg.xml", newmask.c_str());
 } // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtMaskF(){
-	auto maskF = getMaskF("tstDlg.xml");		// InPort.cpp
+	auto maskF = getxml::getMaskF("tstDlg.xml");		// InPort.cpp
 	DlgMaskF dlgmaskf;
 	std::string newmask = dlgmaskf.doModal(maskF);
 	std::string newmaskall;
@@ -133,21 +133,21 @@ void CMultiAmpDlg::OnBnClickedBtMaskF(){
 	}
 	GetDlgItem(IDC_MAINDLG_INFO)->SetWindowTextA(newmaskall.c_str());
 
-	setMaskF("tstDlg.xml", newmask.c_str());		// InPort.cpp
+	getxml::setMaskF("tstDlg.xml", newmask.c_str());		// InPort.cpp
 }  // ///////////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtLays(){
-	cfg_all.lays = getLaysCfg("tstDlg.xml");		// InPort.cpp
+	cfg_all.lays = getxml::getLaysCfg("tstDlg.xml");		// InPort.cpp
 	DlgCfgLays dlgcfgLays;
 	structLaysCfg ret = dlgcfgLays.doModal(cfg_all.lays);
 	if(cfg_all.lays.laysCnt() != ret.laysCnt() ||
 		cfg_all.lays.topX != ret.topX ||
 		cfg_all.lays.topY != ret.topY)
-		clearDataCfg("tstDlg.xml");		// InPort.cpp
-	setLaysCfg("tstDlg.xml", ret);		// InPort.cpp
+		getxml::clearDataCfg("tstDlg.xml");		// InPort.cpp
+	getxml::setLaysCfg("tstDlg.xml", ret);		// InPort.cpp
 }  // /////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtData(){
-	cfg_all.lays = getLaysCfg("tstDlg.xml");
-	cfg_all.data = getDataCfg("tstDlg.xml");
+	cfg_all.lays = getxml::getLaysCfg("tstDlg.xml");
+	cfg_all.data = getxml::getDataCfg("tstDlg.xml");
 	DlgData dlgdata;
 	DlgDataData data;
 	auto szx = cfg_all.lays.bottomX();
@@ -155,16 +155,16 @@ void CMultiAmpDlg::OnBnClickedBtData(){
 	data.create(szx, szy, &cfg_all.data.v, &cfg_all.data.sigma, &cfg_all.data.seed);
 	INT_PTR ret = dlgdata.doModal(&data);
 	if(ret == IDOK)
-		setDataCfg("tstDlg.xml", cfg_all.data);			// InPort.cpp
+		getxml::setDataCfg("tstDlg.xml", cfg_all.data);			// InPort.cpp
 } // /////////////////////////////////////////////////////////////////////////////////
 void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	DlgMisc dlgmisc;
-	cfg_all.misc = getMiscCfg("tstDlg.xml");
+	cfg_all.misc = getxml::getMiscCfg("tstDlg.xml");
 	//_tzset();	_time64(&misccfg.dtCreate);
 
 	INT_PTR ret = dlgmisc.doModal(&cfg_all.misc);
 	if(ret == IDOK)
-		setMiscCfg("tstDlg.xml", cfg_all.misc);
+		getxml::setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 #include "..\AMPEngine2Lib\wndAMP.h"
