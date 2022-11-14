@@ -111,8 +111,11 @@ void ErrorExit(){
 	// Display the error message and exit the process
 
 	lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, (lstrlen((LPCTSTR)lpMsgBuf) + 40) * sizeof(TCHAR));
+#pragma warning(push)
+#pragma warning(disable:28183 6067) 
 	StringCchPrintf((LPTSTR)lpDisplayBuf, LocalSize(lpDisplayBuf) / sizeof(TCHAR),
 		TEXT("failed with error %d: %s"), dw, lpMsgBuf);
+#pragma warning(pop)
 	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
 
 	LocalFree(lpMsgBuf);
