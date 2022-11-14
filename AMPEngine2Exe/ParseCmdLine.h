@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <WTypesbase.h>
 class ParseCmdLine{
 public:
 	std::string fname;

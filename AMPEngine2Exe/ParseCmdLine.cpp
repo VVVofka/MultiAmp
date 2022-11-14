@@ -6,23 +6,31 @@
 #include <locale>
 #include <codecvt>
 INT64 ParseCmdLine::parse(const LPWSTR s_in){
-	tick_cnt = 0;
+	if(s_in == NULL){
+		fname = def_fname;
+		tick_cnt = -1;
+		return tick_cnt;
+	}
+
 	fname.clear();
-	
+
 	std::string s = ws2s(s_in);
 	trim(s);
 	size_t len = s.size();
-	
+	if(len == 0){
+		fname = def_fname;
+		tick_cnt = -1;
+		return tick_cnt;
+	}
+
 	char delim;
 	size_t pos;
 	if(s[0] == '"' || s[0] == '\'' || s[0] == '`'){
 		delim = s[0];
 		pos = 1;
-	}
-	else{
+	} else{
 		delim = ' ';
 		pos = 0;
-		fname = s[0];
 	}
 
 	while(pos < len){
@@ -30,14 +38,21 @@ INT64 ParseCmdLine::parse(const LPWSTR s_in){
 			break;
 		fname += s[pos++];
 	}
-	if(fname.size() == 0 ) 
+	trim(fname);
+	if(fname.size() == 0)
 		fname = def_fname;
 
+	tick_cnt = 0;
+	bool istick = false;
 	while(pos < len){
 		const int ch = s[pos++] - '0';
-		if(ch >= 0 && ch <= 9)
+		if(ch >= 0 && ch <= 9){
 			tick_cnt = tick_cnt * 10 + ch;
+			istick = true;
+		}
 	}
+	if(istick == false)
+		tick_cnt = -1;
 	return tick_cnt;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////
 std::string& ParseCmdLine::ltrim(std::string& s){

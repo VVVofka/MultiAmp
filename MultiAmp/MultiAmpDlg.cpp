@@ -166,65 +166,24 @@ void CMultiAmpDlg::OnBnClickedBtDataMisc(){
 	if(ret == IDOK)
 		getxml::setMiscCfg("tstDlg.xml", cfg_all.misc);
 } // /////////////////////////////////////////////////////////////////////////////////
-#include "..\AMPEngine2Lib\AMPEngine2Lib.h"
-#include "..\AMPEngine2Lib\wndAMP.h"
+
 void CMultiAmpDlg::OnBnClickedBtMainRun(){
-//	cfg_all.load("tstDlg.xml");
-	STARTUPINFO si;
-	PROCESS_INFORMATION pi;
-
-	ZeroMemory(&si, sizeof(si));
-	si.cb = sizeof(si);
-	ZeroMemory(&pi, sizeof(pi));
-
-	if(argc != 2){
-		printf("Usage: %s [cmdline]\n", argv[0]);
-		return;
+	cfg_all.load("tstDlg.xml");
+	HMODULE hLib;
+	auto dllname = dllName();
+	auto spath = TEXT(dllname.c_str());
+	hLib = LoadLibrary(spath);
+	if(hLib != NULL){
+		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
+		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
+		if(pFunction != NULL){
+			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
+			//_RPT1(_CRT_WARN, "%d\n", ret);
+		} else{
+			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
+		}
+	} else{
+		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
 	}
-
-	// Start the child process. 
-	if(!CreateProcess(NULL,   // No module name (use command line)
-		"",        // Command line
-		NULL,           // Process handle not inheritable
-		NULL,           // Thread handle not inheritable
-		FALSE,          // Set handle inheritance to FALSE
-		0,              // No creation flags
-		NULL,           // Use parent's environment block
-		NULL,           // Use parent's starting directory 
-		&si,            // Pointer to STARTUPINFO structure
-		&pi)           // Pointer to PROCESS_INFORMATION structure
-		){
-		printf("CreateProcess failed (%d).\n", GetLastError());
-		return;
-	}
-
-	// Wait until child process exits.
-	WaitForSingleObject(pi.hProcess, INFINITE);
-
-	// Close process and thread handles. 
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
-
-	//eng2::run(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
-	eng2::run(NULL, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////
-//void CMultiAmpDlg::OnBnClickedBtMainRun(){
-//	cfg_all.load("tstDlg.xml");
-//	HMODULE hLib;
-//	auto dllname = dllName();
-//	auto spath = TEXT(dllname.c_str());
-//	hLib = LoadLibrary(spath);
-//	if(hLib != NULL){
-//		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
-//		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
-//		if(pFunction != NULL){
-//			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
-//			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
-//			//_RPT1(_CRT_WARN, "%d\n", ret);
-//		} else{
-//			MessageBox(spath, TEXT("openWindow1 from WinDxDLL.dll not loaded!"), MB_ICONERROR);
-//		}
-//	} else{
-//		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
-//	}
-//} // /////////////////////////////////////////////////////////////////////////////////
