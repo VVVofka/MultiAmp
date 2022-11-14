@@ -1,11 +1,10 @@
 // AMPEngine2Exe.cpp : Defines the entry point for the application.
-//
-
-#include "pch.h"
+//#include "pch.h"
 #include <time.h>
 //#include "framework.h" // in pch.h
 #include "AMPEngine2Exe.h"
 #include "CommandCenter.h"
+//#include "ParseCmdLine.h"
 
 #define MAX_LOADSTRING 100
 
@@ -34,7 +33,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 ){
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-	// TODO: Place code here.
+	
+	// My start
+	//ParseCmdLine prs;
+	//command_center.tick_cnt = prs.parse(lpCmdLine);
+	//if(prs.fname.size() > 0)
+	//	command_center.structall.load(prs.fname.c_str());
+	// My finish
+
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_AMPENGINE2EXE, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
