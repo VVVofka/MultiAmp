@@ -1,10 +1,12 @@
 // AMPEngine2Exe.cpp : Defines the entry point for the application.
 //#include "pch.h"
 #include <time.h>
+#include <windows.h>
+#include <strsafe.h>
 //#include "framework.h" // in pch.h
 #include "AMPEngine2Exe.h"
 #include "CommandCenter.h"
-//#include "ParseCmdLine.h"
+#include "ParseCmdLine.h"
 
 #define MAX_LOADSTRING 100
 
@@ -21,28 +23,27 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 int					MainMessageLoop(HINSTANCE hInstance);
+int mymain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow);
 
 CommandCenter command_center;
 //bool to_exit = false;
 // ////////////////////////////////////////////////////////////////////////////////////
-
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ LPWSTR    lpCmdLine,
-	_In_ int       nCmdShow
-){
-	UNREFERENCED_PARAMETER(hPrevInstance);
-	UNREFERENCED_PARAMETER(lpCmdLine);
-	
-	// My start
-	//ParseCmdLine prs;
-	//command_center.tick_cnt = prs.parse(lpCmdLine);
-	//if(prs.fname.size() > 0)
-	//	command_center.structall.load(prs.fname.c_str());
-	// My finish
-
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance,	_In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine,_In_ int nCmdShow){
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_AMPENGINE2EXE, szWindowClass, MAX_LOADSTRING);
+	return mymain(hInstance,hPrevInstance,lpCmdLine,nCmdShow);
+} // ///////////////////////////////////////////////////////////////////////////////////
+int mymain(HINSTANCE hInstance,	HINSTANCE hPrevInstance,LPWSTR lpCmdLine,int nCmdShow){
+	UNREFERENCED_PARAMETER(hPrevInstance);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+
+	// My start
+	ParseCmdLine prs;
+	command_center.tick_cnt = prs.parse(lpCmdLine);
+	if(prs.fname.size() > 0)
+		command_center.structall.load(prs.fname.c_str());
+	// My finish
+
 	MyRegisterClass(hInstance);
 	if(!InitInstance(hInstance, nCmdShow))
 		return FALSE;
@@ -90,6 +91,34 @@ int MainMessageLoop(HINSTANCE hInstance){
 	//		mdx.CleanupDevice();
 	return (int)msg.wParam;
 } // ////////////////////////////////////////////////////////////////////////////////////
+void ErrorExit(){
+	// Retrieve the system error message for the last-error code
+
+	LPVOID lpMsgBuf;
+	LPVOID lpDisplayBuf;
+	DWORD dw = GetLastError();
+
+	FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		dw,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPTSTR)&lpMsgBuf,
+		0, NULL);
+
+	// Display the error message and exit the process
+
+	lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, (lstrlen((LPCTSTR)lpMsgBuf) + 40) * sizeof(TCHAR));
+	StringCchPrintf((LPTSTR)lpDisplayBuf, LocalSize(lpDisplayBuf) / sizeof(TCHAR),
+		TEXT("failed with error %d: %s"), dw, lpMsgBuf);
+	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
+
+	LocalFree(lpMsgBuf);
+	LocalFree(lpDisplayBuf);
+	ExitProcess(dw);
+} // //////////////////////////////////////////////////////////////////////////////////////////
 ATOM MyRegisterClass(HINSTANCE hInstance){
 	static WNDCLASSEXW wcex{};
 	if(wcex.lpfnWndProc == 0){
@@ -106,7 +135,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance){
 		wcex.lpszClassName = szWindowClass;
 		wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 	}
-	return RegisterClassExW(&wcex);
+	auto ret = RegisterClassExW(&wcex);
+	if(ret == 0)
+		ErrorExit();
+	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////
 //   FUNCTION: InitInstance(HINSTANCE, int)
 //   PURPOSE: Saves instance handle and creates main window
