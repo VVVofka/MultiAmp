@@ -5,12 +5,11 @@
 #include <string>
 #include <locale>
 #include <codecvt>
-using namespace std;
-INT64 ParseCmdLine::parse(LPWSTR s_in){
+INT64 ParseCmdLine::parse(const LPWSTR s_in){
 	tick_cnt = 0;
 	fname.clear();
 	
-	string s = ws2s(s_in);
+	std::string s = ws2s(s_in);
 	trim(s);
 	size_t len = s.size();
 	
@@ -35,15 +34,12 @@ INT64 ParseCmdLine::parse(LPWSTR s_in){
 		fname = def_fname;
 
 	while(pos < len){
-		const int ch = s[pos] - '0';
+		const int ch = s[pos++] - '0';
 		if(ch >= 0 && ch <= 9)
 			tick_cnt = tick_cnt * 10 + ch;
-		pos++;
 	}
 	return tick_cnt;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////////
-//std::wstring ParseCmdLine::trim(wchar_t const* str){
-//} // ////////////////////////////////////////////////////////////////////////////////////////////////////
 std::string& ParseCmdLine::ltrim(std::string& s){
 	s.erase(s.begin(), std::find_if(s.begin(), s.end(),
 		std::ptr_fun<int, int>(std::isgraph)));
