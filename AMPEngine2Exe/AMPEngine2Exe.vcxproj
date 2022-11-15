@@ -165,7 +165,13 @@
   <ItemGroup>
     <ClInclude Include="AMPEngine2Exe.h" />
     <ClInclude Include="CommandCenter.h" />
+    <ClInclude Include="EngineOld\AMPEng2.h" />
+    <ClInclude Include="Engine\Engine2.h" />
+    <ClInclude Include="Engine\NewEngine.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="MDX\MDX.h" />
+    <ClInclude Include="MDX\MDX2.h" />
+    <ClInclude Include="MDX\Vertex.h" />
     <ClInclude Include="ParseCmdLine.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -173,6 +179,10 @@
   <ItemGroup>
     <ClCompile Include="AMPEngine2Exe.cpp" />
     <ClCompile Include="CommandCenter.cpp" />
+    <ClCompile Include="EngineOld\AMPEng2.cpp" />
+    <ClCompile Include="Engine\Engine2.cpp" />
+    <ClCompile Include="MDX\MDX.cpp" />
+    <ClCompile Include="MDX\MDX2.cpp" />
     <ClCompile Include="ParseCmdLine.cpp" />
   </ItemGroup>
   <ItemGroup>

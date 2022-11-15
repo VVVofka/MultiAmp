@@ -113,11 +113,6 @@ ATOM MyRegisterClass(HINSTANCE hInstance){
 		ErrorExit();
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////
-//   FUNCTION: InitInstance(HINSTANCE, int)
-//   PURPOSE: Saves instance handle and creates main window
-//   COMMENTS:
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow){
 	hInst = hInstance; // Store instance handle in our global variable
 	hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
@@ -129,10 +124,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow){
 	UpdateWindow(hWnd);
 	return TRUE;
 } // ////////////////////////////////////////////////////////////////////////////////////
-//  PURPOSE: Processes messages for the main window.
-//  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
-//  WM_DESTROY  - post a quit message and return
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	switch(message){
 	case WM_COMMAND:

@@ -19,6 +19,12 @@
     <Filter Include="MDX">
       <UniqueIdentifier>{918f4e8b-1ef6-4fa3-82b3-3585e4940c1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{f225810e-5742-43ba-af53-d0dd69658d25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineOld">
+      <UniqueIdentifier>{ce690fed-f538-428f-a9c4-9ecaae6fc779}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -39,6 +45,24 @@
     <ClInclude Include="ParseCmdLine.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="MDX\MDX.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX\MDX2.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX\Vertex.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Engine2.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\NewEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineOld\AMPEng2.h">
+      <Filter>EngineOld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Exe.cpp">
@@ -49,6 +73,18 @@
     </ClCompile>
     <ClCompile Include="ParseCmdLine.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MDX\MDX.cpp">
+      <Filter>MDX</Filter>
+    </ClCompile>
+    <ClCompile Include="MDX\MDX2.cpp">
+      <Filter>MDX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Engine2.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineOld\AMPEng2.cpp">
+      <Filter>EngineOld</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
