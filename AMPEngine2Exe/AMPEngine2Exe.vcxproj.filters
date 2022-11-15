@@ -126,12 +126,6 @@
     <ClInclude Include="myUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EngineOld\Model2D.h">
-      <Filter>EngineOld</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineOld\Model2D_Static.h">
-      <Filter>EngineOld</Filter>
-    </ClInclude>
     <ClInclude Include="EngineOld\RunA.h">
       <Filter>EngineOld</Filter>
     </ClInclude>
@@ -142,9 +136,6 @@
       <Filter>EngineOld</Filter>
     </ClInclude>
     <ClInclude Include="EngineOld\Masks.h">
-      <Filter>EngineOld</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineOld\Options.h">
       <Filter>EngineOld</Filter>
     </ClInclude>
   </ItemGroup>
@@ -230,12 +221,6 @@
     <ClCompile Include="EngineOld\ProcessParam.cpp">
       <Filter>EngineOld</Filter>
     </ClCompile>
-    <ClCompile Include="EngineOld\Model2D.cpp">
-      <Filter>EngineOld</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineOld\Model2D_Static.cpp">
-      <Filter>EngineOld</Filter>
-    </ClCompile>
     <ClCompile Include="EngineOld\RunA.cpp">
       <Filter>EngineOld</Filter>
     </ClCompile>
@@ -246,9 +231,6 @@
       <Filter>EngineOld</Filter>
     </ClCompile>
     <ClCompile Include="EngineOld\Masks.cpp">
-      <Filter>EngineOld</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineOld\Options.cpp">
       <Filter>EngineOld</Filter>
     </ClCompile>
   </ItemGroup>

@@ -183,9 +183,6 @@
     <ClInclude Include="CommandCenter.h" />
     <ClInclude Include="EngineOld\AMPEng2.h" />
     <ClInclude Include="EngineOld\Masks.h" />
-    <ClInclude Include="EngineOld\Model2D.h" />
-    <ClInclude Include="EngineOld\Model2D_Static.h" />
-    <ClInclude Include="EngineOld\Options.h" />
     <ClInclude Include="EngineOld\ProcessParam.h" />
     <ClInclude Include="EngineOld\ProcessParams.h" />
     <ClInclude Include="EngineOld\RunA.h" />
@@ -220,9 +217,6 @@
     <ClCompile Include="CommandCenter.cpp" />
     <ClCompile Include="EngineOld\AMPEng2.cpp" />
     <ClCompile Include="EngineOld\Masks.cpp" />
-    <ClCompile Include="EngineOld\Model2D.cpp" />
-    <ClCompile Include="EngineOld\Model2D_Static.cpp" />
-    <ClCompile Include="EngineOld\Options.cpp" />
     <ClCompile Include="EngineOld\ProcessParam.cpp" />
     <ClCompile Include="EngineOld\ProcessParams.cpp" />
     <ClCompile Include="EngineOld\RunA.cpp" />
