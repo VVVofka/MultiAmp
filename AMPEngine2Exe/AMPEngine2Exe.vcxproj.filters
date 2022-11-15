@@ -138,6 +138,9 @@
     <ClInclude Include="myUtil.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="myRnd.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Exe.cpp">

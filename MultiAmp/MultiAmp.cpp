@@ -19,7 +19,10 @@ CMultiAmpApp::CMultiAmpApp(){
 
 // The one and only CMultiAmpApp object
 CMultiAmpApp theApp;
-
+INT_PTR doModalOptionsDlg(){
+	CMultiAmpDlg dlg;
+	return dlg.DoModal();
+} // //////////////////////////////////////////////////////////////////
 
 // CMultiAmpApp initialization
 BOOL CMultiAmpApp::InitInstance(){
