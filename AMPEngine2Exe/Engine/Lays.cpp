@@ -1,5 +1,6 @@
 #include "Lays.h"
-#include "Utils.h"
+#include "..\myUtil.h"
+
 Lays::Lays(structAll* cfg_all, accelerator_view* m_accl_view) : 
 	lay0(cfg_all, m_accl_view){
 

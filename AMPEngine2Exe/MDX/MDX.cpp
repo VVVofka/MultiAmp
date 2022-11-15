@@ -156,7 +156,7 @@ HRESULT MDX::CompileShaderFromFile(LPCWSTR szFileName, LPCSTR szEntryPoint, LPCS
 	// the release configuration of this program.
 	dwShaderFlags |= D3DCOMPILE_DEBUG;
 #endif
-	FILE* f = fopen("tzt.tzt", "w, ccs=UNICODE");		fwrite(szFileName, 2, std::wstring(szFileName).size(), f);		fclose(f);
+	//FILE* f = fopen("tzt.tzt", "w, ccs=UNICODE");		fwrite(szFileName, 2, std::wstring(szFileName).size(), f);		fclose(f);
 	// Read shader file to string buffer
 	std::ifstream shaderFileStream(szFileName);
 	std::stringstream ssbuff;

@@ -10,14 +10,14 @@
 #include <D3D11.h>
 
 #include "Model2D.h"
-#include "Vertex.h"
+#include "..\MDX\Vertex.h"
 #include "RunA.h"
 #include "RunD.h"
 #include "RunDlast.h"
 #include "Masks.h"
 #include "Utils.h"
-#include "Options.h"
-#include "myRnd.h"
+//#include "Options.h"
+#include "..\myRnd.h"
 
 extern Model2D model;
 

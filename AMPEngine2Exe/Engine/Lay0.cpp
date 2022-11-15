@@ -1,5 +1,5 @@
 #include "Lay0.h"
-#include "Utils.h"
+#include "..\myUtil.h"
 
 Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_all, m_accl_view){
 	//cpuPoint2gpuPoint(countPoint);

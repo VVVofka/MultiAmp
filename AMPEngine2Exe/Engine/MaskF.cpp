@@ -1,5 +1,6 @@
 #include "MaskF.h"
-#include "Utils.h"
+#include "..\myUtil.h"
+
 MaskF::MaskF(structAll* cfg_all){
 	//cfg_all->lays.
 } // //////////////////////////////////////////////////////////////////////

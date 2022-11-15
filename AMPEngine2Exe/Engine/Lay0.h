@@ -4,7 +4,7 @@
 #include <random>
 #include "LayBase.h"
 #include "..\MDX\Vertex.h"
-//#include <amp.h>
+#include <amp.h>
 #include <amp_graphics.h>
 
 using namespace Concurrency;

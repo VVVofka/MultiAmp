@@ -1,6 +1,6 @@
 #include <amp_math.h>
 #include "ProcessF.h"
-#include "ProcessParam.h"
+//#include "ProcessParam.h"
 
 using namespace concurrency::graphics;
 using namespace concurrency::direct3d;

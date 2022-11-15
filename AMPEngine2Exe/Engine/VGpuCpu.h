@@ -1,12 +1,14 @@
 #pragma once
 #include <amp.h>
+#include <amp_graphics.h>
 #include <amp_short_vectors.h>
 #include <vector>
+
 #include "LaysCPUCfg.h"
-#include <amp_graphics.h>
+#include "..\myUtil.h"
 
 using namespace Concurrency;
-//using namespace Concurrency::graphics;
+using namespace Concurrency::graphics;	// int_2
 
 template<class T>
 class VGpuCpu{

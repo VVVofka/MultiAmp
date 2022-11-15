@@ -1,9 +1,11 @@
 #pragma once
 #include <string>		// dor Dump
+#include <amp.h>
+#include <amp_graphics.h>
+
 #include "VGpuCpu.h"	// for va
 #include "..\..\OptsTinyLib\structAll.h"
 #include "..\EngineOld\ProcessParams.h"
-#include <amp_graphics.h>
 
 using namespace Concurrency;
 

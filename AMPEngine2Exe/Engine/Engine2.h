@@ -1,5 +1,5 @@
 #pragma once
-#include "NewEngine.h"
+//#include "NewEngine.h"
 #include <amp.h>
 #include <amp_graphics.h>
 #include <D3D11.h>

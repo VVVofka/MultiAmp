@@ -1,5 +1,5 @@
 #include "MaskA.h"
-#include "Utils.h"
+#include "..\myUtil.h"
 
 MaskA::MaskA(structAll* cfg_all){
 	vcpu = {0};
