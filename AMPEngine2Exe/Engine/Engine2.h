@@ -10,12 +10,12 @@
 //#include "RunDlast.h"
 //#include "Masks.h"
 //#include "Options.h"
-#include "Vertex.h"
-#include "Utils.h"
-#include "myRnd.h"
+#include "..\MDX\Vertex.h"
+//#include "Utils.h"
+#include "..\myRnd.h"
 #include "Lays.h"
 #include "Processes.h"
-#include "..\OptsTinyLib\structAll.h"
+#include "..\..\OptsTinyLib\structAll.h"
 
 using namespace Concurrency;
 using namespace concurrency::direct3d;
@@ -27,8 +27,8 @@ class Engine2{
 	//std::vector<std::unique_ptr<array<int, 2>>> vgpu_a;
 	//std::vector<std::unique_ptr<array<DrQuadro, 2>>> vgpu_f;
 	//std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
+	//std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 	std::unique_ptr<array<int, 1>> amask;
-	std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
 
 public:
 	Lays lays;

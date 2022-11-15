@@ -1,5 +1,5 @@
 #pragma once
-#include "NewEngine.h"
+#include "..\Engine\NewEngine.h"
 
 #ifndef NEW_ENGINE // not NEW_ENGINE
 
