@@ -24,6 +24,7 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 int					MainMessageLoop(HINSTANCE hInstance);
 int mymain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow);
+void ErrorExit();
 
 CommandCenter command_center;
 //bool to_exit = false;
@@ -91,37 +92,6 @@ int MainMessageLoop(HINSTANCE hInstance){
 	//		mdx.CleanupDevice();
 	return (int)msg.wParam;
 } // ////////////////////////////////////////////////////////////////////////////////////
-void ErrorExit(){
-	// Retrieve the system error message for the last-error code
-
-	LPVOID lpMsgBuf;
-	LPVOID lpDisplayBuf;
-	DWORD dw = GetLastError();
-
-	FormatMessage(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER |
-		FORMAT_MESSAGE_FROM_SYSTEM |
-		FORMAT_MESSAGE_IGNORE_INSERTS,
-		NULL,
-		dw,
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(LPTSTR)&lpMsgBuf,
-		0, NULL);
-
-	// Display the error message and exit the process
-
-	lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, (lstrlen((LPCTSTR)lpMsgBuf) + 40) * sizeof(TCHAR));
-#pragma warning(push)
-#pragma warning(disable:28183 6067) 
-	StringCchPrintf((LPTSTR)lpDisplayBuf, LocalSize(lpDisplayBuf) / sizeof(TCHAR),
-		TEXT("failed with error %d: %s"), dw, lpMsgBuf);
-#pragma warning(pop)
-	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
-
-	LocalFree(lpMsgBuf);
-	LocalFree(lpDisplayBuf);
-	ExitProcess(dw);
-} // //////////////////////////////////////////////////////////////////////////////////////////
 ATOM MyRegisterClass(HINSTANCE hInstance){
 	static WNDCLASSEXW wcex{};
 	if(wcex.lpfnWndProc == 0){
@@ -138,7 +108,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance){
 		wcex.lpszClassName = szWindowClass;
 		wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 	}
-	auto ret = RegisterClassExW(&wcex);
+	ATOM ret = RegisterClassExW(&wcex);
 	if(ret == 0)
 		ErrorExit();
 	return ret;
@@ -217,7 +187,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 		PostQuitMessage(0);
 		break;
 	default:
-		if(--command_center.tick_cnt == 0)
+		if(--command_center.tick_cnt <= 0)
 			DestroyWindow(hWnd);
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
@@ -229,7 +199,6 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 	switch(message){
 	case WM_INITDIALOG:
 		return (INT_PTR)TRUE;
-
 	case WM_COMMAND:
 		if(LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL){
 			EndDialog(hDlg, LOWORD(wParam));
@@ -239,3 +208,30 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam){
 	}
 	return (INT_PTR)FALSE;
 } // ////////////////////////////////////////////////////////////////////////////////////
+void ErrorExit(){	// Retrieve the system error message for the last-error code
+	LPVOID lpMsgBuf, lpDisplayBuf;
+	DWORD dw = GetLastError();
+
+	FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
+		FORMAT_MESSAGE_IGNORE_INSERTS,
+		NULL,
+		dw,
+		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+		(LPTSTR)&lpMsgBuf,
+		0, NULL);
+
+	// Display the error message and exit the process
+	lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT, (lstrlen((LPCTSTR)lpMsgBuf) + 40) * sizeof(TCHAR));
+#pragma warning(push)
+#pragma warning(disable:28183 6067) 
+	StringCchPrintf((LPTSTR)lpDisplayBuf, LocalSize(lpDisplayBuf) / sizeof(TCHAR),
+		TEXT("failed with error %d: %s"), dw, lpMsgBuf);
+#pragma warning(pop)
+	MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
+
+	LocalFree(lpMsgBuf);
+	LocalFree(lpDisplayBuf);
+	ExitProcess(dw);
+} // //////////////////////////////////////////////////////////////////////////////////////////

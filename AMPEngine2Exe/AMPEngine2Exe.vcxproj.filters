@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{d9880fe9-6014-43a6-98fe-9cd908cff6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MDX">
+      <UniqueIdentifier>{918f4e8b-1ef6-4fa3-82b3-3585e4940c1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -25,24 +31,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AMPEngine2Exe.h">
-      <Filter>Header Files</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="CommandCenter.h">
-      <Filter>Header Files</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="ParseCmdLine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Exe.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="CommandCenter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="ParseCmdLine.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
