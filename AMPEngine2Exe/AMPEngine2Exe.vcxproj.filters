@@ -123,9 +123,6 @@
     <ClInclude Include="EngineOld\ProcessParam.h">
       <Filter>EngineOld</Filter>
     </ClInclude>
-    <ClInclude Include="myUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EngineOld\RunA.h">
       <Filter>EngineOld</Filter>
     </ClInclude>
@@ -137,6 +134,9 @@
     </ClInclude>
     <ClInclude Include="EngineOld\Masks.h">
       <Filter>EngineOld</Filter>
+    </ClInclude>
+    <ClInclude Include="myUtil.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

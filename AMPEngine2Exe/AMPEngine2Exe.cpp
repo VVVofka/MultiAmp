@@ -3,7 +3,7 @@
 #include <time.h>
 #include <windows.h>
 #include <strsafe.h>
-//#include "framework.h" // in pch.h
+#include "framework.h" // in pch.h
 #include "AMPEngine2Exe.h"
 #include "CommandCenter.h"
 #include "ParseCmdLine.h"
@@ -43,6 +43,11 @@ int mymain(HINSTANCE hInstance,	HINSTANCE hPrevInstance,LPWSTR lpCmdLine,int nCm
 	command_center.tick_cnt = prs.parse(lpCmdLine);
 	if(prs.fname.size() > 0)
 		command_center.structall.load(prs.fname.c_str());
+	
+	if(FAILED(command_center.mdx.InitDevice(hWnd, &command_center.structall))){
+		command_center.mdx.CleanupDevice();
+		return E_FAIL;
+	}
 	// My finish
 
 	MyRegisterClass(hInstance);
@@ -69,7 +74,7 @@ int MainMessageLoop(HINSTANCE hInstance){
 			DispatchMessage(&msg);
 		} else{
 			if(!pauseRender){
-				// mdx.Render();	// MAIN !!!
+				command_center.mdx.Render();	// MAIN !!!
 				//model2.cfgAll->misc.curIteration++;
 				cnt++;
 				time_t ctime;
@@ -89,7 +94,7 @@ int MainMessageLoop(HINSTANCE hInstance){
 			}
 		}
 	}
-	//		mdx.CleanupDevice();
+	command_center.mdx.CleanupDevice();
 	return (int)msg.wParam;
 } // ////////////////////////////////////////////////////////////////////////////////////
 ATOM MyRegisterClass(HINSTANCE hInstance){
