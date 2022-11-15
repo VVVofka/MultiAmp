@@ -3,9 +3,11 @@
 #include <amp_short_vectors.h>
 #include <vector>
 #include "LaysCPUCfg.h"
-//#include "Utils.h"
+#include <amp_graphics.h>
 
-using namespace Concurrency::graphics;
+using namespace Concurrency;
+//using namespace Concurrency::graphics;
+
 template<class T>
 class VGpuCpu{
 public:

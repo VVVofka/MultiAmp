@@ -3,7 +3,11 @@
 #include <string>
 #include <random>
 #include "LayBase.h"
-#include "Vertex.h"
+#include "..\MDX\Vertex.h"
+//#include <amp.h>
+#include <amp_graphics.h>
+
+using namespace Concurrency;
 
 class Lay0 : public LayBase{
 public:

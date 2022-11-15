@@ -2,7 +2,7 @@
 #include "ProcessA.h"
 #include "ProcessF.h"
 #include "Lays.h"
-//#include "MasksAll.h"
+#include "MasksAll.h"
 #include "..\myRnd.h"
 #include "..\..\OptsTinyLib\structAll.h"
 
@@ -13,7 +13,7 @@ public:
 
 	ProcessA processA;
 	ProcessF processF;
-	//MasksAll masks;
+	MasksAll masks;
 	structAll* cfg_all;
 
 	void RunAll();

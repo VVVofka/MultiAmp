@@ -1,6 +1,10 @@
 #pragma once
 #include <string>
 #include "LayBase.h"
+#include <amp_graphics.h>
+
+using namespace Concurrency;
+
 class LayMid : public LayBase{
 public:
 	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view);

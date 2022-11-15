@@ -5,6 +5,8 @@
 #include "..\EngineOld\ProcessParams.h"
 #include <amp_graphics.h>
 
+using namespace Concurrency;
+
 class LayBase{
 public:
 	LayBase(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);

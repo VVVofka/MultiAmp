@@ -1,6 +1,6 @@
 ﻿#include "Processes.h"
 
-using namespace concurrency::graphics;
+//using namespace concurrency::graphics;
 Processes::Processes(structAll* p_cfg_all, Lays* p_lays) :
 	masks(p_cfg_all),
 	processA(p_lays, &masks.a),
