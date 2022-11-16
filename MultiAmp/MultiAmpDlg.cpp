@@ -32,6 +32,7 @@ BEGIN_MESSAGE_MAP(CMultiAmpDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BT_DATA, &CMultiAmpDlg::OnBnClickedBtData)
 	ON_BN_CLICKED(IDC_BT_DATA_MISC, &CMultiAmpDlg::OnBnClickedBtDataMisc)
 	ON_BN_CLICKED(IDC_BT_MAIN_RUN, &CMultiAmpDlg::OnBnClickedBtMainRun)
+	ON_BN_CLICKED(IDC_BT_MAIN_RUN2, &CMultiAmpDlg::OnBnClickedBtMainRun2)
 END_MESSAGE_MAP()
 
 // CMultiAmpDlg message handlers
@@ -175,7 +176,7 @@ void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	hLib = LoadLibrary(spath);
 	if(hLib != NULL){
 		int (*pFunction)(HINSTANCE hInstance, int nCmdShow, structAll * cfg_all) = NULL;
-		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   // tstdll
+		(FARPROC&)pFunction = GetProcAddress(hLib, "openWindow1json");   
 		if(pFunction != NULL){
 			int ret = pFunction(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 			//_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
@@ -186,4 +187,9 @@ void CMultiAmpDlg::OnBnClickedBtMainRun(){
 	} else{
 		MessageBox(spath, TEXT("WinDxDLL.dll not loaded!"), MB_ICONERROR);
 	}
+} // /////////////////////////////////////////////////////////////////////////////////
+#include "..\AMPEngine2Lib\AMPEngine2Lib.h"
+void CMultiAmpDlg::OnBnClickedBtMainRun2(){
+	cfg_all.load("tstDlg.xml");
+	eng2::runEngine2Lib(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////
