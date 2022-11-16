@@ -1,8 +1,9 @@
 #include "wndAMP.h"
-//#include "MDX2.h"
+#include "MDX/MDX2.h"
+
 namespace eng2{
 	bool pauseRender;
-	////MDX2 mdx;
+	MDX2 mdx;
 	HINSTANCE g_hInst;
 	HWND g_hWnd;
 
@@ -24,7 +25,7 @@ namespace eng2{
 					cnt++;
 					time_t ctime;
 					time(&ctime);
-					const int interval = 5;
+					const int interval = 1;
 					if(ctime - ltime >= interval){
 						ltime = ctime;
 						char buf[32];
@@ -35,7 +36,7 @@ namespace eng2{
 				}
 			}
 		}
-		//		mdx.CleanupDevice();
+		mdx.CleanupDevice();
 		return (int)msg.wParam;
 	} // /////////////////////////////////////////////////////////////////////////////
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
@@ -48,6 +49,7 @@ namespace eng2{
 			wcex.cbClsExtra = 0;
 			wcex.cbWndExtra = 0;
 			wcex.hInstance = hInstance;
+			//wcex.hInstance = NULL;
 			wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 			wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 			wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
@@ -58,7 +60,7 @@ namespace eng2{
 				return E_FAIL;
 		}
 		// Create window
-		g_hInst = hInstance;
+		g_hInst = wcex.hInstance;
 		RECT rc = {0, 0, 900, 900};
 		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 		g_hWnd = CreateWindow(L"AMPC++WindowClass", L"AMPC++ and Direct3D 11 InterOp Sample",
@@ -101,8 +103,10 @@ namespace eng2{
 				break;
 			}
 		case WM_DESTROY:
-			PostQuitMessage(0);
+			PostQuitMessage(0);	// close application
+			//SendMessage(hWnd, WM_QUIT, 0, 0);
 			break;
+			//return 0;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}

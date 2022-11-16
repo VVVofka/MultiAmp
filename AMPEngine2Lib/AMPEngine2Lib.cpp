@@ -5,14 +5,17 @@
 #include "wndAMP.h"
 #include "MDX/MDX2.h"
 namespace eng2{
+	extern MDX2 mdx;			//	wndAMP.cpp
+	extern HINSTANCE g_hInst;	//	wndAMP.cpp
+	extern HWND g_hWnd;			//	wndAMP.cpp
 	int runEngine2Lib(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
 		if(FAILED(InitWindow(hInstance, nCmdShow)))
 			return E_NOINTERFACE;
 		if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
-		//	mdx.CleanupDevice();
+			mdx.CleanupDevice();
 			return E_FAIL;
 		}
-		//return work();
+		return work();
 		return 8;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////
 

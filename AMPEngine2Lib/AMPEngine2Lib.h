@@ -4,5 +4,4 @@
 
 namespace eng2{
 		int runEngine2Lib(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all);
-		//int fnAMPEngine2Lib();
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -50,7 +50,7 @@ public:
 	float BackColor[4] = {0.0f, 0.125f, 0.3f, 1.0f}; // red,green,blue,alpha
 	HRESULT InitDevice(HWND ghWnd, D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 	void CleanupDevice();
-protected:
+//protected:
 	HRESULT CreateSwapChain();
 	HRESULT CreateVertexShader(const char* snaderName);
 	HRESULT CompileShaderFromFile(LPCWSTR szFileName, LPCSTR szEntryPoint, LPCSTR szShaderModel, ID3DBlob** ppBlobOut);

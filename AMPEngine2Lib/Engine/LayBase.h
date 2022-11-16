@@ -5,7 +5,7 @@
 
 #include "VGpuCpu.h"	// for va
 #include "..\..\OptsTinyLib\structAll.h"
-#include "..\EngineOld\ProcessParams.h"
+#include "Params\ProcessParams.h"
 
 using namespace Concurrency;
 

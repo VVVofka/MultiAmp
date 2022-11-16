@@ -14,6 +14,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{898eb40b-6b15-41ea-9878-0ce05bbc1a76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Params">
+      <UniqueIdentifier>{e157be65-8b7f-4094-9672-8cdfd90ad9bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AMPEngine2Lib.h">
@@ -58,9 +61,6 @@
     <ClInclude Include="Engine\MaskF.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Masks.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\MasksAll.h">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -84,6 +84,12 @@
     </ClInclude>
     <ClInclude Include="myUtil.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Params\ProcessParam.h">
+      <Filter>Engine\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Params\ProcessParams.h">
+      <Filter>Engine\Params</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +129,6 @@
     <ClCompile Include="Engine\MaskF.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Masks.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\MasksAll.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -155,6 +158,12 @@
     </ClCompile>
     <ClCompile Include="Engine\ProcessFcpu.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Params\ProcessParam.cpp">
+      <Filter>Engine\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Params\ProcessParams.cpp">
+      <Filter>Engine\Params</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
