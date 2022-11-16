@@ -8,6 +8,12 @@
     <Filter Include="Common">
       <UniqueIdentifier>{a57f7fe5-5721-48ea-9446-1bb449898837}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MDX">
+      <UniqueIdentifier>{fd7aa76d-b67a-4c2d-8019-f597e6f53c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{898eb40b-6b15-41ea-9878-0ce05bbc1a76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AMPEngine2Lib.h">
@@ -19,6 +25,66 @@
     <ClInclude Include="wndAMP.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="MDX\MDX.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX\MDX2.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="MDX\Vertex.h">
+      <Filter>MDX</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Engine2.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Lay0.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LayBase.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LayMid.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Lays.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LaysCPUCfg.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MaskA.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MaskF.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Masks.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MasksAll.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\NewEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ProcessA.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Processes.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ProcessF.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VGpuCpu.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="myRnd.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="myUtil.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Lib.cpp">
@@ -26,6 +92,69 @@
     </ClCompile>
     <ClCompile Include="wndAMP.cpp">
       <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="MDX\MDX.cpp">
+      <Filter>MDX</Filter>
+    </ClCompile>
+    <ClCompile Include="MDX\MDX2.cpp">
+      <Filter>MDX</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Engine2.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Lay0.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayBase.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayDumps.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayMid.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Lays.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MaskA.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MaskF.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Masks.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MasksAll.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA0.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA1.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessAcpu.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Processes.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF0.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF1.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessFcpu.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
