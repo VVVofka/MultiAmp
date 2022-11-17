@@ -11,5 +11,6 @@ public:
 	time_t dtCreate;
 	time_t dtLastStop;
 	std::string sComments;
+	int cntForStop = -1;
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

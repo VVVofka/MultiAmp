@@ -52,6 +52,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTstAdat", "UTstAdat\UTstAd
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AMPEngine2Lib", "AMPEngine2Lib\AMPEngine2Lib.vcxproj", "{6B996499-012F-4C65-BA89-57582A1CAF4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B94E92DB-3CEB-484F-8C8C-BC2922BA1CF8} = {B94E92DB-3CEB-484F-8C8C-BC2922BA1CF8}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AMPEngine2Exe", "AMPEngine2Exe\AMPEngine2Exe.vcxproj", "{2EAA1ABE-B249-47CE-AB10-A572C8298333}"
 EndProject

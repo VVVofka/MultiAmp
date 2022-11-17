@@ -17,6 +17,21 @@
     <Filter Include="Engine\Params">
       <UniqueIdentifier>{e157be65-8b7f-4094-9672-8cdfd90ad9bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lays">
+      <UniqueIdentifier>{674e5152-1b52-47e6-9512-2214168f087b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Process">
+      <UniqueIdentifier>{5df43afc-d2af-4da2-87dd-a7d91f478c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Process\A">
+      <UniqueIdentifier>{b167a995-d32a-47ee-96c7-5c98b7de93cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Process\F">
+      <UniqueIdentifier>{bfd1b9e0-eb73-42fb-8b60-b343d11871fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Masks">
+      <UniqueIdentifier>{6490fdca-06db-4fa0-97e9-4fc482b01b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AMPEngine2Lib.h">
@@ -40,40 +55,7 @@
     <ClInclude Include="Engine\Engine2.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Lay0.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\LayBase.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\LayMid.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Lays.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\LaysCPUCfg.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\MaskA.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\MaskF.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\MasksAll.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\NewEngine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\ProcessA.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Processes.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\ProcessF.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\VGpuCpu.h">
@@ -90,6 +72,39 @@
     </ClInclude>
     <ClInclude Include="Engine\Params\ProcessParams.h">
       <Filter>Engine\Params</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Lay0.h">
+      <Filter>Engine\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LayBase.h">
+      <Filter>Engine\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LayMid.h">
+      <Filter>Engine\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Lays.h">
+      <Filter>Engine\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\LaysCPUCfg.h">
+      <Filter>Engine\Lays</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ProcessA.h">
+      <Filter>Engine\Process\A</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ProcessF.h">
+      <Filter>Engine\Process\F</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Processes.h">
+      <Filter>Engine\Process</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MaskA.h">
+      <Filter>Engine\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MaskF.h">
+      <Filter>Engine\Masks</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MasksAll.h">
+      <Filter>Engine\Masks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -108,62 +123,62 @@
     <ClCompile Include="Engine\Engine2.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Lay0.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\LayBase.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\LayDumps.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\LayMid.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Lays.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\MaskA.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\MaskF.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\MasksAll.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessA.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessA0.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessA1.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessAcpu.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Processes.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessF.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessF0.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessF1.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\ProcessFcpu.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Params\ProcessParam.cpp">
       <Filter>Engine\Params</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Params\ProcessParams.cpp">
       <Filter>Engine\Params</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Lay0.cpp">
+      <Filter>Engine\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayBase.cpp">
+      <Filter>Engine\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayDumps.cpp">
+      <Filter>Engine\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\LayMid.cpp">
+      <Filter>Engine\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Lays.cpp">
+      <Filter>Engine\Lays</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA.cpp">
+      <Filter>Engine\Process\A</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA0.cpp">
+      <Filter>Engine\Process\A</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessA1.cpp">
+      <Filter>Engine\Process\A</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessAcpu.cpp">
+      <Filter>Engine\Process\A</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF.cpp">
+      <Filter>Engine\Process\F</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF0.cpp">
+      <Filter>Engine\Process\F</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessF1.cpp">
+      <Filter>Engine\Process\F</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\ProcessFcpu.cpp">
+      <Filter>Engine\Process\F</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Processes.cpp">
+      <Filter>Engine\Process</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MaskA.cpp">
+      <Filter>Engine\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MaskF.cpp">
+      <Filter>Engine\Masks</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\MasksAll.cpp">
+      <Filter>Engine\Masks</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

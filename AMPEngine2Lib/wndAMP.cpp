@@ -1,46 +1,20 @@
 #include "wndAMP.h"
 #include "MDX/MDX2.h"
+#include "..\OptsTinyLib\structAll.h"
 
 namespace eng2{
+	// static file
 	bool pauseRender;
-	MDX2 mdx;
-	HINSTANCE g_hInst;
-	HWND g_hWnd;
+	bool isQuit;
+
+	// global (def in AMPEngine2Lib.cpp)
+	extern MDX2 mdx;
+	extern HWND g_hWnd;
+	extern structAll* cfgall;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////
-	int work(){
-		// Main message loop
-		MSG msg = {0};
-		time_t ltime;
-		time(&ltime);
-		int cnt = 0;
-		while(WM_QUIT != msg.message){
-			if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			} else{
-				if(!pauseRender){
-					//					mdx.Render();	// MAIN !!!
-										//model2.cfgAll->misc.curIteration++;
-					cnt++;
-					time_t ctime;
-					time(&ctime);
-					const int interval = 1;
-					if(ctime - ltime >= interval){
-						ltime = ctime;
-						char buf[32];
-						sprintf_s(buf, 32, "fps: %d", cnt / interval);
-						SetWindowTextA(g_hWnd, buf);
-						cnt = 0;
-					}
-				}
-			}
-		}
-		mdx.CleanupDevice();
-		return (int)msg.wParam;
-	} // /////////////////////////////////////////////////////////////////////////////
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
-	// Register class
+		// Register class
 		static WNDCLASSEX wcex{};
 		if(wcex.lpfnWndProc == 0){
 			wcex.cbSize = sizeof(WNDCLASSEX);
@@ -60,7 +34,6 @@ namespace eng2{
 				return E_FAIL;
 		}
 		// Create window
-		g_hInst = wcex.hInstance;
 		RECT rc = {0, 0, 900, 900};
 		AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
 		g_hWnd = CreateWindow(L"AMPC++WindowClass", L"AMPC++ and Direct3D 11 InterOp Sample",
@@ -72,6 +45,37 @@ namespace eng2{
 		ShowWindow(g_hWnd, nCmdShow);
 		return S_OK;
 	} // //////////////////////////////////////////////////////////////////////////////////////////////
+	int MainLoop(){
+		MSG msg = {0};
+		time_t ltime;
+		time(&ltime);
+		int cnt = 0;
+		isQuit = false;
+		while(WM_QUIT != msg.message || !isQuit){
+			if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			} else{
+				if(!pauseRender){
+					mdx.Render();	// MAIN !!!
+										//model2.cfgAll->misc.curIteration++;
+					cnt++;
+					time_t ctime;
+					time(&ctime);
+					const int interval = 1;
+					if(ctime - ltime >= interval){
+						ltime = ctime;
+						char buf[32];
+						sprintf_s(buf, 32, "fps: %d", cnt / interval);
+						SetWindowTextA(g_hWnd, buf);
+						cnt = 0;
+					}
+				}
+			}
+		}
+		mdx.CleanupDevice();
+		return (int)msg.wParam;
+	} // /////////////////////////////////////////////////////////////////////////////
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 		switch(message){
 		case WM_PAINT:
@@ -83,6 +87,7 @@ namespace eng2{
 		case WM_KEYDOWN:
 			switch(wParam){
 			case VK_ESCAPE:
+				isQuit = true;
 				SendMessage(hWnd, WM_CLOSE, 0, 0);
 				break;
 			case 79:{ // key 'o'  // I=73
@@ -103,11 +108,14 @@ namespace eng2{
 				break;
 			}
 		case WM_DESTROY:
+			isQuit = true;
 			PostQuitMessage(0);	// close application
 			//SendMessage(hWnd, WM_QUIT, 0, 0);
 			break;
 			//return 0;
 		default:
+			if(--cfgall->misc.cntForStop <= 0)
+				DestroyWindow(hWnd);
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 		return 0;

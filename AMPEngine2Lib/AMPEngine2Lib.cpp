@@ -4,19 +4,23 @@
 #include "AMPEngine2Lib.h"
 #include "wndAMP.h"
 #include "MDX/MDX2.h"
+#include "..\OptsTinyLib\structAll.h"
 namespace eng2{
-	extern MDX2 mdx;			//	wndAMP.cpp
-	extern HINSTANCE g_hInst;	//	wndAMP.cpp
-	extern HWND g_hWnd;			//	wndAMP.cpp
+
+	MDX2 mdx;			// use:	wndAMP.cpp
+	HWND g_hWnd;		// use:	wndAMP.cpp
+	structAll* cfgall;	// use:	wndAMP.cpp
+
 	int runEngine2Lib(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
+		cfgall = cfg_all;
 		if(FAILED(InitWindow(hInstance, nCmdShow)))
 			return E_NOINTERFACE;
 		if(FAILED(mdx.InitDevice(g_hWnd, cfg_all))){
 			mdx.CleanupDevice();
 			return E_FAIL;
 		}
-		return work();
-		return 8;
+		int ret = MainLoop();
+		return ret;
 	} // ///////////////////////////////////////////////////////////////////////////////////////////
 
-} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+} // namespace eng2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
