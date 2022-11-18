@@ -191,5 +191,5 @@ void CMultiAmpDlg::OnBnClickedBtMainRun(){
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 void CMultiAmpDlg::OnBnClickedBtMainRun2(){
 	cfg_all.load("tstDlg.xml");
-	eng2::runEngine2Lib(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+	runEngine2Lib(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
 } // /////////////////////////////////////////////////////////////////////////////////

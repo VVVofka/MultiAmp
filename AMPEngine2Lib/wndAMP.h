@@ -12,9 +12,9 @@
 //#include "Utils.h"
 //#include "Options.h"
 
-namespace eng2{
+//namespace eng2{
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 	int MainLoop();
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -3,8 +3,7 @@
 #include "MDX/MDX2.h"
 #include "..\OptsTinyLib\structAll.h"
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-namespace eng2{
+//namespace eng2{
 	// static file
 	bool pauseRender;
 	bool isQuit;
@@ -107,13 +106,13 @@ namespace eng2{
 		StringCchPrintf((LPTSTR)lpDisplayBuf, LocalSize(lpDisplayBuf) / sizeof(TCHAR),
 			TEXT("failed with error %d: %s"), dw, lpMsgBuf);
 #pragma warning(pop)
-		MessageBox(NULL, (LPCTSTR)lpDisplayBuf, (LPCTSTR)(caption), MB_OK);
+		MessageBox(NULL, (LPCTSTR)lpDisplayBuf, (LPCTSTR)caption, MB_OK);
 
 		LocalFree(lpMsgBuf);
 		LocalFree(lpDisplayBuf);
-		ExitProcess(dw);
+		//ExitProcess(dw);
 	} // //////////////////////////////////////////////////////////////////////////////////////////
-} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//} // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	switch(message){
 	case WM_PAINT:
@@ -125,17 +124,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 	case WM_KEYDOWN:
 		switch(wParam){
 		case VK_ESCAPE:
-			eng2::isQuit = true;
+			isQuit = true;
 			SendMessage(hWnd, WM_CLOSE, 0, 0);
 			break;
 		case 79:{ // key 'o'  // I=73
-			eng2::pauseRender = true;
+			pauseRender = true;
 			//if(model2.options.showDlg()){
 			//	model2.Create();
 			//	mdx.CleanupDevice();
 			//	mdx.InitDevice(g_hWnd, mdx.cfg_all);
 			//}
-			eng2::pauseRender = false;
+			pauseRender = false;
 			break;
 		}
 		case VK_PAUSE:
@@ -146,13 +145,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 			break;
 		}
 	case WM_DESTROY:
-		eng2::isQuit = true;
+		isQuit = true;
 		PostQuitMessage(0);	// close application
 		//SendMessage(hWnd, WM_QUIT, 0, 0);
 		break;
 		//return 0;
 	default:
-		if(--eng2::cfgall->misc.cntForStop <= 0)
+		if(--cfgall->misc.cntForStop == 0)
 			DestroyWindow(hWnd);
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
