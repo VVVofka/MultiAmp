@@ -62,6 +62,27 @@ public:
 		Assert::AreEqual(v.size(), (size_t)2);
 		Assert::AreEqual(v[0], (int)-3691);
 		Assert::AreEqual(v[1], (int)945);
+
+		v = myconv::strToVInt("0  -3691+945+-*@&$;; _=+-0");
+		Assert::AreEqual(v.size(), (size_t)4);
+		Assert::AreEqual(v[0], (int)0);
+		Assert::AreEqual(v[1], (int)-3691);
+		Assert::AreEqual(v[2], (int)945);
+		Assert::AreEqual(v[3], (int)0);
+
+		v = myconv::strToVInt("  0  -3691+945+-*@&$;; _=+- 0  ");
+		Assert::AreEqual(v.size(), (size_t)4);
+		Assert::AreEqual(v[0], (int)0);
+		Assert::AreEqual(v[1], (int)-3691);
+		Assert::AreEqual(v[2], (int)945);
+		Assert::AreEqual(v[3], (int)0);
+
+		v = myconv::strToVInt("  0  -3691+945+-*@&$;; _=+- 0  ");
+		Assert::AreEqual(v.size(), (size_t)4);
+		Assert::AreEqual(v[0], (int)0);
+		Assert::AreEqual(v[1], (int)-3691);
+		Assert::AreEqual(v[2], (int)945);
+		Assert::AreEqual(v[3], (int)0);
 	} // ////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(strToVSizet){
 		std::vector<size_t> v;

@@ -1,4 +1,5 @@
 #include "structDataCfg.h"
+#include <algorithm>	// count_if
 //#include <regex>
 
 float structDataCfg::fsigma(){
@@ -8,33 +9,30 @@ float structDataCfg::fsigma(){
 } // //////////////////////////////////////////////////////////////////////////////////////
 size_t structDataCfg::fill_v(const std::string& s){
 	size_t size_inp_str = s.length();
-	if(size_inp_str == 0) return 0;
-
-	size_t newsize = 0;
-	for(size_t j = 0; j < size_inp_str; j++)
-		if(s[j] == ' ')
-			newsize++;
-	v.resize(++newsize);
-
-	const int BUFWORDLEN = 12;
-	char bufword[BUFWORDLEN];
-	int bufpos = 0;
-	char ch;
-	size_t vpos = 0;
+	auto cntSpace = std::count_if(s.begin(), s.end(), [](const char i) { return i == ' '; });
+	v.clear();
+	v.reserve(cntSpace + 1);
+	bool isnum = false;
+	size_t bufi = 0;
 	for(size_t j = 0; j < size_inp_str; j++){
-		ch = s[j];
+		char ch = s[j];
 		if(ch == ' '){
-			if(bufpos != 0){
-				bufword[bufpos] = 0;
-				bufpos = 0;
-				add2v(vpos, bufword);
+			if(isnum){
+				add2v(bufi);
+				bufi = 0;
+				isnum = false;
 			}
-		} else if(ch >= '0' && ch <= '9')
-			bufword[bufpos++] = ch;
+		} else{
+			const int ich = ch - '0';
+			if(ich >= 0 && ich <= 9){
+				bufi = bufi * 10 + ich;
+				isnum = true;
+			}
+		}
 	}
-	bufword[bufpos] = 0;
-	add2v(vpos, bufword);
-	return newsize;
+	if(isnum)
+		add2v(bufi);
+	return v.size();
 } // //////////////////////////////////////////////////////////////////////////////////////
 //size_t structDataCfg::fill_v_bak(const std::string& s){
 //	std::regex regex{R"([\s]+)"}; // split on space
@@ -56,9 +54,8 @@ std::string structDataCfg::get_s() const{
 	}
 	return sret;
 } // ///////////////////////////////////////////////////////////////////////////////////
-void structDataCfg::add2v(size_t& vpos, const char* bufword){
-	size_t newval = size_t(_atoi64(bufword));
-	for(size_t j = 0; j < vpos; j++)
-		if(v[j] == newval) return;
-	v[vpos++] = newval;
+void structDataCfg::add2v(const size_t bufi){
+	for(size_t j = 0; j < v.size(); j++)
+		if(v[j] == bufi) return;	// not add duplicate
+	v.push_back(bufi);
 } // ///////////////////////////////////////////////////////////////////////////////////

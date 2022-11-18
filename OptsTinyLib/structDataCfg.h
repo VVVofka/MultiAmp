@@ -14,6 +14,6 @@ public:
 	std::string get_s() const;
 
 private:
-	void add2v(size_t& vpos, const char* bufword);
+	void add2v(const size_t bufi);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

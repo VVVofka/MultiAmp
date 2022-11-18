@@ -180,6 +180,7 @@
     </ClCompile>
     <ClCompile Include="UTstOptsMyConv.cpp" />
     <ClCompile Include="UTstOptsTinyLib.cpp" />
+    <ClCompile Include="UTstStructDataCfg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
