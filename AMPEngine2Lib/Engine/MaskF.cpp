@@ -1,7 +1,7 @@
 #include "MaskF.h"
 #include "..\myUtil.h"
 
-MaskF::MaskF(structAll* cfg_all){
+MaskF::MaskF(structAll* cfg_all, accelerator_view* m_accl_view){
 	//cfg_all->lays.
 } // //////////////////////////////////////////////////////////////////////
 MaskF::~MaskF(){

@@ -8,7 +8,7 @@
 
 class Processes{
 public:
-	Processes(structAll* p_cfg_all, Lays* p_lays);
+	Processes(structAll* p_cfg_all, Lays* p_lays, accelerator_view* m_accl_view);
 	~Processes();
 
 	ProcessA processA;

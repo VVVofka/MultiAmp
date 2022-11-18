@@ -1,8 +1,8 @@
 ﻿#include "Processes.h"
 
 //using namespace concurrency::graphics;
-Processes::Processes(structAll* p_cfg_all, Lays* p_lays) :
-	masks(p_cfg_all),
+Processes::Processes(structAll* p_cfg_all, Lays* p_lays, accelerator_view* m_accl_view) :
+	masks(p_cfg_all, m_accl_view),
 	processA(p_lays, &masks.a),
 	processF(p_lays, &masks.f),
 	rnd(p_cfg_all->misc.curRndSeed){

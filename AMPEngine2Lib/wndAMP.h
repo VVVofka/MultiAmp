@@ -16,5 +16,6 @@ namespace eng2{
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 	int MainLoop();
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	void ErrorExit(LPCTSTR caption);
 } // namespace eng2 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

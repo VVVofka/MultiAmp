@@ -22,7 +22,7 @@ public:
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 #endif // NEW_ENGINE
 
-	void Render();
+	void Render(int cntEngine = 1);
 	void CleanupDevice();
 private:
 	HRESULT CreateComputeShader(structAll* cfg_all = NULL);

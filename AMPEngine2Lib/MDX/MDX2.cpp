@@ -38,7 +38,8 @@ HRESULT MDX2::CreateComputeShader(structAll* cfg_all){ // from this->InitDevice(
 	RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
 	return MDX::CreateComputeShader();
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
-void MDX2::Render(){				//  Call from main loop wWinMain()
-	g_pAMPComputeEngine->run();		// work with lays ( MAIN )
-	MDX::Render();					// draw on screen
+void MDX2::Render(int cntEngine){		//  Call from main loop wWinMain()
+	for(int j = 0; j < cntEngine; j++)
+		g_pAMPComputeEngine->run();		// work with lays ( MAIN )
+	MDX::Render();						// draw on screen
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////

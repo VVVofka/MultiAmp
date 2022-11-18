@@ -12,9 +12,6 @@ namespace eng2{
 	extern MDX2 mdx;
 	extern HWND g_hWnd;
 	extern structAll* cfgall;
-
-	void ErrorExit(LPCTSTR caption);
-
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////
 	HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
 		// Register class
@@ -27,7 +24,6 @@ namespace eng2{
 			wcex.cbClsExtra = 0;
 			wcex.cbWndExtra = 0;
 			wcex.hInstance = hInstance;
-			//wcex.hInstance = NULL;
 			wcex.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 			wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 			wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
@@ -55,10 +51,10 @@ namespace eng2{
 		return S_OK;
 	} // //////////////////////////////////////////////////////////////////////////////////////////////
 	int MainLoop(){
+		structMiscCfg& misc = cfgall->misc;
 		MSG msg = {0};
-		time_t ltime;
-		time(&ltime);
-		int cnt = 0;
+		time_t ltime;		time(&ltime);
+		int cntSpeedometer = 0;
 		isQuit = false;
 		while(WM_QUIT != msg.message || !isQuit){
 			if(PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)){
@@ -66,18 +62,24 @@ namespace eng2{
 				DispatchMessage(&msg);
 			} else{
 				if(!pauseRender){
-					//mdx.Render();	// MAIN !!!
-										//model2.cfgAll->misc.curIteration++;
-					cnt++;
+					mdx.Render(misc.cntEnginePerRender);	// MAIN !!!
+					misc.curIteration++;
+					cntSpeedometer++;
 					time_t ctime;
 					time(&ctime);
 					const int interval = 1;
 					if(ctime - ltime >= interval){
 						ltime = ctime;
 						char buf[32];
-						sprintf_s(buf, 32, "fps: %d", cnt / interval);
+						sprintf_s(buf, 32, "fps: %d", cntSpeedometer / interval);
 						SetWindowTextA(g_hWnd, buf);
-						cnt = 0;
+						cntSpeedometer = 0;
+					}
+					bool isPrevPositive = misc.cntForStop > 0;
+					misc.cntForStop -= misc.cntEnginePerRender;
+					if(misc.cntForStop <= 0 && isPrevPositive){
+						isQuit = true;
+						SendMessage(g_hWnd, WM_CLOSE, 0, 0);	//DestroyWindow(hWnd);
 					}
 				}
 			}
@@ -115,17 +117,17 @@ namespace eng2{
 	} // //////////////////////////////////////////////////////////////////////////////////////////
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam){
 		switch(message){
-		case WM_PAINT:
-			PAINTSTRUCT ps;
-			BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code that uses hdc here...
-			EndPaint(hWnd, &ps);
-			break;
+			//case WM_PAINT:
+			//	PAINTSTRUCT ps;
+			//	BeginPaint(hWnd, &ps);
+			//	// TODO: Add any drawing code that uses hdc here...
+			//	EndPaint(hWnd, &ps);
+			//	break;
 		case WM_KEYDOWN:
 			switch(wParam){
 			case VK_ESCAPE:
 				isQuit = true;
-				SendMessage(hWnd, WM_CLOSE, 0, 0);
+				SendMessage(hWnd, WM_CLOSE, 0, 0);	//DestroyWindow(hWnd);
 				break;
 			case 79:{ // key 'o'  // I=73
 				pauseRender = true;
@@ -138,10 +140,10 @@ namespace eng2{
 				break;
 			}
 			case VK_PAUSE:
+				pauseRender = !pauseRender;
 				break;
 			default:
-				//				model2.setConsole();
-				printf("%d\n", (int)wParam);
+				_RPT1(0, "%d\n", (int)wParam);
 				break;
 			}
 		case WM_DESTROY:
@@ -149,10 +151,7 @@ namespace eng2{
 			PostQuitMessage(0);	// close application
 			//SendMessage(hWnd, WM_QUIT, 0, 0);
 			break;
-			//return 0;
 		default:
-			if(--cfgall->misc.cntForStop == 0)
-				DestroyWindow(hWnd);
 			return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 		return 0;

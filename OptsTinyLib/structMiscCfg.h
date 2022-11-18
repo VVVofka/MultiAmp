@@ -12,5 +12,6 @@ public:
 	time_t dtLastStop;
 	std::string sComments;
 	int cntForStop = -1;
+	int cntEnginePerRender = 1;
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
