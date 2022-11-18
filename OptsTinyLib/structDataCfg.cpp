@@ -1,5 +1,5 @@
 #include "structDataCfg.h"
-#include <regex>
+//#include <regex>
 
 float structDataCfg::fsigma(){
 	float flt;
@@ -27,25 +27,25 @@ size_t structDataCfg::fill_v(const std::string& s){
 			if(bufpos != 0){
 				bufword[bufpos] = 0;
 				bufpos = 0;
-				v[vpos++] = size_t(_atoi64(bufword));
+				add2v(vpos, bufword);
 			}
 		} else if(ch >= '0' && ch <= '9')
 			bufword[bufpos++] = ch;
 	}
 	bufword[bufpos] = 0;
-	v[vpos] = size_t(_atoi64(bufword));
+	add2v(vpos, bufword);
 	return newsize;
 } // //////////////////////////////////////////////////////////////////////////////////////
-size_t structDataCfg::fill_v_bak(const std::string& s){
-	std::regex regex{R"([\s]+)"}; // split on space
-	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
-	std::vector<std::string> words{it, {}};
-	size_t newsize = words.size();
-	v.resize(words.size());
-	for(size_t j = 0; j < newsize; j++)
-		v[j] = size_t(_atoi64(words[j].c_str()));
-	return newsize;
-} // //////////////////////////////////////////////////////////////////////////////////////
+//size_t structDataCfg::fill_v_bak(const std::string& s){
+//	std::regex regex{R"([\s]+)"}; // split on space
+//	std::sregex_token_iterator it{s.begin(), s.end(), regex, -1};
+//	std::vector<std::string> words{it, {}};
+//	size_t newsize = words.size();
+//	v.resize(words.size());
+//	for(size_t j = 0; j < newsize; j++)
+//		v[j] = size_t(_atoi64(words[j].c_str()));
+//	return newsize;
+//} // //////////////////////////////////////////////////////////////////////////////////////
 std::string structDataCfg::get_s() const{
 	std::string sret;
 	size_t size = v.size();
@@ -55,4 +55,10 @@ std::string structDataCfg::get_s() const{
 		sret += std::to_string(v[size - 1]);
 	}
 	return sret;
+} // ///////////////////////////////////////////////////////////////////////////////////
+void structDataCfg::add2v(size_t& vpos, const char* bufword){
+	size_t newval = size_t(_atoi64(bufword));
+	for(size_t j = 0; j < vpos; j++)
+		if(v[j] == newval) return;
+	v[vpos++] = newval;
 } // ///////////////////////////////////////////////////////////////////////////////////

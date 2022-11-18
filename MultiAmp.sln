@@ -43,6 +43,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{7165A0D4-E51E-4B27-806C-134C9A8D0012}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C57BC05B-BC5C-49E1-BDB0-558045AA28DF}"
+	ProjectSection(SolutionItems) = preProject
+		Common\Directs.ods = Common\Directs.ods
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "adat", "adat\adat.vcxproj", "{F77C56C5-2DDE-424B-82A5-2D9181E01F66}"
 EndProject
