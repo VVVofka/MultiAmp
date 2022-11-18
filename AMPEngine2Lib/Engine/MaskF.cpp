@@ -1,27 +1,12 @@
 #include "MaskF.h"
-#include "..\myUtil.h"
+#include "..\myUtil.h"	// SAFE_DELETE
 
 MaskF::MaskF(structAll* cfg_all, accelerator_view* m_accl_view){
-	//cfg_all->lays.
+	vcpu = cfg_all->masks.vf;	// copy
+	vgpu = new concurrency::array<float_2, 1>(256, vcpu.begin(), *m_accl_view);
 } // //////////////////////////////////////////////////////////////////////
 MaskF::~MaskF(){
 	SAFE_DELETE(vgpu);
-} // //////////////////////////////////////////////////////////////////////
-void MaskF::create(const std::vector<float_2>& v_inp){
-	_ASSERTE(v_inp.size() == vcpu.size());
-	for(size_t j = 0; j < vcpu.size(); j++)
-		vcpu[j] = v_inp[j];
-	SAFE_DELETE(vgpu);
-	vgpu = new concurrency::array<float_2, 2>(16, 4, vcpu.begin());
-} // //////////////////////////////////////////////////////////////////////
-void MaskF::create(const std::vector<float>& v_inp){
-	_ASSERTE(v_inp.size() == vcpu.size() * 2);
-	for(size_t j = 0; j < vcpu.size(); j++){
-		vcpu[j].x = v_inp[j * 2];
-		vcpu[j].y = v_inp[j * 2 + 1];
-	}
-	SAFE_DELETE(vgpu);
-	vgpu = new concurrency::array<float_2, 2>(16, 4, vcpu.begin());
 } // //////////////////////////////////////////////////////////////////////
 void MaskF::dump(){
 	std::array<float_2, 16 * 4> vdump;

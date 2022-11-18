@@ -2,7 +2,6 @@
 #include <array>
 #include <amp_graphics.h>
 #include <amprt.h>
-
 #include "..\..\OptsTinyLib\structAll.h"
 
 using namespace Concurrency;
@@ -16,5 +15,4 @@ public:
 	~MaskA();
 
 private:
-	//bool load(const std::array<int, 16>& mask_A);	// 16
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
