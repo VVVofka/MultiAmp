@@ -61,6 +61,7 @@ int work(){
 } // /////////////////////////////////////////////////////////////////////////////
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and create window
 	// Register class
+	const WCHAR szWindowClass[] = L"AMPC++WindowClass";
 	static WNDCLASSEX wcex{};
 	if(wcex.lpfnWndProc == 0){
 		wcex.cbSize = sizeof(WNDCLASSEX);
@@ -73,7 +74,7 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and cr
 		wcex.hCursor = LoadCursor(NULL, IDC_ARROW);
 		wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
 		wcex.lpszMenuName = NULL;
-		wcex.lpszClassName = L"AMPC++WindowClass";
+		wcex.lpszClassName = szWindowClass;
 		wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 		if(!RegisterClassEx(&wcex))
 			return E_FAIL;
@@ -82,7 +83,7 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow){  // Register class and cr
 	g_hInst = hInstance;
 	RECT rc = {0, 0, 900, 900};
 	AdjustWindowRect(&rc, WS_OVERLAPPEDWINDOW, FALSE);
-	g_hWnd = CreateWindow(L"AMPC++WindowClass", L"AMPC++ and Direct3D 11 InterOp Sample",
+	g_hWnd = CreateWindow(szWindowClass, L"AMPC++ and Direct3D 11 InterOp Sample",
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, NULL, NULL, hInstance,
 		NULL);
