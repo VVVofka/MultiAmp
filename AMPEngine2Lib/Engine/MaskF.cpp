@@ -1,12 +1,11 @@
 #include "MaskF.h"
-#include "..\myUtil.h"	// SAFE_DELETE
 
-MaskF::MaskF(structAll* cfg_all, accelerator_view* m_accl_view){
+MaskF::MaskF(const structAll* cfg_all, accelerator_view* m_accl_view){
 	vcpu = cfg_all->masks.vf;	// copy
 	vgpu = new concurrency::array<float_2, 1>(256, vcpu.begin(), *m_accl_view);
 } // //////////////////////////////////////////////////////////////////////
 MaskF::~MaskF(){
-	SAFE_DELETE(vgpu);
+	if(vgpu) delete vgpu;
 } // //////////////////////////////////////////////////////////////////////
 void MaskF::dump(){
 	std::array<float_2, 16 * 4> vdump;

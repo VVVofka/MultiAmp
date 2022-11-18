@@ -11,7 +11,7 @@ public:
 	std::array<float_2, 256> vcpu;
 	const concurrency::array<float_2, 1>* vgpu;	
 
-	MaskF(structAll* cfg_all, accelerator_view* m_accl_view);
+	MaskF(const structAll* cfg_all, accelerator_view* m_accl_view);
 	~MaskF();
 
 	void dump();
