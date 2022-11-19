@@ -147,9 +147,6 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 
 	std::string bufword;
 	int sign = 1;
-	//int bufpos = 0;
-	//size_t vpos = 0;
-	//bool isnum = false;
 	enum curState{
 		IntegerPart,
 		FractionalPart,
@@ -236,5 +233,6 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 				continue;
 			}
 		}
-		return ret;
-	} // ////////////////////////////////////////////////////////////////////////////////////////////////
+	}
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////////////////////

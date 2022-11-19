@@ -9,7 +9,7 @@ size_t KoefsFlt::create(const vector<float>& v_in){
 	vdmax = vd;
 	return size;
 } // //////////////////////////////////////////////////////////////////////////////////
-string KoefsFlt::sall(const int digits, const char separate){
+string KoefsFlt::sall(const int digits, const char separate) const{
 	string ret;
 	string sformat = "%f." + to_string(digits);
 	const char* pformat = sformat.c_str();

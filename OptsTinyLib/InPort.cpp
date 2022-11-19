@@ -9,13 +9,13 @@ namespace getxml{
 
 		size_t topX = xml.getAttributeT<size_t>("topX", 1);
 		size_t topY = xml.getAttributeT<size_t>("topY", 1);
-		size_t cpu = xml.getAttributeT<size_t>("singleCPU", 0);
+		size_t cpu1 = xml.getAttributeT<size_t>("singleCPU", 0);
 		size_t mt = xml.getAttributeT<size_t>("multithreadedCPU", 0);
-		ret.setConfig(topX, topY, cpu, mt);
+		ret.setConfig(topX, topY, cpu1, mt);
 
-		MyXML xmlKF(f_name, "Options;LaysCfg;kF");
-		ret.digits = xmlKF.getAttributeT<size_t>("digits", 2);
-		std::string skoefsF = xmlKF.getText();
+		xml.setOrCreateNode("kF");
+		ret.digits = xml.getAttributeT<size_t>("digits", 2);
+		std::string skoefsF = xml.getText();
 		ret.setKoefsF(skoefsF.c_str());
 
 		return ret;
@@ -24,12 +24,12 @@ namespace getxml{
 		MyXML xml(f_name, "Options;LaysCfg");
 		xml.setAttributeT<size_t>("topX", lays_cfg.topX);
 		xml.setAttributeT<size_t>("topY", lays_cfg.topY);
-		xml.setAttributeT<size_t>("digits", lays_cfg.digits);
 		xml.setAttributeT<size_t>("singleCPU", lays_cfg.cpuSingle);
 		xml.setAttributeT<size_t>("multithreadedCPU", lays_cfg.cpuMultiThreaded);
 
 		xml.setOrCreateNode("kF");
-		std::string s = myconv::vIntToStr(lays_cfg.vkf);
+		xml.setAttributeT<size_t>("digits", lays_cfg.digits);
+		std::string s = lays_cfg.koefsF.sall(lays_cfg.digits);
 		xml.setText(s);
 
 		xml.Save(f_name);

@@ -9,9 +9,9 @@ public:
 	vector<float> v;
 
 	size_t create(const vector<float>& v_in);
-	size_t create(const char* s_in);
-	void resize(size_t new_size);
-	string sall(const int digits = 2, const char separate = ' ');
+	//size_t create(const char* s_in);
+	//void resize(size_t new_size);
+	string sall(const int digits = 2, const char separate = ' ') const;
 	vector<string> vs(int digits = 2);
 
 private:
