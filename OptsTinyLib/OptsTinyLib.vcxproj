@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="InPort.h" />
+    <ClInclude Include="KoefsFlt.h" />
     <ClInclude Include="myconv.h" />
     <ClInclude Include="myXML.h" />
     <ClInclude Include="pch.h" />
@@ -177,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InPort.cpp" />
+    <ClCompile Include="KoefsFlt.cpp" />
     <ClCompile Include="myconv.cpp" />
     <ClCompile Include="myXML.cpp" />
     <ClCompile Include="OptsTinyLib.cpp" />

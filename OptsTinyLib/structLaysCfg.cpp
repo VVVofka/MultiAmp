@@ -1,15 +1,22 @@
 #include "structLaysCfg.h"
-
-void structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t cnt_lays, size_t cpu = 0, size_t mt = 0){
-	cntlays = cnt_lays, topX = top_x, topY = top_y, cpuSingle = cpu, cpuMultiThreaded = mt;
-	vkf.clear(), vkf.resize(cntlays - 1);
-	for(size_t j = 0; j < cntlays; j++)
-		vkf[j] = 1;
+#include "myconv.h"
+void structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, size_t cnt_lays){
+	if(cnt_lays > 0)
+		cntlays = cnt_lays;
+	topX = top_x, topY = top_y, cpuSingle = cpu, cpuMultiThreaded = mt;
+	vector<float> v(cntlays - 1, 1.f);
+	koefsF.create(v);
 } // /////////////////////////////////////////////////////////////////////////
+size_t structLaysCfg::setKoefsF(const vector<float>& vf_in){
+	cntlays = vf_in.size() + 1;
+	koefsF.create(vf_in);
+	return koefsF.size;
+} // ////////////////////////////////////////////////////////////////////////////////
+size_t structLaysCfg::setKoefsF(const char* s_in, const char delimiter){
+	vector<float> v_parse = myconv::strToVFloat(s_in, delimiter);
+	return setKoefsF(v_parse);
+} // ////////////////////////////////////////////////////////////////////////////////
 void structLaysCfg::resize(size_t new_size){
 	cntlays = new_size;
-	vkf.clear(), vkf.resize(cntlays - 1);
-	for(size_t j = 0; j < cntlays; j++)
-		vkf[j] = 1;
-
+	koefsF.resize(cntlays - 1);
 } // ////////////////////////////////////////////////////////////////////////////////

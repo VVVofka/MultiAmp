@@ -6,15 +6,17 @@ namespace getxml{
 	structLaysCfg getLaysCfg(const char* f_name){
 		MyXML xml(f_name, "Options;LaysCfg");
 		structLaysCfg ret;
-		ret.topX = xml.getAttributeT<size_t>("topX", 1);
-		ret.topY = xml.getAttributeT<size_t>("topY", 1);
-		ret.digits = xml.getAttributeT<size_t>("digits", 2);
-		ret.cpuSingle = xml.getAttributeT<size_t>("singleCPU", 0);
-		ret.cpuMultiThreaded = xml.getAttributeT<size_t>("multithreadedCPU", 0);
 
-		xml.setOrCreateNode("kF");
-		std::string s = xml.getText();
-		ret.vkf = myconv::strToVInt(s);
+		size_t topX = xml.getAttributeT<size_t>("topX", 1);
+		size_t topY = xml.getAttributeT<size_t>("topY", 1);
+		size_t cpu = xml.getAttributeT<size_t>("singleCPU", 0);
+		size_t mt = xml.getAttributeT<size_t>("multithreadedCPU", 0);
+		ret.setConfig(topX, topY, cpu, mt);
+
+		MyXML xmlKF(f_name, "Options;LaysCfg;kF");
+		ret.digits = xmlKF.getAttributeT<size_t>("digits", 2);
+		std::string skoefsF = xmlKF.getText();
+		ret.setKoefsF(skoefsF.c_str());
 
 		return ret;
 	} // //////////////////////////////////////////////////////////////////////////

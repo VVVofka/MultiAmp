@@ -139,3 +139,102 @@ tm myconv::getTMstruct(__time64_t long_time){
 	_localtime64_s(&structtime, &long_time);	// Convert to local time.
 	return structtime;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
+std::vector<float> myconv::strToVFloat(const std::string& s, const char delimiter){
+	std::vector<float> ret;
+	size_t size_inp_str = s.length();
+	if(size_inp_str == 0) return ret;
+	ret.reserve(size_inp_str / 4);
+
+	std::string bufword;
+	int sign = 1;
+	//int bufpos = 0;
+	//size_t vpos = 0;
+	//bool isnum = false;
+	enum curState{
+		IntegerPart,
+		FractionalPart,
+		Delimiter,
+		Sign,
+		Comma
+	};
+	curState state = curState::Delimiter;
+	for(size_t j = 0; j < size_inp_str; j++){
+		const char ch = s[j];
+		if(ch == delimiter){
+			switch(state){
+			case IntegerPart:
+			case FractionalPart:
+			case Comma:
+				ret.push_back(sign * atof(bufword.c_str()));
+				sign = 1;
+				bufword.clear();
+				state = curState::Delimiter;
+				continue;
+			case Delimiter:
+			case Sign:
+			default:
+				continue;
+			}
+		}
+		if(ch >= '0' && ch <= '9'){
+			switch(state){
+			case IntegerPart:
+			case FractionalPart:
+				bufword.push_back(ch);
+				continue;
+			case Delimiter:
+			case Sign:
+				bufword.push_back(ch);
+				state = curState::IntegerPart;
+				continue;
+			case Comma:
+				bufword.push_back(ch);
+				state = curState::FractionalPart;
+				continue;
+			default:
+				continue;
+			}
+		}
+		if(ch == '-' || ch == '+'){
+			switch(state){
+			case IntegerPart:
+			case FractionalPart:
+			case Comma:
+				ret.push_back(sign * atof(bufword.c_str()));
+				sign = ch == '-' ? -1 : 1;
+				bufword.clear();
+				state = curState::Sign;
+				continue;
+			case Delimiter:
+				sign = ch == '-' ? -1 : 1;
+				bufword.clear();
+				state = curState::Sign;
+				continue;
+			case Sign:
+				if(ch == '-') sign = -sign;
+				continue;
+			default:
+				continue;
+			}
+		}
+		if(ch == '.' || ch == ','){
+			switch(state){
+			case IntegerPart:
+			case Delimiter:
+			case Sign:
+				bufword.push_back('.');
+				state = curState::FractionalPart;
+				continue;
+			case FractionalPart:
+				ret.push_back(sign * atof(bufword.c_str()));
+				sign = 1;
+				bufword.clear();
+				state = curState::Delimiter;
+				continue;
+			case Comma:
+			default:
+				continue;
+			}
+		}
+		return ret;
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////

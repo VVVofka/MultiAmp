@@ -43,6 +43,7 @@
     <ClInclude Include="structMasksCfg.h">
       <Filter>structs</Filter>
     </ClInclude>
+    <ClInclude Include="KoefsFlt.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OptsTinyLib.cpp">
@@ -70,5 +71,6 @@
     <ClCompile Include="structLaysCfg.cpp">
       <Filter>structs</Filter>
     </ClCompile>
+    <ClCompile Include="KoefsFlt.cpp" />
   </ItemGroup>
 </Project>
