@@ -5,7 +5,7 @@ Lays::Lays(structAll* cfg_all, accelerator_view* m_accl_view) :
 
 	_ASSERTE(lay0.isLoad());
 
-	cntMidLays = cfg_all->lays.laysCnt() - 1;	// w/o lay0
+	cntMidLays = cfg_all->lays.cntlays - 1;	// w/o lay0
 	vMidLays.resize(cntMidLays);
 	for(int j = 0; j < cntMidLays; j++)
 		vMidLays[j] = new LayMid(j + 1, cfg_all, m_accl_view);

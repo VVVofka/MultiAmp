@@ -67,5 +67,8 @@
     <ClCompile Include="structMasksCfg.cpp">
       <Filter>structs</Filter>
     </ClCompile>
+    <ClCompile Include="structLaysCfg.cpp">
+      <Filter>structs</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

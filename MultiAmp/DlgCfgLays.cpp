@@ -153,7 +153,7 @@ void DlgCfgLays::chngCnt(size_t cnt){
 	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 	m_pointsAll.SetWindowTextA(razd(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
-	fsliders.saveVK(cfgOut.laysCnt());
+	fsliders.saveVK(cfgOut.cntlays);
 	m_btOK.EnableWindow(TRUE);
 	Invalidate();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
@@ -243,7 +243,7 @@ std::string DlgCfgLays::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnBnClickedOk(){
-	fsliders.saveVK(cfgOut.laysCnt());
+	fsliders.saveVK(cfgOut.cntlays);
 	cfgOut.cpuSingle = iEdit(m_cpu_single.GetDlgCtrlID(), 0);
 	cfgOut.cpuMultiThreaded= iEdit(m_cpu_multi.GetDlgCtrlID(), 0);
 	CDialog::OnOK();

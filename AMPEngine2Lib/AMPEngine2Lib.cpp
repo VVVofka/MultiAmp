@@ -11,7 +11,7 @@ namespace eng2{
 	HWND g_hWnd;		// use:	wndAMP.cpp
 	structAll* cfgall;	// use:	wndAMP.cpp
 
-	int runEngine2Lib(HINSTANCE hInstance, int nCmdShow, structAll* cfg_all){
+	int runEngine2Lib(structAll* cfg_all, HINSTANCE hInstance, int nCmdShow){
 		cfgall = cfg_all;
 		if(FAILED(InitWindow(hInstance, nCmdShow)))
 			return E_NOINTERFACE;

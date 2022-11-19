@@ -187,6 +187,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="structDataCfg.cpp" />
+    <ClCompile Include="structLaysCfg.cpp" />
     <ClCompile Include="structMasksCfg.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
   </ItemGroup>

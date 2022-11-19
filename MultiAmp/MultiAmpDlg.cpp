@@ -140,7 +140,7 @@ void CMultiAmpDlg::OnBnClickedBtLays(){
 	cfg_all.lays = getxml::getLaysCfg("tstDlg.xml");		// InPort.cpp
 	DlgCfgLays dlgcfgLays;
 	structLaysCfg ret = dlgcfgLays.doModal(cfg_all.lays);
-	if(cfg_all.lays.laysCnt() != ret.laysCnt() ||
+	if(cfg_all.lays.cntlays != ret.cntlays ||
 		cfg_all.lays.topX != ret.topX ||
 		cfg_all.lays.topY != ret.topY)
 		getxml::clearDataCfg("tstDlg.xml");		// InPort.cpp
@@ -191,5 +191,5 @@ void CMultiAmpDlg::OnBnClickedBtMainRun(){
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 void CMultiAmpDlg::OnBnClickedBtMainRun2(){
 	cfg_all.load("tstDlg.xml");
-	eng2::runEngine2Lib(AfxGetApp()->m_hInstance, SW_SHOWDEFAULT, &cfg_all);
+	eng2::runEngine2Lib(&cfg_all, AfxGetApp()->m_hInstance, SW_SHOWDEFAULT);
 } // /////////////////////////////////////////////////////////////////////////////////
