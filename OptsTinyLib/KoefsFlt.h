@@ -5,14 +5,13 @@ using namespace std;
 
 class KoefsFlt{
 public:
-	size_t size;
-	vector<float> v;
+	size_t size()const{ return vd.size(); };
+	vector<float> v() const;
 
 	size_t create(const vector<float>& v_in);
-	//size_t create(const char* s_in);
-	//void resize(size_t new_size);
+	void resize(const size_t new_size);
 	string sall(const int digits = 2, const char separate = ' ') const;
-	vector<string> vs(int digits = 2);
+	vector<string> vs(const int digits = 2) const;
 
 private:
 	vector<double> vd;

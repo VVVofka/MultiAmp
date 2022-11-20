@@ -15,7 +15,7 @@ namespace getxml{
 
 		xml.setOrCreateNode("kF");
 		ret.digits = xml.getAttributeT<size_t>("digits", 2);
-		std::string skoefsF = xml.getText();
+		std::string skoefsF = xml.getText("1 1 1");
 		ret.setKoefsF(skoefsF.c_str());
 
 		return ret;
@@ -64,6 +64,8 @@ namespace getxml{
 		ret.curRndSeed = xml.getAttributeT<uint32_t>("curRndSeed", 1234567);
 		ret.dtCreate = xml.getAttributeT<time_t>("dtCreate", 0);
 		ret.dtLastStop = xml.getAttributeT<time_t>("dtLastStop", 0);
+		ret.cntEnginePerRender = xml.getAttributeT<int>("cntEnginePerRender", 1);
+		ret.cntForStop = xml.getAttributeT<int>("cntForStop", -1);
 
 		xml.setOrCreateNode("sComments");
 		ret.sComments = xml.getText("No comments.");
@@ -76,6 +78,8 @@ namespace getxml{
 		xml.setAttributeT<uint32_t>("curRndSeed", lays_cfg.curRndSeed);
 		xml.setAttributeT<time_t>("dtCreate", lays_cfg.dtCreate);
 		xml.setAttributeT<time_t>("dtLastStop", lays_cfg.dtLastStop);
+		xml.setAttributeT<int>("cntEnginePerRender", lays_cfg.cntEnginePerRender);
+		xml.setAttributeT<int>("cntForStop", lays_cfg.cntForStop);
 
 		xml.setOrCreateNode("sComments");
 		xml.setText(lays_cfg.sComments.c_str());
@@ -95,7 +99,7 @@ namespace getxml{
 
 	std::string getMaskF(const char* f_name){
 		MyXML xml(f_name, "Options;Masks;MaskF");
-		std::string defval(256, '0');
+		const std::string defval(256, '0');
 		std::string ret = xml.getText(defval.c_str());
 		return ret;
 	} // //////////////////////////////////////////////////////////////////////////

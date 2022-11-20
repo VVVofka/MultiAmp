@@ -9,8 +9,7 @@ void structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt,
 } // /////////////////////////////////////////////////////////////////////////
 size_t structLaysCfg::setKoefsF(const vector<float>& vf_in){
 	cntlays = vf_in.size() + 1;
-	koefsF.create(vf_in);
-	return koefsF.size;
+	return koefsF.create(vf_in);
 } // ////////////////////////////////////////////////////////////////////////////////
 size_t structLaysCfg::setKoefsF(const char* s_in, const char delimiter){
 	vector<float> v_parse = myconv::strToVFloat(s_in, delimiter);
