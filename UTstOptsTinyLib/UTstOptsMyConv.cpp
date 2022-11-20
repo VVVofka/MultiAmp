@@ -157,11 +157,20 @@ public:
 		Assert::AreEqual(0.f, v[2], tol, L"4");
 		Assert::AreEqual(-0.091f, v[3], tol, L"4");
 
-		v = myconv::strToVFloat("^^-.36*91;-,%945--+--df0345,23f-");
+		v = myconv::strToVFloat("^^-.36*91;-,%945--+---345,23f-");
 		Assert::AreEqual((size_t)3, v.size(), L"5a");
 		Assert::AreEqual(-0.3691f, v[0], tol, L"5b");
 		Assert::AreEqual(-0.945f, v[1], tol, L"5c");
-		Assert::AreEqual(345.23f, v[2], tol, L"5d");
+		Assert::AreEqual(-345.23f, v[2], tol, L"5d");
+
+		v = myconv::strToVFloat("..");
+		Assert::AreEqual((size_t)2, v.size(), L"6a");
+		Assert::AreEqual(0.f, v[0], tol, L"6b");
+		Assert::AreEqual(0.f, v[1], tol, L"6b");
+
+		v = myconv::strToVFloat("---345,2");
+		Assert::AreEqual(-345.f, v[0], tol, L"7a");
+
 	} // ////////////////////////////////////////////////////////////////////////////};
 	};
 }

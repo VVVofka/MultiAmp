@@ -3,6 +3,7 @@
 #include "DlgCfgLays.h"
 #include "afxdialogex.h"
 #include <string>
+#pragma warning(disable:26454) 
 
 // DlgCfgLays dialog
 IMPLEMENT_DYNAMIC(DlgCfgLays, CDialog)

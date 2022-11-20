@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <algorithm>
+#include "..\OptsTinyLib\structLaysCfg.h"
+
 class FSliders{
 	CDialog* dlg = NULL;	// TODO: del?
 	CWnd* frame = NULL;

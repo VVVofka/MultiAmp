@@ -140,6 +140,7 @@ tm myconv::getTMstruct(__time64_t long_time){
 	return structtime;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////
 std::vector<float> myconv::strToVFloat(const std::string& s, const char delimiter){
+#define FINALY_ADD {ret.push_back(float(sign * atof(bufword.c_str()))),	sign=1, bufword.clear();}
 	std::vector<float> ret;
 	size_t size_inp_str = s.length();
 	if(size_inp_str == 0) return ret;
@@ -162,9 +163,7 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 			case IntegerPart:
 			case FractionalPart:
 			case Comma:
-				ret.push_back(float(sign * atof(bufword.c_str())));
-				sign = 1;
-				bufword.clear();
+				FINALY_ADD
 				state = curState::Delimiter;
 			case Delimiter:
 			case Sign:
@@ -209,14 +208,17 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 				bufword.push_back('0');
 			case IntegerPart:
 				bufword.push_back('.');
-				state = curState::FractionalPart;
+				state = curState::Comma;	
 				continue;
 			case FractionalPart:
-				ret.push_back(float(sign * atof(bufword.c_str())));
-				sign = 1;
-				bufword.clear();
+				FINALY_ADD
 				state = curState::Delimiter;
+				continue;
 			case Comma:
+				FINALY_ADD
+				bufword.push_back('0');
+				bufword.push_back('.');
+				state = curState::FractionalPart;
 				continue;
 			}
 		}
@@ -224,4 +226,5 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 	if(state == curState::IntegerPart || state == curState::Comma || state == curState::FractionalPart)
 		ret.push_back(float(sign * atof(bufword.c_str())));
 	return ret;
+#undef FINALY_ADD
 } // ////////////////////////////////////////////////////////////////////////////////////////////////

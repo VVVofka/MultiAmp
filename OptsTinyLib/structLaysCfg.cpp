@@ -21,7 +21,8 @@ void structLaysCfg::resize(size_t new_size){
 } // ////////////////////////////////////////////////////////////////////////////////
 std::vector<int> structLaysCfg::vikf(){
 	std::vector<int> ret(koefsF.size());
+	double k = pow(10, digits);
 	for(size_t j = 0; j < koefsF.size(); j++)
-		ret[j] = koefsF[j];
+		ret[j] = int(k * koefsF[j] + 0.5);
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////
