@@ -11,10 +11,10 @@ using namespace concurrency::direct3d;
 class RunDlast{
 public:
 	static void Run(const INT2 shift,
-                    const array<DrQuadro, 2>& srcd,
-				    array<Vertex2D, 1>& dstpos,
-				    array<int, 2>& dsta,
-				    array<FLT2, 2>& dstd,
-				    const INT2 sz,
-					bool normdir);
+		const Concurrency::array<DrQuadro, 2>& srcd,
+		Concurrency::array<Vertex2D, 1>& dstpos,
+		Concurrency::array<int, 2>& dsta,
+		Concurrency::array<FLT2, 2>& dstd,
+		const INT2 sz,
+		bool normdir);
 }; // ***************************************************************************************************

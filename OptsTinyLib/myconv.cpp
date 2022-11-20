@@ -143,7 +143,7 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 	std::vector<float> ret;
 	size_t size_inp_str = s.length();
 	if(size_inp_str == 0) return ret;
-	ret.reserve(size_inp_str / 4);
+	ret.reserve(1 + size_inp_str / 4);
 
 	std::string bufword;
 	int sign = 1;
@@ -162,33 +162,27 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 			case IntegerPart:
 			case FractionalPart:
 			case Comma:
-				ret.push_back(sign * atof(bufword.c_str()));
+				ret.push_back(float(sign * atof(bufword.c_str())));
 				sign = 1;
 				bufword.clear();
 				state = curState::Delimiter;
-				continue;
 			case Delimiter:
 			case Sign:
-			default:
 				continue;
 			}
 		}
 		if(ch >= '0' && ch <= '9'){
 			switch(state){
+			case Delimiter:
+			case Sign:
+				state = curState::IntegerPart;
 			case IntegerPart:
 			case FractionalPart:
 				bufword.push_back(ch);
 				continue;
-			case Delimiter:
-			case Sign:
-				bufword.push_back(ch);
-				state = curState::IntegerPart;
-				continue;
 			case Comma:
 				bufword.push_back(ch);
 				state = curState::FractionalPart;
-				continue;
-			default:
 				continue;
 			}
 		}
@@ -197,11 +191,7 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 			case IntegerPart:
 			case FractionalPart:
 			case Comma:
-				ret.push_back(sign * atof(bufword.c_str()));
-				sign = ch == '-' ? -1 : 1;
-				bufword.clear();
-				state = curState::Sign;
-				continue;
+				ret.push_back(float(sign * atof(bufword.c_str())));
 			case Delimiter:
 				sign = ch == '-' ? -1 : 1;
 				bufword.clear();
@@ -210,29 +200,28 @@ std::vector<float> myconv::strToVFloat(const std::string& s, const char delimite
 			case Sign:
 				if(ch == '-') sign = -sign;
 				continue;
-			default:
-				continue;
 			}
 		}
 		if(ch == '.' || ch == ','){
 			switch(state){
-			case IntegerPart:
 			case Delimiter:
 			case Sign:
+				bufword.push_back('0');
+			case IntegerPart:
 				bufword.push_back('.');
 				state = curState::FractionalPart;
 				continue;
 			case FractionalPart:
-				ret.push_back(sign * atof(bufword.c_str()));
+				ret.push_back(float(sign * atof(bufword.c_str())));
 				sign = 1;
 				bufword.clear();
 				state = curState::Delimiter;
-				continue;
 			case Comma:
-			default:
 				continue;
 			}
 		}
 	}
+	if(state == curState::IntegerPart || state == curState::Comma || state == curState::FractionalPart)
+		ret.push_back(float(sign * atof(bufword.c_str())));
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////////////////////////

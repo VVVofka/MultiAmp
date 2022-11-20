@@ -11,13 +11,13 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 	for(int nlay = 0; nlay < layscnt; nlay++){
 		const INT2 size = model.sizeYX(nlay);
 
-		vgpu_a.push_back(std::unique_ptr<array<int, 2>>());
-		auto pareas = new array<int, 2>(size.y, size.x, model.v_areas[nlay].begin(), m_accl_view);
-		vgpu_a[nlay] = std::unique_ptr<array<int, 2>>(pareas);
+		vgpu_a.push_back(std::unique_ptr<Concurrency::array<int, 2>>());
+		auto pareas = new Concurrency::array<int, 2>(size.y, size.x, model.v_areas[nlay].begin(), m_accl_view);
+		vgpu_a[nlay] = std::unique_ptr<Concurrency::array<int, 2>>(pareas);
 
 		if(nlay < layscnt - 1){
-			auto tmp = new array<DrQuadro, 2>(size.y, size.x, model.v_dirs[nlay].begin(), m_accl_view);
-			vgpu_f.push_back(std::unique_ptr<array<DrQuadro, 2>>(tmp));
+			auto tmp = new Concurrency::array<DrQuadro, 2>(size.y, size.x, model.v_dirs[nlay].begin(), m_accl_view);
+			vgpu_f.push_back(std::unique_ptr<Concurrency::array<DrQuadro, 2>>(tmp));
 		}
 		if(nlay < layscnt - 2){
 			FLT2 tmp[Options::szDirs];
@@ -26,18 +26,18 @@ AMPEng2::AMPEng2(ID3D11Device* d3ddevice) : m_accl_view(Concurrency::direct3d::c
 				tmp[j].y = model.options.blocks2D2.vin[j].y * k;
 				tmp[j].x = model.options.blocks2D2.vin[j].x * k;
 			}
-			auto v = new array<FLT2, 1>(Options::szDirs, tmp, m_accl_view);
-			ar_masks.push_back(std::unique_ptr<array<FLT2, 1>>(v));
+			auto v = new Concurrency::array<FLT2, 1>(Options::szDirs, tmp, m_accl_view);
+			ar_masks.push_back(std::unique_ptr<Concurrency::array<FLT2, 1>>(v));
 		}
 	}
-	auto pscreen = new array<Vertex2D, 1>(int(model.v_scr.size()), model.v_scr.begin(), m_accl_view);
-	ar_screen = std::unique_ptr<array<Vertex2D, 1>>(pscreen);
+	auto pscreen = new Concurrency::array<Vertex2D, 1>(int(model.v_scr.size()), model.v_scr.begin(), m_accl_view);
+	ar_screen = std::unique_ptr<Concurrency::array<Vertex2D, 1>>(pscreen);
 
-	auto plast_dirs = new array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view);
-	ar_last_dirs = std::unique_ptr<array<FLT2, 2>>(plast_dirs);
+	auto plast_dirs = new Concurrency::array<FLT2, 2>(model.sizeY(), model.sizeX(), model.ar_last_dirs.begin(), m_accl_view);
+	ar_last_dirs = std::unique_ptr<Concurrency::array<FLT2, 2>>(plast_dirs);
 
-	auto pamsk = new array<int, 1>(16, model.options.aMask(), m_accl_view);
-	amask = std::unique_ptr<array<int, 1>>(pamsk);
+	auto pamsk = new Concurrency::array<int, 1>(16, model.options.aMask(), m_accl_view);
+	amask = std::unique_ptr<Concurrency::array<int, 1>>(pamsk);
 } // ///////////////////////////////////////////////////////////////////////////////////////////////
 void AMPEng2::run(){
 	//INT2 shift(distrLastAY(model.rnd_gen), distrLastAX(model.rnd_gen));   // rand shift
@@ -66,7 +66,7 @@ void AMPEng2::dumpA(size_t nlay){
 	const char separ[] = " ";
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	model.setConsole();
-	array<int, 2> av(*vgpu_a[nlay].get());
+	Concurrency::array<int, 2> av(*vgpu_a[nlay].get());
 	std::cout << "A[" << nlay << "] y*x: " << av.extent[0] << '*' << av.extent[1] << std::endl;
 	if(nlay == vgpu_a.size() - 1){
 		for(int y = 0; y < av.extent[0]; y++){
@@ -104,7 +104,7 @@ void AMPEng2::dumpA(){
 void AMPEng2::dumpD(size_t nlay){
 	if(nlay < 0) nlay = model.LaysCnt() - 1;
 	model.setConsole();
-	array<DrQuadro, 2> av(*vgpu_f[nlay].get());
+	Concurrency::array<DrQuadro, 2> av(*vgpu_f[nlay].get());
 	std::cout << "Dirs[" << nlay << "] y*x: " << av.extent[0] << '*' << av.extent[1] << std::endl;
 	for(int y = 0; y < av.extent[0]; y++){
 		for(int x = 0; x < av.extent[1]; x++){
@@ -126,7 +126,7 @@ void AMPEng2::dumpDLast(){
 	int szy = ar_last_dirs->extent[0],
 		szx = ar_last_dirs->extent[1];
 	if(szy <= 0 || szx <= 0) return;
-	array<FLT2, 2> av(*ar_last_dirs);
+	Concurrency::array<FLT2, 2> av(*ar_last_dirs);
 	std::cout << "DirsLast[" << model.LaysCnt() - 1 << "] y*x: " << szy << '*' << szx;
 	for(int y = 0; y < szy; y++){
 		printf("\n%+.2f", av[0][0].y);

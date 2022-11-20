@@ -19,3 +19,9 @@ void structLaysCfg::resize(size_t new_size){
 	cntlays = new_size;
 	koefsF.resize(cntlays - 1);
 } // ////////////////////////////////////////////////////////////////////////////////
+std::vector<int> structLaysCfg::vikf(){
+	std::vector<int> ret(koefsF.size());
+	for(size_t j = 0; j < koefsF.size(); j++)
+		ret[j] = koefsF[j];
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////////

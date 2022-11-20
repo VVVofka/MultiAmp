@@ -28,7 +28,7 @@ class Engine2{
 	//std::vector<std::unique_ptr<array<DrQuadro, 2>>> vgpu_f;
 	//std::unique_ptr<array<FLT2, 2>> ar_last_dirs;
 	//std::vector<std::unique_ptr<array<FLT2, 1>>> ar_masks;
-	std::unique_ptr<array<int, 1>> amask;
+	std::unique_ptr<Concurrency::array<int, 1>> amask;
 
 public:
 	Lays lays;

@@ -87,7 +87,7 @@ structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
 
-	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, &cfgOut.vkf, 20);
+	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, cfgOut.vikf(), 20);
 	fsliders.draw();
 
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
@@ -100,7 +100,7 @@ BOOL DlgCfgLays::OnInitDialog(){
 
 	m_spinCnt.SetBuddy(&m_cnt);		// подружить окно
 	m_spinCnt.SetRange(2, 20);		// диапазон
-	m_spinCnt.SetPos((int)cfgOut.vkf.size());		    // позиция
+	m_spinCnt.SetPos((int)cfgOut.cntlays);		    // позиция
 
 	m_topX.SetWindowTextA(std::to_string(m_spinTopX.GetPos()).c_str());
 	m_topY.SetWindowTextA(std::to_string(m_spinTopY.GetPos()).c_str());
@@ -148,7 +148,7 @@ void DlgCfgLays::chngCnt(size_t cnt){
 		return;
 	}
 	prev = (int)cnt;
-	cfgOut.vkf.resize(cnt, 1);
+	cfgOut.resize(cnt);
 
 	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());

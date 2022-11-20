@@ -128,5 +128,40 @@ public:
 		Assert::AreEqual(v[0], (size_t)3691);
 		Assert::AreEqual(v[1], (size_t)945);
 	} // ////////////////////////////////////////////////////////////////////////////
+
+	TEST_METHOD(strToVFloat){
+		std::vector<float> v;
+		const float tol = 0.00001f;
+		v = myconv::strToVFloat("");
+		Assert::AreEqual((size_t)0, v.size(), L"0");
+
+		v = myconv::strToVFloat(" ");
+		Assert::AreEqual((size_t)0, v.size(), L"0");
+
+		v = myconv::strToVFloat(" 0");
+		Assert::AreEqual((size_t)1, v.size(), L"Check:1a");
+		Assert::AreEqual(0.f, v[0], tol, L"Check:1b");
+
+		v = myconv::strToVFloat("- 0,");
+		Assert::AreEqual((size_t)1, v.size(), L"2");
+		Assert::AreEqual(0.f, v[0], tol, L"2");
+
+		v = myconv::strToVFloat("+0. ");
+		Assert::AreEqual((size_t)1, v.size(), L"3");
+		Assert::AreEqual(0.f, v[0], tol, L"3");
+
+		v = myconv::strToVFloat("1.273 -034,890 +-.0 -.0910&");
+		Assert::AreEqual((size_t)4, v.size(), L"4");
+		Assert::AreEqual(1.273f, v[0], tol, L"4");
+		Assert::AreEqual(-34.89f, v[1], tol, L"4");
+		Assert::AreEqual(0.f, v[2], tol, L"4");
+		Assert::AreEqual(-0.091f, v[3], tol, L"4");
+
+		v = myconv::strToVFloat("^^-.36*91;-,%945--+--df0345,23f-");
+		Assert::AreEqual((size_t)3, v.size(), L"5a");
+		Assert::AreEqual(-0.3691f, v[0], tol, L"5b");
+		Assert::AreEqual(-0.945f, v[1], tol, L"5c");
+		Assert::AreEqual(345.23f, v[2], tol, L"5d");
+	} // ////////////////////////////////////////////////////////////////////////////};
 	};
 }

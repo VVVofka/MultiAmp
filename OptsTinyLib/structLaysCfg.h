@@ -4,7 +4,7 @@
 
 class structLaysCfg{
 public:
-	static const size_t DEF_SIZE = 5;
+	static const size_t DEF_SIZE = 3;
 	size_t cntlays = DEF_SIZE;
 	size_t topX = 1, topY = 1;
 	size_t digits = 2;
@@ -28,5 +28,6 @@ public:
 	size_t setKoefsF(const char* s_in, const char delimiter = ' ');
 	void resize(size_t new_size);
 
+	std::vector<int> vikf();
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

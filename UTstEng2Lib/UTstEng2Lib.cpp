@@ -18,9 +18,9 @@ public:
 		cfgall.data.fill_v(sscr);
 		misc.cntForStop = 1;
 		misc.curRndSeed = 1;
-		lays.setConfig(2, 1, 3);
+		//lays.setConfig(2, 1, 3);
 		
-		eng2::runEngine2Lib(&cfgall);
+		//eng2::runEngine2Lib(&cfgall);
 	} // ////////////////////////////////////////////////////////////
 
 private:
