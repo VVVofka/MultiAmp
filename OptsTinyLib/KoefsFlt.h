@@ -16,6 +16,6 @@ public:
 	double operator[](size_t idx) const { return vd[idx]; }
 private:
 	vector<double> vd;
-	vector<double> vdmax;
+	//vector<double> vdmax;
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

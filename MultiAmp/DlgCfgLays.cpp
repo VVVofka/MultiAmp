@@ -150,6 +150,7 @@ void DlgCfgLays::chngCnt(size_t cnt_lays){
 	}
 	prev_cntlays = (int)cnt_lays;
 
+	fsliders.saveVK();
 	fsliders.rescale(cnt_lays - 1);	//cfgOut.resize(cnt_lays);
 
 	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
