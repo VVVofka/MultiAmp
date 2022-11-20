@@ -14,13 +14,13 @@ size_t KoefsFlt::create(const vector<float>& v_in){
 } // //////////////////////////////////////////////////////////////////////////////////
 string KoefsFlt::sall(const int digits, const char separate) const{
 	string ret;
-	string sformat = "%f." + to_string(digits);
+	string sformat = "%." + to_string(digits) + "f";
 	const char* pformat = sformat.c_str();
 	for(size_t j = 0;;){
 		char buf[16];
 		sprintf_s(buf, 16, pformat, vd[j]);
 		ret += buf;
-		if(j++ >= vd.size())
+		if(++j >= vd.size())
 			return ret;
 		ret += separate;
 	}

@@ -26,8 +26,9 @@ public:
 	void setConfig(size_t top_x, size_t top_y, size_t cpu = 0, size_t mt = 0, size_t cnt_lays=0);
 	size_t setKoefsF(const vector<float>& vf_in);
 	size_t setKoefsF(const char* s_in, const char delimiter = ' ');
-	void resize(size_t new_size);
-
-	std::vector<int> vikf();
+	void resize(size_t new_cnt_lays);
+	int intKF(size_t idx)const{ return int(lrint(pow(10, digits) * koefsF[idx])); }
+	void setIntKF(size_t idx, int val){ koefsF[idx] = val / pow(10, digits); }
+	//std::vector<int> vikf();
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

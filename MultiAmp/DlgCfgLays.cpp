@@ -78,17 +78,17 @@ END_MESSAGE_MAP()
 
 structLaysCfg DlgCfgLays::doModal(structLaysCfg cfg_lays){
 	cfgOut = cfg_lays;
-	auto cfgInp = cfgOut;
+	structLaysCfg cfgBak = cfgOut;
 	INT_PTR retDlg = CDialog::DoModal();
 	if(retDlg == IDOK)
 		return cfgOut;
-	return cfgInp;
+	return cfgBak;
 } // //////////////////////////////////////////////////////////////////////////////
 // DlgCfgLays message handlers
 BOOL DlgCfgLays::OnInitDialog(){
 	CDialog::OnInitDialog();
 
-	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, cfgOut.vikf(), 20);
+	fsliders.create(this, IDC_LAYSCFG_SLIDERS_GROUP, IDC_LAYSCFG_SLIDER_00, IDC_LAYSCFG_EDIT00, cfgOut, 20);
 	fsliders.draw();
 
 	m_spinTopX.SetBuddy(&m_topX);	// подружить окно
@@ -139,22 +139,22 @@ void DlgCfgLays::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar){
 	fsliders.hscroll(pScrollBar->m_hWnd);
 	CDialog::OnHScroll(nSBCode, nPos, pScrollBar);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
-void DlgCfgLays::chngCnt(size_t cnt){
-	static int prev = -1;
-	if(prev == (int)cnt)
+void DlgCfgLays::chngCnt(size_t cnt_lays){
+	static int prev_cntlays = -1;
+	if(prev_cntlays == (int)cnt_lays)
 		return;
-	if(cnt < 2 || cnt > fsliders.vsliders.size()){
+	if(cnt_lays < 2 || cnt_lays > fsliders.vsliders.size()){
 		m_btOK.EnableWindow(FALSE);
-		prev = (int)cnt;
+		prev_cntlays = (int)cnt_lays;
 		return;
 	}
-	prev = (int)cnt;
-	cfgOut.resize(cnt);
+	prev_cntlays = (int)cnt_lays;
+
+	fsliders.rescale(cnt_lays - 1);	//cfgOut.resize(cnt_lays);
 
 	m_lay0X.SetWindowTextA(razd(cfgOut.bottomX()).c_str());
 	m_lay0Y.SetWindowTextA(razd(cfgOut.bottomY()).c_str());
 	m_pointsAll.SetWindowTextA(razd(cfgOut.bottomX() * cfgOut.bottomY()).c_str());
-	fsliders.saveVK(cfgOut.cntlays);
 	m_btOK.EnableWindow(TRUE);
 	Invalidate();
 } // ///////////////////////////////////////////////////////////////////////////////////////////
@@ -244,7 +244,7 @@ std::string DlgCfgLays::razd(size_t u){
 	return s;
 } // /////////////////////////////////////////////////////////////////////////////
 void DlgCfgLays::OnBnClickedOk(){
-	fsliders.saveVK(cfgOut.cntlays);
+	fsliders.saveVK();
 	cfgOut.cpuSingle = iEdit(m_cpu_single.GetDlgCtrlID(), 0);
 	cfgOut.cpuMultiThreaded= iEdit(m_cpu_multi.GetDlgCtrlID(), 0);
 	CDialog::OnOK();

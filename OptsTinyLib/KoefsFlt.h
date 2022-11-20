@@ -12,7 +12,8 @@ public:
 	void resize(const size_t new_size);
 	string sall(const int digits = 2, const char separate = ' ') const;
 	vector<string> vs(const int digits = 2) const;
-	double operator[](size_t idx)const { return vd[idx]; }
+	double& operator[](size_t idx) { return vd[idx]; }
+	double operator[](size_t idx) const { return vd[idx]; }
 private:
 	vector<double> vd;
 	vector<double> vdmax;

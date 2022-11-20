@@ -128,7 +128,6 @@ public:
 		Assert::AreEqual(v[0], (size_t)3691);
 		Assert::AreEqual(v[1], (size_t)945);
 	} // ////////////////////////////////////////////////////////////////////////////
-
 	TEST_METHOD(strToVFloat){
 		std::vector<float> v;
 		const float tol = 0.00001f;
@@ -172,5 +171,103 @@ public:
 		Assert::AreEqual(-345.f, v[0], tol, L"7a");
 
 	} // ////////////////////////////////////////////////////////////////////////////};
+	TEST_METHOD(my_round){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_round_9 = round(x_9);
+		auto z_round_5 = round(x_5);
+		auto z_round_1 = round(x_1);
+		auto z_round1 = round(x1);
+		auto z_round5 = round(x5);
+		auto z_round9 = round(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_floor){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_round_9 = floor(x_9);
+		auto z_round_5 = floor(x_5);
+		auto z_round_1 = floor(x_1);
+		auto z_round1 = floor(x1);
+		auto z_round5 = floor(x5);
+		auto z_round9 = floor(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_ceil){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_round_9 = ceil(x_9);
+		auto z_round_5 = ceil(x_5);
+		auto z_round_1 = ceil(x_1);
+		auto z_round1 = ceil(x1);
+		auto z_round5 = ceil(x5);
+		auto z_round9 = ceil(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_trunc){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_round_9 = trunc(x_9);
+		auto z_round_5 = trunc(x_5);
+		auto z_round_1 = trunc(x_1);
+		auto z_round1 = trunc(x1);
+		auto z_round5 = trunc(x5);
+		auto z_round9 = trunc(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_lrint){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_lrint_9 = lrint(x_9);
+		auto z_lrint_5 = lrint(x_5);
+		auto z_lrint_1 = lrint(x_1);
+		auto z_lrint1 = lrint(x1);
+		auto z_lrint5 = lrint(x5);
+		auto z_lrint9 = lrint(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_int){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_lrint_9 = int(x_9);
+		auto z_lrint_5 = int(x_5);
+		auto z_lrint_1 = int(x_1);
+		auto z_lrint1 = int(x1);
+		auto z_lrint5 = int(x5);
+		auto z_lrint9 = int(x9);
+	} // ////////////////////////////////////////////////////////////////
+	TEST_METHOD(my_int05){
+		double x_9 = -1.9;
+		double x_5 = -1.5;
+		double x_1 = -1.1;
+		double x1 = 1.1;
+		double x5 = 1.5;
+		double x9 = 1.9;
+		auto z_lrint_9 = int(x_9 + 0.5);
+		auto z_lrint_5 = int(x_5 + 0.5);
+		auto z_lrint_1 = int(x_1 + 0.5);
+		auto z_lrint1 = int(x1 + 0.5);
+		auto z_lrint5 = int(x5 + 0.5);
+		auto z_lrint9 = int(x9 + 0.5);
+	} // ////////////////////////////////////////////////////////////////
 	};
 }

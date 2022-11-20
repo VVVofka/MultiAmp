@@ -4,15 +4,16 @@
 #include <string>
 #include <locale.h>
 
-void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, std::vector<int> v_koefs, size_t size_capacity){
+void FSliders::create(CDialog* dlg, int id_grp, int id_slider_top, int id_edit_top, structLaysCfg& cfg_in, size_t cnt_sliders){
 	this->dlg = dlg;
+	cfg = &cfg_in;
+	cnt = cfg_in.koefsF.size();
 	frame = (CWnd*)dlg->GetDlgItem(id_grp);
-	vsliders.resize(size_capacity);
-	vedits.resize(size_capacity);
-	vkoefs = v_koefs;
+	vsliders.resize(cnt_sliders);
+	vedits.resize(cnt_sliders);
 	idxSlider0 = id_slider_top;
 	idxEdit0 = id_edit_top;
-	for(size_t j = 0; j < size_capacity; j++){
+	for(size_t j = 0; j < cnt_sliders; j++){
 		vsliders[j] = (CSliderCtrl*)dlg->GetDlgItem(id_slider_top + j);
 		vedits[j] = (CEdit*)dlg->GetDlgItem(id_edit_top + j);
 	}
@@ -26,68 +27,68 @@ void FSliders::draw(){
 	rctSlider.right = rctFrame.right - rctFrame.left;
 	rctSlider.left = rctSlider.right - rctSlider0.Width();
 
-	double h = ((double)rctFrame.Height() - 1.5 * height) / (vkoefs.size() - 1);
-	for(size_t j = 0; j < vkoefs.size(); j++){
+	double h = ((double)rctFrame.Height() - 1.5 * height) / (cnt - 1);
+	for(size_t j = 0; j < cnt; j++){
 		int shift = height / 2;
 		rctSlider.top = (LONG)(j * h) + shift;
 		rctSlider.bottom = rctSlider.top + height;
 		vsliders[j]->MoveWindow(rctSlider);
 		//_RPT5(0, "%d\t %d * %d   %d * %d\n", j, rctSlider.left, rctSlider.top, rctSlider.right, rctSlider.bottom);
+		int i = cfg->intKF(j);
 		vsliders[j]->SetRange(fmin, fmax, FALSE);
-		vsliders[j]->SetPos(vkoefs.at(j));
+		vsliders[j]->SetPos(i);
 		vsliders[j]->SetTicFreq(100);
-		vedits[j]->SetWindowTextA(std::to_string(vkoefs.at(j)).c_str());
+		vedits[j]->SetWindowTextA(std::to_string(i).c_str());
 		vsliders[j]->ShowWindow(SW_SHOWNORMAL);
 		vedits[j]->ShowWindow(SW_SHOWNORMAL);
 		vsliders[j]->SetBuddy(vedits[j]);
 	}
-	for(size_t j = vkoefs.size(); j < vsliders.size(); j++){
+	for(size_t j = cnt; j < vsliders.size(); j++){
 		vsliders[j]->ShowWindow(SW_HIDE);
 		vedits[j]->ShowWindow(SW_HIDE);
 	}
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::saveVK(size_t newsize){
-	if(newsize != vkoefs.size())
-		rescale(newsize);
-	else{
-		for(size_t j = 0; j < vkoefs.size(); j++)
-			vkoefs.at(j) = vsliders[j]->GetPos();
-	}
-	draw();	
+void FSliders::saveVK(){
+	for(size_t j = 0; j < cnt; j++)
+		cfg->setIntKF(j, vsliders[j]->GetPos());
+	draw();
 } // /////////////////////////////////////////////////////////////////////////
-void FSliders::rescale(size_t newsize){
-	struct xy{ double x, y; };
+void FSliders::rescale(size_t new_cnt_sliders){
+	cnt = new_cnt_sliders;
+	cfg->resize(new_cnt_sliders + 1);
+	draw();
+	//struct xy{ double x, y; };
 
-	size_t oldsize = vkoefs.size();
-	std::vector<xy> vold(oldsize);
-	std::vector<xy> vnew(newsize);
+	//size_t oldsize = cfg.koefsF.size();
+	//std::vector<xy> vold(oldsize);
+	//std::vector<xy> vnew(new_cnt_sliders);
 
-	for(size_t j = 0; j < oldsize; j++){
-		vold[j].x = j / (oldsize - 1.0);
-		vold[j].y = vsliders[j]->GetPos();
-	}
-	for(size_t j = 0; j < newsize; j++)
-		vnew[j].x = j / (newsize - 1.0);
+	//for(size_t j = 0; j < oldsize; j++){
+	//	vold[j].x = j / (oldsize - 1.0);
+	//	vold[j].y = vsliders[j]->GetPos();
+	//}
+	//for(size_t j = 0; j < new_cnt_sliders; j++)
+	//	vnew[j].x = j / (new_cnt_sliders - 1.0);
 
-	for(size_t j = 1; j < newsize - 1; j++){
-		for(size_t i = 0; i < oldsize; i++){
-			if(vnew[j].x >= vold[i].x){
-				xy& oldleft = vold[i];
-				xy& oldright = vold[i >= oldsize - 1 ? oldsize - 1 : i + 1];
-				double k = (vnew[j].x - oldleft.x) / (oldright.x - oldleft.x);
-				vnew[j].y = oldleft.y + k * (oldright.y - oldleft.y);
-			}
-		}
-	}
-	vnew[0].y = vold[0].y;
-	vnew[newsize - 1].y = vold[oldsize - 1].y;
+	//for(size_t j = 1; j < new_cnt_sliders - 1; j++){
+	//	for(size_t i = 0; i < oldsize; i++){
+	//		if(vnew[j].x >= vold[i].x){
+	//			xy& oldleft = vold[i];
+	//			xy& oldright = vold[i >= oldsize - 1 ? oldsize - 1 : i + 1];
+	//			double k = (vnew[j].x - oldleft.x) / (oldright.x - oldleft.x);
+	//			vnew[j].y = oldleft.y + k * (oldright.y - oldleft.y);
+	//		}
+	//	}
+	//}
+	//vnew[0].y = vold[0].y;
+	//vnew[new_cnt_sliders - 1].y = vold[oldsize - 1].y;
 
-	vkoefs.resize(newsize);
-	for(size_t j = 0; j < vkoefs.size(); j++)
-		vkoefs.at(j) = lround(vnew[j].y);
+	//vkoefs.resize(new_cnt_sliders);
+	//for(size_t j = 0; j < vkoefs.size(); j++)
+	//	vkoefs.at(j) = lround(vnew[j].y);
 } // ////////////////////////////////////////////////////////////////////////
 bool FSliders::hscroll(HWND hwnd){
-	for(size_t j = 0; j < vkoefs.size(); j++){
+	for(size_t j = 0; j < cnt; j++){
 		if(vsliders[j]->m_hWnd == hwnd){
 			vedits[j]->SetWindowTextA(std::to_string(vsliders[j]->GetPos()).c_str());
 			return true;

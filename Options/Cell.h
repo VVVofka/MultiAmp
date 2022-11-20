@@ -1,5 +1,6 @@
 #pragma once
 #include <cassert>
+#include <cmath>
 namespace CppCLRWinformsProjekt{
 using namespace System;
 using namespace System::Windows::Forms;
@@ -28,15 +29,15 @@ public:
 
 		const int xc = x0 + width / 2;
 		const int x1 = x0 + gap;
-		const int x2 = x1 + int(lenarx * 1.5 + 0.5);
+		const int x2 = x1 + int(lrint(lenarx * 1.5));
 		const int x4 = x0 + width - gap;
-		const int x3 = x4 - int(lenarx * 1.5 + 0.5);
+		const int x3 = x4 - int(lrint(lenarx * 1.5));
 
 		const int yc = y0 + heigh / 2;
 		const int y1 = y0 + gap;
-		const int y2 = y1 + int(lenary * 1.5 + 0.5);
+		const int y2 = y1 + int(lrint(lenary * 1.5));
 		const int y4 = y0 + heigh - gap;
-		const int y3 = y4 - int(lenary * 1.5 + 0.5);
+		const int y3 = y4 - int(lrint(lenary * 1.5));
 		switch(dir){
 			case 0:{
 				Pen^ penc = gcnew Pen(Color::Black, 1);
