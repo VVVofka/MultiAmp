@@ -31,6 +31,9 @@
     <Filter Include="EasyBMP">
       <UniqueIdentifier>{b051a92c-2a22-49a2-a156-5631fca35a4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dlgs\Misc">
+      <UniqueIdentifier>{2b7fdcc9-1109-4bb7-96ff-d4cf57435c15}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MultiAmp.h">
@@ -94,7 +97,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DlgMisc.h">
-      <Filter>Header Files</Filter>
+      <Filter>Dlgs\Misc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +141,7 @@
       <Filter>EasyBMP</Filter>
     </ClCompile>
     <ClCompile Include="DlgMisc.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dlgs\Misc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

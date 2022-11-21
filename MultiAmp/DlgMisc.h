@@ -40,4 +40,5 @@ public:
 	virtual BOOL OnInitDialog();
 	virtual INT_PTR DoModal();
 	afx_msg void OnBnClickedOk();
+	CEdit m_en_per_rend;
 }; // ######################################################################################

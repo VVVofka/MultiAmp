@@ -23,7 +23,7 @@ void DlgMisc::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_ED_MISC_DTCREATE_HOUR, m_hour_create);
 	DDX_Control(pDX, IDC_ED_MISC_DTCREATE_MINUTE, m_min_create);
 	DDX_Control(pDX, IDC_ED_MISC_DTCREATE_SEC, m_sec_create);
-	
+
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_TICK, m_tick_stop);
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_YEAR, m_year_stop);
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_MONTH, m_month_stop);
@@ -31,8 +31,9 @@ void DlgMisc::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_HOUR, m_hour_stop);
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_MINUTE, m_min_stop);
 	DDX_Control(pDX, IDC_ED_MISC_DTSTOP_SEC, m_sec_stop);
-	
+
 	DDX_Control(pDX, IDC_ED_MISC_COMMENT, m_comment);
+	DDX_Control(pDX, IDC_ED_MISC_EN_PER_REND, m_en_per_rend);
 }
 BEGIN_MESSAGE_MAP(DlgMisc, CDialog)
 	ON_BN_CLICKED(IDOK, &DlgMisc::OnBnClickedOk)
@@ -108,6 +109,7 @@ void DlgMisc::OnBnClickedOk(){
 	data->dtLastStop = _mktime64(&tmstop);
 	data->sComments = ForMfsControls::getStrFromCEdit(m_comment);
 
+	data->cntEnginePerRender = ForMfsControls::getIntFromCEdit(m_en_per_rend);
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////
 
