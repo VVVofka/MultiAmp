@@ -10,18 +10,15 @@ public:
 		return size_t(std::stoul(s));
 #endif // WIN32
 	} // ////////////////////////////////////////////////////////////////////////////////////
-	static int getIntFromCEdit(CEdit& edit, std::string* s_out = NULL){
+	static int getIntFromCEdit(CEdit& edit, int def_val = 0){
 		CString sb;
 		edit.GetWindowTextA(sb);
 		sb.Replace(" ", "");
 		int u;
-		sscanf_s((LPCSTR)sb, "%d", &u);
-		std::string s = std::to_string(u);
-//		edit.SetWindowTextA(s.c_str());
-//		edit.UpdateWindow();
-		if(s_out != NULL)
-			*s_out = s;
+		int ret = sscanf_s((LPCSTR)sb, "%d", &u);
+		if(ret == 1)
 		return u;
+		return def_val;
 	} // //////////////////////////////////////////////////////////////////////////////
 	static std::string getStrFromCEdit(CEdit& edit){
 		CString sb;
