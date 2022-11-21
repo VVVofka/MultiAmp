@@ -42,68 +42,52 @@ void KoefsFlt::resize(const size_t new_size){
 	auto vdold = vd;
 	vd.resize(new_size);
 	double kNormXnew = 1. / (new_size - 1);
-	double kNormXold = 1. / (vdold.size() - 1);
-	size_t xoldStart = 0, xoldStop = 1;
-	double normXold0 = 0, normXold1 = 1;
+
+	vector<double> vNormXOld(vdold.size());
+	for(size_t j = 0; j < vNormXOld.size(); j++)
+		vNormXOld[j] = double(j) / double(vdold.size() - 1);
+
 	for(size_t xnew = 0; xnew < new_size; xnew++){
 		double normXnew = xnew * kNormXnew;	// [0...1]
-		for(size_t xold0 = xoldStart; xold0 < vdold.size(); xold0++){
-			normXold0 = xold0 * kNormXold;
-			if(normXold0 == normXnew){
-				xoldStart = xold0;
-				if(xoldStart > 0)
-					normXold0 = --xoldStart * kNormXold;
-				break;
-			}
-			if(normXold0 > normXnew){
-				xoldStart = xold0;
-				if(xoldStart > 0)
-					normXold0 = --xoldStart * kNormXold;
-				break;
-			}
-		}
-		for(size_t xold1 = xoldStop; xold1 < vdold.size(); xold1++){
-			normXold1 = xold1 * kNormXold;
-			if(normXold1 >= normXnew){
-				xoldStop = xold1;
-				break;
-			}
-		}
-		double kx = (normXnew - normXold0) / (normXold1 - normXold0);
-		vd[xnew] = vdold[xoldStart] + kx * (vdold[xoldStop] - vdold[xoldStart]);
+		size_t idxXoldDn = find_dn(vNormXOld, normXnew);
+		size_t idxXoldUp = find_up(vNormXOld, normXnew);
+		double kx = (normXnew - vNormXOld[idxXoldDn]) / (vNormXOld[idxXoldUp] - vNormXOld[idxXoldDn]);
+		vd[xnew] = vdold[idxXoldDn] + kx * (vdold[idxXoldUp] - vdold[idxXoldDn]);
 	}
-	double maxplusold = 0, maxminusold = 0;
-	for(size_t j = 0; j < vdold.size(); j++){
-		if(vdold[j] < 0){
-			if(maxminusold > -vdold[j])
-				maxminusold = -vdold[j];
+	pair<double, double> minmaxold = getMinMax(vdold);
+	pair<double, double> minmaxnew = getMinMax(vd);
+	double kdn = minmaxnew.first == 0 ? 1.0 : minmaxold.first / minmaxnew.first;
+	double kup = minmaxnew.second == 0 ? 1.0 : minmaxold.second / minmaxnew.second;
+
+	for(size_t j = 0; j < vd.size(); j++)
+		vd[j] *= ((vd[j] < 0) ? kdn : kup);
+} // //////////////////////////////////////////////////////////////////////////////////
+size_t KoefsFlt::find_dn(const vector<double>& v, const double x){
+	int j = int(v.size());
+	while(--j >= 0)
+		if(v[j] < x)
+			return v[j] < 0.0 ? 0 : size_t(j);
+	return 0;
+} // /////////////////////////////////////////////////////////////////////////////////
+size_t KoefsFlt::find_up(const vector<double>& v, const double x){
+	int j = -1;
+	int last = v.size() - 1;
+	while(++j < last)
+		if(v[j] > x)
+			return size_t(v[j] > 1.0 ? last : j);
+	return size_t(last);
+} // //////////////////////////////////////////////////////////////////////////////////
+pair<double, double> KoefsFlt::getMinMax(const vector<double>& v){
+	double maxplus = 0, maxminus = 0;
+	for(size_t j = 0; j < v.size(); j++){
+		if(v[j] < 0){
+			if(maxminus < -v[j])
+				maxminus = -v[j];
 		} else{
-			if(maxplusold > vdold[j])
-				maxplusold = vdold[j];
+			if(maxplus < v[j])
+				maxplus = v[j];
 		}
 	}
-
-	double maxplusnew = 0, maxminusnew = 0;
-	for(size_t j = 0; j < vd.size(); j++){
-		if(vd[j] < 0){
-			if(maxminusnew < -vd[j])
-				maxminusnew = -vd[j];
-		} else{
-			if(maxplusnew < vd[j])
-				maxplusnew = vd[j];
-		}
-	}
-
-	double kminus = maxminusnew == 0 ? 1 : maxminusold / maxminusnew;
-	double kplus = maxplusnew == 0 ? 1 : maxplusold / maxplusnew;
-
-	for(size_t j = 0; j < vd.size(); j++){
-		if(vd[j] < 0)
-			vd[j] *= kminus;
-		else
-			vd[j] *= kplus;
-	}
-	//if(vd.size() > vdold.size())
-	//	vdold = vd;
+	return make_pair(maxminus, maxplus);
 } // //////////////////////////////////////////////////////////////////////////////////
 

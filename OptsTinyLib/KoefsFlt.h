@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <utility>	// pair
 using namespace std;
 
 class KoefsFlt{
@@ -16,6 +17,8 @@ public:
 	double operator[](size_t idx) const { return vd[idx]; }
 private:
 	vector<double> vd;
-	//vector<double> vdmax;
+	static size_t find_dn(const vector<double>& v, const double x);
+	static size_t find_up(const vector<double>& v, const double x);
+	static pair<double, double> getMinMax(const vector<double>& v);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
