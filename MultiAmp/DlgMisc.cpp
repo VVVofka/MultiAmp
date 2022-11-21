@@ -73,6 +73,7 @@ BOOL DlgMisc::OnInitDialog(){
 	m_sec_stop.SetWindowTextA(std::to_string(tmstop.tm_sec).c_str());
 
 	m_comment.SetWindowTextA(data->sComments.c_str());
+	m_en_per_rend.SetWindowTextA(std::to_string(data->cntEnginePerRender).c_str());
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // EXCEPTION: OCX Property Pages should return FALSE
@@ -109,7 +110,7 @@ void DlgMisc::OnBnClickedOk(){
 	data->dtLastStop = _mktime64(&tmstop);
 	data->sComments = ForMfsControls::getStrFromCEdit(m_comment);
 
-	data->cntEnginePerRender = ForMfsControls::getIntFromCEdit(m_en_per_rend);
+	data->cntEnginePerRender = ForMfsControls::getIntFromCEdit(m_en_per_rend, 1);
 	CDialog::OnOK();
 } // ///////////////////////////////////////////////////////////////////////////////////////
 

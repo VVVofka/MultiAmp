@@ -14,13 +14,14 @@ namespace UTstEng2Lib{
 		structMiscCfg& misc = cfgall.misc;
 public:
 	TEST_METHOD(TestMethod1){
-		string sscr = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
-		cfgall.data.fill_v(sscr);
+		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
+		cfgall.data.fill_v(sdata);
 		misc.cntForStop = 1;
 		misc.curRndSeed = 1;
-		//lays.setConfig(2, 1, 3);
+		lays.setConfig(2, 1);
+		lays.setKoefsF("1 1 1");
 		
-		//eng2::runEngine2Lib(&cfgall);
+		eng2::runEngine2Lib(&cfgall);
 	} // ////////////////////////////////////////////////////////////
 
 private:

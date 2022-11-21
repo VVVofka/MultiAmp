@@ -17,7 +17,7 @@ public:
 		int u;
 		int ret = sscanf_s((LPCSTR)sb, "%d", &u);
 		if(ret == 1)
-		return u;
+			return u;
 		return def_val;
 	} // //////////////////////////////////////////////////////////////////////////////
 	static std::string getStrFromCEdit(CEdit& edit){

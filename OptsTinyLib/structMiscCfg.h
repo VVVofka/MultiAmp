@@ -11,7 +11,7 @@ public:
 	time_t dtCreate;
 	time_t dtLastStop;
 	std::string sComments;
-	int cntForStop = -1;
+	int cntForStop = -1;		// for debug only
 	int cntEnginePerRender = 1;
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
