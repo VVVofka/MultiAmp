@@ -24,7 +24,8 @@ public:
 		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
 		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
 
-		size_t cntlays = lays.setConfig(2, 1, 2, 1, "0.91  0.72  0,43");
+		size_t mt = 0, one_core = 0;
+		size_t cntlays = lays.setConfig(2, 1, one_core, mt, "0.91  0.72  0,43");
 		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
 		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
 		Assert::AreEqual(size_t(16), lays.sizeX(0), L"lays.sizeX(0)");
@@ -38,14 +39,14 @@ public:
 		Assert::AreEqual(0.91, lays.koefsF[0], tol,  L"lays.koefsF[0]");
 		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
 		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
-		Assert::IsTrue(lays.isGPU(0), L"lays.isGPU(0)");
-		Assert::IsFalse(lays.isGPU(1), L"lays.isGPU(1)");
-		Assert::IsFalse(lays.isGPU(2), L"lays.isGPU(2)");
-		Assert::IsFalse(lays.isGPU(3), L"lays.isGPU(3)");
-		Assert::IsFalse(lays.isMT(0), L"lays.isMT(0)");
-		Assert::IsTrue(lays.isMT(1), L"lays.isMT(1)");
-		Assert::IsFalse(lays.isMT(2), L"lays.isMT(2)");
-		Assert::IsFalse(lays.isMT(3), L"lays.isMT(3)");
+		//Assert::IsTrue(lays.isGPU(0), L"lays.isGPU(0)");
+		//Assert::IsFalse(lays.isGPU(1), L"lays.isGPU(1)");
+		//Assert::IsFalse(lays.isGPU(2), L"lays.isGPU(2)");
+		//Assert::IsFalse(lays.isGPU(3), L"lays.isGPU(3)");
+		//Assert::IsFalse(lays.isMT(0), L"lays.isMT(0)");
+		//Assert::IsTrue(lays.isMT(1), L"lays.isMT(1)");
+		//Assert::IsFalse(lays.isMT(2), L"lays.isMT(2)");
+		//Assert::IsFalse(lays.isMT(3), L"lays.isMT(3)");
 
 		misc.cntForStop = 1;
 		misc.curRndSeed = 12345;
@@ -54,13 +55,22 @@ public:
 
 		eng2::runEngine2Lib(&cfgall);
 
-		auto&va = EngineDbg::va;
+		auto& va = EngineDbg::va;
 		Assert::AreEqual(14, va[1][0], L"va 1 0");
 		Assert::AreEqual(2, va[1][1], L"va 1 1");
 		Assert::AreEqual(15, va[1][23], L"va 1 23");
 		Assert::AreEqual(4, va[1][16], L"va 1 16");
 		Assert::AreEqual(8, va[1][24], L"va 1 24");
 		Assert::AreEqual(0, va[1][31], L"va 1 31");
+
+		Assert::AreEqual(1, va[2][0], L"va 2 0");
+		Assert::AreEqual(10, va[2][1], L"va 2 1");
+		Assert::AreEqual(0, va[2][2], L"va 2 2");
+		Assert::AreEqual(3, va[2][3], L"va 2 3");
+		Assert::AreEqual(0, va[2][4], L"va 2 4");
+		Assert::AreEqual(4, va[2][5], L"va 2 5");
+		Assert::AreEqual(4, va[2][6], L"va 2 6");
+		Assert::AreEqual(3, va[2][7], L"va 2 7");
 
 		//auto z = eng2::mdx.cfg_all;	// TODO: restore mdx.CleanupDevice() in wndAMP.cpp::MainLoop() !!!
 		

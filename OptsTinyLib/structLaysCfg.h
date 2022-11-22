@@ -23,8 +23,8 @@ public:
 	bool isGPU(int n_lay){ return n_lay < (int)cntlays - int(cpuSingle + cpuMultiThreaded); }
 	bool isMT(int n_lay){ return !isGPU(n_lay) && (n_lay < (int)cntlays - int(cpuSingle)); }
 
-	size_t setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const char* s_koefs, const char delimiter = ' ');
-	size_t setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const vector<float>* vkoef_in);
+	size_t setConfig(size_t top_x, size_t top_y, size_t one_core, size_t mt, const char* s_koefs, const char delimiter = ' ');
+	size_t setConfig(size_t top_x, size_t top_y, size_t one_core, size_t mt, const vector<float>* vkoef_in);
 	//size_t setKoefsF(const vector<float>& vf_in);
 	//size_t setKoefsF(const char* s_in, const char delimiter = ' ');
 	void resize(size_t new_cnt_lays);

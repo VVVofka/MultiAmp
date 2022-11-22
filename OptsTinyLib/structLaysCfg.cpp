@@ -1,13 +1,13 @@
 #include "structLaysCfg.h"
 #include "myconv.h"
-size_t structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const vector<float>* vkoef_in){
-	topX = top_x, topY = top_y, cpuSingle = cpu, cpuMultiThreaded = mt;
+size_t structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t one, size_t mt, const vector<float>* vkoef_in){
+	topX = top_x, topY = top_y, cpuSingle = one, cpuMultiThreaded = mt;
 	cntlays = vkoef_in->size() + 1u;
 	koefsF.create(*vkoef_in);
 	return cntlays;
 } // /////////////////////////////////////////////////////////////////////////
-size_t structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const char* s_koefs, const char delimiter){
-	topX = top_x, topY = top_y, cpuSingle = cpu, cpuMultiThreaded = mt;
+size_t structLaysCfg::setConfig(size_t top_x, size_t top_y, size_t one, size_t mt, const char* s_koefs, const char delimiter){
+	topX = top_x, topY = top_y, cpuSingle = one, cpuMultiThreaded = mt;
 	vector<float> v_parse = myconv::strToVFloat(s_koefs, delimiter);
 	cntlays = v_parse.size() + 1u;
 	koefsF.create(v_parse);

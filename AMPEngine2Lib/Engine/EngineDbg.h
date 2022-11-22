@@ -10,7 +10,7 @@ namespace EngineDbg{
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 #define VVVDBG_INIT_A(CNT_LAY, SIZE_LAY0) {EngineDbg::initVA(CNT_LAY, SIZE_LAY0);}
-#define VVVDBG_SET_A(N_LAY, VGPU) {EngineDbg::setVA(N_LAY, VGPU);}
+#define VVVDBG_SET_A(N_LAY, VGPU) {EngineDbg::setVA(size_t(N_LAY), VGPU);}
 #else
 #define VVVDBG_INIT_A(CNT_LAY) {}
 #define VVVDBG_SET_A(N_LAY, VGPU) {}
