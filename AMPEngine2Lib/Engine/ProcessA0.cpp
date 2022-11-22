@@ -37,7 +37,6 @@
 				//	dn_vgpu_f[index<2>(y1, x0)] +
 				//	dn_vgpu_f[index<2>(y1, x1)];
 			});
-		VVVDBG_SET_A(0, dn_vgpu_a);
 		VVVDBG_SET_A(1, up_vgpu_a);
 	} // ///////////////////////////////////////////////////////////////////////////////////
 #undef Y
