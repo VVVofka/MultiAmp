@@ -11,12 +11,12 @@ namespace getxml{
 		size_t topY = xml.getAttributeT<size_t>("topY", 1);
 		size_t cpu1 = xml.getAttributeT<size_t>("singleCPU", 0);
 		size_t mt = xml.getAttributeT<size_t>("multithreadedCPU", 0);
-		ret.setConfig(topX, topY, cpu1, mt);
 
 		xml.setOrCreateNode("kF");
 		ret.digits = xml.getAttributeT<size_t>("digits", 2);
-		std::string skoefsF = xml.getText("1 1 1");
-		ret.setKoefsF(skoefsF.c_str());
+		std::string skoefsF = xml.getText("0.9 0.5 0.25");
+		ret.setConfig(topX, topY, cpu1, mt, skoefsF.c_str());
+		//ret.setKoefsF(skoefsF.c_str());
 
 		return ret;
 	} // //////////////////////////////////////////////////////////////////////////

@@ -12,17 +12,43 @@ namespace UTstEng2Lib{
 		structAll cfgall;
 		structLaysCfg& lays = cfgall.lays;
 		structMiscCfg& misc = cfgall.misc;
+		double tol = 0.00001;
 public:
 	TEST_METHOD(TestMethod1){
 		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
-		cfgall.data.fill_v(sdata);
+		size_t scr_cnt = cfgall.data.fill_v(sdata);
+		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
+		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
+		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
+
 		misc.cntForStop = 1;
 		misc.curRndSeed = 12345;
-		lays.setConfig(2, 1);
-		lays.setKoefsF("1 1 1");
-		lays.cpuSingle = 2;
-		
-		eng2::runEngine2Lib(&cfgall);
+
+		size_t cntlays = lays.setConfig(2, 1, 2, 1, "0.91  0.72  0,43");
+		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
+		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
+		Assert::AreEqual(size_t(16), lays.sizeX(0), L"lays.sizeX(0)");
+		Assert::AreEqual(size_t(8), lays.sizeY(0), L"lays.sizeY(0)");
+		Assert::AreEqual(size_t(8), lays.sizeX(1), L"lays.sizeX(1)");
+		Assert::AreEqual(size_t(4), lays.sizeY(1), L"lays.sizeY(1)");
+		Assert::AreEqual(size_t(4), lays.sizeX(2), L"lays.sizeX(2)");
+		Assert::AreEqual(size_t(2), lays.sizeY(2), L"lays.sizeY(2)");
+		Assert::AreEqual(size_t(2), lays.sizeX(3), L"lays.sizeX(3)");
+		Assert::AreEqual(size_t(1), lays.sizeY(3), L"lays.sizeY(3)");
+		Assert::AreEqual(0.91, lays.koefsF[0], tol,  L"lays.koefsF[0]");
+		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
+		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
+		Assert::IsTrue(lays.isGPU(0), L"lays.isGPU(0)");
+		Assert::IsFalse(lays.isGPU(1), L"lays.isGPU(1)");
+		Assert::IsFalse(lays.isGPU(2), L"lays.isGPU(2)");
+		Assert::IsFalse(lays.isGPU(3), L"lays.isGPU(3)");
+		Assert::IsFalse(lays.isMT(0), L"lays.isMT(0)");
+		Assert::IsTrue(lays.isMT(1), L"lays.isMT(1)");
+		Assert::IsFalse(lays.isMT(2), L"lays.isMT(2)");
+		Assert::IsFalse(lays.isMT(3), L"lays.isMT(3)");
+
+
+		//eng2::runEngine2Lib(&cfgall);
 	} // ////////////////////////////////////////////////////////////
 
 private:

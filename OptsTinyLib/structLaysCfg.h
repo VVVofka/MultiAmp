@@ -23,9 +23,10 @@ public:
 	bool isGPU(int n_lay){ return n_lay < (int)cntlays - int(cpuSingle + cpuMultiThreaded); }
 	bool isMT(int n_lay){ return !isGPU(n_lay) && (n_lay < (int)cntlays - int(cpuSingle)); }
 
-	void setConfig(size_t top_x, size_t top_y, size_t cpu = 0, size_t mt = 0, size_t cnt_lays=0);
-	size_t setKoefsF(const vector<float>& vf_in);
-	size_t setKoefsF(const char* s_in, const char delimiter = ' ');
+	size_t setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const char* s_koefs, const char delimiter = ' ');
+	size_t setConfig(size_t top_x, size_t top_y, size_t cpu, size_t mt, const vector<float>* vkoef_in);
+	//size_t setKoefsF(const vector<float>& vf_in);
+	//size_t setKoefsF(const char* s_in, const char delimiter = ' ');
 	void resize(size_t new_cnt_lays);
 	int intKF(size_t idx)const{ return int(lrint(pow(10, digits) * koefsF[idx])); }
 	void setIntKF(size_t idx, int val){ koefsF[idx] = val / pow(10, digits); }
