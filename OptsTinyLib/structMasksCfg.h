@@ -5,6 +5,7 @@ using namespace Concurrency::graphics;	//	float_2
 
 class structMasksCfg{
 public:
+	//structMasksCfg(){ seta("0001011101111111"); }
 	// 0-none; 1-yes
 	std::array<int, 16> va;
 	void seta(const std::string& s);

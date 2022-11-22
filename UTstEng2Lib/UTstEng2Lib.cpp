@@ -12,7 +12,9 @@ namespace UTstEng2Lib{
 		structAll cfgall;
 		structLaysCfg& lays = cfgall.lays;
 		structMiscCfg& misc = cfgall.misc;
-		double tol = 0.00001;
+		structMasksCfg& masks = cfgall.masks;
+
+		double tol = 0.000001;
 public:
 	TEST_METHOD(TestMethod1){
 		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
@@ -20,9 +22,6 @@ public:
 		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
 		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
 		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
-
-		misc.cntForStop = 1;
-		misc.curRndSeed = 12345;
 
 		size_t cntlays = lays.setConfig(2, 1, 2, 1, "0.91  0.72  0,43");
 		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
@@ -47,11 +46,15 @@ public:
 		Assert::IsFalse(lays.isMT(2), L"lays.isMT(2)");
 		Assert::IsFalse(lays.isMT(3), L"lays.isMT(3)");
 
+		misc.cntForStop = 1;
+		misc.curRndSeed = 12345;
 
-		//eng2::runEngine2Lib(&cfgall);
+		masks.seta("0001011101111111");
+
+		eng2::runEngine2Lib(&cfgall);
+		auto z = eng2::mdx.cfg_all;	// TODO: restore mdx.CleanupDevice() in wndAMP.cpp::MainLoop() !!!
+		
 	} // ////////////////////////////////////////////////////////////
-
 private:
-
 	}; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
