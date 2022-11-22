@@ -2,6 +2,7 @@
 #include "CppUnitTest.h"
 #include "..\OptsTinyLib\structAll.h"
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
+#include "..\AMPEngine2Lib\Engine\EngineDbg.h"
 #include <string>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -52,7 +53,16 @@ public:
 		masks.seta("0001011101111111");
 
 		eng2::runEngine2Lib(&cfgall);
-		auto z = eng2::mdx.cfg_all;	// TODO: restore mdx.CleanupDevice() in wndAMP.cpp::MainLoop() !!!
+
+		auto&va = EngineDbg::va;
+		Assert::AreEqual(14, va[1][0], L"va 1 0");
+		Assert::AreEqual(2, va[1][1], L"va 1 1");
+		Assert::AreEqual(15, va[1][23], L"va 1 23");
+		Assert::AreEqual(4, va[1][16], L"va 1 16");
+		Assert::AreEqual(8, va[1][24], L"va 1 24");
+		Assert::AreEqual(0, va[1][31], L"va 1 31");
+
+		//auto z = eng2::mdx.cfg_all;	// TODO: restore mdx.CleanupDevice() in wndAMP.cpp::MainLoop() !!!
 		
 	} // ////////////////////////////////////////////////////////////
 private:

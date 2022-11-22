@@ -206,6 +206,7 @@
   <ItemGroup>
     <ClCompile Include="AMPEngine2Lib.cpp" />
     <ClCompile Include="Engine\Engine2.cpp" />
+    <ClCompile Include="Engine\EngineDbg.cpp" />
     <ClCompile Include="Engine\Lay0.cpp" />
     <ClCompile Include="Engine\LayBase.cpp" />
     <ClCompile Include="Engine\LayDumps.cpp" />

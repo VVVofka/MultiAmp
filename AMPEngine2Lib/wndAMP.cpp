@@ -84,7 +84,7 @@ namespace eng2{
 				}
 			}
 		}
-		//mdx.CleanupDevice();
+		mdx.CleanupDevice();
 		return (int)msg.wParam;
 	} // /////////////////////////////////////////////////////////////////////////////
 // Retrieve the system error message for the last-error code

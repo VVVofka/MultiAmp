@@ -6,7 +6,7 @@ Engine2::Engine2(ID3D11Device* d3ddevice, structAll* cfg_all) :
 	lays(cfg_all, &m_accl_view),
 	processes(cfg_all, &lays, &m_accl_view){
 	//
-	VVVDBG_INIT_A(cfg_all->lays.cntlays);
+	VVVDBG_INIT_A(cfg_all->lays.cntlays, cfg_all->lays.bottomSquare());
 } // /////////////////////////////////////////////////////////////////////////////////////////////////////
 HRESULT Engine2::get_data_d3dbuffer(void** d3dbuffer) const{
 	return Concurrency::direct3d::get_buffer(*lays.lay0.vgpuScreen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);
