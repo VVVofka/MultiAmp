@@ -7,16 +7,16 @@ LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) :
 	_ASSERTE(n_lay > 0);
 	const bool is_dngpu = cfg_all->lays.isGPU(n_lay - 1);
 	const bool is_gpu = cfg_all->lays.isGPU(n_lay);	// n_lay == 1 || gpu_in || cpu_type == CPUtype::GPU;
-	LayBase::gpuIn = is_dngpu && !is_gpu;
+	//LayBase::gpuIn = is_dngpu && !is_gpu;
 	if(is_gpu)
 		LayBase::cpuType = CPUtype::GPU;
 	else if(cfg_all->lays.isMT(n_lay))
 		LayBase::cpuType = CPUtype::MT;
 	else
 		LayBase::cpuType = CPUtype::CPU;
-	const bool togpu = is_dngpu || is_gpu;	//const bool togpu = LayBase::gpuIn || LayBase::cpuType == CPUtype::GPU;
-	LayBase::va.Create(sz, togpu, m_accl_view);
-	vf.Create(sz, togpu, m_accl_view);
+	const bool create_gpu = is_dngpu || is_gpu;	//const bool is_gpu = LayBase::gpuIn || LayBase::cpuType == CPUtype::GPU;
+	LayBase::va.Create(sz, create_gpu, m_accl_view);
+	vf.Create(sz, create_gpu, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void LayMid::gpu2cpu(){
 	LayBase::gpu2cpu();
