@@ -22,6 +22,7 @@ HRESULT MDX2::InitDevice(HWND ghWnd, structAll* cfg_all, D3D_PRIMITIVE_TOPOLOGY 
 	RETURN_IF_FAIL(CreateComputeShader(cfg_all));	// init g_pAMPComputeEngine
 	RETURN_IF_FAIL(MDX::CreateVertexShader("VS2"));
 	RETURN_IF_FAIL(MDX::CreatePixelShader());
+	cntEngine = cfg_all->misc.cntEnginePerRender;
 	return hr;
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
 #endif // NEW_ENGINE
@@ -38,7 +39,7 @@ HRESULT MDX2::CreateComputeShader(structAll* cfg_all){ // from this->InitDevice(
 	RETURN_IF_FAIL(g_pAMPComputeEngine->get_data_d3dbuffer(reinterpret_cast<void**>(&g_pVertexPosBuffer)));
 	return MDX::CreateComputeShader();
 } // ///////////////////////////////////////////////////////////////////////////////////////////////////
-void MDX2::Render(int cntEngine){		//  Call from main loop wWinMain()
+void MDX2::Render(){		//  Call from main loop wWinMain()
 	for(int j = 0; j < cntEngine; j++)
 		g_pAMPComputeEngine->run();		// work with lays ( MAIN )
 	MDX::Render();						// draw on screen

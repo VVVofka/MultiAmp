@@ -22,10 +22,11 @@ public:
 		D3D_PRIMITIVE_TOPOLOGY Primitive = D3D_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
 #endif // NEW_ENGINE
 
-	void Render(int cntEngine = 1);
+	void Render();
 	void CleanupDevice();
 private:
 	HRESULT CreateComputeShader(structAll* cfg_all = NULL);
+	int cntEngine = 1;
 }; // ***********************************************************************
    /*
 D3D11_INPUT_ELEMENT_DESC layout[] =

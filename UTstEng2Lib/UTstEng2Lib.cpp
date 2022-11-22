@@ -17,9 +17,10 @@ public:
 		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
 		cfgall.data.fill_v(sdata);
 		misc.cntForStop = 1;
-		misc.curRndSeed = 1;
+		misc.curRndSeed = 12345;
 		lays.setConfig(2, 1);
 		lays.setKoefsF("1 1 1");
+		lays.cpuSingle = 2;
 		
 		eng2::runEngine2Lib(&cfgall);
 	} // ////////////////////////////////////////////////////////////

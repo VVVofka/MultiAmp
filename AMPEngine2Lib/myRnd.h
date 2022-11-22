@@ -32,7 +32,7 @@ public:
 
 	// Generate ]0 ... 0xfffffffb(UBASE)[
 	uint32_t rand(){
-		return seed = (uint64_t)seed * 279470273u % 0xfffffffb;
+		return seed = (uint64_t)seed * 279470273u % UBASE;
 	} // ////////////////////////////////////////////////////////////////////////////////////
 
 	// Generate [0 ... max[

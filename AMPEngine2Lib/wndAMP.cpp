@@ -62,7 +62,7 @@ namespace eng2{
 				DispatchMessage(&msg);
 			} else{
 				if(!pauseRender){
-					mdx.Render(misc.cntEnginePerRender);	// MAIN !!!
+					mdx.Render();	// MAIN !!!
 					misc.curIteration++;
 					cntSpeedometer++;
 					time_t ctime;
