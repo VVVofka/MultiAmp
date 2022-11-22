@@ -29,7 +29,7 @@ namespace getxml{
 
 		xml.setOrCreateNode("kF");
 		xml.setAttributeT<size_t>("digits", lays_cfg.digits);
-		std::string s = lays_cfg.koefsF.sall(lays_cfg.digits);
+		std::string s = lays_cfg.koefsF.sall(int(lays_cfg.digits));
 		xml.setText(s);
 
 		xml.Save(f_name);

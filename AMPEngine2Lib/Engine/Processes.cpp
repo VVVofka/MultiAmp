@@ -8,17 +8,17 @@ Processes::Processes(structAll* p_cfg_all, Lays* p_lays, accelerator_view* m_acc
 
 	cfg_all = p_cfg_all;
 	curIteration = p_cfg_all->misc.curIteration;
-	rnd.setUpper(p_cfg_all->lays.bottomSquare());
+	rnd.setUpper((int)p_cfg_all->lays.bottomSquare());
 } // ///////////////////////////////////////////////////////////////////////////
 Processes::~Processes(){
 	cfg_all->misc.curRndSeed = rnd.getSeed();
 	cfg_all->misc.curIteration = curIteration;
 } // ///////////////////////////////////////////////////////////////////////////
 void Processes::RunAll(){
-	auto pos = rnd.randk();	// max ~ 65500*65500
+	size_t pos = (size_t)rnd.randk();	// max ~ 65500*65500
 	size_t szx = cfg_all->lays.bottomX();
-	int x = pos % szx;
-	int y = pos / szx;
+	int x = int(pos % szx);
+	int y = int(pos / szx);
 	int_2 shift = int_2(x, y);
 	processA.RunAll(shift);
 	processF.RunAll(shift);

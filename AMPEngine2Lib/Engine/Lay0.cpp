@@ -36,12 +36,14 @@ concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const int count_point){
 	int ret = 0;
 	std::vector<Vertex2D> cpuv(count_point);
 	for(int y = 0; y < sz.y; y++)
-		for(int x = 0; x < sz.x; x++)
-			if(va.vcpu[y * sz.x + x] >= 0){
+		for(int x = 0; x < sz.x; x++){
+			size_t idx = static_cast<size_t>(y) * static_cast<size_t>(sz.x) + static_cast<size_t>(x);
+			if(va.vcpu[idx] >= 0){
 				cpuv[ret].Pos.x = (float)(2 * x + 1) * sz.x - 1.f;
 				cpuv[ret].Pos.y = (float)(2 * y + 1) * sz.y - 1.f;
 				ret++;
 			}
+		}
 	_ASSERTE(ret == count_point);
 	SAFE_DELETE(vgpuScreen);
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(ret, cpuv.begin());
@@ -55,7 +57,7 @@ bool Lay0::isLoad()const{
 	return true;
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_vScreen(){
-	countPoint = cfg_all->data.v.size();	// defPointsCnt(va_inp);
+	countPoint = (int)cfg_all->data.v.size();	// defPointsCnt(va_inp);
 	vcpuScreen.resize(countPoint);
 	size_t szx = cfg_all->lays.bottomX();
 	size_t szy = cfg_all->lays.bottomY();
@@ -74,7 +76,7 @@ void Lay0::fill_vScreen(){
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(countPoint, vcpuScreen.begin(), *m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_va(){
-	std::vector<int> vtmp(sz.x * sz.y, -1);
+	std::vector<int> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), -1);
 	size_t szx = cfg_all->lays.bottomX();
 	size_t szy = cfg_all->lays.bottomY();
 	for(int j = 0; j < countPoint; j++){

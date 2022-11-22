@@ -71,7 +71,7 @@ size_t KoefsFlt::find_dn(const vector<double>& v, const double x){
 } // /////////////////////////////////////////////////////////////////////////////////
 size_t KoefsFlt::find_up(const vector<double>& v, const double x){
 	int j = -1;
-	int last = v.size() - 1;
+	int last = int(v.size()) - 1;
 	while(++j < last)
 		if(v[j] > x)
 			return size_t(v[j] > 1.0 ? last : j);

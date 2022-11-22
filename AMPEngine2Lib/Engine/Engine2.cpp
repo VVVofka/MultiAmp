@@ -1,10 +1,12 @@
 #include "Engine2.h"
+#include "EngineDbg.h"
 
 Engine2::Engine2(ID3D11Device* d3ddevice, structAll* cfg_all) :
 	m_accl_view(Concurrency::direct3d::create_accelerator_view(d3ddevice)),
 	lays(cfg_all, &m_accl_view),
 	processes(cfg_all, &lays, &m_accl_view){
 	//
+	VVVDBG_INIT_A(cfg_all->lays.cntlays);
 } // /////////////////////////////////////////////////////////////////////////////////////////////////////
 HRESULT Engine2::get_data_d3dbuffer(void** d3dbuffer) const{
 	return Concurrency::direct3d::get_buffer(*lays.lay0.vgpuScreen)->QueryInterface(__uuidof(ID3D11Buffer), (LPVOID*)d3dbuffer);

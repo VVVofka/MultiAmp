@@ -14,8 +14,8 @@ public:
 
 	size_t sizeX(size_t n_lay){ return topX << (cntlays - (n_lay + 1)); }
 	size_t sizeY(size_t n_lay){ return topY << (cntlays - (n_lay + 1)); }
-	size_t sizeX(int n_lay){ return topX << (cntlays - size_t(n_lay + 1)); }
-	size_t sizeY(int n_lay){ return topY << (cntlays - size_t(n_lay + 1)); }
+	size_t sizeX(int n_lay){ return topX << (cntlays - (static_cast<size_t>(n_lay) + 1)); }
+	size_t sizeY(int n_lay){ return topY << (cntlays - (static_cast<size_t>(n_lay) + 1)); }
 	size_t bottomY(){ return topY << (cntlays - 1); }
 	size_t bottomX(){ return topX << (cntlays - 1); }
 	size_t bottomSquare(){ return bottomX() * bottomY(); }
@@ -28,8 +28,8 @@ public:
 	//size_t setKoefsF(const vector<float>& vf_in);
 	//size_t setKoefsF(const char* s_in, const char delimiter = ' ');
 	void resize(size_t new_cnt_lays);
-	int intKF(size_t idx)const{ return int(lrint(pow(10, digits) * koefsF[idx])); }
-	void setIntKF(size_t idx, int val){ koefsF[idx] = val / pow(10, digits); }
+	int intKF(size_t idx)const{ return int(lrint(pow(10, (int)digits) * koefsF[idx])); }
+	void setIntKF(size_t idx, int val){ koefsF[idx] = val / pow(10, (int)digits); }
 	//std::vector<int> vikf();
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

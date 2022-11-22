@@ -106,6 +106,9 @@
     <ClInclude Include="Engine\MasksAll.h">
       <Filter>Engine\Masks</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\EngineDbg.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AMPEngine2Lib.cpp">
