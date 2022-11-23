@@ -17,6 +17,8 @@ namespace UTstEng2Lib{
 
 		double tol = 0.000001;
 public:
+//	TEST_METHOD(RestrictMtCpu){
+//	} // //////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(ProcessA_1Pass){
 		byCPU(0, 0);
 		byCPU(0, 1);
@@ -59,14 +61,6 @@ private:
 		Assert::AreEqual(0.91, lays.koefsF[0], tol, L"lays.koefsF[0]");
 		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
 		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
-		//Assert::IsTrue(lays.isGPU(0), L"lays.isGPU(0)");
-		//Assert::IsFalse(lays.isGPU(1), L"lays.isGPU(1)");
-		//Assert::IsFalse(lays.isGPU(2), L"lays.isGPU(2)");
-		//Assert::IsFalse(lays.isGPU(3), L"lays.isGPU(3)");
-		//Assert::IsFalse(lays.isMT(0), L"lays.isMT(0)");
-		//Assert::IsTrue(lays.isMT(1), L"lays.isMT(1)");
-		//Assert::IsFalse(lays.isMT(2), L"lays.isMT(2)");
-		//Assert::IsFalse(lays.isMT(3), L"lays.isMT(3)");
 
 		misc.cntForStop = 1;
 		misc.curRndSeed = 12345;
