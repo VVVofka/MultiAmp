@@ -168,7 +168,7 @@ public:
 		Assert::AreEqual(0.f, v[1], tol, L"6b");
 
 		v = myconv::strToVFloat("---345,2");
-		Assert::AreEqual(-345.f, v[0], tol, L"7a");
+		Assert::AreEqual(-345.2f, v[0], tol, L"7a");
 
 	} // ////////////////////////////////////////////////////////////////////////////};
 	TEST_METHOD(my_round){
