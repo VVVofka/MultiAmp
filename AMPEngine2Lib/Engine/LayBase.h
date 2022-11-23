@@ -34,7 +34,8 @@ protected:
 	std::string sDumpAcpu(const int digits)const;
 	std::string sDumpAgpu(const int digits)const;
 
-private:
 	static std::string sDumpV(const std::vector<int>& v, const int_2 sz, const int digits);
+	static std::string sDumpV(const std::vector<float_2>& v, const int_2 sz, const int digits);
+private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

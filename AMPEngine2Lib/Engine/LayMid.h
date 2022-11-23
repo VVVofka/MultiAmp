@@ -16,12 +16,11 @@ public:
 
 	std::string sDumpAcpu(const int digits)const;
 	std::string sDumpAgpu(const int digits)const;
-	std::string sDumpF(const int digits)const;
+	std::string sDumpFcpu(const int digits)const;
+	std::string sDumpFgpu(const int digits)const;
 
 	std::string sInfo()const;
 
 private:
-	std::string sDumpf(const std::vector<float_2>& v, const int digits)const;
-	std::string sDumpf(const concurrency::array<float_2, 2>* v, const int digits)const;
 }; // #########################################################################################
 
