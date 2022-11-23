@@ -34,5 +34,6 @@ protected:
 	std::string sDumpA(const int digits)const;
 
 private:
+	static std::string sDumpV(const std::vector<int>& v, const int_2 sz, const int digits);
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

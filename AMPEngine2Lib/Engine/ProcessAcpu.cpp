@@ -36,6 +36,7 @@ void ProcessA::cpuRun(const int n_lay){
 		}
 	}
 	VVVDBG_SET_A(n_lay, up_lay->va.vcpu);
+	VVVDBG_DUMP_A(dn_lay->sDumpA(2));
 } // ///////////////////////////////////////////////////////////////////////////
 void ProcessA::mtRun(const int n_lay){
 	_ASSERTE(n_lay > 0);
@@ -69,4 +70,5 @@ void ProcessA::mtRun(const int n_lay){
 		}
 		});
 	VVVDBG_SET_A(n_lay, up_lay->va.vcpu);
+	VVVDBG_DUMP_A(dn_lay->sDumpA(2));
 } // ///////////////////////////////////////////////////////////////////////////

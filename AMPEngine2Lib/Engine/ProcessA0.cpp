@@ -1,6 +1,5 @@
 #include "ProcessA.h"
 #include <amp_math.h>
-#include "EngineDbg.h"
 #define X 1
 #define Y 0
 	using namespace concurrency::graphics;
@@ -37,7 +36,6 @@
 				//	dn_vgpu_f[index<2>(y1, x0)] +
 				//	dn_vgpu_f[index<2>(y1, x1)];
 			});
-		VVVDBG_SET_A(1, up_vgpu_a);
 	} // ///////////////////////////////////////////////////////////////////////////////////
 #undef Y
 #undef X

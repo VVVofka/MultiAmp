@@ -1,4 +1,5 @@
 #include "ProcessA.h"
+#include "EngineDbg.h"
 
 ProcessA::ProcessA(Lays* p_lays, MaskA* p_Mask_a){
 	lays = p_lays;
@@ -19,4 +20,7 @@ void ProcessA::RunAll(const int_2 shift){		// return sum vabs from last lay
 		if(dn->cpuType == CPUtype::GPU && up->cpuType != CPUtype::GPU)
 			up->gpu2cpu();
 	}
+	//VVVDBG_SET_A(1, up_vgpu_a);
+	//VVVDBG_IF_DBG(up_lay.gpu2cpu(););
+	//VVVDBG_DUMP_A(up_lay.sDumpA(2));
 } // ///////////////////////////////////////////////////////////////////////////

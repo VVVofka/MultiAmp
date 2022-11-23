@@ -2,14 +2,13 @@
 #include "Lay0.h"
 #include "LayMid.h"
 #include "Lays.h"
-
-std::string LayBase::sDumpA(const int digits)const{
+std::string LayBase::sDumpV(const std::vector<int>& v, const int_2 sz, const int digits){
 	std::string ret, sformat('%' + std::to_string(digits) + "d ");
-	for(int y = 0; y < sz.y; y++){
-		//int y = sz.y - yr - 1;
+	for(int yr = 0; yr < sz.y; yr++){
+		int y = sz.y - yr - 1;
 		for(int x = 0; x < sz.x; x++){
-			int idx = id(x, y);
-			int q = va.vcpu[idx];
+			int idx = y * sz.x + x;
+			int q = v[idx];
 			if(q < 0){
 				ret += " . ";
 			} else{
@@ -21,6 +20,9 @@ std::string LayBase::sDumpA(const int digits)const{
 		ret += '\n';
 	}
 	return ret;
+} // ////////////////////////////////////////////////////////////////////////////
+std::string LayBase::sDumpA(const int digits)const{
+	return LayBase::sDumpV(va.vcpu, sz, digits);
 } // ////////////////////////////////////////////////////////////////
 
 std::string Lay0::sDumpA(const int digits)const{
