@@ -47,28 +47,25 @@ std::string Lay0::DumpAgpu(const int digits) const{
 	return s;
 } // ////////////////////////////////////////////////////////////////
 
-std::string LayMid::sDumpvf(const VGpuCpu<float_2>& v, const int digits)const{
+std::string LayMid::sDumpf(const std::vector<float_2>& v, const int digits)const{
 	std::string ret, sformat("%+." + std::to_string(digits) + "f ");
-	for(int y = 0; y < sz.y; y++){
-		char buf[64];
-		//int y = sz.y - yr - 1;
+	for(int yr = 0; yr < sz.y; yr++){
+		int y = sz.y - yr - 1;
 		for(int x = 0; x < sz.x; x++){
+			char buf[64];
 			int idx = id(x, y);
-			float_2 cur = v.vcpu[idx];
+			float_2 cur = v[idx];
 			sprintf_s(buf, sformat.c_str(), cur.x);
 			ret += buf;
 		}
 		ret += "\n";
-		for(int x = 0; x < sz.x; x++){
-			int idx = id(x, y);
-			float_2 cur = v.vcpu[idx];
-			sprintf_s(buf, sformat.c_str(), cur.y);
-			ret += buf;
-		}
-		ret += "\n\n";
 	}
 	return ret;
 } // ////////////////////////////////////////////////////////////////
+std::string LayMid::sDumpf(const concurrency::array<float_2, 2>* v, const int digits) const{
+
+	return std::string();
+} // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpAcpu(const int digits)const{
 	return "a cpu: " + sInfo() + '\n' + LayBase::sDumpAcpu(digits);
 } // ///////////////////////////////////////////////////////////////////////////////
@@ -76,7 +73,7 @@ std::string LayMid::sDumpAgpu(const int digits)const{
 	return "a gpu: " + sInfo() + '\n' + LayBase::sDumpAgpu(digits);
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpF(const int digits)const{
-	return "f: " + sInfo() + '\n' + sDumpvf(vf, digits);
+	return "f: " + sInfo() + '\n' + sDumpf(vf, digits);
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sInfo() const{
 	return "size x*y=" + std::to_string(sz.x) + '*' + std::to_string(sz.y) + ' ';

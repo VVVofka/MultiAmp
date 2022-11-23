@@ -12,6 +12,7 @@ public:
 
 	void gpu2cpu();
 	void cpu2gpu();
+	void gpu2other(std::vector<float_2>& v_dst)const;
 
 	std::string sDumpAcpu(const int digits)const;
 	std::string sDumpAgpu(const int digits)const;
@@ -19,8 +20,8 @@ public:
 
 	std::string sInfo()const;
 
-
 private:
-	std::string sDumpvf(const VGpuCpu<float_2>& v, const int digits)const;
+	std::string sDumpf(const std::vector<float_2>& v, const int digits)const;
+	std::string sDumpf(const concurrency::array<float_2, 2>* v, const int digits)const;
 }; // #########################################################################################
 

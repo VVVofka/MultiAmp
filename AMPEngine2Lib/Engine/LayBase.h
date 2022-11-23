@@ -15,7 +15,6 @@ public:
 	int nlay = 0;
 	int_2 sz;
 	CPUtype cpuType = CPUtype::GPU;
-	bool gpuIn = false; // underlying lay is GPU and cur isn't GPU
 
 	VGpuCpu<int> va;
 	

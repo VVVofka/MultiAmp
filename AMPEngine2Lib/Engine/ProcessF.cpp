@@ -1,4 +1,6 @@
 #include "ProcessF.h"
+#include "EngineDbg.h"
+
 ProcessF::ProcessF(Lays* p_lays, MaskF* p_Masks_f){
 	lays = p_lays;
 	fmasks = p_Masks_f;
