@@ -22,5 +22,5 @@ public:
 
 private:
 	std::string sDumpvf(const VGpuCpu<float_2>& v, const int digits)const;
-};
+}; // #########################################################################################
 

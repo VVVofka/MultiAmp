@@ -12,8 +12,14 @@ namespace EngineDbg{
 	void setVA(size_t n_lay, const concurrency::array<int, 2>& vgpu){
 		concurrency::copy(vgpu, va[n_lay].begin());
 	} // //////////////////////////////////////////////////////////////////////
+	void setVA(size_t n_lay, const concurrency::array<int, 2>* vgpu){
+		concurrency::copy(*vgpu, va[n_lay].begin());
+	} // //////////////////////////////////////////////////////////////////////
 	void setVA(size_t n_lay, const std::vector<int>& v_cpu){
 		va[n_lay] = v_cpu;
+	} // //////////////////////////////////////////////////////////////////////
+	void setVA(size_t n_lay, const std::vector<int>* v_cpu){
+		va[n_lay] = *v_cpu;
 	} // //////////////////////////////////////////////////////////////////////
 	void EngineDbg::DumpA(const std::string& s){
 		_RPT0(0, s.c_str());

@@ -21,9 +21,13 @@ public:
 	size_t bottomSquare(){ return bottomX() * bottomY(); }
 
 	bool isGPU(int n_lay){ 
+		if(n_lay <= 1)
+			return true;
 		return n_lay < (int)cntlays - int(cpuSingle + cpuMultiThreaded); 
 	}
 	bool isMT(int n_lay){ 
+		if(n_lay <= 1)
+			return false;
 		return !isGPU(n_lay) && (n_lay < (int)cntlays - int(cpuSingle)); 
 	}
 	size_t setConfig(size_t top_x, size_t top_y, size_t one_core, size_t mt, const char* s_koefs, const char delimiter = ' ');

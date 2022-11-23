@@ -17,17 +17,24 @@ namespace UTstEng2Lib{
 
 		double tol = 0.000001;
 public:
-	TEST_METHOD(TestMethod1){
-		byCPU(2, 0);
+	TEST_METHOD(ProcessA_1Pass){
 		byCPU(0, 0);
 		byCPU(0, 1);
 		byCPU(1, 0);
 		byCPU(0, 2);
 		byCPU(1, 1);
+		byCPU(2, 0);
+
+		// restrict cpu
+		byCPU(3, 0);
+		byCPU(2, 1);
+
+		// restrict mt
 		byCPU(0, 3);
 		byCPU(1, 2);
-		byCPU(2, 1);
-		byCPU(3, 0);
+
+		// restrict mt & cpu
+		byCPU(5, 5);
 	} // ////////////////////////////////////////////////////////////
 private:
 	void byCPU(size_t one, size_t mt){

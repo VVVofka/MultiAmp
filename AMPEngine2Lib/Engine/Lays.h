@@ -25,5 +25,7 @@ public:
 	std::string DumpF(int idx = -1, const int digits = 2)const;
 
 private:
+	static bool correctMtCpu(structAll* cfg_all);
+
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

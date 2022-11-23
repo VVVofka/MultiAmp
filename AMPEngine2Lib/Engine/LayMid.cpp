@@ -1,7 +1,7 @@
 #include <crtdbg.h>	// _ASSERTE
 #include "LayMid.h"
 
-LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) : 
+LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) :
 	LayBase(n_lay, cfg_all, m_accl_view){
 
 	_ASSERTE(n_lay > 0);
@@ -26,3 +26,5 @@ void LayMid::cpu2gpu(){
 	LayBase::cpu2gpu();
 	vf.cpu2gpu();
 } // /////////////////////////////////////////////////////////////////////////////////
+
+
