@@ -20,8 +20,10 @@ public:
 	int countPoint = 0;
 
 	bool isLoad()const;
-	std::string sDumpA(const int digits)const;
-	std::string DumpA(const int digits = 2)const;
+	std::string sDumpAcpu(const int digits)const;
+	std::string sDumpAgpu(const int digits)const;
+	std::string DumpAcpu(const int digits)const;
+	std::string DumpAgpu(const int digits)const;
 	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const int count_point);
 
 	using LayBase::cpu2gpu;

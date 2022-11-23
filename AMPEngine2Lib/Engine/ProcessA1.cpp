@@ -1,6 +1,5 @@
 #include "ProcessA.h"
 #include <amp_math.h>
-#include "EngineDbg.h"
 
 #define X 1
 #define Y 0
@@ -30,9 +29,6 @@ void ProcessA::gpuRun1(const int n_lay){
 				(maskA[dn_vgpu_a[index<2>(y + 1, x)]] << 2) +
 				(maskA[dn_vgpu_a[index<2>(y + 1, x + 1)]] << 3);
 		});
-	VVVDBG_SET_A(n_lay, dn_vgpu_a);
-	VVVDBG_IF_DBG(up_lay.gpu2cpu(););
-	VVVDBG_DUMP_A(dn_lay.sDumpA(2));
 } // ///////////////////////////////////////////////////////////////////////////
 #undef Y
 #undef X

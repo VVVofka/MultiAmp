@@ -13,7 +13,8 @@ public:
 	void gpu2cpu();
 	void cpu2gpu();
 
-	std::string sDumpA(const int digits)const;
+	std::string sDumpAcpu(const int digits)const;
+	std::string sDumpAgpu(const int digits)const;
 	std::string sDumpF(const int digits)const;
 
 	std::string sInfo()const;

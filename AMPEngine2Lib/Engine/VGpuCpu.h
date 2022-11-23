@@ -42,6 +42,10 @@ public:
 
 	void gpu2cpu(){ concurrency::copy(*vgpu, vcpu.begin()); }
 	void cpu2gpu(){ concurrency::copy(vcpu.begin(), *vgpu); }
+	void gpu2other(std::vector<T>& v_dst) const{
+		if(vgpu) 
+			concurrency::copy(*vgpu, v_dst.begin()); 
+	} // ///////////////////////////////////////////////////////////////////////////////
 
 }; //class VGpuCpu
 

@@ -30,8 +30,10 @@ public:
 protected:
 	void gpu2cpu(){ va.gpu2cpu(); }
 	void cpu2gpu(){ va.cpu2gpu(); }
+	void gpu2other (std::vector<int>& v_dst)const{ va.gpu2other(v_dst); }
 
-	std::string sDumpA(const int digits)const;
+	std::string sDumpAcpu(const int digits)const;
+	std::string sDumpAgpu(const int digits)const;
 
 private:
 	static std::string sDumpV(const std::vector<int>& v, const int_2 sz, const int digits);

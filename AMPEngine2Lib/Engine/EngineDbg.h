@@ -13,7 +13,7 @@ namespace EngineDbg{
 
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-#define VVVDBG_IF_DBG(ANY_OPER) {ANY_OPER}
+#define VVVDBG_IF_DBG(ANY_OPER) (ANY_OPER);
 #define VVVDBG_INIT_A(CNT_LAY, SIZE_LAY0) {EngineDbg::initVA(size_t(CNT_LAY), size_t(SIZE_LAY0));}
 #define VVVDBG_SET_A(N_LAY, V_SOURCE) {EngineDbg::setVA(size_t(N_LAY), (V_SOURCE));}
 #define VVVDBG_DUMP_A(STRING_DUMP) {EngineDbg::DumpA(STRING_DUMP);}

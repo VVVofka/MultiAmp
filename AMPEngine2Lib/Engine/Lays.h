@@ -14,9 +14,13 @@ public:
 
 	bool isLoad();
 
+	std::string sDumpAcpu(int idx = -1, const int digits = 2)const;
+	std::string sDumpAgpu(int idx = -1, const int digits = 2)const;
 	std::string sDumpA(int idx = -1, const int digits = 2)const;
 	std::string sDumpF(int idx = -1, const int digits = 2)const;
 
+	std::string DumpAcpu(int idx = -1, const int digits = 2)const;
+	std::string DumpAgpu(int idx = -1, const int digits = 2)const;
 	std::string DumpA(int idx = -1, const int digits = 2)const;
 	std::string DumpF(int idx = -1, const int digits = 2)const;
 
