@@ -4,21 +4,27 @@
 #include "..\AMPEngine2Lib\AMPEngine2Lib.h"
 #include "..\AMPEngine2Lib\Engine\EngineDbg.h"
 #include <string>
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
-
 namespace UTstEng2Lib{
 	TEST_CLASS(UTstEng2LibA){
 		structAll cfgall;
 		structLaysCfg& lays = cfgall.lays;
 		structMiscCfg& misc = cfgall.misc;
 		structMasksCfg& masks = cfgall.masks;
-
 		double tol = 0.000001;
 public:
-//	TEST_METHOD(RestrictMtCpu){
-//	} // //////////////////////////////////////////////////////////////////////////////
+	UTstEng2LibA(){
+		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
+		size_t scr_cnt = cfgall.data.fill_v(sdata);
+		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
+		Assert::AreEqual(size_t(37), cfgall.data.v.size(), L"cfgall.data.v.size()");
+		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
+		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
+	} // //////////////////////////////////////////////////////////////////////////////
+	TEST_METHOD(MinProcess){
+		byCPU(0, 0);
+	} // //////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(ProcessA){
 		byCPU(0, 0);
 		byCPU(0, 1);
@@ -60,11 +66,6 @@ public:
 private:
 	void byCPU(size_t one, size_t mt){
 		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
-		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
-		size_t scr_cnt = cfgall.data.fill_v(sdata);
-		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
-		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
-		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
 
 		size_t cntlays = lays.setConfig(2, 1, one, mt, "0.91  0.72  0,43");
 		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
@@ -85,7 +86,7 @@ private:
 		misc.curRndSeed = 12345;
 
 		//def:		0001011101111111
-		masks.seta("0001011101111111");	
+		masks.seta("0001011101111111");
 
 		eng2::runEngine2Lib(&cfgall);
 
@@ -115,11 +116,7 @@ private:
 	 // eq void byCPU(size_t one, size_t mt), but Mask[1] = 1
 	void byCPU_A1(size_t one, size_t mt){
 		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
-		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
-		size_t scr_cnt = cfgall.data.fill_v(sdata);
-		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
-		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
-		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
+
 		size_t cntlays = lays.setConfig(2, 1, one, mt, "0.91  0.72  0,43");
 		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
 		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
@@ -134,6 +131,7 @@ private:
 		Assert::AreEqual(0.91, lays.koefsF[0], tol, L"lays.koefsF[0]");
 		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
 		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
+
 		misc.cntForStop = 1;
 		misc.curRndSeed = 12345;
 
@@ -155,7 +153,7 @@ private:
 		Assert::AreEqual(1, va[1][14], L"va maskA1 1 14");
 		Assert::AreEqual(1, va[1][15], L"va maskA1 1 15");
 		Assert::AreEqual(1, va[1][18], L"va maskA1 1 18");
-		
+
 		Assert::AreEqual(1, va[2][0], L"va 2 0");
 		Assert::AreEqual(10, va[2][1], L"va 2 1");
 		Assert::AreEqual(4, va[2][2], L"va 2 2");	// MaskA[1] = 1

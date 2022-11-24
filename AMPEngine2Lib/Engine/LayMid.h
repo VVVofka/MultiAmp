@@ -9,6 +9,7 @@ class LayMid : public LayBase{
 public:
 	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view);
 	VGpuCpu<float_2> vf;
+	float kF = 0.f;
 
 	void gpu2cpu();
 	void cpu2gpu();
