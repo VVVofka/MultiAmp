@@ -5,7 +5,7 @@
 
 IMPLEMENT_DYNAMIC(DlgMaskF, CDialogEx)
 
-DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParent){
+DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/) : CDialogEx(IDD_DLG_MASK_F, pParent){
 	for(size_t j = 0; j < vcells.size(); j++)	//	16
 		vcells[j] = std::make_unique<CMCell16>();
 	for(size_t j = 0; j < vsymOther.size(); j++){	//	4
@@ -18,8 +18,7 @@ DlgMaskF::DlgMaskF(CWnd* pParent /*=nullptr*/): CDialogEx(IDD_DLG_MASK_F, pParen
 		}
 	}
 } // ///////////////////////////////////////////////////////////////////////////////
-DlgMaskF::~DlgMaskF(){
-} // ///////////////////////////////////////////////////////////////////////////////
+DlgMaskF::~DlgMaskF(){} // ///////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::DoDataExchange(CDataExchange* pDX){
 	CDialogEx::DoDataExchange(pDX);
 	for(int j = 0; j < 16; j++)
@@ -34,11 +33,15 @@ BEGIN_MESSAGE_MAP(DlgMaskF, CDialogEx)
 END_MESSAGE_MAP()
 
 std::string DlgMaskF::doModal(const std::string& s_xml){
-	sxmlOut = sxmlInp = s_xml;
+	sxmlOut = sxmlInp = convs(s_xml);
+	//std::string sdbg(256, '0');
+	//sdbg[16] = '1';
+	//sdbg[38] = '8';
+	//sxmlOut = sxmlInp = convs(sdbg);
 	INT_PTR retDlg = CDialog::DoModal();
 	if(retDlg == IDOK)
-		return sxmlOut;
-	return sxmlInp;
+		return convs(sxmlOut);
+	return convs(sxmlInp);
 } // ////////////////////////////////////////////////////////////////
 BOOL DlgMaskF::OnInitDialog(){
 	CDialogEx::OnInitDialog();
@@ -50,16 +53,42 @@ BOOL DlgMaskF::OnInitDialog(){
 	m_chSymmetry.SetCheck(1);
 	setSymmetry();
 	return TRUE;  // return TRUE unless you set the focus to a control
-}// //////////////////////////////////////////////////////////////////////////////////////
+} // //////////////////////////////////////////////////////////////////////////////////////
+size_t DlgMaskF::convertNCell(size_t idx){
+	// 0  1  4  5    10  4 14 15
+	// 2  3  6  7 ->  8  9 12 13
+	// 8  9 12 13     2  3  6  7
+	//10 11 14 15     0  1  4  5
+	const size_t v[16] = {10,11,8,9,14,15,12,13,2,3,0,1,6,7,4,5};
+	return v[idx];
+} // //////////////////////////////////////////////////////////////////////////////////////
+std::string DlgMaskF::convs(const std::string s_in){
+	_ASSERTE(s_in.size() == 16 * 16);
+	const size_t vidmask[16] = {0,4,8,12,1,5,9,13,2,6,10,14,3,7,11,15};
+//	const std::string cnvrotate = "054321876";
+	std::string ret(256, '\0');
+	for(size_t idmask = 0; idmask < 16; idmask++){
+		const size_t conv_idmask = vidmask[idmask] * 16;
+		size_t ofs = idmask * 16;
+		for(size_t j = 0; j < 16; j++){
+			const size_t conv_j = convertNCell(j);
+			//int i = int(s_in[ofs + j]) - int('0');
+			//ret[conv_idmask * 16 + conv_j] = cnvrotate[i];
+			ret[conv_idmask + conv_j] = s_in[ofs + j];
+		}
+	}
+	return ret;
+} // ///////////////////////////////////////////////////////////////////////////////////////
 void DlgMaskF::OnBnClickedOk(){
-	// Add your control notification handler code here
 	int poss = 0;
 	sxmlOut.resize(16 * 16, '\0');
 	for(size_t j = 0; j < vcells.size(); j++){	//	16
-		CMCell16& cell4 = *(vcells[j]);
+		//const size_t conv_j = convertNCell(j);
+		const CMCell16& cell4 = *(vcells[j]);
 		for(size_t c = 0; c < cell4.v.size(); c++){	// 16
-			CMCell& cell = cell4.v[c];
-			size_t idRotate = cell.idRotate;
+			//const size_t conv_c = convertNCell(c);
+			const CMCell& cell = cell4.v[c];
+			const size_t idRotate = cell.idRotate;
 			sxmlOut[poss++] = std::to_string(idRotate)[0];
 		}
 	}

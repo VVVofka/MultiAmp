@@ -256,7 +256,6 @@
     <ResourceCompile Include="MultiAmp.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Common\Directs.ods" />
     <None Include="res\MultiAmp.rc2" />
   </ItemGroup>
   <ItemGroup>

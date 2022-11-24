@@ -50,6 +50,14 @@ private:
 		{6, 9}
 	};
 
+	// convert index from top,left coord to bottom,left coordinate (2*2)*(2*2) = 16
+	// 0  1  4  5    10  4 14 15
+	// 2  3  6  7 ->  8  9 12 13
+	// 8  9 12 13     2  3  6  7
+	//10 11 14 15     0  1  4  5
+	static size_t convertNCell(size_t idx);
+	static std::string convs(const std::string s_in);
+
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedSymetryF();

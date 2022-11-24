@@ -4,6 +4,7 @@
 ProcessF::ProcessF(Lays* p_lays, MaskF* p_Masks_f){
 	lays = p_lays;
 	fmasks = p_Masks_f;
+
 } // /////////////////////////////////////////////////////////////////////////////
 void ProcessF::RunAll(const int_2 shift){
 	for(int nmidlay = lays->cntMidLays - 1; nmidlay > 0; nmidlay--){

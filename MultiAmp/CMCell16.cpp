@@ -44,7 +44,6 @@ std::array<CRect, 4> CMCell16::DevideRect4(const CRect& rect_base, int border){
 } // //////////////////////////////////////////////////////////////////////////////////
 void CMCell16::create(size_t mask, const char* id_rotate){
 	setIdMaskF(mask);
-	//fills.fill();
 	CRect rctClient;
 	GetClientRect(&rctClient);
 	//_RPT4(0, "rctClient: %d %d    %d %d\n", rctClient.left, rctClient.top, rctClient.right, rctClient.bottom);
@@ -73,8 +72,10 @@ void CMCell16::setIdMaskF(size_t i){
 	}
 } // //////////////////////////////////////////////////////////////////////////////////////
 void CMCell16::setRotates(const char* id_rotate){
+	//const size_t vidx[16] = {0,4,8,12,1,5,9,13,2,6,10,14,3,7,11,15};
+	char buf[] = "\0";
 	for(size_t j = 0; j < v.size(); j++){
-		char buf[] = "\0";
+		//	const size_t conv_j = vidx[j];
 		buf[0] = id_rotate[j];
 		v[j].idRotate = (size_t)atol(buf);
 	}

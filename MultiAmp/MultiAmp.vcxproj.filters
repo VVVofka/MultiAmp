@@ -153,9 +153,6 @@
     <None Include="res\MultiAmp.rc2">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Common\Directs.ods">
-      <Filter>Dlgs\F</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\MultiAmp.ico">

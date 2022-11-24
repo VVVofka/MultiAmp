@@ -21,9 +21,11 @@ public:
 		Assert::AreEqual(size_t(37), cfgall.data.v.size(), L"cfgall.data.v.size()");
 		Assert::AreEqual(size_t(88), cfgall.data.v[0], L" cfgall.data.v[0]");
 		Assert::AreEqual(size_t(98), cfgall.data.v[scr_cnt - 1], L" cfgall.data.v[scr_cnt-1]");
+		string sfmask = "6576544378812312000100000000000000000040000000000000000000000000000000000800000000000000000000000002000000006000000000000000222000000000000020000000008004000000000000000000000000000000880800000000000000000000000040440000000006660000000000006666444488882222";
+		cfgall.masks.setf(sfmask);
 	} // //////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(MinProcess){
-		byCPU(0, 0);
+		byCPU(0, 0);	//	Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 	} // //////////////////////////////////////////////////////////////////////////////
 	TEST_METHOD(ProcessA){
 		byCPU(0, 0);

@@ -5,6 +5,7 @@
 #include "MaskF.h"
 
 using namespace Concurrency::graphics;
+
 class ProcessF{
 	typedef void (ProcessF::* pFunc)(const int n_lay);
 
@@ -20,8 +21,6 @@ private:
 	void gpuRun1(const int ncurlay);
 	void mtRun(const int ncurlay);
 	void cpuRun(const int ncurlay);
-
-	//float_2 rSizeDn0; // 1/size lay0
 
 	const pFunc arFuncRun[3] = {&ProcessF::gpuRun1, &ProcessF::mtRun, &ProcessF::cpuRun};
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

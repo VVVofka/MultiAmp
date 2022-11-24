@@ -1,6 +1,7 @@
 #pragma once
 #include "Directs.h"
 #include <array>
+#pragma warning(disable : 26495)
 class CellsFillSym{
 public:
 	std::array<Direct, 16> vout;
