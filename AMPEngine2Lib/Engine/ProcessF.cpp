@@ -7,7 +7,7 @@ ProcessF::ProcessF(Lays* p_lays, MaskF* p_Masks_f){
 
 } // /////////////////////////////////////////////////////////////////////////////
 void ProcessF::RunAll(const int_2 shift){
-	for(int nmidlay = lays->cntMidLays - 1; nmidlay > 0; nmidlay--){
+	for(int nmidlay = lays->cntMidLays - 1; nmidlay > 1; nmidlay--){
 		const LayMid* up = lays->vMidLays[nmidlay];
 		LayMid* dn = lays->vMidLays[nmidlay - 1];
 		const int tp = (int)dn->cpuType;

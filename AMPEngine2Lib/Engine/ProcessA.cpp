@@ -13,7 +13,7 @@ void ProcessA::RunAll(const int_2 shift){
 	LayMid* dn, * up = lays->vMidLays[0];
 	VVVDBG_SET_A(1, up->va.vgpu);
 
-	for(int nmid = 1; nmid < lays->cntMidLays - 1; nmid++){	// '- 1': for Process A last lay not needed
+	for(int nmid = 1; nmid < lays->cntMidLays; nmid++){	
 		dn = up;
 		up = lays->vMidLays[nmid];
 

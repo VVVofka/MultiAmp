@@ -7,41 +7,53 @@
 using namespace concurrency::graphics;
 
 void ProcessF::gpuRun1(const int ncurlay){
-	_ASSERTE(ncurlay > 0);
+	_ASSERTE(ncurlay > 1);
 	const LayMid& up_lay = *lays->vMidLays[ncurlay];
-	LayMid& dn_lay = *lays->vMidLays[ncurlay - 1];
-	const float klayf = up_lay.kF;
-
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
+	const float klayf = up_lay.kF;
 
-	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay.va.vgpu;
-	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
+	LayMid& dn_lay = *lays->vMidLays[ncurlay - 1];
+	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
+
+	LayMid& dst_lay = *lays->vMidLays[ncurlay - 2];
+	concurrency::array<float_2, 2>& dst_vgpu_f = *dn_lay.vf.vgpu;
 
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 
-//	parallel_for_each(up_vgpu_a.extent,
-//		[&dn_vgpu_a, &dn_vgpu_f,
-//		&up_vgpu_a, &up_vgpu_f,
-//		&f_masks, klayf, kLaminar, kTurbul, levelTurbul
-//		](index<2> idx)restrict(amp) {
-//			const int x0 = idx[X] * 2;
-//			const int y0 = idx[Y] * 2;
-//
-//#define idc0 (index<2>(y0, x0))
-//#define idc1 (index<2>(y0, x0 + 1))
-//#define idc2 (index<2>(y0 + 1, x0))
-//#define idc3 (index<2>(y0 + 1, x0 + 1))
-//
-//			dn_vgpu_f[idc0] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][0] * klayf;
-//			dn_vgpu_f[idc1] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][1] * klayf;
-//			dn_vgpu_f[idc2] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][2] * klayf;
-//			dn_vgpu_f[idc3] = up_vgpu_f[idx] + f_masks[up_vgpu_a[idx]][3] * klayf;
-//		});
+	parallel_for_each(up_vgpu_a.extent,
+		[&dn_vgpu_f, &up_vgpu_a, &up_vgpu_f, &dst_vgpu_f,
+		&f_masks, klayf
+		](index<2> idx) restrict(amp) {
+			const int x0 = idx[X] * 2;
+			const int y0 = idx[Y] * 2;
+
+			int idmask = up_vgpu_a[idx] * 16;
+
+			float_2 curf = dn_vgpu_f[index<2>(y0, x0)];
+			dst_vgpu_f[index<2>(y0, x0)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 1, x0)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 1, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			
+			curf = dn_vgpu_f[index<2>(y0, x0 + 1)];
+			dst_vgpu_f[index<2>(y0, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 1, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 1, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+
+			curf = dn_vgpu_f[index<2>(y0 + 1, x0)];
+			dst_vgpu_f[index<2>(y0 + 2, x0)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 2, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 3, x0)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 3, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+
+			curf = dn_vgpu_f[index<2>(y0 + 1, x0 + 1)];
+			dst_vgpu_f[index<2>(y0 + 2, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 2, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 3, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			dst_vgpu_f[index<2>(y0 + 3, x0 + 3)] = curf + f_masks[idmask] * klayf;
+		});
 } // ///////////////////////////////////////////////////////////////////////////
-#undef idc0
-#undef idc1
-#undef idc2
-#undef idc3
 #undef Y
 #undef X
