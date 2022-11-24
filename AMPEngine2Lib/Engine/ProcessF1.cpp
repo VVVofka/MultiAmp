@@ -17,7 +17,7 @@ void ProcessF::gpuRun1(const int ncurlay){
 	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
 
 	LayMid& dst_lay = *lays->vMidLays[ncurlay - 2];
-	concurrency::array<float_2, 2>& dst_vgpu_f = *dn_lay.vf.vgpu;
+	concurrency::array<float_2, 2>& dst_vgpu_f = *dst_lay.vf.vgpu;
 
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 

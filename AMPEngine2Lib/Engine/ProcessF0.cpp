@@ -1,6 +1,5 @@
 #include <amp_math.h>
 #include "ProcessF.h"
-//#include "ProcessParam.h"
 
 using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
@@ -8,33 +7,28 @@ using namespace concurrency::direct3d;
 #define Y 0
 
 void ProcessF::gpuRun0(const int_2 shift){
-//	const LayMid& up_lay = *lays->vMidLays[0];
-//	Lay0& lay_0 = lays->lay0;
-//	const ProcessParam* param = &up_lay.param;
-//	const float klayf = param->klayf;
-//	const float kLaminar = param->kLaminar;
-//	const float kTurbul = param->kTurbul;
-//	const float levelTurbul = param->levelTurbul;
-//	const float kf = param->kfv;
-//
-//	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
-//	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
-//
-//	concurrency::array<int, 2>& dn_vgpu_a = *lay_0.va.vgpu;
-//	//concurrency::array<float_2, 2>& dn_vgpu_f = *lay_0.vf.vgpu;
-//
-//	concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
-//	const concurrency::array<float_2, 2>& f_masks = *fmasks->vgpu;
-//	const float_2 rSizeDn(lay_0.sz);
-//	const float kinert = 1.f;	// lay_0.kinert;
-//
-//	parallel_for_each(up_vgpu_a.extent,
-//		[&dn_vgpu_a,	//	&dn_vgpu_f,
-//		&up_vgpu_a, &up_vgpu_f,
-//		&f_masks, &screen,
-//		shift, klayf, kLaminar, kTurbul, levelTurbul, rSizeDn, kf, kinert
-//		](index<2> idx)restrict(amp) {
-//			// TODO: optimize!
+	const LayMid& up_lay = *lays->vMidLays[1];
+	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
+	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
+	const float klayf = up_lay.kF;
+
+	LayMid& dn_lay = *lays->vMidLays[0];
+	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
+
+	Lay0& lay_0 = lays->lay0;
+	concurrency::array<int, 2>& dn_vgpu_a = *lay_0.va.vgpu;
+	concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
+	const float_2 rSizeDn(lay_0.sz);
+
+	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
+
+	parallel_for_each(up_vgpu_a.extent,
+		[&dn_vgpu_a,	//	&dn_vgpu_f,
+		&up_vgpu_a, &up_vgpu_f,
+		&f_masks, &screen,
+		shift, klayf, rSizeDn
+		](index<2> idx)restrict(amp) {
+			// TODO: optimize!
 //			const int x0 = mad(idx[X], 2, shift.x) % dn_vgpu_a.extent[X];
 //			const int y0 = mad(idx[Y], 2, shift.y) % dn_vgpu_a.extent[Y];
 //			const int x1 = (x0 + 1) % dn_vgpu_a.extent[X];
@@ -107,7 +101,7 @@ void ProcessF::gpuRun0(const int_2 shift){
 //			//	screen[dn_vgpu_a[idxsrc]].Pos.y = normy0;
 //			//	dn_vgpu_a[idxdst] = -1;
 //			//}
-//		});
+		});
 } // ////////////////////////////////////////////////////////////////////////////
 #undef normx0
 #undef normx1
