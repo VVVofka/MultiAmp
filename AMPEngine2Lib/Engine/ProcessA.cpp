@@ -5,7 +5,7 @@ ProcessA::ProcessA(Lays* p_lays, MaskA* p_Mask_a){
 	lays = p_lays;
 	amask = p_Mask_a;
 } // ////////////////////////////////////////////////////////////////////////////////////////////
-void ProcessA::RunAll(const int_2 shift){
+void ProcessA::RunAll(const uint_2 shift){
 	VVVDBG_IF_DBG(lays->DumpA(0));
 	gpuRun0(shift);
 	VVVDBG_IF_DBG(lays->DumpAgpu(1));

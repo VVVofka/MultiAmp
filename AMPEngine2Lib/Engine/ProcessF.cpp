@@ -6,7 +6,7 @@ ProcessF::ProcessF(Lays* p_lays, MaskF* p_Masks_f){
 	fmasks = p_Masks_f;
 
 } // /////////////////////////////////////////////////////////////////////////////
-void ProcessF::RunAll(const int_2 shift){
+void ProcessF::RunAll(const uint_2 shift){
 	for(int nmidlay = lays->cntMidLays - 1; nmidlay > 1; nmidlay--){
 		const LayMid* up = lays->vMidLays[nmidlay];
 		LayMid* dn = lays->vMidLays[nmidlay - 1];

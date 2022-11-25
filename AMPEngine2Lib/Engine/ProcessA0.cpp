@@ -5,7 +5,7 @@
 	using namespace concurrency::graphics;
 	using namespace concurrency::direct3d;
 
-	void ProcessA::gpuRun0(const int_2 shift){
+	void ProcessA::gpuRun0(const uint_2 shift){
 		LayMid& up_lay = *lays->vMidLays[0];
 		const Lay0& dn_lay = lays->lay0;
 

@@ -7,6 +7,7 @@
 using namespace concurrency::graphics;
 
 void ProcessF::gpuRun1(const int ncurlay){
+	// TODO: Move to class
 	_ASSERTE(ncurlay > 1);
 	const LayMid& up_lay = *lays->vMidLays[ncurlay];
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
@@ -25,9 +26,11 @@ void ProcessF::gpuRun1(const int ncurlay){
 		[&dn_vgpu_f, &up_vgpu_a, &up_vgpu_f, &dst_vgpu_f,
 		&f_masks, klayf
 		](index<2> idx) restrict(amp) {
+			// TODO: #define?
 			const int x0 = idx[X] * 2;
 			const int y0 = idx[Y] * 2;
 
+			// TODO: ptr?
 			int idmask = up_vgpu_a[idx] * 16;
 
 			float_2 curf = dn_vgpu_f[index<2>(y0, x0)];

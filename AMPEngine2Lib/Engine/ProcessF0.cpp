@@ -5,7 +5,7 @@
 using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 
-void ProcessF::gpuRun0(const int_2 shift){
+void ProcessF::gpuRun0(const uint_2 shift){
 	const LayMid& up_lay = *lays->vMidLays[1];
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
@@ -20,6 +20,7 @@ void ProcessF::gpuRun0(const int_2 shift){
 	const float_2 rSizeDn(lay_0.sz);
 
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
+	uint_2 iter = 
 
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,

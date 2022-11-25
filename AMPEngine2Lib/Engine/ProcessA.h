@@ -16,10 +16,10 @@ class ProcessA{
 
 public:
 	ProcessA(Lays* p_lays, MaskA* p_Mask_a);
-	void RunAll(const int_2 shift);	// return sum vabs from last lay
+	void RunAll(const uint_2 shift);	// return sum vabs from last lay
 
 private:
-	void gpuRun0(const int_2 shift);
+	void gpuRun0(const uint_2 shift);
 	void gpuRun1(const int n_lay);
 	void mtRun(const int n_lay);
 	void cpuRun(const int n_lay);
