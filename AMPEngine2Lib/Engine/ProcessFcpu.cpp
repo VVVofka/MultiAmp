@@ -4,21 +4,23 @@
 #include<ppl.h>	//	parallel_for
 
 void ProcessF::cpuRun(const int ncurlay){
-	//_ASSERTE(ncurlay > 0);
-	////auto up_lay = &lays->vMidLays[ncurlay];
-	//const LayMid* up_lay = lays->vMidLays[ncurlay];
-	//LayMid* dn_lay = lays->vMidLays[ncurlay - 1];
+	_ASSERTE(ncurlay > 1);
+	const LayMid* up_lay = lays->vMidLays[ncurlay];
+	const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
+	const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
+	const float klayf = up_lay->kF;
 
-	//const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
-	//const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
+	const LayMid* dn_lay = lays->vMidLays[ncurlay - 1];
+	const std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
 
-	//const std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;	// const
-	//std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
+	LayMid* dst_lay = lays->vMidLays[ncurlay - 2];
+	std::vector<float_2>& dst_vcpu_f = dst_lay->vf.vcpu;
 
-	//const size_t szUpY = (size_t)up_lay->sz.y;
-	//const size_t szUpX = (size_t)up_lay->sz.x;
-	//const size_t szDnX = szUpX * 2;
-	//const std::array<float_2, 16 * 4>& f_masks = fmasks->vcpu;
+	const std::array<float_2, 256U>& f_masks = fmasks->vcpu;
+
+	const size_t szUpY = (size_t)up_lay->sz.y;
+	const size_t szUpX = (size_t)up_lay->sz.x;
+	const size_t szDnX = szUpX * 2;
 
 	//for(size_t y = 0, idUp = 0; y < szUpY; y++){
 	//	for(size_t x = 0; x < szUpX; x++, idUp++){
@@ -29,6 +31,8 @@ void ProcessF::cpuRun(const int ncurlay){
 	//		const float_2 up_f = up_vcpu_f[idUp];
 	//	}	// x
 	//}	//	y
+	if(dst_lay->cpuType != CPUtype::GPU)
+		dst_lay->cpu2gpu();
 } // ///////////////////////////////////////////////////////////////////////////
 void ProcessF::mtRun(const int ncurlay){
 	//_ASSERTE(ncurlay > 0);

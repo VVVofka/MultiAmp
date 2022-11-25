@@ -13,13 +13,10 @@ void ProcessA::RunAll(const int_2 shift){
 	LayMid* dn, * up = lays->vMidLays[0];
 	VVVDBG_SET_A(1, up->va.vgpu);
 
-	for(int nmid = 1; nmid < lays->cntMidLays; nmid++){	
+	for(int nmid = 1; nmid < lays->cntMidLays; nmid++){
 		dn = up;
 		up = lays->vMidLays[nmid];
 
-		if(dn->cpuType == CPUtype::GPU && up->cpuType != CPUtype::GPU){
-			dn->gpu2cpu();
-		} 
 		VVVDBG_IF_DBG(lays->DumpA(nmid));
 		int tp = (int)up->cpuType;
 		(this->*arFuncRun[tp])(nmid);	//{&ProcessA::gpuRun1, &ProcessA::mtRun, &ProcessA::cpuRun}

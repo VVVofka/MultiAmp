@@ -5,12 +5,16 @@ using namespace concurrency::graphics;
 
 void ProcessA::cpuRun(const int n_lay){
 	_ASSERTE(n_lay > 0);
-	const std::array<int, 16>& a_masks = amask->vcpu;
-	LayMid* up_lay = lays->vMidLays[n_lay];
-	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
 
+	LayMid* up_lay = lays->vMidLays[n_lay];
+
+	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
 	std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
-	//std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
+
+	const std::array<int, 16>& a_masks = amask->vcpu;
+
+	if(dn_lay->cpuType == CPUtype::GPU)
+		dn_lay->gpu2cpu();
 
 	const size_t maxy = (size_t)up_lay->sz.y;
 	const size_t maxx = (size_t)up_lay->sz.x;
@@ -28,21 +32,20 @@ void ProcessA::cpuRun(const int n_lay){
 				(a_masks[dn_vcpu_a[idDn1 + 1]] << 1) +		// << 1
 				(a_masks[dn_vcpu_a[idDn2]] << 2) +			// << 2
 				(a_masks[dn_vcpu_a[idDn2 + 1]] << 3);		// << 3;
-
-			//up_lay->vf.vcpu[idUp] =
-			//	dn_vcpu_f[idDn1] + dn_vcpu_f[idDn1 + 1] +
-			//	dn_vcpu_f[idDn2] + dn_vcpu_f[idDn2 + 1];
 		}
 	}
 } // ///////////////////////////////////////////////////////////////////////////
 void ProcessA::mtRun(const int n_lay){
 	_ASSERTE(n_lay > 0);
-	const std::array<int, 16>& a_masks = amask->vcpu;
 	LayMid* up_lay = lays->vMidLays[n_lay];
-	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
 
+	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
 	std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
-	//std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
+
+	const std::array<int, 16>& a_masks = amask->vcpu;
+
+	if(dn_lay->cpuType == CPUtype::GPU)
+		dn_lay->gpu2cpu();
 
 	const size_t maxy = (size_t)up_lay->sz.y;
 	const size_t maxx = (size_t)up_lay->sz.x;
@@ -60,10 +63,6 @@ void ProcessA::mtRun(const int n_lay){
 				(a_masks[dn_vcpu_a[idDn1 + 1]] << 1) +		// << 1
 				(a_masks[dn_vcpu_a[idDn2]] << 2) +			// << 2
 				(a_masks[dn_vcpu_a[idDn2 + 1]] << 3);		// << 3;
-
-			//up_lay->vf.vcpu[idUp] =
-			//	dn_vcpu_f[idDn1] + dn_vcpu_f[idDn1 + 1] +
-			//	dn_vcpu_f[idDn2] + dn_vcpu_f[idDn2 + 1];
 		}
 		});
 } // ///////////////////////////////////////////////////////////////////////////

@@ -13,7 +13,7 @@ void ProcessF::gpuRun1(const int ncurlay){
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
 	const float klayf = up_lay.kF;
 
-	LayMid& dn_lay = *lays->vMidLays[ncurlay - 1];
+	const LayMid& dn_lay = *lays->vMidLays[ncurlay - 1];
 	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
 
 	LayMid& dst_lay = *lays->vMidLays[ncurlay - 2];

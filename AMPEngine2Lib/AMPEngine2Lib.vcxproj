@@ -193,8 +193,6 @@
     <ClInclude Include="Engine\MaskF.h" />
     <ClInclude Include="Engine\MasksAll.h" />
     <ClInclude Include="Engine\NewEngine.h" />
-    <ClInclude Include="Engine\Params\ProcessParam.h" />
-    <ClInclude Include="Engine\Params\ProcessParams.h" />
     <ClInclude Include="Engine\ProcessA.h" />
     <ClInclude Include="Engine\Processes.h" />
     <ClInclude Include="Engine\ProcessF.h" />
@@ -219,8 +217,6 @@
     <ClCompile Include="Engine\MaskA.cpp" />
     <ClCompile Include="Engine\MaskF.cpp" />
     <ClCompile Include="Engine\MasksAll.cpp" />
-    <ClCompile Include="Engine\Params\ProcessParam.cpp" />
-    <ClCompile Include="Engine\Params\ProcessParams.cpp" />
     <ClCompile Include="Engine\ProcessA.cpp" />
     <ClCompile Include="Engine\ProcessA0.cpp" />
     <ClCompile Include="Engine\ProcessA1.cpp" />

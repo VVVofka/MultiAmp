@@ -10,9 +10,11 @@ using namespace concurrency::direct3d;
 void ProcessA::gpuRun1(const int n_lay){
 	_ASSERTE(n_lay > 0);
 	LayMid& up_lay = *lays->vMidLays[n_lay];
-	const LayMid& dn_lay = *lays->vMidLays[n_lay - 1];
 	concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
+
+	const LayMid& dn_lay = *lays->vMidLays[n_lay - 1];
 	const concurrency::array<int, 2>& dn_vgpu_a = *dn_lay.va.vgpu;
+
 	const concurrency::array<int, 1>& maskA = *amask->vgpu;
 
 	parallel_for_each(up_vgpu_a.extent,

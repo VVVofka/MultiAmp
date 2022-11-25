@@ -1,10 +1,9 @@
 #include <amp_math.h>
 #include "ProcessF.h"
-
-using namespace concurrency::graphics;
-using namespace concurrency::direct3d;
 #define X 1
 #define Y 0
+using namespace concurrency::graphics;
+using namespace concurrency::direct3d;
 
 void ProcessF::gpuRun0(const int_2 shift){
 	const LayMid& up_lay = *lays->vMidLays[1];
@@ -23,7 +22,7 @@ void ProcessF::gpuRun0(const int_2 shift){
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 
 	parallel_for_each(up_vgpu_a.extent,
-		[&dn_vgpu_a, &up_vgpu_a, &up_vgpu_f, &screen,
+		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,
 		&f_masks, shift, klayf, rSizeDn
 		](index<2> idx)restrict(amp) {
 			const int x0 = idx[X] * 2;
@@ -32,28 +31,28 @@ void ProcessF::gpuRun0(const int_2 shift){
 			int idmask = up_vgpu_a[idx] * 16;
 
 			float_2 curf = dn_vgpu_f[index<2>(y0, x0)];
-			dst_vgpu_f[index<2>(y0, x0)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0, x0 + 1)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 1, x0)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 1, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0, x0)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 1, x0)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 1, x0 + 1)] = curf + f_masks[idmask++] * klayf;
 
-			curf = dn_vgpu_f[index<2>(y0, x0 + 1)];
-			dst_vgpu_f[index<2>(y0, x0 + 2)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0, x0 + 3)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 1, x0 + 2)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 1, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+			//curf = dn_vgpu_f[index<2>(y0, x0 + 1)];
+			//dst_vgpu_f[index<2>(y0, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 1, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 1, x0 + 3)] = curf + f_masks[idmask++] * klayf;
 
-			curf = dn_vgpu_f[index<2>(y0 + 1, x0)];
-			dst_vgpu_f[index<2>(y0 + 2, x0)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 2, x0 + 1)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 3, x0)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 3, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			//curf = dn_vgpu_f[index<2>(y0 + 1, x0)];
+			//dst_vgpu_f[index<2>(y0 + 2, x0)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 2, x0 + 1)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 3, x0)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 3, x0 + 1)] = curf + f_masks[idmask++] * klayf;
 
-			curf = dn_vgpu_f[index<2>(y0 + 1, x0 + 1)];
-			dst_vgpu_f[index<2>(y0 + 2, x0 + 2)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 2, x0 + 3)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 3, x0 + 2)] = curf + f_masks[idmask++] * klayf;
-			dst_vgpu_f[index<2>(y0 + 3, x0 + 3)] = curf + f_masks[idmask] * klayf;
+			//curf = dn_vgpu_f[index<2>(y0 + 1, x0 + 1)];
+			//dst_vgpu_f[index<2>(y0 + 2, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 2, x0 + 3)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 3, x0 + 2)] = curf + f_masks[idmask++] * klayf;
+			//dst_vgpu_f[index<2>(y0 + 3, x0 + 3)] = curf + f_masks[idmask] * klayf;
 
 
 			// TODO: optimize!
