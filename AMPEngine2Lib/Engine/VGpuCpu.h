@@ -18,7 +18,7 @@ public:
 
 	~VGpuCpu(){ SAFE_DELETE(vgpu); }
 
-	void Create(const int_2 size, const bool is_gpu, accelerator_view* m_accl_view){
+	void Create(const uint_2 size, const bool is_gpu, accelerator_view* m_accl_view){
 		size_t size1 = (size_t)size.x * (size_t)size.y;
 		vcpu.resize(size1, 0);
 		//for(size_t j = 0; j < size1; j++)
@@ -27,7 +27,7 @@ public:
 		if(is_gpu)
 			vgpu = new concurrency::array<T, 2>(size.y, size.x, vcpu.begin(), *m_accl_view);
 	} // ////////////////////////////////////////////////////////////////////////////
-	void Create(const int_2 size, const std::vector<T>& vi_inp, const bool is_gpu, accelerator_view* m_accl_view){
+	void Create(const uint_2 size, const std::vector<T>& vi_inp, const bool is_gpu, accelerator_view* m_accl_view){
 		size_t size1 = (size_t)size.x * (size_t)size.y;
 		_ASSERTE(size1 == vi_inp.size());
 		vcpu.resize(size1);

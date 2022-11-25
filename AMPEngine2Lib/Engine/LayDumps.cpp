@@ -4,12 +4,13 @@
 #include "Lays.h"
 
 // static
-std::string LayBase::sDumpV(const std::vector<int>& v, const int_2 sz, const int digits){
+std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits){
 	std::string ret, sformat('%' + std::to_string(digits) + "d ");
-	for(int yr = 0; yr < sz.y; yr++){
-		int y = sz.y - yr - 1;
-		for(int x = 0; x < sz.x; x++){
-			int idx = y * sz.x + x;
+	for(size_t yr = 0; yr < sz.y; yr++){
+		_ASSERTE(sz.y >= yr + 1);
+		size_t y = sz.y - yr - 1;
+		for(size_t x = 0; x < sz.x; x++){
+			size_t idx = y * sz.x + x;
 			int q = v[idx];
 			if(q < 0){
 				ret += " . ";
@@ -24,14 +25,15 @@ std::string LayBase::sDumpV(const std::vector<int>& v, const int_2 sz, const int
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
 // static
-std::string LayBase::sDumpV(const std::vector<float_2>& v, const int_2 sz, const int digits){
+std::string LayBase::sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits){
 	std::string sdigit = std::to_string(digits);
 	std::string ret, sformat("%+." + sdigit + "fx%+." + sdigit + "f ");
-	for(int yr = 0; yr < sz.y; yr++){
-		int y = sz.y - yr - 1;
-		for(int x = 0; x < sz.x; x++){
+	for(size_t yr = 0; yr < sz.y; yr++){
+		_ASSERTE(sz.y >= yr + 1);
+		size_t y = sz.y - yr - 1;
+		for(size_t x = 0; x < sz.x; x++){
 			char buf[64];
-			int idx = y * sz.x + x;
+			size_t idx = y * sz.x + x;
 			float_2 cur = v[idx];
 			sprintf_s(buf, sformat.c_str(), cur.x, cur.y);
 			ret += buf;

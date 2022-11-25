@@ -24,7 +24,7 @@ public:
 	std::string sDumpAgpu(const int digits)const;
 	std::string DumpAcpu(const int digits)const;
 	std::string DumpAgpu(const int digits)const;
-	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const int count_point);
+	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const uint count_point);
 
 	using LayBase::cpu2gpu;
 	using LayBase::gpu2cpu;

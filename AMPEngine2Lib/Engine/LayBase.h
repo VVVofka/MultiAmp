@@ -10,12 +10,12 @@ using namespace Concurrency;
 
 class LayBase{
 public:
-	LayBase(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
-	int nlay = 0;
-	int_2 sz;
+	LayBase(uint n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	uint nlay = 0;
+	uint_2 sz;
 	CPUtype cpuType = CPUtype::GPU;
 
-	VGpuCpu<int> va;
+	VGpuCpu<int> va;	// -1 - empty point
 	
 	accelerator_view* m_accl_view = NULL;
 	structAll* cfg_all = NULL;
@@ -31,8 +31,8 @@ protected:
 	std::string sDumpAcpu(const int digits)const;
 	std::string sDumpAgpu(const int digits)const;
 
-	static std::string sDumpV(const std::vector<int>& v, const int_2 sz, const int digits);
-	static std::string sDumpV(const std::vector<float_2>& v, const int_2 sz, const int digits);
+	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);
+	static std::string sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits);
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

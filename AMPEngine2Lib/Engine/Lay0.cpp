@@ -31,13 +31,13 @@ Lay0::~Lay0(){
 //	SAFE_DELETE(vgpuScreen);
 //	vgpuScreen = new concurrency::array<Vertex2D, 1>(count);
 //} // ///////////////////////////////////////////////////////////////////////////////
-concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const int count_point){
+concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const uint count_point){
 	_ASSERTE(count_point >= 0);
 	int ret = 0;
 	std::vector<Vertex2D> cpuv(count_point);
-	for(int y = 0; y < sz.y; y++)
-		for(int x = 0; x < sz.x; x++){
-			size_t idx = static_cast<size_t>(y) * static_cast<size_t>(sz.x) + static_cast<size_t>(x);
+	for(size_t y = 0; y < sz.y; y++)
+		for(size_t x = 0; x < sz.x; x++){
+			size_t idx = y * static_cast<size_t>(sz.x) + x;
 			if(va.vcpu[idx] >= 0){
 				cpuv[ret].Pos.x = (float)(2 * x + 1) * sz.x - 1.f;
 				cpuv[ret].Pos.y = (float)(2 * y + 1) * sz.y - 1.f;
