@@ -6,32 +6,69 @@ using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 
 void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
-	const LayMid& up_lay = *lays->vMidLays[1];
-	const concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;
-	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay.vf.vgpu;
-	const float klayf = up_lay.kF;
+	const LayMid* up_lay = lays->vMidLays[1];
+	const concurrency::array<int, 2>& up_vgpu_a = *up_lay->va.vgpu;
+	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay->vf.vgpu;
+	const float klayf = up_lay->kF;
 
-	LayMid& dn_lay = *lays->vMidLays[0];
-	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay.vf.vgpu;
+	LayMid* dn_lay = lays->vMidLays[0];
+	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
 
-	Lay0& lay_0 = lays->lay0;
-	concurrency::array<int, 2>& dn_vgpu_a = *lay_0.va.vgpu;
-	concurrency::array<Vertex2D, 1>& screen = *lay_0.vgpuScreen;
-	const float_2 rSizeDn(lay_0.sz);
+	Lay0* lay_0 = &lays->lay0;
+	concurrency::array<int, 2>& dn_vgpu_a = *lay_0->va.vgpu;
+	concurrency::array<Vertex2D, 1>& screen = *lay_0->vgpuScreen;
+	const float_2 rSizeDn(lay_0->sz);
 
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 	uint_2 iter2 = uint_2(iter, iter ^ 1);
 
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,
-		&f_masks, shift, klayf, rSizeDn
+		&f_masks, shift, klayf, rSizeDn, iter2
 		](index<2> idx)restrict(amp) {
-			const int x0 = idx[X] * 2;
-			const int y0 = idx[Y] * 2;
+			const uint_2 mid0 = uint_2(idx[Y], idx[X]) * 2;
 
+			// TODO: va lay0 - int;  other uint
 			int idmask = up_vgpu_a[idx] * 16;
+			float_2 curf = dn_vgpu_f[index<2>(mid0.y, mid0.x)];
+			
+			uint_2 dn0 = mid0 * 2;
+			uint_2 ofs = iter2;
 
-			float_2 curf = dn_vgpu_f[index<2>(y0, x0)];
+			index<2> src = index<2>(dn0.y, dn0.x);
+			index<2> dst = index<2>(dn0.y + ofs.y, dn0.x + ofs.x);
+			float_2 fsrc = curf + f_masks[idmask] * klayf;
+			float_2 fdst = curf + f_masks[idmask + 2 * ofs.y + ofs.x] * klayf;
+			if(fsrc. src[ofs.x] >= 0)
+
+			float_2 f0 = curf + f_masks[idmask++] * klayf;
+			float_2 f1 = curf + f_masks[idmask++] * klayf;
+			float_2 f2 = curf + f_masks[idmask++] * klayf;
+			float_2 f3 = curf + f_masks[idmask++] * klayf;
+			idmask += 4;
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+
+			src = index<2>(y = 2, x = 0);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
+			src = index<2>(y += iter2.x, x += iter2.y);
+			dst = index<2>(y + iter2.y, x + iter2.x);
+
 			//dst_vgpu_f[index<2>(y0, x0)] = curf + f_masks[idmask++] * klayf;
 			//dst_vgpu_f[index<2>(y0, x0 + 1)] = curf + f_masks[idmask++] * klayf;
 			//dst_vgpu_f[index<2>(y0 + 1, x0)] = curf + f_masks[idmask++] * klayf;
