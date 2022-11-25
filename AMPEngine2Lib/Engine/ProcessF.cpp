@@ -6,7 +6,7 @@ ProcessF::ProcessF(Lays* p_lays, MaskF* p_Masks_f){
 	fmasks = p_Masks_f;
 
 } // /////////////////////////////////////////////////////////////////////////////
-void ProcessF::RunAll(const uint_2 shift){
+void ProcessF::RunAll(const uint_2 shift, const uint iter){
 	for(int nmidlay = lays->cntMidLays - 1; nmidlay > 1; nmidlay--){
 		const LayMid* up = lays->vMidLays[nmidlay];
 		LayMid* dn = lays->vMidLays[nmidlay - 1];
@@ -15,5 +15,5 @@ void ProcessF::RunAll(const uint_2 shift){
 		if(dn->cpuType == CPUtype::GPU && up->cpuType != CPUtype::GPU)
 			dn->cpu2gpu();
 	}
-	gpuRun0(shift); 
+	gpuRun0(shift, iter); 
 } // ///////////////////////////////////////////////////////////////////////////

@@ -13,10 +13,10 @@ class ProcessF{
 
 public:
 	ProcessF(Lays* p_lays, MaskF* p_Masks_f);
-	void RunAll(const uint_2 shift);
+	void RunAll(const uint_2 shift, const uint iter);
 
 private:
-	void gpuRun0(const uint_2 shift);
+	void gpuRun0(const uint_2 shift, const uint iter);
 	void gpuRun1(const int ncurlay);
 	void mtRun(const int ncurlay);
 	void cpuRun(const int ncurlay);
