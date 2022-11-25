@@ -20,6 +20,7 @@ void Processes::RunAll(){
 	uint x = uint(pos % szx);
 	uint y = uint(pos / szx);
 	uint_2 shift = uint_2(x, y);
+	unsg iter = 1 & cfg_all->misc.curIteration;
 	processA.RunAll(shift);
 	processF.RunAll(shift);
 	curIteration++;

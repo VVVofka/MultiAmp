@@ -1,9 +1,7 @@
 #include <amp_math.h>
 #include "ProcessF.h"
-
 #define X 1
 #define Y 0
-
 using namespace concurrency::graphics;
 
 void ProcessF::gpuRun1(const int ncurlay){
