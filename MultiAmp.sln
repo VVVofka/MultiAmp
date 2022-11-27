@@ -44,6 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{7165A0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{C57BC05B-BC5C-49E1-BDB0-558045AA28DF}"
 	ProjectSection(SolutionItems) = preProject
+		Common\Directs.ods = Common\Directs.ods
 		Common\include\myRnd.h = Common\include\myRnd.h
 		Win32\Debug\tstDlg.xml = Win32\Debug\tstDlg.xml
 		Common\include\Util.h = Common\include\Util.h

@@ -21,17 +21,29 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 
 	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 	uint_2 iter2 = uint_2(iter, iter ^ 1);
+	auto zzz = 0xb0111;
 
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,
 		&f_masks, shift, klayf, rSizeDn, iter2
 		](index<2> idx)restrict(amp) {
+			//const uint vmaskmov[256] = {0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb1110, 0xb1100, 0xb1110, 0xb1110, 0xb1101, 0xb1100, 0xb1101, 0xb1101, 0xb1110, 0xb1110, 0xb1110, 0xb1110, 0xb1110, 0xb1110, 0, 0xb1110, 0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb110, 0xb100, 0xb110, 0xb110, 0, 0, 0, 0, 0xb110, 0xb110, 0xb110, 0xb110, 0xb10, 0, 0xb10, 0, 0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0, 0xb100, 0, 0, 0, 0, 0, 0, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb110, 0xb100, 0xb110, 0xb110, 0, 0, 0, 0, 0xb110, 0xb110, 0xb110, 0xb110, 0xb10, 0, 0xb10, 0, 0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb1110, 0xb100, 0xb1110, 0xb1110, 0xb1101, 0xb1100, 0xb1101, 0xb1101, 0xb1110, 0xb100, 0xb1110, 0xb1110, 0, 0xb1110, 1, 0xb1110, 0, 0xb100, 0, 0, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb110, 0xb100, 0xb110, 0xb110, 0, 0, 0, 0, 0xb110, 0xb110, 0xb110, 0xb110, 0xb10, 0, 0xb10, 0, 0xb1011, 0xb100, 0xb1011, 0xb1011, 0xb1001, 0xb1000, 0xb1001, 0xb1001, 0xb1011, 0, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 1, 0xb1011, 0, 0xb100, 0, 0, 0, 0, 0, 0, 0, 0xb100, 0, 0, 1, 0, 1, 0, 0xb1011, 0, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb1011, 0xb11, 0xb1011, 0xb111, 0xb100, 0xb111, 0xb111, 0, 0, 0, 0, 0xb111, 0xb111, 0xb111, 0xb111, 0xb11, 0, 0xb11, 0};
+			const uint vmaskmov[256] = {
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 14,12,14,14,13,12,13,13,14,14,14,14,14,14,15,14,
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 6,4,6,6,15,15,15,15,6,6,6,6,2,15,2,15,
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 15,4,15,15,15,15,15,15,15,4,15,15,1,15,1,15,
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 6,4,6,6,15,15,15,15,6,6,6,6,2,15,2,15,
+
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 14,4,14,14,13,12,13,13,14,4,14,14,15,14,1,14,
+				15,4,15,15,9,8,9,9,15,4,15,15,1,15,1,15, 6,4,6,6,15,15,15,15,6,6,6,6,2,15,2,15,
+				11,4,11,11,9,8,9,9,11,15,11,11,11,11,1,11, 15,4,15,15,15,15,15,15,15,4,15,15,1,15,1,15,
+				11,15,11,11,11,11,11,11,11,11,11,11,11,11,3,11, 7,4,7,7,15,15,15,15,7,7,7,7,3,15,3,15};
 			const uint_2 mid0 = uint_2(idx[Y], idx[X]) * 2;
 
 			// TODO: va lay0 - int;  other uint
 			int idmask = up_vgpu_a[idx] * 16;
 			float_2 curf = dn_vgpu_f[index<2>(mid0.y, mid0.x)];
-			
+
 			uint_2 dn0 = mid0 * 2;
 			uint_2 ofs = iter2;
 
@@ -39,35 +51,35 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			index<2> dst = index<2>(dn0.y + ofs.y, dn0.x + ofs.x);
 			float_2 fsrc = curf + f_masks[idmask] * klayf;
 			float_2 fdst = curf + f_masks[idmask + 2 * ofs.y + ofs.x] * klayf;
-			if(fsrc. src[ofs.x] >= 0)
+			
 
-			float_2 f0 = curf + f_masks[idmask++] * klayf;
+				float_2 f0 = curf + f_masks[idmask++] * klayf;
 			float_2 f1 = curf + f_masks[idmask++] * klayf;
 			float_2 f2 = curf + f_masks[idmask++] * klayf;
 			float_2 f3 = curf + f_masks[idmask++] * klayf;
 			idmask += 4;
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
 
-			src = index<2>(y = 2, x = 0);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y = 2, x = 0);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
-			src = index<2>(y += iter2.x, x += iter2.y);
-			dst = index<2>(y + iter2.y, x + iter2.x);
+			//src = index<2>(y += iter2.x, x += iter2.y);
+			//dst = index<2>(y + iter2.y, x + iter2.x);
 
 			//dst_vgpu_f[index<2>(y0, x0)] = curf + f_masks[idmask++] * klayf;
 			//dst_vgpu_f[index<2>(y0, x0 + 1)] = curf + f_masks[idmask++] * klayf;
