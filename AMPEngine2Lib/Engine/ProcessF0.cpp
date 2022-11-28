@@ -26,9 +26,20 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,
 		&f_masks, shift, klayf, rSizeDn, iter2
-		](index<2> idx)restrict(amp) {
-			//0,1:src; 1,2:dst; 3,4:cnt move;
-			const uint vmaskmov[256] = {
+		](index<2> idUp)restrict(amp) {
+			const uint x0 = (idUp[X] * 2 + shift.x) % dn_vgpu_a.extent[X];
+			const uint x1 = (x0 + 1) % dn_vgpu_a.extent[X];
+			const uint y0 = (idUp[Y] * 2 + shift.y) % dn_vgpu_a.extent[Y];
+			const uint y1 = (y0 + 1) % dn_vgpu_a.extent[Y];
+
+			//index: 0(2,4,6) digit: 0:point absent or f=0; 
+			//						 1:point present;
+			//		 1(3,5,7) digit: 0:left  (f<0)
+			//						 1:right (f>0)
+			//value: 0,1 digits: index src (0xb00-right; 0xb11-left) 
+			//		 1,2 digits: index dst (0xb00-right; 0xb11-left) 
+			//		 3,4 digits: abs cnt move (0..3)
+			const int vmaskmov[256] = {
 			 0,20, 0, 0,25,40,25,25, 0,20, 0, 0,17, 0,17, 0,  30,60,30,30,45,60,45,45,30,30,30,30,30,30, 0,30,
 			 0,20, 0, 0,25,40,25,25, 0,20, 0, 0,17, 0,17, 0,  22,20,22,22, 0, 0, 0, 0,22,22,22,22,34, 0,34, 0,
 			 0,20, 0, 0,25,40,25,25, 0,20, 0, 0,17, 0,17, 0,   0,20, 0, 0, 0, 0, 0, 0, 0,20, 0, 0,17, 0,17, 0,
@@ -39,10 +50,11 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			27,20,27,27,25,40,25,25,27, 0,27,27,27,27,17,27,   0,20, 0, 0, 0, 0, 0, 0, 0,20, 0, 0,17, 0,17, 0,
 			27, 0,27,27,27,27,27,27,27,27,27,27,27,27,51,27,  39,20,39,39, 0, 0, 0, 0,39,39,39,39,51, 0,51, 0
 			};
-			const uint_2 mid0 = uint_2(idx[Y], idx[X]) * 2;
+
+			int idmask = up_vgpu_a[idUp] * 16;
+			const uint_2 mid0 = uint_2(idUp[Y], idUp[X]) * 2;
 
 			// TODO: va lay0 - int;  other uint
-			int idmask = up_vgpu_a[idx] * 16;
 			float_2 curf = dn_vgpu_f[index<2>(mid0.y, mid0.x)];
 
 			uint_2 dn0 = mid0 * 2;
