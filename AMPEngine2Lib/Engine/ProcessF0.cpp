@@ -52,25 +52,22 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			};
 
 			int idmask = up_vgpu_a[idUp] * 16;
-			const uint_2 mid0 = uint_2(idUp[Y], idUp[X]) * 2;
+			float_2 curf = dn_vgpu_f[index<2>(idUp[Y] * 2, idUp[X] * 2)];
 
-			// TODO: va lay0 - int;  other uint
-			float_2 curf = dn_vgpu_f[index<2>(mid0.y, mid0.x)];
+			//uint_2 dn0 = mid0 * 2;
+			//uint_2 ofs = iter2;
 
-			uint_2 dn0 = mid0 * 2;
-			uint_2 ofs = iter2;
-
-			index<2> src = index<2>(dn0.y, dn0.x);
-			index<2> dst = index<2>(dn0.y + ofs.y, dn0.x + ofs.x);
-			float_2 fsrc = curf + f_masks[idmask] * klayf;
-			float_2 fdst = curf + f_masks[idmask + 2 * ofs.y + ofs.x] * klayf;
+			//index<2> src = index<2>(dn0.y, dn0.x);
+			//index<2> dst = index<2>(dn0.y + ofs.y, dn0.x + ofs.x);
+			//float_2 fsrc = curf + f_masks[idmask] * klayf;
+			//float_2 fdst = curf + f_masks[idmask + 2 * ofs.y + ofs.x] * klayf;
 
 
-			float_2 f0 = curf + f_masks[idmask++] * klayf;
-			float_2 f1 = curf + f_masks[idmask++] * klayf;
-			float_2 f2 = curf + f_masks[idmask++] * klayf;
-			float_2 f3 = curf + f_masks[idmask++] * klayf;
-			idmask += 4;
+			//float_2 f0 = curf + f_masks[idmask++] * klayf;
+			//float_2 f1 = curf + f_masks[idmask++] * klayf;
+			//float_2 f2 = curf + f_masks[idmask++] * klayf;
+			//float_2 f3 = curf + f_masks[idmask++] * klayf;
+			//idmask += 4;
 
 			//src = index<2>(y += iter2.x, x += iter2.y);
 			//dst = index<2>(y + iter2.y, x + iter2.x);
