@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include <amp_short_vectors.h>
+#include <amp_short_vectors.h>	//	float_2
 using namespace Concurrency::graphics;	//	float_2
 
 class structMasksCfg{
@@ -10,11 +10,12 @@ public:
 	std::array<int, 16> va;
 	void seta(const std::string& s);
 
-	// 0145
-	// 2367
-	// 89CD
 	// ABEF
+	// 89CD
+	// 2367
+	// 0145
 	// 0-none; 1-up; 2-right+up; 3-right ... 8-left+up
+
 	std::array<float_2, 16 * 4 * 4> vf;
 	void setf(const std::string& s);
 

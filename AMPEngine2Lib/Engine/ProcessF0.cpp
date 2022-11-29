@@ -63,7 +63,7 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 1) % SIZEX)] + 1) << 2) |
 
 				(((signbitf(mad(f_masks[idmask].x, klayf, upf)) + signFor0) / 2) << 1) |
-				(sign(dn_vgpu_a[index<2>(y0, (x0 * 4 + shift.x) % SIZEX)] + 1));
+				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 0) % SIZEX)] + 1) << 0);
 			const int cnt = (vmaskmov[idmove] >> 4) & 0xb11;
 			if(cnt){
 				const int posxsrc = (x0 + vmaskmov[idmove] & 0xb11) % SIZEX;
