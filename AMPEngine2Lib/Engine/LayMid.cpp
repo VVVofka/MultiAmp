@@ -17,11 +17,12 @@ LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) :
 	va.Create(sz, create_gpu, m_accl_view);
 	vf.Create(sz, create_gpu, m_accl_view);
 	
-	//std::vector<float_2> vkf(cfg_all->masks.vf.size());
-	//for(size_t j = 0; j < cfg_all->masks.vf.size(); j++)
-	//	vkf[j] = cfg_all->masks.vf[j]
-	//kF.Create(sz, , create_gpu, m_accl_view);
+	std::vector<float_2> vkf(cfg_all->masks.vf.size());
+	float koeff = float(cfg_all->lays.koefsF[n_lay - 1]);
+	for(size_t j = 0; j < cfg_all->masks.vf.size(); j++)
+		vkf[j] = koeff * cfg_all->masks.vf[j]
+	kF.Create(sz, vkf, create_gpu, m_accl_view);
 	//for(size_t j = 0; j < cfg_all->masks.vf.size(); j++)
 	//	kF[j] = cfg_all->masks.vf[j];
-	kF = float(cfg_all->lays.koefsF[n_lay - 1]);
+	//@@kF = float(cfg_all->lays.koefsF[n_lay - 1]);
 } // /////////////////////////////////////////////////////////////////////////////////

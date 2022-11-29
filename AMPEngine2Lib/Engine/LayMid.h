@@ -10,8 +10,8 @@ public:
 	LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view);
 	VGpuCpu<int, 2> va;	// -1 - empty point
 	VGpuCpu<float_2, 2> vf;
-	//VGpuCpu<float_2> kF;// = {1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f};
-	float kF;// = {1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f};
+	VGpuCpu<float_2, 1> kF;	// size=256
+	//float kF;
 
 	void gpu2cpu(){ va.gpu2cpu(), vf.gpu2cpu(); }
 	void cpu2gpu(){ va.cpu2gpu(), vf.cpu2gpu();	}
