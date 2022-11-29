@@ -15,7 +15,7 @@ public:
 	uint_2 sz;
 	CPUtype cpuType = CPUtype::GPU;
 
-	VGpuCpu<int> va;	// -1 - empty point
+	VGpuCpu<int, 2> va;	// -1 - empty point
 	
 	accelerator_view* m_accl_view = NULL;
 	structAll* cfg_all = NULL;
