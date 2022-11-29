@@ -15,24 +15,15 @@ public:
 	uint_2 sz;
 	CPUtype cpuType = CPUtype::GPU;
 
-	VGpuCpu<int, 2> va;	// -1 - empty point
-	
 	accelerator_view* m_accl_view = NULL;
 	structAll* cfg_all = NULL;
 
 	int id(const int x, const int y) const{ return y * sz.x + x; }
-	bool isLoad()const;
 
 protected:
-	void gpu2cpu(){ va.gpu2cpu(); }
-	void cpu2gpu(){ va.cpu2gpu(); }
-	void gpu2other (std::vector<int>& v_dst)const{ va.gpu2other(v_dst); }
-
-	std::string sDumpAcpu(const int digits)const;
-	std::string sDumpAgpu(const int digits)const;
-
 	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);
 	static std::string sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits);
+
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

@@ -12,7 +12,7 @@ public:
 	std::vector<LayMid*> vMidLays;
 	int cntMidLays = 0;
 
-	bool isLoad();
+	//bool isLoad();
 
 	std::string sDumpAcpu(int idx = -1, const int digits = 2)const;
 	std::string sDumpAgpu(int idx = -1, const int digits = 2)const;

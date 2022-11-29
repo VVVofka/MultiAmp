@@ -83,6 +83,6 @@ void Lay0::fill_va(){
 		const size_t idx = cfg_all->data.v[j];
 		vtmp[idx] = j;
 	}
-	LayBase::va.Create(sz, vtmp, true, m_accl_view);
+	va.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 

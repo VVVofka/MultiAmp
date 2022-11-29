@@ -17,15 +17,15 @@ Lays::~Lays(){
 	for(size_t nlay = 0; nlay < vMidLays.size(); nlay++)
 		SAFE_DELETE(vMidLays[nlay]);
 } // ////////////////////////////////////////////////////////////////////////////////
-bool Lays::isLoad(){
-	if(lay0.isLoad() == false) return false;
-	if(vMidLays.size() < 1) return false;
-	_ASSERTE(vMidLays.size() == cntMidLays);
-	for(int j = 0; j < cntMidLays; j++)
-		if(vMidLays[j]->isLoad() == false)
-			return false;
-	return true;
-} // //////////////////////////////////////////////////////////////////////////
+//bool Lays::isLoad(){
+//	if(lay0.isLoad() == false) return false;
+//	if(vMidLays.size() < 1) return false;
+//	_ASSERTE(vMidLays.size() == cntMidLays);
+//	for(int j = 0; j < cntMidLays; j++)
+//		if(vMidLays[j]->isLoad() == false)
+//			return false;
+//	return true;
+//} // //////////////////////////////////////////////////////////////////////////
 bool Lays::correctMtCpu(structAll* cfg){
 	const int layscnt = int(cfg->lays.cntlays);
 	const int processcnt = layscnt - 1;

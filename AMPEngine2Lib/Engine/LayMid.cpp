@@ -14,7 +14,7 @@ LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) :
 	else
 		LayBase::cpuType = CPUtype::CPU;
 	const bool create_gpu = is_dngpu || is_gpu;
-	LayBase::va.Create(sz, create_gpu, m_accl_view);
+	va.Create(sz, create_gpu, m_accl_view);
 	vf.Create(sz, create_gpu, m_accl_view);
 	
 	//std::vector<float_2> vkf(cfg_all->masks.vf.size());
@@ -25,16 +25,3 @@ LayMid::LayMid(int n_lay, structAll* cfg_all, accelerator_view* m_accl_view) :
 	//	kF[j] = cfg_all->masks.vf[j];
 	kF = float(cfg_all->lays.koefsF[n_lay - 1]);
 } // /////////////////////////////////////////////////////////////////////////////////
-void LayMid::gpu2cpu(){
-	LayBase::gpu2cpu();
-	vf.gpu2cpu();
-} // /////////////////////////////////////////////////////////////////////////////////
-void LayMid::cpu2gpu(){
-	LayBase::cpu2gpu();
-	vf.cpu2gpu();
-} // /////////////////////////////////////////////////////////////////////////////////
-void LayMid::gpu2other(std::vector<float_2>& v_dst) const{
-	vf.gpu2other(v_dst);
-} // /////////////////////////////////////////////////////////////////////////////////
-
-

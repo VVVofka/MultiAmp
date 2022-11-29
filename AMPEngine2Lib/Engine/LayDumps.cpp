@@ -42,20 +42,16 @@ std::string LayBase::sDumpV(const std::vector<float_2>& v, const uint_2 sz, cons
 	}
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
-std::string LayBase::sDumpAcpu(const int digits)const{
-	return LayBase::sDumpV(va.vcpu, sz, digits);
-} // ////////////////////////////////////////////////////////////////
-std::string LayBase::sDumpAgpu(const int digits)const{
-	std::vector<int> vtmp(va.vcpu.size());
-	gpu2other(vtmp);
-	return LayBase::sDumpV(vtmp, sz, digits);
-} // ////////////////////////////////////////////////////////////////
 
 std::string Lay0::sDumpAcpu(const int digits)const{
-	return "a cpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpAcpu(digits);
+	std::string sa = sDumpV(va.vcpu, sz, digits);
+	return "a cpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sa;
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpAgpu(const int digits)const{
-	return "a gpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + LayBase::sDumpAgpu(digits);
+	std::vector<int> vtmp(va.vcpu.size());
+	va.gpu2other(vtmp);
+	std::string sa = sDumpV(vtmp, sz, digits);
+	return "a gpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sa;
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::DumpAcpu(const int digits) const{
 	std::string s(sDumpAcpu(digits));
@@ -69,17 +65,21 @@ std::string Lay0::DumpAgpu(const int digits) const{
 } // ////////////////////////////////////////////////////////////////
 
 std::string LayMid::sDumpAcpu(const int digits)const{
-	return "a cpu: " + sInfo() + '\n' + LayBase::sDumpAcpu(digits);
+	std::string sa = sDumpV(va.vcpu, sz, digits);
+	return "a cpu: " + sInfo() + '\n' + sa;
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpAgpu(const int digits)const{
-	return "a gpu: " + sInfo() + '\n' + LayBase::sDumpAgpu(digits);
+	std::vector<int> vtmp(va.vcpu.size());
+	va.gpu2other(vtmp);
+	std::string sa = sDumpV(vtmp, sz, digits);
+	return "a gpu: " + sInfo() + '\n' + sa;
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpFcpu(const int digits) const{
 	return "f: " + sInfo() + '\n' + LayBase::sDumpV(vf.vcpu, sz, digits);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpFgpu(const int digits) const{
 	std::vector<float_2> vtmp(vf.vcpu.size());
-	gpu2other(vtmp);
+	vf.gpu2other(vtmp);
 	return "f: " + sInfo() + '\n' + LayBase::sDumpV(vtmp, sz, digits);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sInfo() const{
