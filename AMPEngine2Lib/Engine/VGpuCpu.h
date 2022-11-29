@@ -3,15 +3,12 @@
 #include <amp_graphics.h>
 #include <amp_short_vectors.h>
 #include <vector>
+#include "..\myUtil.h"	// SAFE_DELETE
 
-#include "LaysCPUCfg.h"
-#include "..\myUtil.h"
+using namespace Concurrency;				// accelerator_view
+using namespace Concurrency::graphics;		// int_2
 
-using namespace Concurrency;
-using namespace Concurrency::graphics;	// int_2
-
-template<class T>
-class VGpuCpu2{
+template<class T> class VGpuCpu2{
 public:
 	std::vector<T> vcpu;
 	concurrency::array<T, 2>* vgpu = NULL;
@@ -43,8 +40,7 @@ public:
 	} // ///////////////////////////////////////////////////////////////////////////////
 }; //class VGpuCpu ##################################################################################
 
-template<class T>
-class VGpuCpu1{
+template<class T> class VGpuCpu1{
 public:
 	std::vector<T> vcpu;
 	concurrency::array<T, 1>* vgpu = NULL;
@@ -67,5 +63,4 @@ public:
 		if(vgpu)
 			concurrency::copy(*vgpu, v_dst.begin());
 	} // ///////////////////////////////////////////////////////////////////////////////
-
 }; // ##################################################################################

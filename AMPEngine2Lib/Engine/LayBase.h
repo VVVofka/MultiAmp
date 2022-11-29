@@ -5,6 +5,7 @@
 
 #include "VGpuCpu.h"	// for va
 #include "..\..\OptsTinyLib\structAll.h"
+#include "LaysCPUCfg.h"
 
 using namespace Concurrency;
 
