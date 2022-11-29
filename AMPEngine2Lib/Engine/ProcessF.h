@@ -9,7 +9,7 @@ class ProcessF{
 	typedef void (ProcessF::* pFunc)(const int n_lay);
 
 	Lays* lays = NULL;
-	MaskF* fmasks = NULL;
+	MaskF* fmasks = NULL;	// TODO: del
 
 public:
 	ProcessF(Lays* p_lays, MaskF* p_Masks_f);

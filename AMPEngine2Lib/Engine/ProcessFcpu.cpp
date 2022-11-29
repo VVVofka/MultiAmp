@@ -8,7 +8,7 @@ void ProcessF::cpuRun(const int ncurlay){
 	const LayMid* up_lay = lays->vMidLays[ncurlay];
 	const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
 	const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
-	const float klayf = up_lay->kF;
+	//const float klayf = up_lay->kF;
 
 	const LayMid* dn_lay = lays->vMidLays[ncurlay - 1];
 	const std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
@@ -16,7 +16,8 @@ void ProcessF::cpuRun(const int ncurlay){
 	LayMid* dst_lay = lays->vMidLays[ncurlay - 2];
 	std::vector<float_2>& dst_vcpu_f = dst_lay->vf.vcpu;
 
-	const std::array<float_2, 256U>& f_masks = fmasks->vcpu;
+	//const std::array<float_2, 256U>& f_masks = fmasks->vcpu;
+	const std::vector<float_2>& f_masks = up_lay->kF.vcpu;
 
 	const size_t szUpY = (size_t)up_lay->sz.y;
 	const size_t szUpX = (size_t)up_lay->sz.x;

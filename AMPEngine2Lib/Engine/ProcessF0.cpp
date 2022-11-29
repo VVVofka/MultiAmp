@@ -12,7 +12,8 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 	const LayMid* up_lay = lays->vMidLays[1];
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay->va.vgpu;
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay->vf.vgpu;
-	const float klayf = up_lay->kF;
+	//const float klayf = up_lay->kF;
+	const concurrency::array<float_2, 1>& f_masks = *up_lay->kF.vgpu;	//const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 
 	LayMid* dn_lay = lays->vMidLays[0];
 	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
@@ -22,12 +23,11 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 	concurrency::array<Vertex2D, 1>& screen = *lay_0->vgpuScreen;
 	const float_2 rSizeDn(lay_0->sz);
 
-	const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
 	const uint signFor0 = (iter & 1) + 1; // 1 or 2
 
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &dn_vgpu_f, &up_vgpu_f, &screen,
-		&f_masks, shift, klayf, rSizeDn, signFor0
+		&f_masks, shift, rSizeDn, signFor0
 		](index<2> idUp)restrict(amp) {
 			//index: 0(2,4,6) digit: 0:point absent or f=0; 
 			//						 1:point present;
@@ -53,16 +53,16 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			const int x0 = idUp[X] * 4;	// TODO: define?
 			const int y0 = (idUp[Y] * 4 + shift.y) % SIZEY;
 			const int idmove =
-				(((signbitf(mad(f_masks[idmask + 5].x, klayf, upf)) + signFor0) / 2) << 7) |
+				(((signbitf(f_masks[idmask + 5].x + upf) + signFor0) / 2) << 7) |
 				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 3) % SIZEX)] + 1) << 6) |
 
-				(((signbitf(mad(f_masks[idmask + 4].x, klayf, upf)) + signFor0) / 2) << 5) |
+				(((signbitf(f_masks[idmask + 4].x + upf) + signFor0) / 2) << 5) |
 				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 2) % SIZEX)] + 1) << 4) |
 
-				(((signbitf(mad(f_masks[idmask + 1].x, klayf, upf)) + signFor0) / 2) << 3) |
+				(((signbitf(f_masks[idmask + 1].x + upf) + signFor0) / 2) << 3) |
 				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 1) % SIZEX)] + 1) << 2) |
 
-				(((signbitf(mad(f_masks[idmask].x, klayf, upf)) + signFor0) / 2) << 1) |
+				(((signbitf(f_masks[idmask].x + upf) + signFor0) / 2) << 1) |
 				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 0) % SIZEX)] + 1) << 0);
 			const int cnt = (vmaskmov[idmove] >> 4) & 0xb11;
 			if(cnt){
