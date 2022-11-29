@@ -52,18 +52,24 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			float upf = dn_vgpu_f[index<2>(idUp[Y] * 2, idUp[X] * 2)].x;
 			const int x0 = idUp[X] * 4;	// TODO: define?
 			const int y0 = (idUp[Y] * 4 + shift.y) % SIZEY;
+#define DIR_POS1(IDMASK, SHIFT) (((signbitf(f_masks[idmask + IDMASK].x + upf) + signFor0) / 2) << SHIFT)
+#define DIR_POS_ALL (DIR_POS1(5, 7) | DIR_POS1(4, 5) | DIR_POS1(1, 3) | DIR_POS1(0, 1))
+#define X0_SHIFT (x0 + shift.x)	/* TODO: const int ? */
+#define EXIST_POS1(XOFFSET, SHIFT) (sign(dn_vgpu_a[index<2>(y0, (X0_SHIFT + XOFFSET) % SIZEX)] + 1) << SHIFT)
+#define EXIST_POS_ALL (EXIST_POS1(3, 6) | EXIST_POS1(2, 4) | EXIST_POS1(1, 2) | EXIST_POS1(0, 0))
 			const int idmove =
-				(((signbitf(f_masks[idmask + 5].x + upf) + signFor0) / 2) << 7) |
-				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 3) % SIZEX)] + 1) << 6) |
+				DIR_POS_ALL | EXIST_POS_ALL;
+				//(((signbitf(f_masks[idmask + 5].x + upf) + signFor0) / 2) << 7) |
+				//(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 3) % SIZEX)] + 1) << 6) |
 
-				(((signbitf(f_masks[idmask + 4].x + upf) + signFor0) / 2) << 5) |
-				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 2) % SIZEX)] + 1) << 4) |
+				//(((signbitf(f_masks[idmask + 4].x + upf) + signFor0) / 2) << 5) |
+				//(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 2) % SIZEX)] + 1) << 4) |
 
-				(((signbitf(f_masks[idmask + 1].x + upf) + signFor0) / 2) << 3) |
-				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 1) % SIZEX)] + 1) << 2) |
+				//(((signbitf(f_masks[idmask + 1].x + upf) + signFor0) / 2) << 3) |
+				//(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 1) % SIZEX)] + 1) << 2) |
 
-				(((signbitf(f_masks[idmask].x + upf) + signFor0) / 2) << 1) |
-				(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 0) % SIZEX)] + 1) << 0);
+				//(((signbitf(f_masks[idmask].x + upf) + signFor0) / 2) << 1) |
+				//(sign(dn_vgpu_a[index<2>(y0, (x0 + shift.x + 0) % SIZEX)] + 1) << 0);
 			const int cnt = (vmaskmov[idmove] >> 4) & 0xb11;
 			if(cnt){
 				const int posxsrc = (x0 + vmaskmov[idmove] & 0xb11) % SIZEX;
