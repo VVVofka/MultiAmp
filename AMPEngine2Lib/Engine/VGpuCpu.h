@@ -8,7 +8,7 @@
 using namespace Concurrency;				// accelerator_view
 using namespace Concurrency::graphics;		// int_2
 
-template<class T> class VGpuCpu2{
+template<class T> class VGpuCpu2{	// double dimension gpu
 public:
 	std::vector<T> vcpu;
 	concurrency::array<T, 2>* vgpu = NULL;
@@ -39,8 +39,7 @@ public:
 			concurrency::copy(*vgpu, v_dst.begin()); 
 	} // ///////////////////////////////////////////////////////////////////////////////
 }; //class VGpuCpu ##################################################################################
-
-template<class T> class VGpuCpu1{
+template<class T> class VGpuCpu1{	// single dimension gpu
 public:
 	std::vector<T> vcpu;
 	concurrency::array<T, 1>* vgpu = NULL;
@@ -56,7 +55,6 @@ public:
 		if(is_gpu)
 			vgpu = new concurrency::array<T, 1>(size1, vcpu.begin(), *m_accl_view);
 	} // //////////////////////////////////////////////////////////////////////////////
-
 	void gpu2cpu(){ concurrency::copy(*vgpu, vcpu.begin()); }
 	void cpu2gpu(){ concurrency::copy(vcpu.begin(), *vgpu); }
 	void gpu2other(std::vector<T>& v_dst) const{
