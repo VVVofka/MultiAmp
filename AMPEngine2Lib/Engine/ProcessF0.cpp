@@ -73,8 +73,9 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			if(cnt){
 				const int posxsrc = (x0 + vmaskmov[idmove] & 0xb11) % SIZEX;
 				const int posxdst = (x0 + (vmaskmov[idmove] >> 2) & 0xb11) % SIZEX;
-
-				//auto tmp =
+				const auto tmp = dn_vgpu_a[posxsrc];
+				dn_vgpu_a[posxsrc] = dn_vgpu_a[posxdst];
+				dn_vgpu_a[posxdst] = tmp;
 			}
 			//uint_2 dn0 = mid0 * 2;
 			//uint_2 ofs = iter2;
