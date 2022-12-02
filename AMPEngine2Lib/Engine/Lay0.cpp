@@ -7,8 +7,8 @@ Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_a
 	LayBase::cpuType = CPUtype::GPU;
 	//LayBase::gpuIn = false;
 
-	fill_vScreen();
 	fill_va();
+	fill_vScreen();
 } // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
