@@ -12,6 +12,7 @@ void ProcessA::RunAll(const uint_2 shift){
 
 	LayMid* dn, * up = lays->vMidLays[0];
 	VVVDBG_SET_A(1, up->va.vgpu);
+	VVVDBG_SET_F(1, up->vf.vgpu);
 
 	for(int nmid = 1; nmid < lays->cntMidLays; nmid++){
 		dn = up;
@@ -23,7 +24,8 @@ void ProcessA::RunAll(const uint_2 shift){
 
 		VVVDBG_IF_DBG(lays->DumpA(nmid + 1));
 		VVVDBG_IF_DBG(up->cpuType == CPUtype::GPU ?
-			VVVDBG_SET_A(nmid + 1, up->va.vgpu) :
-			VVVDBG_SET_A(nmid + 1, up->va.vcpu));
+			(VVVDBG_SET_A(nmid + 1, up->va.vgpu), VVVDBG_SET_F(nmid + 1, up->vf.vgpu)) :
+			(VVVDBG_SET_A(nmid + 1, up->va.vcpu), VVVDBG_SET_F(nmid + 1, up->vf.vcpu))
+		);
 	}
 } // ///////////////////////////////////////////////////////////////////////////

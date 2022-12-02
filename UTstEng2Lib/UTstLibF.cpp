@@ -7,14 +7,14 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
 namespace UTstEng2Lib{
-	TEST_CLASS(UTstEng2LibA){
+	TEST_CLASS(UTstEng2LibF){
 		structAll cfgall;
 		structLaysCfg& lays = cfgall.lays;
 		structMiscCfg& misc = cfgall.misc;
 		structMasksCfg& masks = cfgall.masks;
 		double tol = 0.000001;
 public:
-	UTstEng2LibA(){
+	UTstEng2LibF(){
 		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
 		size_t scr_cnt = cfgall.data.fill_v(sdata);
 		Assert::AreEqual(size_t(37), scr_cnt, L"scr_cnt");
@@ -114,6 +114,10 @@ private:
 		Assert::AreEqual(4, va[2][5], L"va 2 5");
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
+
+		vector<vector<float_2>>& vf = EngineDbg::vf;
+		Assert::AreEqual(14, va[1][0], L"vf 1 0");
+
 	} // ////////////////////////////////////////////////////////////
 	 // eq void byCPU(size_t one, size_t mt), but Mask[1] = 1
 	void byCPU_A1(size_t one, size_t mt){

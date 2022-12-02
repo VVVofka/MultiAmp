@@ -10,6 +10,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Misc</Filter>
     </ClCompile>
+    <ClCompile Include="UTstLibF.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
