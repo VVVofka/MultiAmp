@@ -12,7 +12,8 @@ namespace UTstEng2Lib{
 		structLaysCfg& lays = cfgall.lays;
 		structMiscCfg& misc = cfgall.misc;
 		structMasksCfg& masks = cfgall.masks;
-		double tol = 0.000001;
+		const double tol = 0.000001;
+		const float ftol = float(tol);
 		vector<vector<int>>& va = EngineDbg::va;
 		vector<vector<float_2>>& vf = EngineDbg::vf;
 public:
@@ -129,10 +130,11 @@ private:
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
 
-		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
+		const float q = 1.f / sqrtf(2.f);
+		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
 	} // ////////////////////////////////////////////////////////////
 	void set_mt(size_t one, size_t mt){
 		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
@@ -155,5 +157,38 @@ private:
 		misc.cntForStop = 1;
 		misc.curRndSeed = 12345;
 	} // ////////////////////////////////////////////////////////////////////////////////////////////
+	const float Q = 0.707106781186548f;
+	std::vector<float> vxf0 = {
+		0.f, 0.f, 0.f,-1.f,  -Q,   Q, 1.f, 0.f,			-Q, 0.f, 0.f, 1.f, 0.2928932f, 0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,  -Q, 0.f, 0.f,   Q, 0.f,			0.f, 0.f, 0.f, 1.f, 1.f, 0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,			0.f, 0.f, 0.f, -Q, 0.f, 0.f, Q, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,			0.f, 0.f, 0.f, -1.f, -Q, Q, 1.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, Q,			Q, 0.f, 0.f, -1.f, -Q, Q, 1.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 1.7071068f,	Q, 0.f, 0.f, -Q, 0.f, 0.f, Q, 0.f,
+		0.f, 0.f, 0.f,  -Q, 0.f, 0.f,   Q, 0.f,			0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,-1.f,  -Q,   Q, 1.f, 0.f,			0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f
+	};
+	std::vector<float> vyf0 = {
+		0.f, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f,  Q,  0.f, 0.f, 0.f,   Q, 0.f, 0.f, 0.f, 
+		0.f, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f, 
+		0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f, 
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f, 
+		0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 
+		0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f
+	};
+	std::vector<float> vxf1 = {
+		0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	Q,		0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	0.f,	0.f,	1.f,	0.f,	0.f,	0.f
+	};
+	std::vector<float> vyf1 = {
+		0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	-Q,		0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,
+		0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f,	0.f
+	};
 	}; // #####################################################################
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
