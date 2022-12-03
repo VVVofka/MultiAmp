@@ -5,7 +5,6 @@
 Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_all, m_accl_view){
 	//cpuPoint2gpuPoint(countPoint);
 	LayBase::cpuType = CPUtype::GPU;
-	//LayBase::gpuIn = false;
 
 	fill_va();
 	fill_vScreen();
@@ -77,6 +76,7 @@ void Lay0::fill_vScreen(){
 	vgpuScreen = new concurrency::array<Vertex2D, 1>(countPoint, vcpuScreen.begin(), *m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_va(){
+	countPoint = cfg_all->data.v.size();
 	std::vector<int> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), -1);
 	size_t szx = cfg_all->lays.bottomX();
 	size_t szy = cfg_all->lays.bottomY();

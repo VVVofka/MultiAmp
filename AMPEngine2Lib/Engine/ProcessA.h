@@ -11,8 +11,8 @@
 class ProcessA{
 	typedef void (ProcessA::* pFunc)(const int n_lay);
 
-	Lays* lays = NULL;
-	MaskA* amask = NULL;
+	Lays* lays;	// = NULL;
+	MaskA* amask;	// = NULL;
 
 public:
 	ProcessA(Lays* p_lays, MaskA* p_Mask_a);

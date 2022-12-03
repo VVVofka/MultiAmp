@@ -13,6 +13,8 @@ namespace UTstEng2Lib{
 		structMiscCfg& misc = cfgall.misc;
 		structMasksCfg& masks = cfgall.masks;
 		double tol = 0.000001;
+		vector<vector<int>>& va = EngineDbg::va;
+		vector<vector<float_2>>& vf = EngineDbg::vf;
 public:
 	UTstEng2LibA(){
 		string sdata = "88 61 51 121 32 49 70 63 42 33 21 34 47 12 38 24 113 65 20 8 111 11 97 90 75 114 74 115 44 103 79 52 58 96 41 36 98";
@@ -67,32 +69,13 @@ public:
 	} // ////////////////////////////////////////////////////////////
 private:
 	void byCPU(size_t one, size_t mt){
-		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
-
-		size_t cntlays = lays.setConfig(2, 1, one, mt, "0.91  0.72  0,43");
-		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
-		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
-		Assert::AreEqual(size_t(16), lays.sizeX(0), L"lays.sizeX(0)");
-		Assert::AreEqual(size_t(8), lays.sizeY(0), L"lays.sizeY(0)");
-		Assert::AreEqual(size_t(8), lays.sizeX(1), L"lays.sizeX(1)");
-		Assert::AreEqual(size_t(4), lays.sizeY(1), L"lays.sizeY(1)");
-		Assert::AreEqual(size_t(4), lays.sizeX(2), L"lays.sizeX(2)");
-		Assert::AreEqual(size_t(2), lays.sizeY(2), L"lays.sizeY(2)");
-		Assert::AreEqual(size_t(2), lays.sizeX(3), L"lays.sizeX(3)");
-		Assert::AreEqual(size_t(1), lays.sizeY(3), L"lays.sizeY(3)");
-		Assert::AreEqual(0.91, lays.koefsF[0], tol, L"lays.koefsF[0]");
-		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
-		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
-
-		misc.cntForStop = 1;
-		misc.curRndSeed = 12345;
+		set_mt(one, mt);
 
 		//def:		0001011101111111
 		masks.seta("0001011101111111");
 
 		eng2::runEngine2Lib(&cfgall);
 
-		vector<vector<int>>& va = EngineDbg::va;
 		Assert::AreEqual(14, va[1][0], L"va 1 0");
 		Assert::AreEqual(2, va[1][1], L"va 1 1");
 		Assert::AreEqual(4, va[1][16], L"va 1 16");
@@ -117,32 +100,13 @@ private:
 	} // ////////////////////////////////////////////////////////////
 	 // eq void byCPU(size_t one, size_t mt), but Mask[1] = 1
 	void byCPU_A1(size_t one, size_t mt){
-		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
-
-		size_t cntlays = lays.setConfig(2, 1, one, mt, "0.91  0.72  0,43");
-		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
-		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
-		Assert::AreEqual(size_t(16), lays.sizeX(0), L"lays.sizeX(0)");
-		Assert::AreEqual(size_t(8), lays.sizeY(0), L"lays.sizeY(0)");
-		Assert::AreEqual(size_t(8), lays.sizeX(1), L"lays.sizeX(1)");
-		Assert::AreEqual(size_t(4), lays.sizeY(1), L"lays.sizeY(1)");
-		Assert::AreEqual(size_t(4), lays.sizeX(2), L"lays.sizeX(2)");
-		Assert::AreEqual(size_t(2), lays.sizeY(2), L"lays.sizeY(2)");
-		Assert::AreEqual(size_t(2), lays.sizeX(3), L"lays.sizeX(3)");
-		Assert::AreEqual(size_t(1), lays.sizeY(3), L"lays.sizeY(3)");
-		Assert::AreEqual(0.91, lays.koefsF[0], tol, L"lays.koefsF[0]");
-		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
-		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
-
-		misc.cntForStop = 1;
-		misc.curRndSeed = 12345;
+		set_mt(one, mt);
 
 		//def:		0001011101111111
 		masks.seta("0101011101111111");
 
 		eng2::runEngine2Lib(&cfgall);
 
-		auto& va = EngineDbg::va;
 		Assert::AreEqual(14, va[1][0], L"va 1 0");
 		Assert::AreEqual(2, va[1][1], L"va 1 1");
 		Assert::AreEqual(4, va[1][16], L"va 1 16");
@@ -164,6 +128,32 @@ private:
 		Assert::AreEqual(5, va[2][5], L"va 2 5");	// MaskA[1] = 1
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
+
+		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
+		Assert::AreEqual(0.f, vf[0][0].x, L"vf ");
 	} // ////////////////////////////////////////////////////////////
+	void set_mt(size_t one, size_t mt){
+		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
+
+		size_t cntlays = lays.setConfig(2, 1, one, mt, "0.91  0.72  0,43");
+		Assert::AreEqual(size_t(4), cntlays, L"cntlays");
+		Assert::AreEqual(cntlays, lays.cntlays, L"lays.cntlays");
+		Assert::AreEqual(size_t(16), lays.sizeX(0), L"lays.sizeX(0)");
+		Assert::AreEqual(size_t(8), lays.sizeY(0), L"lays.sizeY(0)");
+		Assert::AreEqual(size_t(8), lays.sizeX(1), L"lays.sizeX(1)");
+		Assert::AreEqual(size_t(4), lays.sizeY(1), L"lays.sizeY(1)");
+		Assert::AreEqual(size_t(4), lays.sizeX(2), L"lays.sizeX(2)");
+		Assert::AreEqual(size_t(2), lays.sizeY(2), L"lays.sizeY(2)");
+		Assert::AreEqual(size_t(2), lays.sizeX(3), L"lays.sizeX(3)");
+		Assert::AreEqual(size_t(1), lays.sizeY(3), L"lays.sizeY(3)");
+		Assert::AreEqual(0.91, lays.koefsF[0], tol, L"lays.koefsF[0]");
+		Assert::AreEqual(0.72, lays.koefsF[1], tol, L"lays.koefsF[1]");
+		Assert::AreEqual(0.43, lays.koefsF[2], tol, L"lays.koefsF[2]");
+
+		misc.cntForStop = 1;
+		misc.curRndSeed = 12345;
+	} // ////////////////////////////////////////////////////////////////////////////////////////////
 	}; // #####################################################################
 } // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

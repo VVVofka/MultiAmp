@@ -115,10 +115,16 @@ std::string Lays::sDumpAgpu(int idx, const int digits)const{
 std::string Lays::sDumpA(int idx, const int digits)const{
 	if(idx > cntMidLays)
 		return "";
-	if(idx == 0)
-		return "Lay0 a gpu: " + lay0.sDumpAgpu(digits) + "Lay0 a cpu: " + lay0.sDumpAcpu(digits);
-	if(idx > 0)
-		return "Lay" + std::to_string(idx) + " a gpu: " + vMidLays[idx - 1]->sDumpAgpu(digits) + "a cpu: " + vMidLays[idx - 1]->sDumpAcpu(digits);
+	if(idx == 0){
+		std::string sgpu = lay0.sDumpAgpu(digits);
+		std::string scpu = lay0.sDumpAcpu(digits);
+		return " Lay0 a gpu: " + sgpu + " Lay0 a cpu: " + scpu;
+	}
+	if(idx > 0){
+		std::string sgpu = vMidLays[idx - 1]->sDumpAgpu(digits);
+		std::string scpu = vMidLays[idx - 1]->sDumpAcpu(digits);
+		return " Lay" + std::to_string(idx) + " a gpu: " + sgpu + " a cpu: " + scpu;
+	}
 	// idx < 0
 	std::string ret = "a gpu:Lay0: " + lay0.sDumpAgpu(digits);
 	ret += "a cpu:Lay0: " + lay0.sDumpAcpu(digits);
