@@ -5,7 +5,12 @@
 
 // static
 std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits){
-	std::string ret, sformat('%' + std::to_string(digits) + "d ");
+	std::string ret, sformat("%-" + std::to_string(digits) + "d");
+
+	std::string s0 = ".";
+	for(int d = 0; d < digits - 1; d++)
+		s0 += ' ';
+
 	for(size_t yr = 0; yr < sz.y; yr++){
 		_ASSERTE(sz.y >= yr + 1);
 		size_t y = sz.y - yr - 1;
@@ -13,7 +18,7 @@ std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const in
 			size_t idx = y * sz.x + x;
 			int q = v[idx];
 			if(q < 0){
-				ret += " . ";
+				ret += s0;
 			} else{
 				char buf[64];
 				sprintf_s(buf, sformat.c_str(), q);

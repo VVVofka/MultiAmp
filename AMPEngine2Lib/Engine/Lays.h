@@ -13,22 +13,22 @@ public:
 	int cntMidLays = 0;
 
 	//bool isLoad();
+	static const int defdig = 3;
+	std::string sDumpAcpu(int idx = -1, const int digits = defdig)const;
+	std::string sDumpAgpu(int idx = -1, const int digits = defdig)const;
+	std::string sDumpA(int idx = -1, const int digits = defdig)const;
 
-	std::string sDumpAcpu(int idx = -1, const int digits = 2)const;
-	std::string sDumpAgpu(int idx = -1, const int digits = 2)const;
-	std::string sDumpA(int idx = -1, const int digits = 2)const;
+	std::string sDumpFcpu(int idx = -1, const int digits = defdig)const;
+	std::string sDumpFgpu(int idx = -1, const int digits = defdig)const;
+	std::string sDumpF(int idx = -1, const int digits = defdig)const;
 
-	std::string sDumpFcpu(int idx = -1, const int digits = 2)const;
-	std::string sDumpFgpu(int idx = -1, const int digits = 2)const;
-	std::string sDumpF(int idx = -1, const int digits = 2)const;
+	std::string DumpAcpu(int idx = -1, const int digits = defdig)const;
+	std::string DumpAgpu(int idx = -1, const int digits = defdig)const;
+	std::string DumpA(int idx = -1, const int digits = defdig)const;
 
-	std::string DumpAcpu(int idx = -1, const int digits = 2)const;
-	std::string DumpAgpu(int idx = -1, const int digits = 2)const;
-	std::string DumpA(int idx = -1, const int digits = 2)const;
-
-	std::string DumpFcpu(int idx = -1, const int digits = 2)const;
-	std::string DumpFgpu(int idx = -1, const int digits = 2)const;
-	std::string DumpF(int idx = -1, const int digits = 2)const;
+	std::string DumpFcpu(int idx = -1, const int digits = defdig)const;
+	std::string DumpFgpu(int idx = -1, const int digits = defdig)const;
+	std::string DumpF(int idx = -1, const int digits = defdig)const;
 
 private:
 	static bool correctMtCpu(structAll* cfg_all);

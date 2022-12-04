@@ -15,11 +15,12 @@ public:
 	void gpu2cpu(){ va.gpu2cpu(), vf.gpu2cpu(); }
 	void cpu2gpu(){ va.cpu2gpu(), vf.cpu2gpu();	}
 
-	std::string sDumpAcpu(const int digits)const;
-	std::string sDumpAgpu(const int digits)const;
-	std::string sDumpFcpu(const int digits)const;
-	std::string sDumpFgpu(const int digits)const;
-	std::string sDumpF(const int digits)const;
+	static const int defdig = 3;
+	std::string sDumpAcpu(const int digits = defdig)const;
+	std::string sDumpAgpu(const int digits = defdig)const;
+	std::string sDumpFcpu(const int digits = defdig)const;
+	std::string sDumpFgpu(const int digits = defdig)const;
+	std::string sDumpF(const int digits = defdig)const;
 
 	std::string sInfo()const;
 
