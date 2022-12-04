@@ -11,7 +11,6 @@ public:
 	VGpuCpu2<int> va;	// -1 - empty point
 	VGpuCpu2<float_2> vf;
 	VGpuCpu1<float_2> kF;	// size=256
-	//float kF;
 
 	void gpu2cpu(){ va.gpu2cpu(), vf.gpu2cpu(); }
 	void cpu2gpu(){ va.cpu2gpu(), vf.cpu2gpu();	}
@@ -20,6 +19,7 @@ public:
 	std::string sDumpAgpu(const int digits)const;
 	std::string sDumpFcpu(const int digits)const;
 	std::string sDumpFgpu(const int digits)const;
+	std::string sDumpF(const int digits)const;
 
 	std::string sInfo()const;
 

@@ -12,6 +12,7 @@ Lays::Lays(structAll* cfg_all, accelerator_view* m_accl_view) :
 	//	cfg_all->lays.cpuSingle == 0 && cfg_all->lays.cpuMultiThreaded == 2
 	for(int j = 0; j < cntMidLays; j++)
 		vMidLays[j] = new LayMid(j + 1, cfg_all, m_accl_view);
+	
 } // ////////////////////////////////////////////////////////////////////////////////
 Lays::~Lays(){
 	for(size_t nlay = 0; nlay < vMidLays.size(); nlay++)

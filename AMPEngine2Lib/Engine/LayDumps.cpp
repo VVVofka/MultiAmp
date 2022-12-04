@@ -27,7 +27,7 @@ std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const in
 // static
 std::string LayBase::sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits){
 	std::string sdigit = std::to_string(digits);
-	std::string ret, sformat("%+." + sdigit + "fx%+." + sdigit + "f ");
+	std::string ret, sformat("%+." + sdigit + "f*%+." + sdigit + "f ");
 	for(size_t yr = 0; yr < sz.y; yr++){
 		_ASSERTE(sz.y >= yr + 1);
 		size_t y = sz.y - yr - 1;
@@ -75,12 +75,15 @@ std::string LayMid::sDumpAgpu(const int digits)const{
 	return "a gpu: " + sInfo() + '\n' + sa;
 } // ///////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpFcpu(const int digits) const{
-	return "f: " + sInfo() + '\n' + LayBase::sDumpV(vf.vcpu, sz, digits);
+	return "f cpu: " + sInfo() + '\n' + LayBase::sDumpV(vf.vcpu, sz, digits);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpFgpu(const int digits) const{
 	std::vector<float_2> vtmp(vf.vcpu.size());
 	vf.gpu2other(vtmp);
-	return "f: " + sInfo() + '\n' + LayBase::sDumpV(vtmp, sz, digits);
+	return "f gpu: " + sInfo() + '\n' + LayBase::sDumpV(vtmp, sz, digits);
+} // ///////////////////////////////////////////////////////////////////////////////////////////
+std::string LayMid::sDumpF(const int digits) const{
+	return sDumpFgpu(digits) + sDumpFcpu(digits);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sInfo() const{
 	return "size x*y=" + std::to_string(sz.x) + '*' + std::to_string(sz.y) + ' ';

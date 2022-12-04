@@ -98,6 +98,9 @@ private:
 		Assert::AreEqual(4, va[2][5], L"va 2 5");
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
+
+		check_f(vxf1, vxf1, vf[1]);
+		check_f(vxf0, vxf0, vf[0]);
 	} // ////////////////////////////////////////////////////////////
 	 // eq void byCPU(size_t one, size_t mt), but Mask[1] = 1
 	void byCPU_A1(size_t one, size_t mt){
@@ -129,13 +132,16 @@ private:
 		Assert::AreEqual(5, va[2][5], L"va 2 5");	// MaskA[1] = 1
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
-
-		const float q = 1.f / sqrtf(2.f);
-		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
-		Assert::AreEqual(0.f, vf[0][0].x, ftol, L"vf ");
-	} // ////////////////////////////////////////////////////////////
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	void check_f(const std::vector<float>& expectx, const std::vector<float>& expecty, const std::vector<float_2>& real){
+		Assert::AreEqual(expectx.size(), real.size(), L"vfx size");
+		Assert::AreEqual(expecty.size(), real.size(), L"vfy size");
+		for(size_t j = 0; j < real.size(); j++){
+			std::wstring s = L" j:" + std::to_wstring(j);
+			Assert::AreEqual(expectx[j], real[j].x, ftol, (L"vxf0:" + s).c_str());
+			Assert::AreEqual(expecty[j], real[j].y, ftol, (L"vyf0:" + s).c_str());
+		}
+	} // ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	void set_mt(size_t one, size_t mt){
 		Logger::WriteMessage((" one:" + std::to_string(one) + " mt:" + std::to_string(mt)).c_str());
 
@@ -169,13 +175,13 @@ private:
 		0.f, 0.f, 0.f,-1.f,  -Q,   Q, 1.f, 0.f,			0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f
 	};
 	std::vector<float> vyf0 = {
-		0.f, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f,  Q,  0.f, 0.f, 0.f,   Q, 0.f, 0.f, 0.f, 
-		0.f, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 
-		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f, 
-		0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 
-		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f, 
-		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f, 
-		0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 
+		0.f, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f,  Q,  0.f, 0.f, 0.f,   Q, 0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f,
+		0.f, 0.f, 0.f, 0.f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 0.f,   Q,   Q, 0.f, 0.f,
+		0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f,   Q, 1.f, 1.f,   Q, 0.f,
+		0.f, 0.f, 0.f,  -Q,-1.f,-1.f,  -Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f,
 		0.f, 0.f, 0.f, 0.f,  -Q,  -Q, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f
 	};
 	std::vector<float> vxf1 = {
