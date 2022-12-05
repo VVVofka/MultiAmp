@@ -23,16 +23,17 @@ namespace EngineDbg{
 	void setVF(size_t n_lay, const std::vector<float_2>* v_cpu);
 
 	void Dump(const std::string& s);
+	//void DumpLay(const int n_lay, const std::string& s="");
 
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-#define VVVDBG_IF_DBG(ANY_OPER) (ANY_OPER);
+#define VVVDBG_IF_DBG(ANY_OPER) ANY_OPER
 #define VVVDBG_INIT_V(CNT_LAY, SIZE_LAY0) {EngineDbg::initV(size_t(CNT_LAY), size_t(SIZE_LAY0));}
 #define VVVDBG_SET_A(N_LAY, V_SOURCE) (EngineDbg::setVA(size_t(N_LAY), (V_SOURCE) ))
 #define VVVDBG_SET_F(N_LAY, V_SOURCE) (EngineDbg::setVF(size_t(N_LAY), (V_SOURCE) ))
 #define VVVDBG_DUMP(STRING_DUMP) {EngineDbg::Dump(STRING_DUMP);}
 #else
-#define VVVDBG_IF_DBG(ANY_OPER) {}
+#define VVVDBG_IF_DBG(ANY_OPER) 
 #define VVVDBG_INIT_V(CNT_LAY) {}
 #define VVVDBG_SET_A(N_LAY, VGPU) 
 #define VVVDBG_SET_F(N_LAY, VGPU) 

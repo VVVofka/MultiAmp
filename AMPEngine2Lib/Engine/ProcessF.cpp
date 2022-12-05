@@ -15,19 +15,25 @@ void ProcessF::RunAll(const uint_2 shift, const uint iter){
 			VVVDBG_SET_F(nmidlay + 1, up->vf.vcpu));
 		VVVDBG_DUMP(up->sDumpF());
 
-		LayMid* dn = lays->vMidLays[nmidlay - 1];
-		VVVDBG_IF_DBG(dn->cpuType == CPUtype::GPU ? \
-			VVVDBG_SET_F(nmidlay, dn->vf.vgpu) : \
-			VVVDBG_SET_F(nmidlay, dn->vf.vcpu));
+		LayMid* mid = lays->vMidLays[nmidlay - 1];
+		VVVDBG_IF_DBG(mid->cpuType == CPUtype::GPU ? \
+			VVVDBG_SET_F(nmidlay, mid->vf.vgpu) : \
+			VVVDBG_SET_F(nmidlay, mid->vf.vcpu));
+		VVVDBG_DUMP(mid->sDumpF());
+
+		VVVDBG_IF_DBG(LayMid * dn = lays->vMidLays[nmidlay - 2];)
+			VVVDBG_IF_DBG(dn->cpuType == CPUtype::GPU ? \
+			VVVDBG_SET_F(nmidlay-1, dn->vf.vgpu) : \
+			VVVDBG_SET_F(nmidlay-1, dn->vf.vcpu));
 		VVVDBG_DUMP(dn->sDumpF());
 
-		const int tp = (int)dn->cpuType;
+		const int tp = (int)mid->cpuType;
 		(this->*arFuncRun[tp])(nmidlay);	//{&ProcessF::gpuRun1, &ProcessF::mtRun, &ProcessF::cpuRun}
-		if(dn->cpuType == CPUtype::GPU && up->cpuType != CPUtype::GPU)
-			dn->cpu2gpu();
+		if(mid->cpuType == CPUtype::GPU && up->cpuType != CPUtype::GPU)
+			mid->cpu2gpu();
 		VVVDBG_IF_DBG(dn->cpuType == CPUtype::GPU ? \
-			VVVDBG_SET_F(nmidlay, dn->vf.vgpu) : \
-			VVVDBG_SET_F(nmidlay, dn->vf.vcpu));
+			VVVDBG_SET_F(nmidlay-1, dn->vf.vgpu) : \
+			VVVDBG_SET_F(nmidlay-1, dn->vf.vcpu));
 		VVVDBG_DUMP(dn->sDumpF());
 	}
 	gpuRun0(shift, iter); 
