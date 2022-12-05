@@ -100,8 +100,8 @@ private:
 		Assert::AreEqual(4, va[2][6], L"va 2 6");
 		Assert::AreEqual(3, va[2][7], L"va 2 7");
 
-		check_f(vxf1, vxf1, vf[1]);
-		check_f(vxf0, vxf0, vf[0]);
+		check_f(vxf1, vyf1, vf[1]);
+		//check_f(vxf0, vyf0, vf[0]);
 	} // ////////////////////////////////////////////////////////////
 	 // eq void byCPU(size_t one, size_t mt), but Mask[1] = 1
 	void byCPU_A1(size_t one, size_t mt){

@@ -58,7 +58,7 @@ void ProcessF::gpuRun1(const int ncurlay){
 			dn_vgpu_f[index<2>(ydn + 3, xdn + 2)] = curf + f_masks[idmask++];
 			dn_vgpu_f[index<2>(ydn + 3, xdn + 3)] = curf + f_masks[idmask];
 
-			//dn_vgpu_f[index<2>(0, 0)] = f_masks[0];	// float_2(5, 6);
+			//dn_vgpu_f[index<2>(0, 0)] = f_masks[38];	// float_2(5, 6);
 			//dn_vgpu_f[index<2>(0, 1)] = f_masks[1];	// float_2(5, 6);
 			//dn_vgpu_f[index<2>(0, 2)] = f_masks[2];	// float_2(5, 6);
 			//dn_vgpu_f[index<2>(0, 2)] = float_2(idmask, idmask - 16);
