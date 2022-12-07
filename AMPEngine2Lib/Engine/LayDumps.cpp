@@ -47,6 +47,20 @@ std::string LayBase::sDumpV(const std::vector<float_2>& v, const uint_2 sz, cons
 	}
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
+std::string LayBase::sDumpV(const std::vector<float_2>& v, const int digits){
+	std::string sdigit = std::to_string(digits);
+	std::string ret, sformat("%+." + sdigit + "f*%+." + sdigit + "f ");
+	for(size_t x = 0; x < v.size(); x++){
+		char buf[64];
+		float_2 cur = v[x];
+		sprintf_s(buf, sformat.c_str(), cur.x, cur.y);
+		ret += buf;
+		if((x+1) % 10 == 0)
+			ret += "\n";
+	}
+	ret += "\n";
+	return ret;
+} // ////////////////////////////////////////////////////////////////////////////
 
 std::string Lay0::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
@@ -76,9 +90,8 @@ std::string Lay0::sDumpScreen(const int digits) const{
 		vtmp[j].x = vvert[j].Pos.x;
 		vtmp[j].y = vvert[j].Pos.y;
 	}
-	const int X = 1, Y = 0;
-	uint_2 sz = uint_2(vgpuScreen->extent[X], vgpuScreen->extent[Y]);
-	return "screen: " + '\n' + LayBase::sDumpV(vtmp, sz, digits);
+	std::string ret = "screen[" + std::to_string(countPoint) + "]:\n" + LayBase::sDumpV(vtmp, digits);
+	return ret;
 } // ////////////////////////////////////////////////////////////////////
 
 std::string LayMid::sDumpAcpu(const int digits)const{
@@ -182,7 +195,7 @@ std::string Lays::sDumpFgpu(int idx, const int digits)const{
 std::string Lays::sDumpF(int idx, const int digits)const{
 	if(idx > cntMidLays || idx == 0)
 		return "";
-	
+
 	if(idx > 0)
 		return "Lay" + std::to_string(idx) +
 		" f gpu: " + vMidLays[idx - 1]->sDumpFgpu(digits) +

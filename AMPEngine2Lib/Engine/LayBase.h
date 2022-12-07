@@ -24,6 +24,7 @@ public:
 protected:
 	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);
 	static std::string sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits);
+	static std::string sDumpV(const std::vector<float_2>& v, const int digits);
 
 private:
 }; // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
