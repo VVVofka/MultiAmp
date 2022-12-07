@@ -93,7 +93,10 @@ std::string Lay0::sDumpScreen(const int digits) const{
 	std::string ret = "screen[" + std::to_string(countPoint) + "]:\n" + LayBase::sDumpV(vtmp, digits);
 	return ret;
 } // ////////////////////////////////////////////////////////////////////
+std::string Lay0::sDumpDbg(const int digits) const{
 
+	return std::string();
+} // /////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
 	return "a cpu: " + sInfo() + '\n' + sa;
