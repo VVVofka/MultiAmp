@@ -1,6 +1,8 @@
 #include <amp_math.h>
 #include "ProcessF.h"
 #include "..\myUtil.h"	// NORMAL_TO_AREA
+#include "EngineDbg.h"	// VVVDBG_DUMP
+
 #define X 1
 #define Y 0
 #define SIZEX dn_vgpu_a.extent[X]
@@ -24,6 +26,7 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 
 	const uint signFor0 = (iter & 1) + 1; // 1 or 2
 
+	VVVDBG_DUMP(dn_lay->sDumpAgpu());
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &mid_vgpu_f, &up_vgpu_f, &screen,
 		&f_masks, shift, signFor0
@@ -52,7 +55,7 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			27, 0,27,27,27,27,27,27,27,27,27,27,27,27,51,27,  39,20,39,39, 0, 0, 0, 0,39,39,39,39,51, 0,51, 0
 			};
 
-			const int idmask = up_vgpu_a[idx] * 16;	// TODO: define?
+			int idmask = up_vgpu_a[idx] * 16;	// TODO: define?
 			float_2 curf = mid_vgpu_f[index<2>(ymid, xmid)];
 			const int xshift = (xdn + shift.x) % SIZEX;	// TODO: define?
 			int yshift = (ydn + shift.y) % SIZEY;
@@ -75,15 +78,35 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 			}
 
 			yshift = (yshift + 1) % SIZEY;
+			idmask += 2;	// 2
 			idmove =
 				(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 				(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 				(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
 				(sign(dn_vgpu_a[yshift][(xshift + 3) % SIZEX] + 1) << 6) |
-				(((signbitf(f_masks[idmask + 2].x + curf.x) + signFor0) / 2) << 1) |
-				(((signbitf(f_masks[idmask + 2 + 1].x + curf.x) + signFor0) / 2) << 3) |
-				(((signbitf(f_masks[idmask + 2 + 4].x + curf.x) + signFor0) / 2) << 5) |
-				(((signbitf(f_masks[idmask + 2 + 5].x + curf.x) + signFor0) / 2) << 7);
+				(((signbitf(f_masks[idmask].x + curf.x) + signFor0) / 2) << 1) |	// TODO: /2 & << - compens
+				(((signbitf(f_masks[idmask + 1].x + curf.x) + signFor0) / 2) << 3) |
+				(((signbitf(f_masks[idmask + 4].x + curf.x) + signFor0) / 2) << 5) |
+				(((signbitf(f_masks[idmask + 5].x + curf.x) + signFor0) / 2) << 7);
+			if(vmaskmov[idmove] & 0xb110000){
+				const int posxsrc = (xshift + vmaskmov[idmove] & 0xb11) % SIZEX;
+				const int posxdst = (xshift + (vmaskmov[idmove] >> 2) & 0xb11) % SIZEX;
+				dn_vgpu_a[yshift][posxdst] = dn_vgpu_a[yshift][posxsrc];
+				dn_vgpu_a[yshift][posxsrc] = -1;
+				screen[dn_vgpu_a[yshift][posxdst]].Pos.x = NORMAL_TO_AREA(posxdst, SIZEX);	// TODO: screen to separate
+			}
+
+			idmask += 6;	// 8
+			yshift = (yshift + 1) % SIZEY;
+			idmove =
+				(sign(dn_vgpu_a[yshift][xshift] + 1)) |
+				(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
+				(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
+				(sign(dn_vgpu_a[yshift][(xshift + 3) % SIZEX] + 1) << 6) |
+				(((signbitf(f_masks[idmask].x + curf.x) + signFor0) / 2) << 1) |
+				(((signbitf(f_masks[idmask + 1].x + curf.x) + signFor0) / 2) << 3) |
+				(((signbitf(f_masks[idmask + 4].x + curf.x) + signFor0) / 2) << 5) |
+				(((signbitf(f_masks[idmask + 5].x + curf.x) + signFor0) / 2) << 7);
 			if(vmaskmov[idmove] & 0xb110000){
 				const int posxsrc = (xshift + vmaskmov[idmove] & 0xb11) % SIZEX;
 				const int posxdst = (xshift + (vmaskmov[idmove] >> 2) & 0xb11) % SIZEX;
@@ -92,34 +115,17 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 				screen[dn_vgpu_a[yshift][posxdst]].Pos.x = NORMAL_TO_AREA(posxdst, SIZEX);
 			}
 
+			idmask += 2;	// 10
 			yshift = (yshift + 1) % SIZEY;
 			idmove =
 				(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 				(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 				(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
 				(sign(dn_vgpu_a[yshift][(xshift + 3) % SIZEX] + 1) << 6) |
-				(((signbitf(f_masks[idmask + 8].x + curf.x) + signFor0) / 2) << 1) |
-				(((signbitf(f_masks[idmask + 8 + 1].x + curf.x) + signFor0) / 2) << 3) |
-				(((signbitf(f_masks[idmask + 8 + 4].x + curf.x) + signFor0) / 2) << 5) |
-				(((signbitf(f_masks[idmask + 8 + 5].x + curf.x) + signFor0) / 2) << 7);
-			if(vmaskmov[idmove] & 0xb110000){
-				const int posxsrc = (xshift + vmaskmov[idmove] & 0xb11) % SIZEX;
-				const int posxdst = (xshift + (vmaskmov[idmove] >> 2) & 0xb11) % SIZEX;
-				dn_vgpu_a[yshift][posxdst] = dn_vgpu_a[yshift][posxsrc];
-				dn_vgpu_a[yshift][posxsrc] = -1;
-				screen[dn_vgpu_a[yshift][posxdst]].Pos.x = NORMAL_TO_AREA(posxdst, SIZEX);
-			}
-
-			yshift = (yshift + 1) % SIZEY;
-			idmove =
-				(sign(dn_vgpu_a[yshift][xshift] + 1)) |
-				(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
-				(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
-				(sign(dn_vgpu_a[yshift][(xshift + 3) % SIZEX] + 1) << 6) |
-				(((signbitf(f_masks[idmask + 10].x + curf.x) + signFor0) / 2) << 1) |
-				(((signbitf(f_masks[idmask + 10 + 1].x + curf.x) + signFor0) / 2) << 3) |
-				(((signbitf(f_masks[idmask + 10 + 4].x + curf.x) + signFor0) / 2) << 5) |
-				(((signbitf(f_masks[idmask + 10 + 5].x + curf.x) + signFor0) / 2) << 7);
+				(((signbitf(f_masks[idmask].x + curf.x) + signFor0) / 2) << 1) |
+				(((signbitf(f_masks[idmask + 1].x + curf.x) + signFor0) / 2) << 3) |
+				(((signbitf(f_masks[idmask + 4].x + curf.x) + signFor0) / 2) << 5) |
+				(((signbitf(f_masks[idmask + 5].x + curf.x) + signFor0) / 2) << 7);
 			if(vmaskmov[idmove] & 0xb110000){
 				const int posxsrc = (xshift + vmaskmov[idmove] & 0xb11) % SIZEX;
 				const int posxdst = (xshift + (vmaskmov[idmove] >> 2) & 0xb11) % SIZEX;
@@ -128,6 +134,8 @@ void ProcessF::gpuRun0(const uint_2 shift, const uint iter){
 				screen[dn_vgpu_a[yshift][posxdst]].Pos.x = NORMAL_TO_AREA(posxdst, SIZEX);
 			}
 		});
+		VVVDBG_DUMP(dn_lay->sDumpAgpu());
+		VVVDBG_DUMP(dn_lay->sDumpScreen());
 } // ////////////////////////////////////////////////////////////////////////////
 #undef Y
 #undef X

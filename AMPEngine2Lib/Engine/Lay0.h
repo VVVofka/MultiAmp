@@ -27,6 +27,7 @@ public:
 	std::string sDumpAgpu(const int digits = defdig)const;
 	std::string DumpAcpu(const int digits = defdig)const;
 	std::string DumpAgpu(const int digits = defdig)const;
+	std::string sDumpScreen(const int digits = defdig)const;
 	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const uint count_point);
 
 	void cpu2gpu(){ va.cpu2gpu(); }

@@ -68,6 +68,18 @@ std::string Lay0::DumpAgpu(const int digits) const{
 	_RPT0(0, s.c_str());
 	return s;
 } // ////////////////////////////////////////////////////////////////
+std::string Lay0::sDumpScreen(const int digits) const{
+	std::vector<Vertex2D> vvert(countPoint);
+	concurrency::copy(*vgpuScreen, vvert.begin());
+	std::vector<float_2> vtmp(countPoint);
+	for(int j = 0; j < countPoint; j++){
+		vtmp[j].x = vvert[j].Pos.x;
+		vtmp[j].y = vvert[j].Pos.y;
+	}
+	const int X = 1, Y = 0;
+	uint_2 sz = uint_2(vgpuScreen->extent[X], vgpuScreen->extent[Y]);
+	return "screen: " + '\n' + LayBase::sDumpV(vtmp, sz, digits);
+} // ////////////////////////////////////////////////////////////////////
 
 std::string LayMid::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
