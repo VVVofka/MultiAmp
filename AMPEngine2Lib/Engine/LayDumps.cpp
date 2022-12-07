@@ -61,6 +61,12 @@ std::string LayBase::sDumpV(const std::vector<float_2>& v, const int digits){
 	ret += "\n";
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
+std::string LayBase::sDumpDbg(const int digits) const{
+	std::vector<float_2> vtmp(sz.x * sz.y);
+	concurrency::copy(*vgpuDbg, vtmp.begin());
+	std::string ret = "dbg:\n" + sDumpV(vtmp, sz, digits);
+	return ret;
+} // /////////////////////////////////////////////////////////////////////////////
 
 std::string Lay0::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
@@ -93,10 +99,6 @@ std::string Lay0::sDumpScreen(const int digits) const{
 	std::string ret = "screen[" + std::to_string(countPoint) + "]:\n" + LayBase::sDumpV(vtmp, digits);
 	return ret;
 } // ////////////////////////////////////////////////////////////////////
-std::string Lay0::sDumpDbg(const int digits) const{
-
-	return std::string();
-} // /////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
 	return "a cpu: " + sInfo() + '\n' + sa;

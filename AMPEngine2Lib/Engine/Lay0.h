@@ -8,7 +8,6 @@
 #include <amp_graphics.h>
 
 using namespace Concurrency;
-#include "EngineDbg.h"	// VVVDBG_IF_DBG
 
 class Lay0 : public LayBase{
 public:
@@ -19,12 +18,6 @@ public:
 	std::vector<Vertex2D> vcpuScreen;
 	concurrency::array<Vertex2D, 1>* vgpuScreen = NULL;		//[pointsCnt] for render [-1...+1]
 
-#ifdef _DEBUG
-	concurrency::array<float_2, 2>* vgpuDbg = NULL;
-	void fill_vdbg();
-	std::string sDumpDbg(const int digits = defdig)const;
-#endif
-	
 	int countPoint = 0;
 
 	bool isLoad()const;

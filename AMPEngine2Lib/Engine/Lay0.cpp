@@ -8,7 +8,6 @@ Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_a
 
 	fill_va();
 	fill_vScreen();
-	VVVDBG_IF_DBG(fill_vdbg());
 } // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
 	SAFE_DELETE(vgpuScreen);
@@ -87,12 +86,3 @@ void Lay0::fill_va(){
 	}
 	va.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
-#ifdef _DEBUG
-void Lay0::fill_vdbg(){
-	size_t szx = cfg_all->lays.bottomX();
-	size_t szy = cfg_all->lays.bottomY();
-	std::vector<float_2> vtmp(szx * szy);
-	SAFE_DELETE(vgpuDbg);
-	vgpuDbg = new concurrency::array<float_2, 2>(szy, szx, vtmp.begin(), *m_accl_view);
-} // //////////////////////////////////////////////////////////////////////////////
-#endif

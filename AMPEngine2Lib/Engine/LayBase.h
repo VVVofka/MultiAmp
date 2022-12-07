@@ -6,6 +6,7 @@
 #include "VGpuCpu.h"	// for va
 #include "..\..\OptsTinyLib\structAll.h"
 #include "LaysCPUCfg.h"
+#include "EngineDbg.h"	// VVVDBG_IF_DBG
 
 using namespace Concurrency;
 
@@ -20,6 +21,11 @@ public:
 	structAll* cfg_all = NULL;
 
 	int id(const int x, const int y) const{ return y * sz.x + x; }
+
+#ifdef _DEBUG
+	concurrency::array<float_2, 2>* vgpuDbg = NULL;
+	std::string sDumpDbg(const int digits = 3)const;
+#endif	//	 _DEBUG
 
 protected:
 	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);
