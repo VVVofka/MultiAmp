@@ -13,6 +13,7 @@ using namespace Concurrency;
 class LayBase{
 public:
 	LayBase(uint n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
+	~LayBase();
 	uint nlay = 0;
 	uint_2 sz;
 	CPUtype cpuType = CPUtype::GPU;

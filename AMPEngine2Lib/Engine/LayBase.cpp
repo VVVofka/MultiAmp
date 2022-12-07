@@ -15,4 +15,9 @@ LayBase::LayBase(uint n_lay, structAll* cfg_all, accelerator_view* m_accl_view){
 	vgpuDbg = new concurrency::array<float_2, 2>(szy, szx, vtmp.begin(), *m_accl_view); }
 #endif	//  _DEBUG
 } // ///////////////////////////////////////////////////////////////////////////////
+LayBase::~LayBase(){
+#ifdef _DEBUG
+	SAFE_DELETE(vgpuDbg);
+#endif	//  _DEBUG
+} // ///////////////////////////////////////////////////////////////////////////////
 
