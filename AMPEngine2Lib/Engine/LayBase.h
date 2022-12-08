@@ -23,10 +23,10 @@ public:
 
 	int id(const int x, const int y) const{ return y * sz.x + x; }
 
-#ifdef _DEBUG
-	concurrency::array<float_2, 2>* vgpuDbg = NULL;
-	std::string sDumpDbg(const int digits = 3)const;
-#endif	//	 _DEBUG
+//#ifdef _DEBUG
+//	concurrency::array<float_2, 2>* vgpuDbg = NULL;
+//	std::string sDumpDbg(const int digits = 3)const;
+//#endif	//	 _DEBUG
 
 protected:
 	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);

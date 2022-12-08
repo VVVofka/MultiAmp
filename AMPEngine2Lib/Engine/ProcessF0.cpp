@@ -11,12 +11,12 @@ using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 using namespace Concurrency::fast_math;
 
-void setDbg(concurrency::array<float_2, 2>& dn_vgpu_dbg, int_2 shift, const float_2* f_masks, const float_2& curf)restrict(amp){
-	dn_vgpu_dbg[shift.y][shift.x] = curf;// +f_masks[0];
-	dn_vgpu_dbg[shift.y][(shift.x + 1) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[1];
-	dn_vgpu_dbg[shift.y][(shift.x + 2) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[4];
-	dn_vgpu_dbg[shift.y][(shift.x + 3) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[5];
-} // ///////////////////////////////////////////////////////////////////////////////////////////
+//void setDbg(concurrency::array<float_2, 2>& dn_vgpu_dbg, int_2 shift, const float_2* f_masks, const float_2& curf)restrict(amp){
+//	dn_vgpu_dbg[shift.y][shift.x] = curf;// +f_masks[0];
+//	dn_vgpu_dbg[shift.y][(shift.x + 1) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[1];
+//	dn_vgpu_dbg[shift.y][(shift.x + 2) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[4];
+//	dn_vgpu_dbg[shift.y][(shift.x + 3) % dn_vgpu_dbg.extent[X]] = curf;// +f_masks[5];
+//} // ///////////////////////////////////////////////////////////////////////////////////////////
 int getIdMove(concurrency::array<int, 2>& dn_vgpu_a, int_2 shift, const float_2* f_masks, float curfx, int signFor0)restrict(amp){
 	return
 		(sign(dn_vgpu_a[shift.y][shift.x] + 1)) |
@@ -38,7 +38,6 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 
 	LayMid* mid_lay = lays->vMidLays[0];
 	const concurrency::array<float_2, 2>& mid_vgpu_f = *mid_lay->vf.vgpu;
-	VVVDBG_DUMP(mid_lay->sDumpFgpu(2));
 
 	Lay0* dn_lay = &lays->lay0;
 	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay->va.vgpu;
@@ -46,14 +45,14 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 
 	const int signFor0 = (iter & 1) + 1; // 1 or 2
 
-	VVVDBG_IF_DBG2(concurrency::array<float_2, 2>&dn_vgpu_dbg = *dn_lay->vgpuDbg);
+	//VVVDBG_IF_DBG2(concurrency::array<float_2, 2>&dn_vgpu_dbg = *dn_lay->vgpuDbg);
 
 	//VVVDBG_DUMP(dn_lay->sDumpAgpu());
 	parallel_for_each(up_vgpu_a.extent,
 		[&dn_vgpu_a, &up_vgpu_a, &mid_vgpu_f, &up_vgpu_f, &screen,
 		&f_masks,
 		shift0, signFor0
-		VVVDBG_IF_DBG2(, &dn_vgpu_dbg)
+		//VVVDBG_IF_DBG2(, &dn_vgpu_dbg)
 		](index<2> idx)restrict(amp) {
 		// TODO: #define?
 		const int xmid = idx[X] * 2;
@@ -84,7 +83,7 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 		int_2 shift = int_2((xdn + shift0.x) % SIZEX, (ydn + shift0.y) % SIZEY);
 
 		int idmove = getIdMove(dn_vgpu_a, shift, &f_masks[idmask], curf.x, signFor0);
-		setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
+		//setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
 		//(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
@@ -108,7 +107,7 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 		shift.y = (shift.y + 1) % SIZEY;
 		idmask += 2;	// 2
 		idmove = getIdMove(dn_vgpu_a, shift, &f_masks[idmask], curf.x, signFor0);
-		setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
+		//setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
 		//(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
@@ -132,7 +131,7 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 		idmask += 6;	// 8
 		shift.y = (shift.y + 1) % SIZEY;
 		idmove = getIdMove(dn_vgpu_a, shift, &f_masks[idmask], curf.x, signFor0);
-		setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
+		//setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
 		//(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
@@ -156,7 +155,7 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 		idmask += 2;	// 10
 		shift.y = (shift.y + 1) % SIZEY;
 		idmove = getIdMove(dn_vgpu_a, shift, &f_masks[idmask], curf.x, signFor0);
-		setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
+		//setDbg(dn_vgpu_dbg, shift, &f_masks[idmask], curf);
 		//(sign(dn_vgpu_a[yshift][xshift] + 1)) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 1) % SIZEX] + 1) << 2) |
 		//(sign(dn_vgpu_a[yshift][(xshift + 2) % SIZEX] + 1) << 4) |
@@ -179,7 +178,7 @@ void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
 	});
 	//VVVDBG_DUMP(dn_lay->sDumpAgpu());
 	//VVVDBG_DUMP(dn_lay->sDumpScreen());
-	VVVDBG_DUMP(dn_lay->sDumpDbg(2));
+	//VVVDBG_DUMP(dn_lay->sDumpDbg(2));
 } // ////////////////////////////////////////////////////////////////////////////
 #undef Y
 #undef X
