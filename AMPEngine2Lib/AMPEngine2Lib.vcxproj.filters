@@ -171,5 +171,8 @@
     <ClCompile Include="Engine\EngineDbg.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\ProcessF0Split1.cpp">
+      <Filter>Engine\Process\F</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

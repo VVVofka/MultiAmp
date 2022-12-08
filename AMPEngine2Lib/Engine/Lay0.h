@@ -31,8 +31,8 @@ public:
 	std::string sDumpScreen(const int digits = defdig)const;
 	concurrency::array<Vertex2D, 1>* cpuPoint2gpuPoint(const uint count_point);
 
-	void cpu2gpu(){ va.cpu2gpu(); }
-	void gpu2cpu(){ va.gpu2cpu(); }
+	void cpu2gpu(){ va.cpu2gpu(); vf.cpu2gpu();}
+	void gpu2cpu(){ va.gpu2cpu(); vf.gpu2cpu();}
 
 private:
 	void fill_vScreen();
