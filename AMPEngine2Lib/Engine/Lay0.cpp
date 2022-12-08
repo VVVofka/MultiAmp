@@ -3,11 +3,10 @@
 //#include "LaysCPUCfg.h"
 
 Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_all, m_accl_view){
-	//cpuPoint2gpuPoint(countPoint);
 	LayBase::cpuType = CPUtype::GPU;
-
 	fill_va();
 	fill_vf();
+	fill_vmaskmove();
 	fill_vScreen();
 } // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
@@ -67,10 +66,10 @@ void Lay0::fill_vScreen(){
 
 		const size_t ux = idx % szx;
 		const float x = NORMAL_TO_AREA(ux, szx);
-		
+
 		const size_t uy = idx / szx;
 		const float y = NORMAL_TO_AREA(uy, szy);
-		
+
 		vcpuScreen[j] = Vertex2D(y, x);
 	}
 	SAFE_DELETE(vgpuScreen);
@@ -86,6 +85,12 @@ void Lay0::fill_va(){
 	va.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_vf(){
-	std::vector<float_2> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), float_2(0,0));
+	size_t sizev = static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y);
+	std::vector<float_2> vtmp(sizev, float_2(0.f, 0.f));
 	vf.Create(sz, vtmp, true, m_accl_view);
+} // ///////////////////////////////////////////////////////////////////////////////
+void Lay0::fill_vmaskmove(){
+	size_t sizev = (static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y)) / 16;
+	std::vector<uint_2> vtmp(sizev, uint_2(0u, 0u));
+	vmaskmove.Create(sz / 4, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////

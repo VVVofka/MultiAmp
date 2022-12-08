@@ -225,6 +225,7 @@
     <ClCompile Include="Engine\ProcessF.cpp" />
     <ClCompile Include="Engine\ProcessF0.cpp" />
     <ClCompile Include="Engine\ProcessF0Split1.cpp" />
+    <ClCompile Include="Engine\ProcessF0Split2.cpp" />
     <ClCompile Include="Engine\ProcessF1.cpp" />
     <ClCompile Include="Engine\ProcessFcpu.cpp" />
     <ClCompile Include="MDX\MDX.cpp" />
