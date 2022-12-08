@@ -7,6 +7,7 @@ Lay0::Lay0(structAll* cfg_all, accelerator_view* m_accl_view) : LayBase(0, cfg_a
 	LayBase::cpuType = CPUtype::GPU;
 
 	fill_va();
+	fill_vf();
 	fill_vScreen();
 } // ///////////////////////////////////////////////////////////////////////////////
 Lay0::~Lay0(){
@@ -78,11 +79,13 @@ void Lay0::fill_vScreen(){
 void Lay0::fill_va(){
 	countPoint = cfg_all->data.v.size();
 	std::vector<int> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), -1);
-	size_t szx = cfg_all->lays.bottomX();
-	size_t szy = cfg_all->lays.bottomY();
 	for(int j = 0; j < countPoint; j++){
 		const size_t idx = cfg_all->data.v[j];
 		vtmp[idx] = j;
 	}
 	va.Create(sz, vtmp, true, m_accl_view);
+} // ///////////////////////////////////////////////////////////////////////////////
+void Lay0::fill_vf(){
+	std::vector<float_2> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), float_2(0,0));
+	vf.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
