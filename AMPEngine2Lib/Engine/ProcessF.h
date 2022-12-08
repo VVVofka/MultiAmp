@@ -18,7 +18,7 @@ public:
 private:
 	void gpuRun0(const uint_2 shift, const uint iter);
 	void gpuRun0Split1(const int_2 shift);
-	void gpuRun0Split2(const int_2 shift);
+	void gpuRun0Split2(const int_2 shift, const uint iter);
 	void gpuRun1(const int ncurlay);
 	void mtRun(const int ncurlay);
 	void cpuRun(const int ncurlay);

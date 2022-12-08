@@ -15,7 +15,8 @@ public:
 	~Lay0();
 	VGpuCpu2<int> va;	// -1 - empty point
 	VGpuCpu2<float_2> vf;	
-	VGpuCpu2<uint_2> vmaskmove;	
+	
+	concurrency::array<uint, 1>* vgpuMaskMove = NULL;
 
 	std::vector<Vertex2D> vcpuScreen;
 	concurrency::array<Vertex2D, 1>* vgpuScreen = NULL;		//[pointsCnt] for render [-1...+1]

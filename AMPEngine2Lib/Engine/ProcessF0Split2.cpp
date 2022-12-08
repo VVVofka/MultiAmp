@@ -5,33 +5,46 @@
 
 #define X 1
 #define Y 0
-#define SIZEX dn_vgpu_f.extent[X]
-#define SIZEY dn_vgpu_f.extent[Y]
+#define SIZEX dn_vgpu_a.extent[X]
+#define SIZEY dn_vgpu_a.extent[Y]
 
 using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 using namespace Concurrency::fast_math;
 
-void ProcessF::gpuRun0Split2(const int_2 shift0){
+void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 	const LayMid* up_lay = lays->vMidLays[1];
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay->va.vgpu;
-	const concurrency::array<float_2, 1>& f_masks = *up_lay->kF.vgpu;	//const concurrency::array<float_2, 1>& f_masks = *fmasks->vgpu;
-
-	LayMid* mid_lay = lays->vMidLays[0];
-	const concurrency::array<float_2, 2>& mid_vgpu_f = *mid_lay->vf.vgpu;
 
 	Lay0* dn_lay = &lays->lay0;
-	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
-	concurrency::array<uint_2, 2>& up_vgpu_m = *dn_lay->vmaskmove.vgpu;
+	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay->va.vgpu;
+	const concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
+	const concurrency::array<uint, 1>& mask_move = *dn_lay->vgpuMaskMove;
+
+	const int signFor0 = (iter & 1) + 1; // 1 or 2
 
 	parallel_for_each(up_vgpu_a.extent,
-		[&up_vgpu_a,&mid_vgpu_f, &dn_vgpu_f,
-		&f_masks, shift0](index<2> idx)restrict(amp) {
-			const int_2 pos0 = int_2((idx[X] * 4 + shift0.x) % SIZEX, (idx[Y] * 4 + shift0.y) % SIZEY);
-			const int_2 pos1 = int_2((pos0.x + 1) % SIZEX, (pos0.y + 1) % SIZEY);
-			const int_2 pos2 = int_2((pos1.x + 1) % SIZEX, (pos1.y + 1) % SIZEY);
-			const int_2 pos3 = int_2((pos2.x + 1) % SIZEX, (pos2.y + 1) % SIZEY);
+		[&dn_vgpu_a, &dn_vgpu_f, &mask_move,
+		shift0, signFor0](index<2> idx)restrict(amp) {
+			const int x0 = (idx[X] * 4 + shift0.x) % SIZEX;
+			const int x1 = (x0 + 1) % SIZEX;
+			const int x2 = (x1 + 1) % SIZEX;
+			const int x3 = (x2 + 1) % SIZEX;
 
-
+			int y = (idx[Y] * 4 + shift0.y) % SIZEY;
+			for(int j = 0; j < 4; j++){	// gluke in expand!
+				uint maskm = mask_move[
+					(sign(dn_vgpu_a[y][x0] + 1)) | (((signbitf(dn_vgpu_f[y][x0].x) + signFor0) / 2) << 1) |
+						(sign(dn_vgpu_a[y][x1] + 1) << 2) | (((signbitf(dn_vgpu_f[y][x1].x) + signFor0) / 2) << 3) |
+						(sign(dn_vgpu_a[y][x2] + 1) << 4) | (((signbitf(dn_vgpu_f[y][x2].x) + signFor0) / 2) << 5) |
+						(sign(dn_vgpu_a[y][x3] + 1) << 6) | (((signbitf(dn_vgpu_f[y][x3].x) + signFor0) / 2) << 7)];
+				if(maskm & 0xb110000){
+					const int posxsrc = (x0 + (maskm & 0xb11)) % SIZEX;
+					const int posxdst = (x0 + ((maskm >> 2) & 0xb11)) % SIZEX;
+					dn_vgpu_a[y][posxdst] = dn_vgpu_a[y][posxsrc];
+					dn_vgpu_a[y][posxsrc] = -1;
+				}
+				y = (y + 1) % SIZEY;
+			}
 		});
 } // ///////////////////////////////////////////////////////////////////////////
