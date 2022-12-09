@@ -30,7 +30,7 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 		const int x3 = (x2 + 1) % SIZEX;
 
 		int y = (idx[Y] * 4 + shift0.y) % SIZEY;
-		for(int j = 0; j < 4; j++){	// gluke in expand!
+		for(int j = 0; j < 4; j++){	// gluke in expand case!
 			const int idxmaskm =
 				(sign(dn_vgpu_a[y][x0] + 1)) | (((signbitf(dn_vgpu_f[y][x0].x) + signFor0) / 2) << 1) |
 				(sign(dn_vgpu_a[y][x1] + 1) << 2) | (((signbitf(dn_vgpu_f[y][x1].x) + signFor0) / 2) << 3) |
@@ -42,6 +42,7 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 				const int posxdst = (x0 + ((maskm >> 2) & 0xb11)) % SIZEX;
 				dn_vgpu_a[y][posxdst] = dn_vgpu_a[y][posxsrc];
 				dn_vgpu_a[y][posxsrc] = -1;
+				//dn_vgpu_f[y][posxdst].x = 0.f;
 			}
 			y = (y + 1) % SIZEY;
 		}
