@@ -17,9 +17,9 @@ Processes::~Processes(){
 void Processes::RunAll(){
 	size_t pos = (size_t)rnd.randk();	// max ~ 65500*65500
 	size_t szx = cfg_all->lays.bottomX();
-	uint x = uint(pos % szx);
-	uint y = uint(pos / szx);
-	uint_2 shift = uint_2(x, y);
+	int x = int(pos % szx);
+	int y = int(pos / szx);
+	int_2 shift = int_2(x, y);
 	processA.RunAll(shift);
 
 	uint iter = 1 & uint(cfg_all->misc.curIteration++);

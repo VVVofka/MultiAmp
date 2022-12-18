@@ -5,7 +5,7 @@
 	using namespace concurrency::graphics;
 	using namespace concurrency::direct3d;
 
-	void ProcessA::gpuRun0(const uint_2 shift){
+	void ProcessA::gpuRun0(const int_2 shift){
 		LayMid& up_lay = *lays->vMidLays[0];
 		concurrency::array<int, 2>& up_vgpu_a = *up_lay.va.vgpu;		//
 

@@ -28,8 +28,11 @@ int getIdMove(concurrency::array<int, 2>& dn_vgpu_a, int_2 shift, const float_2*
 		(((signbitf(f_masks[4].x + curfx) + signFor0) / 2) << 5) |
 		(((signbitf(f_masks[5].x + curfx) + signFor0) / 2) << 7);
 } // /////////////////////////////////////////////////////////////////////////////////////
-
-void ProcessF::gpuRun0(const uint_2 shift0, const uint iter){
+void ProcessF::gpuRun0(const int_2 shift0, const uint iter){
+	gpuRun0Split1(shift0);
+	gpuRun0Split2(shift0, iter);
+} // /////////////////////////////////////////////////////////////////////////////////////
+void ProcessF::gpuRun0Bak(const int_2 shift0, const uint iter){
 	const LayMid* up_lay = lays->vMidLays[1];
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay->va.vgpu;
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay->vf.vgpu;
