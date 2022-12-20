@@ -28,6 +28,7 @@ public:
 	static const int defdig = 3;
 	std::string sDumpAcpu(const int digits = defdig)const;
 	std::string sDumpAgpu(const int digits = defdig)const;
+	std::string sDumpFgpu(const int digits = defdig)const;
 	std::string DumpAcpu(const int digits = defdig)const;
 	std::string DumpAgpu(const int digits = defdig)const;
 	std::string sDumpScreen(const int digits = defdig)const;

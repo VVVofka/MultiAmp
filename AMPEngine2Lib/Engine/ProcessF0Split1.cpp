@@ -53,4 +53,5 @@ void ProcessF::gpuRun0Split1(const int_2 shift0){
 			dn_vgpu_f[pos3.y][pos2.x] = curf + *pmask;	pmask++;
 			dn_vgpu_f[pos3.y][pos3.x] = curf + *pmask;	
 		});
+	VVVDBG_DUMP(dn_lay->sDumpFgpu());
 } // ///////////////////////////////////////////////////////////////////////////

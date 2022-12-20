@@ -88,6 +88,12 @@ std::string Lay0::DumpAgpu(const int digits) const{
 	_RPT0(0, s.c_str());
 	return s;
 } // ////////////////////////////////////////////////////////////////
+std::string Lay0::sDumpFgpu(const int digits)const{
+	std::vector<float_2> vtmp(vf.vcpu.size());
+	vf.gpu2other(vtmp);
+	std::string sf = sDumpV(vtmp, sz, digits);
+	return "f gpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sf;
+} // ////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpScreen(const int digits) const{
 	std::vector<Vertex2D> vvert(countPoint);
 	concurrency::copy(*vgpuScreen, vvert.begin());
