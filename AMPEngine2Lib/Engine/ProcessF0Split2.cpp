@@ -1,6 +1,7 @@
-#include <amp_math.h>
+#include <amp.h>		// sign
+#include <amp_math.h>	// signbitf
 #include "ProcessF.h"
-#include "..\myUtil.h"	// NORMAL_TO_AREA
+//#include "..\myUtil.h"	// NORMAL_TO_AREA
 #include "EngineDbg.h"	// VVVDBG_DUMP
 
 #define X 1
@@ -25,16 +26,17 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 
 	parallel_for_each(up_extent, [&dn_vgpu_a, &dn_vgpu_f, &mask_move, shift0, signFor0](index<2> idx)restrict(amp) {
 		const int x0 = (idx[X] * 4 + shift0.x) % SIZEX;
+		const int x1 = (x0 + 1) % SIZEX;
+		const int x2 = (x1 + 1) % SIZEX;
+		const int x3 = (x2 + 1) % SIZEX;
 		int y = (idx[Y] * 4 + shift0.y) % SIZEY;
-		const index<2> idx1 = index<2>(y, (x0 + 1) % SIZEX);
-		const index<2> idx2 = index<2>(y, (idx1[X] + 1) % SIZEX);
-		const index<2> idx3 = index<2>(y, (idx2[X] + 1) % SIZEX);
+
 		for(int j = 0; j < 4; j++){	// gluke in expand for!
 			const int idxmaskm =
 				(sign(dn_vgpu_a[y][x0] + 1)) | (((signbitf(dn_vgpu_f[y][x0].x) + signFor0) / 2) << 1) |
-				(sign(dn_vgpu_a[idx1] + 1) << 2) | (((signbitf(dn_vgpu_f[idx1].x) + signFor0) / 2) << 3) |
-				(sign(dn_vgpu_a[idx2] + 1) << 4) | (((signbitf(dn_vgpu_f[idx2].x) + signFor0) / 2) << 5) |
-				(sign(dn_vgpu_a[idx3] + 1) << 6) | (((signbitf(dn_vgpu_f[idx3].x) + signFor0) / 2) << 7);
+				(sign(dn_vgpu_a[y][x1] + 1) << 2) | (((signbitf(dn_vgpu_f[y][x1].x) + signFor0) / 2) << 3) |
+				(sign(dn_vgpu_a[y][x2] + 1) << 4) | (((signbitf(dn_vgpu_f[y][x2].x) + signFor0) / 2) << 5) |
+				(sign(dn_vgpu_a[y][x3] + 1) << 6) | (((signbitf(dn_vgpu_f[y][x3].x) + signFor0) / 2) << 7);
 			const uint maskm = mask_move[idxmaskm];
 			if(maskm & 0xb110000){
 				const int posxsrc = (x0 + (maskm & 0xb11)) % SIZEX;

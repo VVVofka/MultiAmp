@@ -11,6 +11,7 @@ public:
 	VGpuCpu2<int> va;	// -1 - empty point
 	VGpuCpu2<float_2> vf;
 	VGpuCpu1<float_2> kF;	// size=256
+	float kf;
 
 	void gpu2cpu(){ va.gpu2cpu(), vf.gpu2cpu(); }
 	void cpu2gpu(){ va.cpu2gpu(), vf.cpu2gpu();	}
