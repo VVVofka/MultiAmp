@@ -4,7 +4,7 @@
 //#include "..\myUtil.h"	// NORMAL_TO_AREA
 #include "EngineDbg.h"	// VVVDBG_DUMP
 
-#define X 1
+#define X 1 
 #define Y 0
 #define SIZEX dn_vgpu_a.extent[X]
 #define SIZEY dn_vgpu_a.extent[Y]
