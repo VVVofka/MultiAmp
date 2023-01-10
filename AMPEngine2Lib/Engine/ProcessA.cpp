@@ -22,9 +22,6 @@ void ProcessA::RunAll(const int_2 shift){
 		(this->*arFuncRun[tp])(nmid);	//{&ProcessA::gpuRun1, &ProcessA::mtRun, &ProcessA::cpuRun}
 
 		VVVDBG_IF_DBG(lays->DumpA(nmid + 1));
-		VVVDBG_IF_DBG(up->cpuType == CPUtype::GPU ? \
-			VVVDBG_SET_A(nmid + 1, up->va.vgpu) : \
-			VVVDBG_SET_A(nmid + 1, up->va.vcpu)	\
-		);
+		VVVDBG_IF_DBG(up->cpuType == CPUtype::GPU ? VVVDBG_SET_A(nmid + 1, up->va.vgpu) : VVVDBG_SET_A(nmid + 1, up->va.vcpu));
 	}
 } // ///////////////////////////////////////////////////////////////////////////
