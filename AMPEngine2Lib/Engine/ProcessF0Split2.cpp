@@ -43,12 +43,12 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 				(sign(dn_vgpu_a[y][x3] + 1) << 6) | (((signbitf(dn_vgpu_f[y][x3].x) + signFor0) / 2) << 7);
 
 			index<2> idxdbg = index<2>(idx[Y] * 4 + dy, idx[X]);
-			vdbg[idxdbg] = int_4(y, x0, idxmaskm, mask_move[idxmaskm]);
-
 			const uint maskm = mask_move[idxmaskm];
-			if(maskm & 0xb110000){
-				const int posxsrc = (x0 + (maskm & 0xb11)) % SIZEX;
-				const int posxdst = (x0 + ((maskm >> 2) & 0xb11)) % SIZEX;
+			vdbg[idxdbg] = int_4(y, x0, -3, -3);
+			if(maskm & 0b110000){
+				const int posxsrc = (x0 + (maskm & 0b11)) % SIZEX;
+				const int posxdst = (x0 + ((maskm >> 2) & 0b11)) % SIZEX;
+				vdbg[idxdbg] = int_4(y, x0, posxsrc, posxdst);
 				dn_vgpu_a[y][posxdst] = dn_vgpu_a[y][posxsrc];
 				dn_vgpu_a[y][posxsrc] = -1;
 				dn_vgpu_f[y][posxdst].x = 0.f;
