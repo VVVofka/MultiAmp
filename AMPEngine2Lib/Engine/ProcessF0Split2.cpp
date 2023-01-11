@@ -52,6 +52,7 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 				dn_vgpu_a[y][posxdst] = dn_vgpu_a[y][posxsrc];
 				dn_vgpu_a[y][posxsrc] = -1;
 				dn_vgpu_f[y][posxdst].x = 0.f;
+				dn_vgpu_f[y][posxsrc].x = 0.f;
 			}
 			y = (y + 1) % SIZEY;
 		}
