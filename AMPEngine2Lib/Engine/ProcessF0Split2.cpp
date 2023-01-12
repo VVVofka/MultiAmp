@@ -13,7 +13,7 @@ using namespace concurrency::graphics;
 using namespace concurrency::direct3d;
 using namespace Concurrency::fast_math;
 
-void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
+void ProcessF::gpuRun0Split2x(const int_2 shift0, const uint signFor0){
 	const LayMid* up_lay = lays->vMidLays[1];
 	const Concurrency::extent<2> up_extent = up_lay->va.vgpu->get_extent();
 
@@ -21,12 +21,8 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay->va.vgpu;
 	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
 	const concurrency::array<uint, 1>& mask_move = *dn_lay->vgpuMaskMove;
-
-	const int signFor0 = (iter & 1) + 1; // 1 or 2
-
 	//std::vector<int_4> vdbgcpu(dn_lay->sz.y * dn_lay->sz.x / 4, -2);
 	//array_view<int_4, 2> vdbg(dn_lay->sz.y, dn_lay->sz.x / 4, vdbgcpu);
-
 	VVVDBG_DUMP(dn_lay->sDumpAgpu(3));
 	parallel_for_each(up_extent, [&dn_vgpu_a, &dn_vgpu_f, &mask_move, shift0, signFor0/*, vdbg*/](index<2> idx)restrict(amp) {
 		const int x0 = (idx[X] * 4 + shift0.x) % SIZEX;
@@ -41,19 +37,24 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 				(sign(dn_vgpu_a[y][x1] + 1) << 2) | (((signbitf(-1000.f * dn_vgpu_f[y][x1].x) + signFor0) / 2) << 3) |
 				(sign(dn_vgpu_a[y][x2] + 1) << 4) | (((signbitf(-1000.f * dn_vgpu_f[y][x2].x) + signFor0) / 2) << 5) |
 				(sign(dn_vgpu_a[y][x3] + 1) << 6) | (((signbitf(-1000.f * dn_vgpu_f[y][x3].x) + signFor0) / 2) << 7);
-
-			index<2> idxdbg = index<2>(idx[Y] * 4 + dy, idx[X]);
 			const uint maskm = mask_move[idxmaskm];
+			//index<2> idxdbg = index<2>(idx[Y] * 4 + dy, idx[X]);
 			//vdbg[idxdbg] = int_4(y, x0, maskm, -3);
 			//vdbg[idxdbg] = int_4(dn_vgpu_a[y][(x0 + (maskm & 0b11)) % SIZEX], idxmaskm, maskm, int(dn_vgpu_f[y][(x0 + (maskm & 0b11)) % SIZEX].x * 1000));
 			if(maskm & 0b110000){
 				const int posxsrc = (x0 + (maskm & 0b11)) % SIZEX;
 				const int posxdst = (x0 + ((maskm >> 2) & 0b11)) % SIZEX;
-				//vdbg[idxdbg] = int_4(dn_vgpu_a[y][posxsrc], idxmaskm, maskm, posxdst);
+
 				dn_vgpu_a[y][posxdst] = dn_vgpu_a[y][posxsrc];
 				dn_vgpu_a[y][posxsrc] = -1;
+
+				float tmp = dn_vgpu_f[y][posxdst].x;
 				dn_vgpu_f[y][posxdst].x = 0.f;
-				dn_vgpu_f[y][posxsrc].x = 0.f;
+				dn_vgpu_f[y][posxsrc].x = tmp;
+
+				tmp = dn_vgpu_f[y][posxdst].y;
+				dn_vgpu_f[y][posxdst].y = dn_vgpu_f[y][posxsrc].y;
+				dn_vgpu_f[y][posxsrc].y = tmp;
 			}
 			y = (y + 1) % SIZEY;
 		}
@@ -63,5 +64,56 @@ void ProcessF::gpuRun0Split2(const int_2 shift0, const uint iter){
 		//VVVDBG_DUMP(std::to_string(j) + '\t' + std::to_string(vdbgcpu[j].r) + '\t' + std::to_string(vdbgcpu[j].g) + '\t' + std::to_string(vdbgcpu[j].b) + '\t' + std::to_string(vdbgcpu[j].a) + "\n");
 	//VVVDBG_DUMP(dn_lay->sDumpScreen());
 	VVVDBG_DUMP(dn_lay->sDumpAgpu(3));
+} // ///////////////////////////////////////////////////////////////////////////
+void ProcessF::gpuRun0Split2y(const int_2 shift0, const uint signFor0){
+	const LayMid* up_lay = lays->vMidLays[1];
+	const Concurrency::extent<2> up_extent = up_lay->va.vgpu->get_extent();
 
+	Lay0* dn_lay = &lays->lay0;
+	concurrency::array<int, 2>& dn_vgpu_a = *dn_lay->va.vgpu;
+	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
+	const concurrency::array<uint, 1>& mask_move = *dn_lay->vgpuMaskMove;
+	//std::vector<int_4> vdbgcpu(dn_lay->sz.y * dn_lay->sz.x / 4, -2);
+	//array_view<int_4, 2> vdbg(dn_lay->sz.y, dn_lay->sz.x / 4, vdbgcpu);
+	VVVDBG_DUMP(dn_lay->sDumpAgpu(3));
+	parallel_for_each(up_extent, [&dn_vgpu_a, &dn_vgpu_f, &mask_move, shift0, signFor0/*, vdbg*/](index<2> idx)restrict(amp) {
+		const int y0 = (idx[Y] * 4 + shift0.y) % SIZEY;
+		const int y1 = (y0 + 1) % SIZEY;
+		const int y2 = (y1 + 1) % SIZEY;
+		const int y3 = (y2 + 1) % SIZEY;
+		int x = (idx[X] * 4 + shift0.x) % SIZEX;
+
+		for(int dx = 0; dx < 4; dx++){	// gluke in expand for!
+			const int idxmaskm =
+				(sign(dn_vgpu_a[y0][x] + 1)) | (((signbitf(-1000.f * dn_vgpu_f[y0][x].y) + signFor0) / 2) << 1) |
+				(sign(dn_vgpu_a[y1][x] + 1) << 2) | (((signbitf(-1000.f * dn_vgpu_f[y1][x].y) + signFor0) / 2) << 3) |
+				(sign(dn_vgpu_a[y2][x] + 1) << 4) | (((signbitf(-1000.f * dn_vgpu_f[y2][x].y) + signFor0) / 2) << 5) |
+				(sign(dn_vgpu_a[y3][x] + 1) << 6) | (((signbitf(-1000.f * dn_vgpu_f[y3][x].y) + signFor0) / 2) << 7);
+			const uint maskm = mask_move[idxmaskm];
+			//index<2> idxdbg = index<2>(idx[Y] * 4 + dy, idx[X]);
+			//vdbg[idxdbg] = int_4(y, x0, maskm, -3);
+			//vdbg[idxdbg] = int_4(dn_vgpu_a[y][(x0 + (maskm & 0b11)) % SIZEX], idxmaskm, maskm, int(dn_vgpu_f[y][(x0 + (maskm & 0b11)) % SIZEX].x * 1000));
+			if(maskm & 0b110000){
+				const int posysrc = (y0 + (maskm & 0b11)) % SIZEY;
+				const int posydst = (y0 + ((maskm >> 2) & 0b11)) % SIZEY;
+
+				dn_vgpu_a[posydst][x] = dn_vgpu_a[posysrc][x];
+				dn_vgpu_a[posysrc][x] = -1;
+				
+				float tmp = dn_vgpu_f[posydst][x].y;
+				dn_vgpu_f[posydst][x].y = 0.f;
+				dn_vgpu_f[posysrc][x].y = tmp;
+
+				tmp = dn_vgpu_f[posydst][x].x;
+				dn_vgpu_f[posydst][x].x = dn_vgpu_f[posysrc][x].x;
+				dn_vgpu_f[posysrc][x].x = tmp;
+			}
+			x = (x + 1) % SIZEX;
+		}
+		});
+	//vdbg.synchronize();
+	//for(size_t j = 0; j < vdbgcpu.size(); j++)
+		//VVVDBG_DUMP(std::to_string(j) + '\t' + std::to_string(vdbgcpu[j].r) + '\t' + std::to_string(vdbgcpu[j].g) + '\t' + std::to_string(vdbgcpu[j].b) + '\t' + std::to_string(vdbgcpu[j].a) + "\n");
+	//VVVDBG_DUMP(dn_lay->sDumpScreen());
+	VVVDBG_DUMP(dn_lay->sDumpAgpu(3));
 } // ///////////////////////////////////////////////////////////////////////////
