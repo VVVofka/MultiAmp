@@ -108,7 +108,7 @@ void ProcessF::gpuRun0Split2y(const int_2 shift0, const uint signFor0){
 				dn_vgpu_f[posydst][x].x = dn_vgpu_f[posysrc][x].x;
 				dn_vgpu_f[posysrc][x].x = tmp;
 			}
-			x = (x + 1) % SIZEX;
+			x = (x + 1) % SIZEX; 
 		}
 		});
 	//vdbg.synchronize();
