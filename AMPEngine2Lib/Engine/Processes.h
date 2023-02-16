@@ -16,7 +16,7 @@ public:
 	MasksAll masks;
 	structAll* cfg_all;
 
-	void RunAll();
+	void RunAllLays();
 
 private:
 	LehmerRng rnd;

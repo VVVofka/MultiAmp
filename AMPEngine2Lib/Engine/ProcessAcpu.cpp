@@ -3,7 +3,7 @@
 
 using namespace concurrency::graphics;
 
-void ProcessA::cpuRun(const int n_lay){
+void ProcessA::cpuRunMid(const int n_lay){
 	_ASSERTE(n_lay > 0);
 
 	LayMid* up_lay = lays->vMidLays[n_lay];
@@ -35,7 +35,7 @@ void ProcessA::cpuRun(const int n_lay){
 		}
 	}
 } // ///////////////////////////////////////////////////////////////////////////
-void ProcessA::mtRun(const int n_lay){
+void ProcessA::mtRunMid(const int n_lay){
 	_ASSERTE(n_lay > 0);
 	LayMid* up_lay = lays->vMidLays[n_lay];
 

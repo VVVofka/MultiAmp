@@ -150,10 +150,10 @@
     <ClCompile Include="Engine\ProcessF0.cpp">
       <Filter>Engine\Process\F</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\ProcessF1.cpp">
+    <ClCompile Include="Engine\ProcessFMidGPU.cpp">
       <Filter>Engine\Process\F</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\ProcessFcpu.cpp">
+    <ClCompile Include="Engine\ProcessFMidMTCPU.cpp">
       <Filter>Engine\Process\F</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Processes.cpp">

@@ -13,16 +13,19 @@ class ProcessF{
 
 public:
 	ProcessF(Lays* p_lays, MaskF* p_Masks_f);
-	void RunAll(const int_2 shift, const uint iter);
+	void RunAllLays(const int_2 shift, const uint iter);
 
 private:
+	//	Lay0
 	void gpuRun0(const int_2 shift, const uint iter);
 	void gpuRun0Split1(const int_2 shift);
 	void gpuRun0Split2x(const int_2 shift, const uint signFor0);
 	void gpuRun0Split2y(const int_2 shift, const uint signFor0);
-	void gpuRun1(const int ncurlay);
-	void mtRun(const int ncurlay);
-	void cpuRun(const int ncurlay);
 
-	const pFunc arFuncRun[3] = {&ProcessF::gpuRun1, &ProcessF::mtRun, &ProcessF::cpuRun};
+	// Other Lays
+	void gpuRunMid(const int ncurlay);
+	void mtRunMid(const int ncurlay);
+	void cpuRunMid(const int ncurlay);
+
+	const pFunc vFuncRunMid[3] = {&ProcessF::gpuRunMid, &ProcessF::mtRunMid, &ProcessF::cpuRunMid};
 }; // #### ProcessF #########################################################################

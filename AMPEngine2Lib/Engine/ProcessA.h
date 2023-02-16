@@ -16,25 +16,14 @@ class ProcessA{
 
 public:
 	ProcessA(Lays* p_lays, MaskA* p_Mask_a);
-	void RunAll(const int_2 shift);	// return sum vabs from last lay
+	void RunAllLays(const int_2 shift);	// return sum vabs from last lay
 
 private:
 	void gpuRun0(const int_2 shift);
-	void gpuRun1(const int n_lay);
-	void mtRun(const int n_lay);
-	void cpuRun(const int n_lay);
+	void gpuRunMid(const int n_lay);
+	void mtRunMid(const int n_lay);
+	void cpuRunMid(const int n_lay);
 
-	const pFunc arFuncRun[3] = {&ProcessA::gpuRun1, &ProcessA::mtRun, &ProcessA::cpuRun};
+	const pFunc vFuncRunMid[3] = {&ProcessA::gpuRunMid, &ProcessA::mtRunMid, &ProcessA::cpuRunMid};
 
-	//float_2 getNormKoef();
-	//void defNormKoefAvg();
-	//void defNormKoefAbs();
-	//void defNormKoefLay0Avg();
-	//void defNormKoefLay0Abs();
-	//void defNormKoefFinishAvg(unsigned sz);
-	//void defNormKoefFinishAbs(unsigned sz);
-	//void defNormKoefReduct(unsigned sz);
-
-	//void ApplyKNormAvg();
-	//void ApplyKNormAbs();
 };

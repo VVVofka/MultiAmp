@@ -5,23 +5,16 @@ ProcessA::ProcessA(Lays* p_lays, MaskA* p_Mask_a){
 	lays = p_lays;
 	amask = p_Mask_a;
 } // ////////////////////////////////////////////////////////////////////////////////////////////
-void ProcessA::RunAll(const int_2 shift){
-	VVVDBG_IF_DBG(lays->DumpA(0));
+void ProcessA::RunAllLays(const int_2 shift){
 	gpuRun0(shift);
-	VVVDBG_IF_DBG(lays->DumpAgpu(1));
 
-	LayMid* dn, * up = lays->vMidLays[0];
-	VVVDBG_SET_A(1, up->va.vgpu);
-
-	for(int nmid = 1; nmid < lays->cntMidLays; nmid++){
-		dn = up;
-		up = lays->vMidLays[nmid];
-
-		VVVDBG_IF_DBG(lays->DumpA(nmid));
+	for(int nMidUp = 1; nMidUp < lays->cntMidLays; nMidUp++){
+		LayMid* up = lays->vMidLays[nMidUp];
 		int tp = (int)up->cpuType;
-		(this->*arFuncRun[tp])(nmid);	//{&ProcessA::gpuRun1, &ProcessA::mtRun, &ProcessA::cpuRun}
-
-		VVVDBG_IF_DBG(lays->DumpA(nmid + 1));
-		VVVDBG_IF_DBG(up->cpuType == CPUtype::GPU ? VVVDBG_SET_A(nmid + 1, up->va.vgpu) : VVVDBG_SET_A(nmid + 1, up->va.vcpu));
+		(this->*vFuncRunMid[tp])(nMidUp);	//{&ProcessA::gpuRunMid, &ProcessA::mtRunMid, &ProcessA::cpuRunMid}
 	}
 } // ///////////////////////////////////////////////////////////////////////////
+		//VVVDBG_IF_DBG(lays->DumpA(nmid));
+
+		//VVVDBG_IF_DBG(lays->DumpA(nmid + 1));
+		//VVVDBG_IF_DBG(up->cpuType == CPUtype::GPU ? VVVDBG_SET_A(nmid + 1, up->va.vgpu) : VVVDBG_SET_A(nmid + 1, up->va.vcpu));
