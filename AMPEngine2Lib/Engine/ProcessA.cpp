@@ -8,10 +8,10 @@ ProcessA::ProcessA(Lays* p_lays, MaskA* p_Mask_a){
 void ProcessA::RunAllLays(const int_2 shift){
 	gpuRun0(shift);
 
-	for(int nMidUp = 1; nMidUp < lays->cntMidLays; nMidUp++){
-		LayMid* up = lays->vMidLays[nMidUp];
-		int tp = (int)up->cpuType;
-		(this->*vFuncRunMid[tp])(nMidUp);	//{&ProcessA::gpuRunMid, &ProcessA::mtRunMid, &ProcessA::cpuRunMid}
+	for(int n_mid_up = 1; n_mid_up < lays->cntMidLays; n_mid_up++){
+		LayMid* up_lay = lays->vMidLays[n_mid_up];
+		int tp = (int)up_lay->cpuType;
+		(this->*vFuncRunMid[tp])(up_lay);	//{&ProcessA::gpuRunMid, &ProcessA::mtRunMid, &ProcessA::cpuRunMid}
 	}
 } // ///////////////////////////////////////////////////////////////////////////
 		//VVVDBG_IF_DBG(lays->DumpA(nmid));

@@ -4,18 +4,18 @@
 #include "Lays.h"
 
 // static
-std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits){
+std::string LayBase::sDumpV(const std::vector<int>& v, const size_t sz, const int digits){
 	std::string ret, sformat("%-" + std::to_string(digits) + "d");
 
 	std::string s0 = ".";
 	for(int d = 0; d < digits - 1; d++)
 		s0 += ' ';
 
-	for(size_t yr = 0; yr < sz.y; yr++){
-		_ASSERTE(sz.y >= yr + 1);
-		size_t y = sz.y - yr - 1;
-		for(size_t x = 0; x < sz.x; x++){
-			size_t idx = y * sz.x + x;
+	for(size_t yr = 0; yr < sz; yr++){
+		_ASSERTE(sz >= yr + 1);
+		size_t y = sz - yr - 1;
+		for(size_t x = 0; x < sz; x++){
+			size_t idx = y * sz + x;
 			int q = v[idx];
 			if(q < 0){
 				ret += s0;
@@ -30,15 +30,15 @@ std::string LayBase::sDumpV(const std::vector<int>& v, const uint_2 sz, const in
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
 // static
-std::string LayBase::sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits){
+std::string LayBase::sDumpV(const std::vector<float_2>& v, const size_t sz, const int digits){
 	std::string sdigit = std::to_string(digits);
 	std::string ret, sformat("%+." + sdigit + "f*%+." + sdigit + "f ");
-	for(size_t yr = 0; yr < sz.y; yr++){
-		_ASSERTE(sz.y >= yr + 1);
-		size_t y = sz.y - yr - 1;
-		for(size_t x = 0; x < sz.x; x++){
+	for(size_t yr = 0; yr < sz; yr++){
+		_ASSERTE(sz >= yr + 1);
+		size_t y = sz - yr - 1;
+		for(size_t x = 0; x < sz; x++){
 			char buf[64];
-			size_t idx = y * sz.x + x;
+			size_t idx = y * sz + x;
 			float_2 cur = v[idx];
 			sprintf_s(buf, sformat.c_str(), cur.x, cur.y);
 			ret += buf;
@@ -61,22 +61,16 @@ std::string LayBase::sDumpV(const std::vector<float_2>& v, const int digits){
 	ret += "\n";
 	return ret;
 } // ////////////////////////////////////////////////////////////////////////////
-//std::string LayBase::sDumpDbg(const int digits) const{
-//	std::vector<float_2> vtmp(sz.x * sz.y);
-//	concurrency::copy(*vgpuDbg, vtmp.begin());
-//	std::string ret = "dbg:\n" + sDumpV(vtmp, sz, digits);
-//	return ret;
-//} // /////////////////////////////////////////////////////////////////////////////
 
 std::string Lay0::sDumpAcpu(const int digits)const{
 	std::string sa = sDumpV(va.vcpu, sz, digits);
-	return "a cpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sa;
+	return "a cpu: Lay0: x*y= " + std::to_string(sz) + '*' + std::to_string(sz) + '\n' + sa;
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpAgpu(const int digits)const{
 	std::vector<int> vtmp(va.vcpu.size());
 	va.gpu2other(vtmp);
 	std::string sa = sDumpV(vtmp, sz, digits);
-	return "a gpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sa;
+	return "a gpu: Lay0: x*y= " + std::to_string(sz) + '*' + std::to_string(sz) + '\n' + sa;
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::DumpAcpu(const int digits) const{
 	std::string s(sDumpAcpu(digits));
@@ -92,7 +86,7 @@ std::string Lay0::sDumpFgpu(const int digits)const{
 	std::vector<float_2> vtmp(vf.vcpu.size());
 	vf.gpu2other(vtmp);
 	std::string sf = sDumpV(vtmp, sz, digits);
-	return "f gpu: Lay0: x*y= " + std::to_string(sz.x) + '*' + std::to_string(sz.y) + '\n' + sf;
+	return "f gpu: Lay0: x*y= " + std::to_string(sz) + '*' + std::to_string(sz) + '\n' + sf;
 } // ////////////////////////////////////////////////////////////////
 std::string Lay0::sDumpScreen(const int digits) const{
 	std::vector<Vertex2D> vvert(countPoint);
@@ -127,7 +121,7 @@ std::string LayMid::sDumpF(const int digits) const{
 	return sDumpFgpu(digits) + sDumpFcpu(digits);
 } // ///////////////////////////////////////////////////////////////////////////////////////////
 std::string LayMid::sInfo() const{
-	return "size x*y=" + std::to_string(sz.x) + '*' + std::to_string(sz.y) + ' ';
+	return "size x*y=" + std::to_string(sz) + '*' + std::to_string(sz) + ' ';
 } // ///////////////////////////////////////////////////////////////////////////////
 
 std::string Lays::sDumpAcpu(int idx, const int digits)const{

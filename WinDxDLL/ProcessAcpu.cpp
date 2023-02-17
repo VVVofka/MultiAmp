@@ -1,9 +1,9 @@
-#include "ProcessA.h"
 #include <ppl.h>				//	parallel_for
+#include "ProcessA.h"
+
 using namespace concurrency::graphics;
 
-void ProcessA::cpuRun(const int n_lay){
-	_ASSERTE(n_lay > 0);
+void ProcessA::cpuRun(LayMid* up_lay){
 	const std::array<int, 16>& a_masks = amask->vcpu;
 	LayMid* up_lay = lays->vMidLays[n_lay];
 	LayMid* dn_lay = lays->vMidLays[n_lay - 1];
@@ -34,8 +34,7 @@ void ProcessA::cpuRun(const int n_lay){
 		}
 	}
 } // ///////////////////////////////////////////////////////////////////////////
-void ProcessA::mtRun(const int n_lay){
-	_ASSERTE(n_lay > 0);
+void ProcessA::mtRun(LayMid* up_lay){
 	const std::array<int, 16>& a_masks = amask->vcpu;
 	LayMid* up_lay = lays->vMidLays[n_lay];
 	LayMid* dn_lay = lays->vMidLays[n_lay - 1];

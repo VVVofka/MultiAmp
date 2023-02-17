@@ -36,12 +36,12 @@ concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const uint count_point)
 	_ASSERTE(count_point >= 0);
 	int ret = 0;
 	std::vector<Vertex2D> cpuv(count_point);
-	for(size_t y = 0; y < sz.y; y++)
-		for(size_t x = 0; x < sz.x; x++){
-			size_t idx = y * static_cast<size_t>(sz.x) + x;
+	for(size_t y = 0; y < sz; y++)
+		for(size_t x = 0; x < sz; x++){
+			size_t idx = y * sz + x;
 			if(va.vcpu[idx] >= 0){
-				cpuv[ret].Pos.x = (float)(2 * x + 1) * sz.x - 1.f;
-				cpuv[ret].Pos.y = (float)(2 * y + 1) * sz.y - 1.f;
+				cpuv[ret].Pos.x = (float)(2 * x + 1) * sz - 1.f;
+				cpuv[ret].Pos.y = (float)(2 * y + 1) * sz - 1.f;
 				ret++;
 			}
 		}
@@ -51,7 +51,7 @@ concurrency::array<Vertex2D, 1>* Lay0::cpuPoint2gpuPoint(const uint count_point)
 	return vgpuScreen;
 } // ///////////////////////////////////////////////////////////////////////////////
 bool Lay0::isLoad()const{
-	if(sz.x <= 0 || sz.y <= 0) return false;
+	if(sz <= 0) return false;
 	if(va.vcpu.size() < 4) return false;
 	if(va.vgpu == NULL) return false;
 	if(vgpuScreen == NULL) return false;
@@ -60,16 +60,15 @@ bool Lay0::isLoad()const{
 void Lay0::fill_vScreen(){
 	countPoint = (int)cfg_all->data.v.size();	// defPointsCnt(va_inp);
 	vcpuScreen.resize(countPoint);
-	size_t szx = cfg_all->lays.bottomX();
-	size_t szy = cfg_all->lays.bottomY();
+	size_t szBottom = cfg_all->lays.sizeBottom();
 	for(int j = 0; j < countPoint; j++){
 		const size_t idx = cfg_all->data.v[j];
 
-		const size_t ux = idx % szx;
-		const float x = NORMAL_TO_AREA(ux, szx);
+		const size_t ux = idx % szBottom;
+		const float x = NORMAL_TO_AREA(ux, szBottom);
 
-		const size_t uy = idx / szx;
-		const float y = NORMAL_TO_AREA(uy, szy);
+		const size_t uy = idx / szBottom;
+		const float y = NORMAL_TO_AREA(uy, szBottom);
 
 		vcpuScreen[j] = Vertex2D(y, x);
 	}
@@ -78,7 +77,7 @@ void Lay0::fill_vScreen(){
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_va(){
 	countPoint = cfg_all->data.v.size();
-	std::vector<int> vtmp(static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y), -1);
+	std::vector<int> vtmp(sz * sz, -1);
 	for(int j = 0; j < countPoint; j++){
 		const size_t idx = cfg_all->data.v[j];
 		vtmp[idx] = j;
@@ -86,8 +85,7 @@ void Lay0::fill_va(){
 	va.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_vf(){
-	size_t sizev = static_cast<size_t>(sz.x) * static_cast<size_t>(sz.y);
-	std::vector<float_2> vtmp(sizev, float_2(0.f, 0.f));
+	std::vector<float_2> vtmp(sz * sz, float_2(0.f, 0.f));
 	vf.Create(sz, vtmp, true, m_accl_view);
 } // ///////////////////////////////////////////////////////////////////////////////
 void Lay0::fill_vmaskmove(){

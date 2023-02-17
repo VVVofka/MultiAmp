@@ -16,7 +16,7 @@ Processes::~Processes(){
 } // ///////////////////////////////////////////////////////////////////////////
 void Processes::RunAllLays(){
 	int pos = (int)rnd.randk();	// max ~ 65500*65500
-	int szx = (int)cfg_all->lays.bottomX();
+	int szx = (int)cfg_all->lays.sizeBottom();
 	int x = pos % szx;
 	int y = pos / szx;
 	int_2 shift = int_2(x, y);

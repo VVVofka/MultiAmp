@@ -6,15 +6,12 @@
 #define Y 0
 using namespace concurrency::graphics;
 
-void ProcessF::gpuRunMid(const int nuplay){
-	_ASSERTE(nuplay > 1);
-
-	const LayMid* up_lay = lays->vMidLays[nuplay];
+void ProcessF::gpuRunMid(LayMid* up_lay){
 	const concurrency::array<int, 2>& up_vgpu_a = *up_lay->va.vgpu;
 	const concurrency::array<float_2, 2>& up_vgpu_f = *up_lay->vf.vgpu;
 	const concurrency::array<float_2, 1>& f_masks = *up_lay->kF.vgpu;
 
-	LayMid* dn_lay = lays->vMidLays[nuplay - 1];
+	LayMid* dn_lay = up_lay - 1;
 	concurrency::array<float_2, 2>& dn_vgpu_f = *dn_lay->vf.vgpu;
 
 	parallel_for_each(up_vgpu_a.extent,

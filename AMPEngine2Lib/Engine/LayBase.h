@@ -15,13 +15,13 @@ public:
 	LayBase(uint n_lay, structAll* cfg_all, accelerator_view* m_accl_view = NULL);
 	~LayBase();
 	uint nlay = 0;
-	uint_2 sz;
+	size_t sz;
 	CPUtype cpuType = CPUtype::GPU;
 
 	accelerator_view* m_accl_view = NULL;
 	structAll* cfg_all = NULL;
 
-	int id(const int x, const int y) const{ return y * sz.x + x; }
+	int id(const int x, const int y) const{ return y * sz + x; }
 
 //#ifdef _DEBUG
 //	concurrency::array<float_2, 2>* vgpuDbg = NULL;
@@ -29,8 +29,8 @@ public:
 //#endif	//	 _DEBUG
 
 protected:
-	static std::string sDumpV(const std::vector<int>& v, const uint_2 sz, const int digits);
-	static std::string sDumpV(const std::vector<float_2>& v, const uint_2 sz, const int digits);
+	static std::string sDumpV(const std::vector<int>& v, const size_t sz, const int digits);
+	static std::string sDumpV(const std::vector<float_2>& v, const size_t sz, const int digits);
 	static std::string sDumpV(const std::vector<float_2>& v, const int digits);
 
 private:

@@ -1,65 +1,40 @@
-#include <amp_math.h>
-#include "ProcessF.h"
-#include<float.h>
 #include<ppl.h>	//	parallel_for
+#include "ProcessF.h"
 
-void ProcessF::cpuRunMid(const int nuplay){
-	_ASSERTE(nuplay > 1);
-	const LayMid* up_lay = lays->vMidLays[nuplay];
-	const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
-	const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
-	const std::vector<float_2>& f_masks = up_lay->kF.vcpu;
+void ProcessF::cpuRunMid(LayMid* up_lay){
+	for(size_t id_up = 0; id_up < up_lay->sz; id_up++){
+		mtcpuRunMid1(up_lay, id_up);
+	}
 
-	LayMid* dn_lay = lays->vMidLays[nuplay - 1];
-	std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
-
-	LayMid* dst_lay = lays->vMidLays[nuplay - 2];
-	std::vector<float_2>& dst_vcpu_f = dst_lay->vf.vcpu;
-
-	const size_t szUpY = (size_t)up_lay->sz.y;
-	const size_t szUpX = (size_t)up_lay->sz.x;
-	const size_t szDnX = szUpX * 2;
-
-	for(size_t y = 0, idUp = 0; y < szUpY; y++){
-		for(size_t x = 0; x < szUpX; x++, idUp++){
-	//		size_t idxDn0 = 2 * (y * szDnX + x);
-	//		const size_t idcDn[4] = {idxDn0, idxDn0 + 1, idxDn0 + szDnX, idxDn0 + szDnX + 1};	// szDnX
-
-	//		const int a4 = up_vcpu_a[idUp] * 4;
-	//		const float_2 up_f = up_vcpu_f[idUp];
-		}	// x
-	}	//	y
-	if(dst_lay->cpuType != CPUtype::GPU)
-		dst_lay->cpu2gpu();
+	LayMid* dn_lay = up_lay - 1;
+	if(dn_lay->cpuType == CPUtype::GPU)
+		dn_lay->vf.cpu2gpu();
 } // ///////////////////////////////////////////////////////////////////////////
-void ProcessF::mtRunMid(const int ncurlay){
-	//_ASSERTE(ncurlay > 0);
-	//const LayMid* up_lay = lays->vMidLays[ncurlay];
-	//LayMid* dn_lay = lays->vMidLays[ncurlay - 1];
+void ProcessF::mtRunMid(LayMid* up_lay){
+	parallel_for(size_t(0), up_lay->sz, [=](size_t id_up){
+		mtcpuRunMid1(up_lay, id_up);
+		});	
 
-	//const std::vector<int>& up_vcpu_a = up_lay->va.vcpu;
-	//const std::vector<float_2>& up_vcpu_f = up_lay->vf.vcpu;
+	LayMid* dn_lay = up_lay - 1;
+	if(dn_lay->cpuType == CPUtype::GPU)
+		dn_lay->vf.cpu2gpu();
+} // ///////////////////////////////////////////////////////////////////////////
+void ProcessF::mtcpuRunMid1(LayMid* up_lay, const size_t id_up){
+	LayMid* dn_lay = up_lay - 1;
 
-	//std::vector<int>& dn_vcpu_a = dn_lay->va.vcpu;
-	//std::vector<float_2>& dn_vcpu_f = dn_lay->vf.vcpu;
+	const size_t x = id_up % up_lay->sz;
+	const size_t y = id_up / up_lay->sz;
+	const size_t id_dn = 2 * (y * dn_lay->sz + x);
 
-	//const size_t szUpY = (size_t)up_lay->sz.y;
-	//const size_t szUpX = (size_t)up_lay->sz.x;
-	//const size_t szDnX = szUpX * 2;
-	//const std::array<float_2, 16 * 4>& f_masks = fmasks->vcpu;
+	const int id_maskf = up_lay->va.vcpu[id_up] * 4;
+	const float_2* val_maskf = &up_lay->kF.vcpu[id_maskf];
 
-	//parallel_for(size_t(0), szUpY, [&](size_t y){
-	//	for(size_t x = 0; x < szUpX; x++){
-	//		size_t idxDn0 = 2 * (y * szDnX + x);
-	//		size_t idcDn[4] = {idxDn0, idxDn0 + 1, idxDn0 + szDnX, idxDn0 + szDnX + 1};
+	const float_2 up_f = up_lay->vf.vcpu[id_up];
 
-	//		size_t idUp = y * szUpX + x;
-	//		const int a4 = up_vcpu_a[idUp] * 4;
-	//		const float_2 up_f = up_vcpu_f[idUp];
-	//		for(int j = 3; j >= 0; j--){
-	//			const size_t idDn = idcDn[j];
-	//			dn_vcpu_f[idDn] = up_f + f_masks[a4 + j] * up_lay->param.klayf;
-	//		}
-	//	}		//for(size_t x = 0; x < szUpX; x++)
-	//	});	// parallel_for(size_t(0), szUpY, [&](size_t y)
+	float_2* vf_dn = &dn_lay->vf.vcpu[id_dn];
+	vf_dn[0] = up_f + val_maskf[0] * up_lay->kf;
+	vf_dn[1] = up_f + val_maskf[1] * up_lay->kf;
+	vf_dn += dn_lay->sz;
+	vf_dn[0] = up_f + val_maskf[2] * up_lay->kf;
+	vf_dn[1] = up_f + val_maskf[3] * up_lay->kf;
 } // ///////////////////////////////////////////////////////////////////////////

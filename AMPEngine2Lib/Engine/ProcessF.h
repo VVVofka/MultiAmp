@@ -6,7 +6,7 @@
 using namespace Concurrency::graphics;	// int_2
 
 class ProcessF{
-	typedef void (ProcessF::* pFunc)(const int n_lay);
+	typedef void (ProcessF::* pFunc)(LayMid* up_lay);
 
 	Lays* lays = NULL;
 	MaskF* fmasks = NULL;	// TODO: del
@@ -23,9 +23,10 @@ private:
 	void gpuRun0Split2y(const int_2 shift, const uint signFor0);
 
 	// Other Lays
-	void gpuRunMid(const int ncurlay);
-	void mtRunMid(const int ncurlay);
-	void cpuRunMid(const int ncurlay);
+	void gpuRunMid(LayMid* up_lay);
+	void mtRunMid(LayMid* up_lay);
+	void cpuRunMid(LayMid* up_lay);
+	void mtcpuRunMid1(LayMid* up_lay, const size_t id_up);
 
 	const pFunc vFuncRunMid[3] = {&ProcessF::gpuRunMid, &ProcessF::mtRunMid, &ProcessF::cpuRunMid};
 }; // #### ProcessF #########################################################################
