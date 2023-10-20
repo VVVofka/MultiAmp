@@ -148,14 +148,15 @@ protected:
 		HRESULT hr = S_OK;
 		ID3DBlob* pVSBlob = NULL;
 		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";		//LPCSTR pProfile = "vs_5_0";
-		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
+		
+		hr = CompileShaderFromFile(L"c:\\Prog\\CPP\\MultiAmp\\WinDxDLL\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 		if(FAILED(hr)){
 			hr = CompileShaderFromFile(L"..\\DXInterOpPsVs.hlsl", snaderName, pProfile, &pVSBlob);
 			if(FAILED(hr)){
 				wchar_t* q = NULL;
 				errno_t err = _get_wpgmptr(&q);
 				if(err == 0){
-					MessageBox(NULL, L"The vertex shader in DXInterOpPsVs.hlsl cannot be compiled", q, MB_OK);
+					MessageBox(NULL, L"The vertex shader in DXInterOpPsVs.hlsl cannot be compiled!", q, MB_OK);
 					return hr;
 				}
 				else
@@ -238,7 +239,7 @@ protected:
 		ID3DBlob* pPSBlob = NULL;
 		LPCSTR pProfile = (g_pd3dDevice->GetFeatureLevel() >= D3D_FEATURE_LEVEL_11_0) ? "ps_5_0" : "ps_4_0";
 
-		hr = CompileShaderFromFile(L"..\\WinDxDLL\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
+		hr = CompileShaderFromFile(L"c:\\Prog\\CPP\\MultiAmp\\WinDxDLL\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
 		if(FAILED(hr)){
 			hr = CompileShaderFromFile(L"..\\DXInterOpPsVs.hlsl", "PS", pProfile, &pPSBlob);
 			if(FAILED(hr)){
